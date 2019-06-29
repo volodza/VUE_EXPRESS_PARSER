@@ -1,12 +1,5 @@
 <template>
-    <v-app>
-        <v-navigation-drawer
-   class="side"  
-  style="width:280px;"
-   app
-  v-model="drawer">
-
-  
+    <div>
    
     <!--укоротить через v-for-->
      <v-list class="header--text" style="padding:0px;" > 
@@ -96,8 +89,8 @@
           </v-list-tile>
         </v-list-group>
     </v-list>
-  </v-navigation-drawer> 
-    </v-app>
+  
+    </div>
 </template>
 
 <script>

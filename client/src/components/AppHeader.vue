@@ -1,9 +1,5 @@
 <template>
-  <v-app>
-       <v-toolbar app class="header" style="height:60px;">
-     <v-toolbar-side-icon  @click.stop="drawer = !drawer" class="hidden-lg-and-up"></v-toolbar-side-icon>
-   
-      <v-spacer></v-spacer>
+  <div>
 
       <!-- меню с зада4ами -->
     <div v-if="this.$store.getters.user">
@@ -152,7 +148,7 @@
          Войти
        </v-btn>
       
-   </v-toolbar>
+   
 
    <!-- <v-content class='white'>
        <router-view></router-view>
@@ -197,7 +193,7 @@
         </v-btn>
       </v-snackbar>
     </template>
-  </v-app>
+  </div>
 </template>
 
 <script>
@@ -211,7 +207,7 @@ export default {
         {title:'Настройки', onClick:1, icon:'mdi-settings'},
         {title:'Выйти', onClick:this.userLogout, icon:'mdi-exit-to-app'}
       ],
-      drawer:null,
+      
        computed:{
     isUserLoggedIn(){
       return this.$store.getters.isUserLoggedIn
