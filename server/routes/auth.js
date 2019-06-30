@@ -65,7 +65,7 @@ auth.get('/vkontakte/callback',(req,res)=> {
           })    
         }
   
-        res.redirect(`http://${config.hostname}:${config.port}`)
+        res.redirect(`http://${config.hostname}`)
     })
 });
 
