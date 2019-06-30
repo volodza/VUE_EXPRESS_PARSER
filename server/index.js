@@ -12,8 +12,8 @@ app.use('/auth',auth)
 
 const port = process.env.PORT || 3000;
 
-app.use(Express.static(__dirname + '/public/dist'))
-app.get(/.*/, (req,res)=> res.sendFile(__dirname + '/public/dist/index.html'))
+app.use(Express.static(__dirname + '/public/'))
+app.get(/.*/, (req,res)=> res.sendFile(__dirname + '/public/index.html'))
 
 db.connect((err)=>{
   if (err) {
