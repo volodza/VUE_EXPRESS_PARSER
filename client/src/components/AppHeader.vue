@@ -113,7 +113,7 @@ export default {
 
   methods:{
     vkAuth (){
-      this.$http.get('http://localhost:3000/auth/vkontakte')
+      this.$http.get('/auth/vkontakte')
       .then(response => {
         localStorage.access_key = response.body.access_key
         window.location.href = response.body.vk_url
@@ -126,7 +126,7 @@ export default {
     },
     checkUserLogin (){
       if(!localStorage.access_key) return;
-      this.$http.get("http://localhost:3000/auth/checkToken",{
+      this.$http.get("/auth/checkToken",{
         params: {
           access_key:localStorage.access_key
         }
