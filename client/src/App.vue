@@ -4,6 +4,7 @@
      <v-toolbar-side-icon  @click.stop="drawer = !drawer" class="hidden-lg-and-up"></v-toolbar-side-icon>
      <v-spacer></v-spacer>
     <app-header></app-header>
+    
     </v-toolbar>
     
       <v-navigation-drawer
@@ -14,7 +15,9 @@
      <app-sidebar></app-sidebar>
      </v-navigation-drawer>
 
-    <router-view/>
+    <v-content class='white'>
+       <router-view></router-view>
+   </v-content>
   </v-app>
 </template>
 
@@ -28,6 +31,7 @@ export default {
   components: {
     AppHeader,
     AppSidebar
+    
   }
   
 }

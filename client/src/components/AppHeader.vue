@@ -150,11 +150,9 @@
       
    
 
-   <!-- <v-content class='white'>
-       <router-view></router-view>
-   </v-content>
+  
 
-   snackbar-error -->
+   <!-- snackbar-error -->
     <template v-if="error">
       <v-snackbar
         @input="closeError"
@@ -207,6 +205,8 @@ export default {
         {title:'Настройки', onClick:1, icon:'mdi-settings'},
         {title:'Выйти', onClick:this.userLogout, icon:'mdi-exit-to-app'}
       ],
+    }
+  },
       
        computed:{
     isUserLoggedIn(){
@@ -253,6 +253,6 @@ export default {
   created: function (){
       this.checkUserLogin()
     }
-}}}}
+}}
 
 </script>
