@@ -1,6 +1,7 @@
 <template>
   <v-app>
 
+    <!-- Header -->
     <v-toolbar app class="header">
      <v-toolbar-side-icon
       @click.stop="drawer = !drawer" 
@@ -11,9 +12,10 @@
      <app-header/>
     </v-toolbar>
     
+    <!-- Sidebar -->
     <v-navigation-drawer
-     class="side"  
-     style="width:280px;"
+      
+     style="width:280px;background: linear-gradient(200deg,#4f555e,#4f555e,#4f555e,#4f555e,#5c6e68,#7f6b67);"
      app
      v-model="drawer"
     >

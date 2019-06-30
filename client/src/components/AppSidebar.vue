@@ -1,9 +1,9 @@
 <template>
     <div>
-     <v-list class="header--text" style="padding:0px;" > 
+     <v-list class="sideText--text" style="padding:0px;" > 
     
     <!-- side-header -->
-    <v-list-tile style="height:63px;margin-top:10px" 
+    <v-list-tile style="height:54px;margin-top:10px" 
         :href="'/'">
         
           <v-list-tile-action>
@@ -23,6 +23,7 @@
         <v-list-group
           no-action
           sub-group
+          
         >
           <template v-slot:activator>
             <v-list-tile>

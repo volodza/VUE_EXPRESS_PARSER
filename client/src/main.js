@@ -17,7 +17,8 @@ Vue.use(Vuetify, {
         secondary: '#F27865', //red
         accent: '#8CCFB9', //green
         side: '#4f555e', //grey
-        header: '#eef1f0' //light grey
+        header: '#eef1f0', //light grey
+        sideText: '#eef1f0'
     },
     iconfont: 'mdi'
 })

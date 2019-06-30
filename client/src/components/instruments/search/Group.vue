@@ -174,7 +174,7 @@
           >
     
             <v-icon style="margin-right: 5px">mdi-play</v-icon>
-            <label>Начать поиск</label>
+            <label>Поиск</label>
           </v-btn>
         </v-flex>
        </v-layout> 
