@@ -14,7 +14,8 @@
         "vue": "^2.6.10",
         "vue-resource": "^1.5.1",
         "vue-router": "^3.0.6",
-        "vuetify": "^1.5.16"
+        "vuetify": "^1.5.16",
+        "vuex": "^3.1.1"
     },
     "devDependencies": {
         "@vue/cli-plugin-babel": "^3.8.0",
@@ -23,8 +24,7 @@
         "babel-eslint": "^10.0.1",
         "eslint": "^5.16.0",
         "eslint-plugin-vue": "^5.0.0",
-        "vue-template-compiler": "^2.6.10",
-        "vuex": "^3.1.1"
+        "vue-template-compiler": "^2.6.10"
     },
     "eslintConfig": {
         "root": true,

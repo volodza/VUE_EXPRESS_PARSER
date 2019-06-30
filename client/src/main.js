@@ -5,11 +5,11 @@ import store from './store'
 import Vuetify from 'vuetify'
 import 'vuetify/dist/vuetify.min.css'
 import '@mdi/font/css/materialdesignicons.css'
-// import VueResource from 'vue-resource'
+import VueResource from 'vue-resource'
 // import colors from 'vuetify/es5/util/colors'
 
 
-// Vue.use(VueResource)
+Vue.use(VueResource)
 
 Vue.use(Vuetify, {
     theme: {

@@ -1,11 +1,9 @@
 <template>
     <div>
-   
-    <!--укоротить через v-for-->
      <v-list class="header--text" style="padding:0px;" > 
     
     <!-- side-header -->
-    <v-list-tile style="height:60px;" class="pt-1"
+    <v-list-tile style="height:63px;margin-top:10px" 
         :href="'/'">
         
           <v-list-tile-action>
@@ -15,7 +13,7 @@
         
     </v-list-tile>
     
-     <v-divider class="mb-4 accent"></v-divider>
+     <v-divider class="mb-2 accent"></v-divider>
      
     <!-- side-content -->
           <v-list-tile style="color:#8CCFB9;">
@@ -95,9 +93,8 @@
 
 <script>
 export default {
-    data () {
+  data () {
     return {
-
       links:{
         search:[
           {title:'Сообщества',icon:'mdi-account-multiple',url:'/group'},

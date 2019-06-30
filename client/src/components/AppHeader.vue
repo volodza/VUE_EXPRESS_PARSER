@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div id="appHeader" style="align-items: center;display: flex;">
 
       <!-- меню с зада4ами -->
     <div v-if="this.$store.getters.user">
@@ -38,159 +38,56 @@
         </v-menu>
       </v-badge>
     </div>
-
-     <!-- <v-menu
-        v-if="this.$store.getters.user"
-        :close-on-content-click="false"
-        :nudge-width="200"
-      >
+     
+    <v-menu  offset-y v-if="this.$store.getters.user">
       <template v-slot:activator="{ on }">
         <v-btn
-          class="hidden-md-and-up"
-          color="black"
-          dark
+          left
+          outline 
           v-on="on"
-          outline
+          style="height:50px;width:70px;border:none"
         >
-          Мои задачи
+          <v-avatar
+            :tile="false"
+            :size="40"
+          >
+            <img :src="$store.getters.user.photo_50">
+          </v-avatar>
+          
+          <v-icon >mdi-chevron-down</v-icon>
+    
         </v-btn>
       </template>
-
-      <v-card>
-          <tasks></tasks>
-      </v-card>
-    </v-menu> -->
-     <!-- <v-spacer></v-spacer>  -->
-     
-        <v-menu  offset-y v-if="this.$store.getters.user">
-          <template v-slot:activator="{ on }">
-            <v-btn
-              left
-              outline 
-              v-on="on"
-              style="height:50px;width:70px;border:none"
-            >
-              <v-avatar
-                :tile="false"
-                :size="40"
-                
-              >
-                <img :src="$store.getters.user.photo_50">
-              </v-avatar>
-              
-              <v-icon >mdi-chevron-down</v-icon>
-        
-            </v-btn>
-          </template>
-          <v-list>
-            <v-list-tile
-              v-for="(item, index) in menu"
-              :key="index"
-              @click="item.onClick"
-            >
-              <v-list-tile-title>{{ item.title }}</v-list-tile-title>
-              <v-icon right>{{item.icon}}</v-icon>
-            </v-list-tile>
-          </v-list>
-        </v-menu>
-          
-        <!-- <v-avatar
-          :tile="false"
-          :size="40"
-          color="grey lighten-4"
+      <v-list>
+        <v-list-tile
+          v-for="(item, index) in menu"
+          :key="index"
+          @click="item.onClick"
         >
-          <img :src="this.$store.getters.user.photo_50">
-        </v-avatar> -->
+          <v-list-tile-title>{{ item.title }}</v-list-tile-title>
+          <v-icon right>{{item.icon}}</v-icon>
+        </v-list-tile>
+      </v-list>
+    </v-menu>
+           
+    <!-- <v-btn 
+      class="hidden-sm-and-down" 
+      style="border: 1px solid black;"
+      :href="'/Tarif'"
+    >
+      <p style="font-size:15px; padding-top:15px; text-transform:none">Тариф "нехуйный"</p>
+    </v-btn>  -->
 
-
-          <!-- <v-btn
-          style="height:30px;font:"
-          flat
-          outline
-          v-if="this.$store.getters.user"
-       >Тариф "{{this.$store.getters.user.profile_status}}"</v-btn>
-          <v-list-tile
-              v-if="this.$store.getters.user"
-              :key="'item.title'"
-              avatar
-              @click="1"
-            >
-              <v-list-tile-avatar>
-                <img :src="this.$store.getters.user.photo_50">
-                
-              </v-list-tile-avatar>
-
-              <v-list-tile-content>
-
-                <v-list-tile-title v-html="this.$store.getters.user.first_name"></v-list-tile-title>
-                <v-list-tile-sub-title v-html="'item.subtitle'"></v-list-tile-sub-title>
-              </v-list-tile-content>
-            </v-list-tile> -->
-
-     <!-- <v-toolbar-items class="hidden-sm-and-down"> -->
- 
-        <v-btn class="hidden-sm-and-down" style="border: 1px solid black;"
-         :href="'/Tarif'">
-        
-         <p style="font-size:15px; padding-top:15px; text-transform:none">
-          Тариф "нехуйный"</p>
-         </v-btn> 
-
-       <v-btn 
-        @click="vkAuth"
-        flat
-        style="background:#4a76a8"
-        dark
-        
-        v-if="!this.$store.getters.user"
-       >
-         <v-icon left>mdi-vk</v-icon>
-         Войти
-       </v-btn>
+    <v-btn 
+      @click="vkAuth"
+      flat
+      style="background:#4a76a8"
+      dark
+      v-if="!this.$store.getters.user"
+    >
+      <v-icon left>mdi-vk</v-icon>Войти
+    </v-btn>
       
-   
-
-  
-
-   <!-- snackbar-error -->
-    <template v-if="error">
-      <v-snackbar
-        @input="closeError"
-        :multi-line="false"
-        :timeout="5000"
-        color="error"
-        :value="true"
-      >
-        {{error}}
-        <v-btn
-          dark
-          flat
-          @click="closeError"
-        >
-          Закрыть
-        </v-btn>
-      </v-snackbar>
-    </template>
-
-    <!-- snackbar-access -->
-    <template v-if="success">
-      <v-snackbar
-        @input="closeSuccess"
-        :multi-line="false"
-        :timeout="5000"
-        color="success"
-        :value="true"
-      >
-        {{success}}
-        <v-btn
-          dark
-          flat
-          @click="closeSuccess"
-        >
-          Закрыть
-        </v-btn>
-      </v-snackbar>
-    </template>
   </div>
 </template>
 
@@ -208,51 +105,41 @@ export default {
     }
   },
       
-       computed:{
+  computed:{
     isUserLoggedIn(){
       return this.$store.getters.isUserLoggedIn
-    },
-    error(){
-      return this.$store.getters.error
-    },
-    success(){
-      return this.$store.getters.success
-    },
-      methods:{
-    
+    }
+  },
+
+  methods:{
     vkAuth (){
-      this.$http.get('http://89.254.230.243:3000/auth/vkontakte')
+      this.$http.get('http://localhost:3000/auth/vkontakte')
       .then(response => {
-        localStorage.access_token = response.body.access_token
+        localStorage.access_key = response.body.access_key
         window.location.href = response.body.vk_url
       },(response) => {});
     },
     userLogout (){
-      localStorage.removeItem('access_token')
+      localStorage.removeItem('access_key')
       this.$store.commit('logout');
-      window.location.href = 'http://89.254.230.243:3000/'
+      window.location.href = '/'
     },
     checkUserLogin (){
-      if(!localStorage.access_token) return;
-      this.$http.post("http://89.254.230.243:3000/checkToken", {
-          access_token: localStorage.access_token
-        })
-        .then(res => {
-          // console.log(res.body)
+      if(!localStorage.access_key) return;
+      this.$http.get("http://localhost:3000/auth/checkToken",{
+        params: {
+          access_key:localStorage.access_key
+        }
+      }).then(res => {
           res.body ? this.$store.commit('setUser',res.body) : console.log('Ошибка')
           console.log(this.$store.getters.user) 
         });
-    },
-    closeError (){
-      this.$store.dispatch('clearError')
-    },
-    closeSuccess (){
-      this.$store.dispatch('clearSuccess')
     }
   },
+
   created: function (){
       this.checkUserLogin()
-    }
-}}
+  }
+}
 
 </script>
