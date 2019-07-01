@@ -1,9 +1,9 @@
 <template>
   <v-container grid-list-xl fluid>
       <div>
-            <h1 class="display-1">Пользователи ВКонтакте</h1>
+            <h1 class="display-1 mb-3">Пользователи ВКонтакте</h1>
           </div>
-            <v-divider class="mb-4" ></v-divider>
+           
 
     
     <v-layout flex-child wrap>
@@ -19,14 +19,14 @@
             solo
             class="border"
             name="input-7-1"
-            label="Ключевые слова по одному в строке"
+            label="По одному слову в строке"
             flat
             v-model="textarea.value"
             hide-details
           ></v-textarea>
          </v-flex>
 
-         <v-flex>
+         <v-flex mt-2>
           <v-checkbox 
             height='6px'
             :label="`Только с фотографией`"
@@ -48,7 +48,7 @@
                 solo
                 class="border"
                 flat
-                label="Пол"
+                label="Выберите пол"
                 :items="selects.sex.items"
                 v-model="selects.sex.selected"
                 item-text="title"
@@ -63,7 +63,7 @@
                 solo
                 class="border"
                 flat
-                label="Семейное положение"
+                label="Выберите семейное положение"
                 :items="selects.status.items"
                 v-model="selects.status.selected"
                 item-text="title"
@@ -98,6 +98,7 @@
               ></v-text-field>
             </v-flex>
 
+            
                <v-flex xs6 sm3 pt-0>
               <v-autocomplete
                 class="border"
@@ -172,34 +173,38 @@
               
           
 
-         <v-divider class="my-4"></v-divider>
+         <v-divider class="mb-4"></v-divider>
 
-<div style="text-align:left;" class="font-weight-medium">
-                <strong>Название задачи </strong>
-            </div>
-          <v-layout wrap>
-<v-flex xs12 sm8>
-          <v-text-field
-            class="border"
-            flat
-            solo
-            label="Любое название (для себя)"
-            hide-details
-          ></v-text-field>
-</v-flex>
+        <label>Название задачи</label>
+        <v-layout wrap>
+          <v-flex xs12 sm6 md8 pt-0> 
+            <v-text-field
+              class="border"
+              flat
+              solo
+              label="Любое название (для себя)"
+              hide-details
+            ></v-text-field>
+          </v-flex>
 
-<v-flex xs12 sm4>
-          <v-btn color='secondary' style="font-size:20px; text-transform:none"
+          <v-flex xs12 sm6 md4 pt-0>
+            <v-btn 
+            class="mt-0"
+            style="height:50px;             
+            font-size:20px; 
+            text-transform:none; 
+            background: linear-gradient(160deg,#4f555e,#4f555e,#5c6e68,#7f6b67); 
+            color:white"
             block
-            @click="getUsers"
-            :loading="!answer"
-          >
-    
-            <v-icon style="margin-right: 5px">mdi-play</v-icon>
-            <label>Начать поиск</label>
-          </v-btn>
-        </v-flex>
-       </v-layout> 
+            flat
+            hide-details
+            @click="getGroups"
+            :loading="!answer">
+              <v-icon style="margin-right: 5px">mdi-play</v-icon>
+              <label>Начать поиск</label>
+            </v-btn>
+          </v-flex>
+        </v-layout>
 
         </v-flex>
       </v-flex>

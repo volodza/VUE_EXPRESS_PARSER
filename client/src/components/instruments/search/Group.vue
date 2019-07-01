@@ -58,7 +58,7 @@
           ></v-checkbox> 
           </v-layout>
 
-          <v-divider class="mb-4"></v-divider>
+          <v-divider class="mb-3"></v-divider>
 
 
      
@@ -171,36 +171,41 @@
 
           
           
-          <v-divider class="my-4"></v-divider>
+          <v-divider class="my-3"></v-divider>
 
-          <v-layout wrap>
-<v-flex xs12 md8 pt-0> 
-  <label>Название задачи</label>
-          <v-text-field
-            class="border"
-            flat
-            solo
-            label="Любое название (для себя)"
-            hide-details
-          ></v-text-field>
-</v-flex>
+        <label>Название задачи</label>
+        <v-layout wrap>
+          <v-flex xs12 sm6 md8 pt-0> 
+            <v-text-field
+              class="border"
+              flat
+              solo
+              label="Любое название (для себя)"
+              hide-details
+            ></v-text-field>
+          </v-flex>
 
-<v-flex xs12 sm6 md4>
-          <v-btn style="height:50px; margin-top:9px; font-size:20px; text-transform:none; background: linear-gradient(160deg,#4f555e,#4f555e,#5c6e68,#7f6b67); color:white"
+          <v-flex xs12 sm6 md4 pt-0>
+            <v-btn 
+            class="mt-0"
+            style="height:50px;             
+            font-size:20px; 
+            text-transform:none; 
+            background: linear-gradient(160deg,#4f555e,#4f555e,#5c6e68,#7f6b67); 
+            color:white"
             block
             flat
-
+            hide-details
             @click="getGroups"
-            :loading="!answer"
-          >
-    
-            <v-icon style="margin-right: 5px">mdi-play</v-icon>
-            <label>Начать поиск</label>
-          </v-btn>
-        </v-flex>
-       </v-layout> 
-     </v-flex>
-   </v-flex>
+            :loading="!answer">
+              <v-icon style="margin-right: 5px">mdi-play</v-icon>
+              <label>Начать поиск</label>
+            </v-btn>
+          </v-flex>
+        </v-layout> 
+
+      </v-flex>
+    </v-flex>
 
            <v-flex xs12 md4 pt-0 >
         <v-flex style="background:#e7fbed"> <h1>Описание</h1>
