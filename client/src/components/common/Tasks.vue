@@ -1,16 +1,18 @@
 <template>
     <div style="height:250px;overflow:auto;border:1px solid #e0e0e0;">
             <v-progress-circular
-              v-if="!this.$store.getters.tasks"
+              v-if="this.$store.getters.tasks == null"
               indeterminate
               color="primary"
             ></v-progress-circular>
 
+            <div v-if="this.$store.getters.monitored == []">Список сообществ для отслеживания пуст</div>
+
         <v-list two-line subheader v-else style="padding-bottom:20px">
 
           <v-list-tile
-            v-for="task in tasks"
-            :key="task.begin"
+            v-for="(task,index) in tasks"
+            :key="index"
             avatar
             style="height:50px;padding:0 0 0 0"
           >
@@ -116,7 +118,7 @@ export default {
       //     anchorTag.download = obj.user_id + ".txt"; 
       //     anchorTag.click();
       // });
-      fetch('http://89.254.230.243:3000/downloadAnswer', {
+      fetch(`http://${this.$store.getters.ip}downloadAnswer`, {
         method: 'POST',
         responseType: 'arraybuffer',
         body:JSON.stringify(obj),
@@ -134,8 +136,11 @@ export default {
       });
     },
     getTasks (){
-      this.$http.post('http://89.254.230.243:3000/getTasks',{
-        user_id:this.$store.getters.user.id
+      if(!this.$store.getters.user.id)return
+      this.$http.get(`http://localhost:3000/api/tasks`,{
+        params:{
+          user_id:this.$store.getters.user.id
+        }
       })
        .then(res =>{
          if(!res)return
@@ -149,7 +154,7 @@ export default {
         begin:task.begin
       };
 
-      this.$http.post('http://89.254.230.243:3000/deleteTask',obj)
+      this.$http.post(`http://localhost:3000/deleteTask`,obj)
        .then(res =>{
          console.log(res.body)
          this.getTasks()
@@ -161,4 +166,3 @@ export default {
   }
 }
 </script>
-
