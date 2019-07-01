@@ -3,41 +3,45 @@
      <div>
             <h1 class="display-1">Поиск сообществ ВКонтакте</h1>
           </div>
-            <v-divider class="my-4" ></v-divider>
+            <v-divider class="mb-4" ></v-divider>
 
     <v-layout flex-child wrap>
-       <v-flex xs12 md8  style="border:1px solid #EBEBEB">
+       <v-flex xs12 md8  class="border">
         <v-flex class="white">
 
           <!-- Textarea -->
         <v-layout row wrap>
-         <v-flex xs12 sm6>
+         <v-flex xs12 xl6>
            <label>Ключевые слова</label>
           <v-textarea
             rows='4'
             solo
-            outline
+            class="border"
+            flat
             name="input-7-1"
             label="Ключевые слова по одному в строке"
             v-model="textarea.key_word"
+            hide-details
           ></v-textarea>
           </v-flex>
 
-        <v-flex xs12 sm6>
+        <v-flex xs12 xl6>
           <label>Минус ключевые слова</label>
           <v-textarea
             rows='4'
             solo 
-            outline
+            class="border"
+            flat
             name="input-7-1"
             label="Минус слова по одному в строке"
             v-model="textarea.minus_key_word"
+            hide-details
           ></v-textarea>
           </v-flex>
         </v-layout>
 
         <!-- Checkbox -->   
-          <v-layout row wrap  mx-1 >       
+          <v-layout row wrap  mx-1 mt-3 >       
           <v-checkbox
             class="my-0 py-0"
             :label="`Точное вхождение поисковой фразы`"
@@ -63,10 +67,13 @@
           
           
 <v-layout wrap>
-            <v-flex xs12 sm6>
+            <v-flex xs12 md6> 
+              <label>Типы сообществ</label>
               <v-select
                 hide-details
                 solo
+                class="border"
+                flat
                 v-model="selects.type.selected"
                 label="Типы сообществ"
                 item-text="title"
@@ -75,11 +82,14 @@
               ></v-select>
             </v-flex>
 
-            <v-flex xs12 sm6>
+            <v-flex xs12 md6>
+              <label>Сортировка</label>
               <v-select
                 v-model="selects.sort.selected"
                 hide-details
                 solo
+                class="border"
+                flat
                 item-text="title"
                 item-value="value"
                 :items="selects.sort.items"
@@ -87,29 +97,35 @@
               ></v-select>
             </v-flex>
 </v-layout>
-            
-            <v-layout wrap> 
-              
-               <v-flex xs6 sm3>  
-              <v-text-field
+
+            <label >Подписчиков</label>
+            <v-layout wrap>               
+               <v-flex xs6 md3 pt-0>  
+              <v-text-field 
+                class="border"
+                flat
                 solo
-                label="Подписчиков от"
+                label="От"
                 v-model="inputs.members.from"
                 hide-details
               ></v-text-field>
             </v-flex>
 
-            <v-flex xs6 sm3>
+            <v-flex xs6 md3 pt-0>
               <v-text-field
+                class="border"
+                flat
                 solo
                 v-model="inputs.members.to"
-                label="Подписчиков до"
+                label="До"
                 hide-details
               ></v-text-field>
             </v-flex>
 
-            <v-flex xs6 sm3>
+            <v-flex xs6 md3 pt-0>
               <v-autocomplete
+                class="border"
+                flat
                 v-model="selects.country.selected"
                 :loading="selects.country.loading"
                 :items="selects.country.items"
@@ -123,8 +139,10 @@
               ></v-autocomplete>
             </v-flex>
 
-            <v-flex xs6 sm3>
+            <v-flex xs6 md3 pt-0>
               <v-autocomplete
+                class="border"
+                flat
                 :disabled="!selects.country.selected"
                 v-model="selects.city.selected"                
                 :loading="selects.city.loading"
@@ -159,14 +177,17 @@
                 <strong>Название задачи </strong>
             </div>
           <v-layout wrap>
-<v-flex xs12 sm9>
+<v-flex xs12 sm12 md8>
           <v-text-field
+            class="border"
+            flat
             solo
             label="Любое название (для себя)"
+            hide-details
           ></v-text-field>
 </v-flex>
 
-<v-flex xs12 sm3>
+<v-flex xs12 sm6 md4>
           <v-btn color='secondary' style="font-size:20px; text-transform:none"
             block
             @click="getGroups"
@@ -174,15 +195,15 @@
           >
     
             <v-icon style="margin-right: 5px">mdi-play</v-icon>
-            <label>Поиск</label>
+            <label>Начать поиск</label>
           </v-btn>
         </v-flex>
        </v-layout> 
      </v-flex>
    </v-flex>
 
-           <v-flex xs12 md4 d-flex >
-        <v-flex style="padding-top: 0"> <h1>Описание</h1>
+           <v-flex xs12 md4 pt-0 >
+        <v-flex style="background:#e7fbed"> <h1>Описание</h1>
           <p>Облачный "Поиск групп" осуществляется по базе Segmento Target, 
             способен выдавать до 10 000 результатов (в 10 раз больше чем в API Поиске).
             В базе хранятся группы с количеством участников от 2 пользователей,
@@ -279,6 +300,16 @@
     </v-layout>
   </v-container>
 </template>
+
+
+
+<style scoped> 
+.border{
+  border:1px solid #d7d7d7;
+}
+</style>
+
+
 
 <script>
 import Tasks from './Tasks'

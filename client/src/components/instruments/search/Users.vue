@@ -1,26 +1,33 @@
 <template>
-  <v-container fluid grid-list-xl>
+  <v-container grid-list-xl fluid>
       <div>
             <h1 class="display-1">Пользователи ВКонтакте</h1>
           </div>
-            <v-divider class="my-4" ></v-divider>
+            <v-divider class="mb-4" ></v-divider>
 
     
     <v-layout flex-child wrap>
-      <v-flex xs12 md8 d-flex style="border:1px solid #EBEBEB">
-        <v-flex class="white" text-xs-center>
+      <v-flex xs12 md8  class="border">
+        <v-flex class="white" >
+
           <!-- Textarea -->
            <v-layout row wrap>
-             <v-flex xs12 sm6>
+             <v-flex xs12 xl6>
+               <label>Ключевые слова</label>
           <v-textarea
+            rows='4'
             solo
-            label="Ключевые фразы"
-           
+            class="border"
+            name="input-7-1"
+            label="Ключевые слова по одному в строке"
+            flat
             v-model="textarea.value"
+            hide-details
           ></v-textarea>
          </v-flex>
-         <v-flex xs12 sm6>
-          <v-checkbox
+
+         <v-flex>
+          <v-checkbox 
             height='6px'
             :label="`Только с фотографией`"
             v-model="checkboxes.hasPhoto"
@@ -31,69 +38,70 @@
             :label="`Точное вхождение поисковой фразы`"
             v-model="checkboxes.exactMatch"
           ></v-checkbox>
-          </v-flex>
+         </v-flex>
 </v-layout>
 
-          
-            <v-layout  wrap>
-              <v-flex xs6 sm3 >
-              <v-text-field
-                hide-details
-                solo
-                label="Возраст от"
-                v-model="inputs.age.from"
-              ></v-text-field>
-            </v-flex>
-
-            <v-flex xs6 sm3 >
-              <v-text-field
-                hide-details
-                solo
-                v-model="inputs.age.to"
-                label="Возраст до"
-              ></v-text-field>
-            </v-flex>
-            
-            <v-flex xs6 sm3 >
+            <v-layout wrap>
+            <v-flex xs12 sm6 >
+              <label>Пол</label>
               <v-select
                 solo
+                class="border"
+                flat
                 label="Пол"
                 :items="selects.sex.items"
                 v-model="selects.sex.selected"
                 item-text="title"
                 item-value="id"
+                hide-details
               ></v-select>
             </v-flex>
 
-             <v-flex xs6 sm3 >
+             <v-flex xs12 sm6 >
+               <label>Семейное положение</label>
               <v-select
                 solo
+                class="border"
+                flat
                 label="Семейное положение"
                 :items="selects.status.items"
                 v-model="selects.status.selected"
                 item-text="title"
                 item-value="id"
+                hide-details
               ></v-select>
               </v-flex>
-              </v-layout>
+          
+            </v-layout>
 
-              <div class="font-weight-medium mt-3">Поиск по</div>
+            <label>Возраст</label>
+            <v-layout wrap>
+              <v-flex xs6 sm3 pt-0>               
+              <v-text-field 
+                class="border"
+                hide-details
+                solo
+                flat
+                label="От"
+                v-model="inputs.age.from"
+              ></v-text-field>
+            </v-flex>
 
-   <v-radio-group v-model="radiogroup.selected" row>
-            <v-radio label="Интересам" value="interests"></v-radio>
-            <v-radio label="Должности" value="position"></v-radio>
-            <v-radio label="Месту работы" value="workplace"></v-radio>
-            <v-radio label="Религии" value="religion"></v-radio>
-            <v-radio label="Имени" value="name"></v-radio>
-            <v-radio label="Фамилии" value="surname"></v-radio>
-            <v-radio label="Имени + Фамилии" value="name+surname"></v-radio>
-            <v-radio label="Статусу" value="status"></v-radio>
-            <v-radio label="Имени ребенка" value="childname"></v-radio>
-          </v-radio-group>
+            <v-flex xs6 sm3 pt-0>
+              <v-text-field 
+                class="border"
+                hide-details
+                solo
+                flat
+                v-model="inputs.age.to"
+                label="До"
+              ></v-text-field>
+            </v-flex>
 
-              <v-layout wrap>
-            <v-flex xs12 sm6 >
+               <v-flex xs6 sm3 pt-0>
               <v-autocomplete
+                class="border"
+                flat
                 v-model="selects.country.selected"
                 :loading="selects.country.loading"
                 :items="selects.country.items"
@@ -107,8 +115,10 @@
               ></v-autocomplete>
             </v-flex>
 
-            <v-flex xs12 sm6>
+            <v-flex xs6 sm3 pt-0>
               <v-autocomplete
+                class="border"
+                flat
                 :disabled="!selects.country.selected"
                 v-model="selects.city.selected"
                 :loading="selects.city.loading"
@@ -143,28 +153,24 @@
               </v-autocomplete>
               
             </v-flex>
-            </v-layout>
+              </v-layout>
+
+              <!-- <div class="font-weight-medium mt-3">Поиск по</div> -->
+<label>Поиск по</label>
+   <v-radio-group v-model="radiogroup.selected" style="margin-top:0px"  row>
+            <v-radio label="Интересам" value="interests"></v-radio>
+            <v-radio label="Должности" value="position"></v-radio>
+            <v-radio label="Месту работы" value="workplace"></v-radio>
+            <v-radio label="Религии" value="religion"></v-radio>
+            <v-radio label="Имени" value="name"></v-radio>
+            <v-radio label="Фамилии" value="surname"></v-radio>
+            <v-radio label="Имени + Фамилии" value="name+surname"></v-radio>
+            <v-radio label="Статусу" value="status"></v-radio>
+            <v-radio label="Имени ребенка" value="childname"></v-radio>
+          </v-radio-group>
+
+              
           
-
-
- 
-
-
-
-  
-          
-
-
-          
-        
-
-         
-
-          
-
-         
-
-
 
          <v-divider class="my-4"></v-divider>
 
@@ -172,14 +178,17 @@
                 <strong>Название задачи </strong>
             </div>
           <v-layout wrap>
-<v-flex xs12 sm9>
+<v-flex xs12 sm8>
           <v-text-field
+            class="border"
+            flat
             solo
             label="Любое название (для себя)"
+            hide-details
           ></v-text-field>
 </v-flex>
 
-<v-flex xs12 sm3>
+<v-flex xs12 sm4>
           <v-btn color='secondary' style="font-size:20px; text-transform:none"
             block
             @click="getUsers"
@@ -187,7 +196,7 @@
           >
     
             <v-icon style="margin-right: 5px">mdi-play</v-icon>
-            <label>Поиск</label>
+            <label>Начать поиск</label>
           </v-btn>
         </v-flex>
        </v-layout> 
@@ -195,24 +204,18 @@
         </v-flex>
       </v-flex>
 
-      <v-flex xs12 md4 d-flex >
-        <v-flex style="padding-top: 0"> <h1>Описание</h1>
-          <p>Облачный "Поиск групп" осуществляется по базе Segmento Target, 
-            способен выдавать до 10 000 результатов (в 10 раз больше чем в API Поиске).
-            В базе хранятся группы с количеством участников от 2 пользователей,
-            группы с меньшим количеством участников отсутствуют в выдаче.
-            База обновляется один раз в 3 дня, это означает что в выдаче могут
-            содержаться не самые актуальные результаты. Поиск осуществляется с
-            учетом морфологии, однако выдача может несколько отличаться от
-            выдачи ВКонтакте, так как алгоритмы текстового поиска не совпадают.
-            Инструмент позволяет сохранить контакты групп. Ключевые слова и 
-            фразы нужно вводить по одному в строке. Если Вам необходима выдача 
-            точь-в-точь как во ВКонтакте — воспользуйтесь API Поиском групп.
-            Выдачу можно отсортировать по количеству постов в день, в неделю,
-            чтобы выделить группы, в которых ведётся активность. API Поиск работает корректно,
-            не смотря на то что устаревший ВК не поддерживается. 
-            Если Вы вводите страну либо город — пабликов в выдаче не будет.
-            ER=(Лайки+Репосты+Комментарии)/Дни/Участники*100</p>
+      <v-flex xs12 md4 pt-0>
+        <v-flex style="background:#e7fbed" > <h1>Описание</h1>
+          <p>В поиске пользователей можно искать людей по полу,
+             городу, возрасту, тех, у кого день рождения, семейному положению,
+             наличию детей, а так же производить поиск их родственников, 
+             вторых половинок и детей. <br><br>
+             1. Введите параметры поиска людей <br><br>
+             2. Задайте понятное описание задачи, чтобы не забыть, кто у Вас собирается. <br><br>
+             3. Нажмите "Добавить задачу" и перейдите к следующей. <br><br>
+             При указании возраста, города, семейного положения выдача может
+             отличаться от выдачи ВКонтакте, т.к. в базу попадают только те,
+             кто не скрыл возраст, семейное положение, город настройками приватности.</p>
           </v-flex>
       </v-flex>
 
@@ -221,8 +224,15 @@
   </v-container>
 </template>
 
-<script>
 
+<style scoped> 
+.border{
+  border:1px solid #d7d7d7;
+}
+</style>
+
+
+<script>
 export default {
   data () {
     return {
@@ -299,10 +309,10 @@ export default {
         ageTo:+this.inputs.age.to,
         status: this.selects.status.selected,
         sex: this.selects.sex.selected,
-        // city: this.selects.city.selected,
-        // country: this.selects.country.selected,
+        city: this.selects.city.selected,
+        country: this.selects.country.selected,
         title:'Поиск > Пользователи',
-        // user_id:this.$store.getters.user.id,
+        user_id:this.$store.getters.user.id,
       };
       this.answer = '';
       this.$http.post("http://localhost:3000/getUsers", obj)
