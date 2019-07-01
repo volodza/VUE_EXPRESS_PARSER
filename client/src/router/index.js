@@ -59,31 +59,6 @@ export default new Router({
             path: '/recentlyjoin',
             name: 'recentlyjoin',
             component: RecentlyJoin
-        },
-        {
-            path: '/Discussions',
-            name: 'Discussions',
-            component: Discussions
-        },
-        {
-            path: '/Posts',
-            name: 'Posts',
-            component: Posts
-        },
-        {
-            path: '/Relatives',
-            name: 'Relatives',
-            component: Relatives
-        },
-        {
-            path: '/Comments',
-            name: 'Comments',
-            component: Comments
-        },
-        {
-            path: '/Tarif',
-            name: 'Tarif',
-            component: Tarif
         }
     ],
     mode: 'history'
