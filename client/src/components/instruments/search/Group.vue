@@ -1,9 +1,8 @@
 <template>
   <v-container grid-list-xl fluid>
-     <div>
+     <div class='mb-3'>
             <h1 class="display-1">Поиск сообществ ВКонтакте</h1>
           </div>
-            <v-divider class="mb-4" ></v-divider>
 
     <v-layout flex-child wrap>
        <v-flex xs12 md8  class="border">
@@ -19,7 +18,7 @@
             class="border"
             flat
             name="input-7-1"
-            label="Ключевые слова по одному в строке"
+            label="По одному слову в строке"
             v-model="textarea.key_word"
             hide-details
           ></v-textarea>
@@ -33,7 +32,7 @@
             class="border"
             flat
             name="input-7-1"
-            label="Минус слова по одному в строке"
+            label="По минус одному слову в строке"
             v-model="textarea.minus_key_word"
             hide-details
           ></v-textarea>
@@ -75,7 +74,7 @@
                 class="border"
                 flat
                 v-model="selects.type.selected"
-                label="Типы сообществ"
+                label="Выберите тип сообщества"
                 item-text="title"
                 item-value="value"
                 :items="selects.type.items"
@@ -93,7 +92,7 @@
                 item-text="title"
                 item-value="value"
                 :items="selects.sort.items"
-                label="Сортировка"
+                label="Выберете тип сортировки"
               ></v-select>
             </v-flex>
 </v-layout>
@@ -173,11 +172,10 @@
           
           
           <v-divider class="my-4"></v-divider>
-<div style="text-align:left;" class="font-weight-medium">
-                <strong>Название задачи </strong>
-            </div>
+
           <v-layout wrap>
-<v-flex xs12 sm12 md8>
+<v-flex xs12 md8 pt-0> 
+  <label>Название задачи</label>
           <v-text-field
             class="border"
             flat
@@ -188,8 +186,10 @@
 </v-flex>
 
 <v-flex xs12 sm6 md4>
-          <v-btn color='secondary' style="font-size:20px; text-transform:none"
+          <v-btn style="height:50px; margin-top:9px; font-size:20px; text-transform:none; background: linear-gradient(160deg,#4f555e,#4f555e,#5c6e68,#7f6b67); color:white"
             block
+            flat
+
             @click="getGroups"
             :loading="!answer"
           >

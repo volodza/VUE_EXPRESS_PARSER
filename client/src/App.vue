@@ -2,7 +2,7 @@
   <v-app>
 
     <!-- Header -->
-    <v-toolbar app class="header">
+    <v-toolbar app flat style="border-bottom:1px solid #8CCFB9">
      <v-toolbar-side-icon
       @click.stop="drawer = !drawer" 
       class="hidden-lg-and-up"
@@ -10,7 +10,9 @@
      </v-toolbar-side-icon>
      <v-spacer></v-spacer>
      <app-header/>
+     
     </v-toolbar>
+    
     
     <!-- Sidebar -->
     <v-navigation-drawer
