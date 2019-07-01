@@ -93,9 +93,9 @@
 </template>
 
 <script>
-// import Tasks from './components/instruments/search/Tasks'
+import Tasks from './common/Tasks'
 export default {
-//   components:{Tasks:Tasks},
+  components:{Tasks:Tasks},
   data () {
     return {
       menu:[
@@ -114,7 +114,7 @@ export default {
 
   methods:{
     vkAuth (){
-      this.$http.get('/auth/vkontakte')
+      this.$http.get('http://localhost:3000/auth/vkontakte')
       .then(response => {
         localStorage.access_key = response.body.access_key
         window.location.href = response.body.vk_url
@@ -127,7 +127,7 @@ export default {
     },
     checkUserLogin (){
       if(!localStorage.access_key) return;
-      this.$http.get("/auth/checkToken",{
+      this.$http.get("http://localhost:3000/auth/checkToken",{
         params: {
           access_key:localStorage.access_key
         }

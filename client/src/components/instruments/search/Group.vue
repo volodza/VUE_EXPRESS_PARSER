@@ -312,12 +312,7 @@
 
 
 <script>
-import Tasks from './Tasks'
-//сделать глобальным
-
-
 export default {
-  components:{Tasks:Tasks},
   data () {
     return {
       textarea:{

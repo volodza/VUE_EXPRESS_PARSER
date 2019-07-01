@@ -9,6 +9,8 @@ app.use(BodyParser.json());
 
 const auth = require('./routes/auth')
 app.use('/auth',auth)
+const tasks = require('./routes/api/tasks')
+app.use('/api/tasks',tasks)
 
 const port = process.env.PORT || 3000;
 
