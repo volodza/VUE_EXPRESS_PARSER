@@ -413,20 +413,23 @@ export default {
     getCities(v) {
       if (!this.selects.country.selected) return;
       this.selects.city.loading = true;
-      this.$http.post("http://localhost:3000/", {
-          q: v
+      this.$http.get("http://localhost:3000/api/geolocation/cities", {
+          params:{
+            q: v,
+            country_id:this.selects.country.selected
+          }
         })
         .then(res => {
           this.selects.city.items = res.body.items;
           this.selects.city.loading = false;
-          getTasks()
         });
     },
     getCountries(v) {
       this.selects.country.loading = true;
-      this.$http
-        .post("http://localhost:3000/", {
-          q: v
+      this.$http.get("http://localhost:3000/api/geolocation/countries", {
+          params:{
+            q: v
+          }
         })
         .then(res => {
           this.selects.country.items = res.body.items;

@@ -6,7 +6,7 @@ const tasks = express.Router();
 
 
 tasks.get('/', async (req,res) => {
-  console.log(req.query.user_id)
+  // console.log(req.query.user_id)
   let tasks = await db.getDB().collection('tasks').findOne({id:req.query.user_id})
   let withoutAnswer = tasks.tasks.map(x=>{
     delete x.answer;
