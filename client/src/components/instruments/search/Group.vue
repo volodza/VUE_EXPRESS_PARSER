@@ -178,6 +178,7 @@
   <label>Название задачи</label>
           <v-text-field
             class="border"
+            v-model="inputs.taskName"
             flat
             solo
             label="Любое название (для себя)"
@@ -387,19 +388,19 @@ export default {
       let obj = {
         q:this.key_phrases,
         type:this.selects.type.selected,
-        // city_id:this.selects.city.selected,
-        // country_id:this.selects.country.selected,
+        city_id:this.selects.city.selected,
+        country_id:this.selects.country.selected,
         sort:this.selects.sort.selected,
         members_from:+this.inputs.members.from,
         members_to:+this.inputs.members.to,
         exact_phrase: this.checkboxes.exact_phrase,
         verified:this.checkboxes.only_official,
         market:+this.checkboxes.with_goods,
-        // user_id:this.$store.getters.user.id,
-        title:'Поиск > Сообщества'
+        user_id:this.$store.getters.user.id,
+        title:this.inputs.taskName || 'Поиск > Сообщества'
       }
       this.answer = '';
-      this.$http.post('http://localhost:3000/getGroups',obj)
+      this.$http.post('http://localhost:3000/api/search/groups',obj)
        .then(res =>{
           this.$store.commit('setSuccess',res.body)
           this.answer = res.body

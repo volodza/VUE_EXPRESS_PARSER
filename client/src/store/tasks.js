@@ -1,6 +1,6 @@
 export default {
     state:{
-        tasks:[]
+        tasks:null
     },
     mutations:{
         setTasks(state,payload){

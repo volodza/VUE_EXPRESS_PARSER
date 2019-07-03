@@ -4,13 +4,13 @@
       <!-- меню с зада4ами -->
     <div v-if="this.$store.getters.user">
       <v-badge 
-        overlap class="hidden-md-and-up" 
+        overlap 
         v-if="$store.getters.user"
-        v-model="$store.getters.tasks.length" 
+        v-model="counter" 
       >
 
         <template v-slot:badge>
-          <span>{{$store.getters.tasks.length}}</span>
+          <span>{{counter}}</span>
         </template>
 
         <v-menu
@@ -20,7 +20,7 @@
 
           <template v-slot:activator="{ on }">
             <v-btn
-              class="hidden-md-and-up"
+              
               color="black"
               dark
               v-on="on"
@@ -103,6 +103,7 @@ export default {
         {title:'Настройки', onClick:1, icon:'mdi-settings'},
         {title:'Выйти', onClick:this.userLogout, icon:'mdi-exit-to-app'}
       ],
+      counter:'0'
     }
   },
       
