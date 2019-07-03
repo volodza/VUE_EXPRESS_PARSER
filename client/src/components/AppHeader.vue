@@ -4,7 +4,7 @@
       <!-- меню с зада4ами -->
     <div v-if="this.$store.getters.user">
       <v-badge 
-        overlap class="hidden-md-and-up" 
+        overlap 
         v-if="$store.getters.user"
         v-model="$store.getters.tasks.length" 
       >
@@ -13,25 +13,26 @@
           <span>{{$store.getters.tasks.length}}</span>
         </template>
 
-        <v-menu
+        <v-menu 
           :close-on-content-click="false"
           :nudge-width="200"
         >
 
           <template v-slot:activator="{ on }">
             <v-btn
-              class="hidden-md-and-up"
+              
+              
               color="black"
-              dark
+              flat
               v-on="on"
-              outline
-              style='height:30px'
+              
+              style='height:30px;border:1px solid #d7d7d7;text-transform:none'
             >
               Мои задачи
             </v-btn>
           </template>
 
-          <v-card>
+          <v-card class="flat" style="box-shadow: 0 0 5px 2px;">
             <tasks></tasks>
           </v-card>
 
@@ -112,35 +113,36 @@ export default {
     }
   },
 
-  methods:{
-    vkAuth (){
-      this.$http.get('http://localhost:3000/auth/vkontakte')
-      .then(response => {
-        localStorage.access_key = response.body.access_key
-        window.location.href = response.body.vk_url
-      },(response) => {});
-    },
-    userLogout (){
-      localStorage.removeItem('access_key')
-      this.$store.commit('logout');
-      window.location.href = '/'
-    },
-    checkUserLogin (){
-      if(!localStorage.access_key) return;
-      this.$http.get("http://localhost:3000/auth/checkToken",{
-        params: {
-          access_key:localStorage.access_key
-        }
-      }).then(res => {
-          res.body ? this.$store.commit('setUser',res.body) : console.log('Ошибка')
-          console.log(this.$store.getters.user) 
-        });
-    }
-  },
+ methods:{ 
+vkAuth (){ 
+this.$http.get('http://localhost:3000/auth/vkontakte') 
+.then(response => { 
+localStorage.access_key = response.body.access_key 
+window.location.href = response.body.vk_url 
+},(response) => {}); 
+}, 
+    userLogout (){ 
+localStorage.removeItem('access_key') 
+this.$store.commit('logout'); 
+window.location.href = '/' 
+}, 
 
-  created: function (){
-      this.checkUserLogin()
-  }
+    checkUserLogin (){ 
+if(!localStorage.access_key) return; 
+this.$http.get("http://localhost:3000/auth/checkToken",{ 
+params: { 
+access_key:localStorage.access_key 
+} 
+}).then(res => { 
+res.body ? this.$store.commit('setUser',res.body) : console.log('Ошибка') 
+console.log(this.$store.getters.user) 
+}); 
+} 
+}, 
+
+created: function (){ 
+this.checkUserLogin() 
+}
 }
 
 </script>

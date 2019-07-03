@@ -9,7 +9,7 @@
           <v-list-tile-action>
             <img style="height:50px" src="../assets/logo1.png" alt="">
           </v-list-tile-action>
-          <h1 style="font-size:25px; color:#E87563"><strong style="color:#88C8B3">Arrow</strong>Target</h1>
+          <h1 style="font-size:30px; color:#E87563"><strong style="color:#88C8B3">Arrow</strong>Target</h1>
         
     </v-list-tile>
     

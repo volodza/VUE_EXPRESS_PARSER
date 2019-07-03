@@ -13,7 +13,7 @@ Vue.use(VueResource)
 
 Vue.use(Vuetify, {
     theme: {
-        primary: '#8CCFB9', //white
+        primary: '#8CCFB9', //green
         secondary: '#F27865', //red
         accent: '#8CCFB9', //green
         side: '#4f555e', //grey

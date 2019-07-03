@@ -1,15 +1,15 @@
 export default {
-    state:{
-        tasks:[]
+    state: {
+        tasks: []
     },
-    mutations:{
-        setTasks(state,payload){
+    mutations: {
+        setTasks(state, payload) {
             state.tasks = payload
         }
     },
-    actions:{},
-    getters:{
-        tasks(state){
+    actions: {},
+    getters: {
+        tasks(state) {
             return state.tasks;
         }
     }
