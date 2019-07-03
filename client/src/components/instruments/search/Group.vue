@@ -400,7 +400,7 @@ export default {
         title:this.inputs.taskName || 'Поиск > Сообщества'
       }
       this.answer = '';
-      this.$http.post('http://localhost:3000/api/search/groups',obj)
+      this.$http.post('/api/search/groups',obj)
        .then(res =>{
           this.$store.commit('setSuccess',res.body)
           this.answer = res.body
@@ -409,7 +409,7 @@ export default {
     getCities(v) {
       if (!this.selects.country.selected) return;
       this.selects.city.loading = true;
-      this.$http.get("http://localhost:3000/api/geolocation/cities", {
+      this.$http.get("/api/geolocation/cities", {
           params:{
             q: v,
             country_id:this.selects.country.selected
@@ -422,7 +422,7 @@ export default {
     },
     getCountries(v) {
       this.selects.country.loading = true;
-      this.$http.get("http://localhost:3000/api/geolocation/countries", {
+      this.$http.get("/api/geolocation/countries", {
           params:{
             q: v
           }
