@@ -20,33 +20,34 @@
            <strong style="font-size:15px;">ИНСТРУМЕНТЫ</strong>
          </v-list-tile>
         
-        <v-list-group
+        <v-list-group 
           no-action
-          sub-group
-          
+          sub-group 
         >
-          <template v-slot:activator>
-            <v-list-tile>
-              <v-list-tile-title>Поиск</v-list-tile-title>
+          <template v-slot:activator >
+            <v-list-tile >
+              Поиск
             </v-list-tile>
           </template>
 
-          <v-list-tile
+          <v-list-tile 
             v-for="link in links.search"
             :key="link.title"
             @click="1"
             :to='link.url'
-          >
-            <v-list-tile-title v-text="link.title"></v-list-tile-title>
-            <v-list-tile-action>
-              <v-icon v-text="link.icon" style="color:#b9c4d4;"></v-icon>
+            > 
+              
+            <v-list-tile-action >
+              <v-icon right  v-text="link.icon"></v-icon>
             </v-list-tile-action>
+           <v-list-tile-title   v-text="link.title"></v-list-tile-title>
           </v-list-tile>
         </v-list-group>
 
         <v-list-group
           sub-group
           no-action
+          
         >
           <template v-slot:activator>
             <v-list-tile>
@@ -59,10 +60,11 @@
             @click="1"
             :to='link.url'
           >
-            <v-list-tile-title v-text="link.title"></v-list-tile-title>
+            
             <v-list-tile-action>
-              <v-icon :color="link.iconColor" v-text="link.icon"></v-icon>
+              <v-icon right :color="link.iconColor" v-text="link.icon"></v-icon>
             </v-list-tile-action>
+            <v-list-tile-title v-text="link.title"> </v-list-tile-title>
           </v-list-tile>
         </v-list-group>
 
@@ -81,10 +83,11 @@
             :key="link.title"
             @click="1"
           >
-            <v-list-tile-title v-text="link.title"></v-list-tile-title>
+            
             <v-list-tile-action>
-              <v-icon v-text="link.icon"></v-icon>
+              <v-icon right v-text="link.icon"></v-icon>
             </v-list-tile-action>
+            <v-list-tile-title v-text="link.title"></v-list-tile-title>
           </v-list-tile>
         </v-list-group>
     </v-list>

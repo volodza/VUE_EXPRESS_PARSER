@@ -17,7 +17,7 @@
     <!-- Sidebar -->
     <v-navigation-drawer
       
-     style="width:280px;background: linear-gradient(200deg,#4f555e,#4f555e,#4f555e,#4f555e,#5c6e68,#7f6b67);"
+     style="background: linear-gradient(200deg,#4f555e,#4f555e,#4f555e,#4f555e,#5c6e68,#7f6b67);"
      app
      v-model="drawer"
     >
