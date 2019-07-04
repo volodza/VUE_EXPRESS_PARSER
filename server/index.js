@@ -11,6 +11,8 @@ const auth = require('./routes/auth')
 app.use('/auth',auth)
 const geolocation = require('./routes/api/geolocation')
 app.use('/api/geolocation',geolocation)
+const search = require('./routes/api/search')
+app.use('/api/search',search)
 const tasks = require('./routes/api/tasks')
 app.use('/api/tasks',tasks)
 

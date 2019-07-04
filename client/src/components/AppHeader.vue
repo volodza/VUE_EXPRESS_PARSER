@@ -6,11 +6,11 @@
       <v-badge 
         overlap 
         v-if="$store.getters.user"
-        v-model="$store.getters.tasks.length" 
+        v-model="counter" 
       >
 
         <template v-slot:badge>
-          <span>{{$store.getters.tasks.length}}</span>
+          <span>{{counter}}</span>
         </template>
 
         <v-menu 
@@ -20,7 +20,6 @@
 
           <template v-slot:activator="{ on }">
             <v-btn
-              
               
               color="black"
               flat
@@ -104,6 +103,7 @@ export default {
         {title:'Настройки', onClick:1, icon:'mdi-settings'},
         {title:'Выйти', onClick:this.userLogout, icon:'mdi-exit-to-app'}
       ],
+      counter:'0'
     }
   },
       
@@ -113,19 +113,31 @@ export default {
     }
   },
 
- methods:{ 
-vkAuth (){ 
-this.$http.get('http://localhost:3000/auth/vkontakte') 
-.then(response => { 
-localStorage.access_key = response.body.access_key 
-window.location.href = response.body.vk_url 
-},(response) => {}); 
-}, 
-    userLogout (){ 
-localStorage.removeItem('access_key') 
-this.$store.commit('logout'); 
-window.location.href = '/' 
-}, 
+  methods:{
+    vkAuth (){
+      this.$http.get('/auth/vkontakte')
+      .then(response => {
+        localStorage.access_key = response.body.access_key
+        window.location.href = response.body.vk_url
+      },(response) => {});
+    },
+    userLogout (){
+      localStorage.removeItem('access_key')
+      this.$store.commit('logout');
+      window.location.href = '/'
+    },
+    checkUserLogin (){
+      if(!localStorage.access_key) return;
+      this.$http.get("/auth/checkToken",{
+        params: {
+          access_key:localStorage.access_key
+        }
+      }).then(res => {
+          res.body ? this.$store.commit('setUser',res.body) : console.log('Ошибка')
+          console.log(this.$store.getters.user) 
+        });
+    }
+  },
 
     checkUserLogin (){ 
 if(!localStorage.access_key) return; 
@@ -137,12 +149,12 @@ access_key:localStorage.access_key
 res.body ? this.$store.commit('setUser',res.body) : console.log('Ошибка') 
 console.log(this.$store.getters.user) 
 }); 
-} 
-}, 
+}
+}
 
 created: function (){ 
 this.checkUserLogin() 
 }
-}
+
 
 </script>
