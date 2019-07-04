@@ -171,26 +171,16 @@
 
           
           
-<<<<<<< HEAD
-          <v-divider class="my-3"></v-divider>
-
-        <label>Название задачи</label>
-        <v-layout wrap>
-          <v-flex xs12 sm6 md8 pt-0> 
-            <v-text-field
-              class="border"
-              flat
-              solo
-              label="Любое название (для себя)"
-              hide-details
-            ></v-text-field>
-          </v-flex>
-=======
+         
           <v-divider class="my-4"></v-divider>
 
+          
+<label>Название задачи</label>
           <v-layout wrap>
-<v-flex xs12 md8 pt-0> 
-  <label>Название задачи</label>
+
+
+<v-flex xs12 sm6 md8 pt-0> 
+  
           <v-text-field
             class="border"
             v-model="inputs.taskName"
@@ -200,7 +190,6 @@
             hide-details
           ></v-text-field>
 </v-flex>
->>>>>>> 73e4b6d146aa2ec8e04dfbe3d5c533c3dd883e56
 
           <v-flex xs12 sm6 md4 pt-0>
             <v-btn 
@@ -245,79 +234,7 @@
           </v-flex>
       </v-flex>
 
-          
        
-      
-
-     
-
-          <!-- <tasks></tasks> -->
-            <!-- <v-list two-line subheader>
-
-          <v-list-tile
-            v-for="item in list.tasks.items"
-            :key="item.title"
-            avatar
-          >
-            <v-list-tile-avatar>
-            <v-progress-circular
-              color="primary"
-            ></v-progress-circular>
-              
-            </v-list-tile-avatar>
-
-            <v-list-tile-content>
-              <v-list-tile-title>{{ item.title }}</v-list-tile-title>
-              <v-list-tile-sub-title>
-                <v-icon size='17'>mdi-calendar</v-icon>
-                {{ item.subtitle }}
-                </v-list-tile-sub-title>
-            </v-list-tile-content>
-
-            <v-list-tile-action>
-              <v-layout>
-               <v-btn icon ripple>
-                <v-icon size="20" color="grey lighten-1">mdi-clock-outline</v-icon>
-              </v-btn>
-              <v-btn icon ripple>
-                <v-icon size="20" color="grey lighten-1">mdi-star-outline</v-icon>
-              </v-btn>  
-              <v-btn icon ripple>
-                <v-icon size="20" color="grey lighten-1">mdi-reload</v-icon>
-              </v-btn>                             
-              <v-btn icon ripple>
-                <v-icon size="20" color="grey lighten-1">mdi-delete-outline</v-icon>
-              </v-btn>                             
-
-              </v-layout>
-            
-            </v-list-tile-action>
-          </v-list-tile>
-
-
-        </v-list> -->
-
-
-          <!-- <v-flex d-flex row>
-            <v-flex xs1>
-            <v-progress-circular
-              indeterminate
-              color="primary"
-            ></v-progress-circular>
-            </v-flex>
-            <v-flex xs7>
-              <div >Поиск > Сообщества</div>
-            </v-flex>
-            <v-flex xs4> 
-              <v-icon>mdi-clock</v-icon> 
-              <v-icon>mdi-star</v-icon> 
-              <v-icon>mdi-repeat</v-icon>
-              <v-icon>mdi-delete</v-icon>
-            </v-flex>
-          </v-flex> -->
-
-    
-    
 
     </v-layout>
   </v-container>

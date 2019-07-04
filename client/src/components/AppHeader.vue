@@ -6,11 +6,11 @@
       <v-badge 
         overlap 
         v-if="$store.getters.user"
-        v-model="counter" 
+         v-model="$store.getters.tasks.length" 
       >
 
         <template v-slot:badge>
-          <span>{{counter}}</span>
+          <span>{{$store.getters.tasks.length}}</span>
         </template>
 
         <v-menu 
@@ -115,7 +115,7 @@ export default {
 
   methods:{
     vkAuth (){
-      this.$http.get('/auth/vkontakte')
+      this.$http.get('http://localhost:3000/auth/vkontakte') 
       .then(response => {
         localStorage.access_key = response.body.access_key
         window.location.href = response.body.vk_url
@@ -126,19 +126,7 @@ export default {
       this.$store.commit('logout');
       window.location.href = '/'
     },
-    checkUserLogin (){
-      if(!localStorage.access_key) return;
-      this.$http.get("/auth/checkToken",{
-        params: {
-          access_key:localStorage.access_key
-        }
-      }).then(res => {
-          res.body ? this.$store.commit('setUser',res.body) : console.log('Ошибка')
-          console.log(this.$store.getters.user) 
-        });
-    }
-  },
-
+  
     checkUserLogin (){ 
 if(!localStorage.access_key) return; 
 this.$http.get("http://localhost:3000/auth/checkToken",{ 
@@ -150,11 +138,11 @@ res.body ? this.$store.commit('setUser',res.body) : console.log('Ошибка')
 console.log(this.$store.getters.user) 
 }); 
 }
-}
+},
 
 created: function (){ 
 this.checkUserLogin() 
 }
-
+}
 
 </script>
