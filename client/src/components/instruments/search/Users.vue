@@ -1,48 +1,41 @@
 <template>
   <v-container grid-list-xl fluid>
-      <div>
-            <h1 class="display-1 mb-3">Пользователи ВКонтакте</h1>
-          </div>
-           
+    <div>
+      <h1 class="display-1 mb-3">Пользователи ВКонтакте</h1>
+    </div>
 
-    
     <v-layout flex-child wrap>
-      <v-flex xs12 md8  class="border">
-        <v-flex class="white" >
-
+      <v-flex xs12 md8 class="border">
+        <v-flex class="white">
           <!-- Textarea -->
-           <v-layout row wrap>
-             <v-flex xs12 xl6>
-               <label>Ключевые слова</label>
-          <v-textarea
-            rows='4'
-            solo
-            class="border"
-            name="input-7-1"
-            label="По одному слову в строке"
-            flat
-            v-model="textarea.value"
-            hide-details
-          ></v-textarea>
-         </v-flex>
+          <v-layout row wrap>
+            <v-flex xs12>
+              <label>Ключевые слова</label>
+              <v-textarea
+                rows="4"
+                solo
+                class="border"
+                name="input-7-1"
+                label="По одному слову в строке"
+                flat
+                v-model="textarea.value"
+                hide-details
+              ></v-textarea>
+            </v-flex>
+          </v-layout>
 
-         <v-flex mt-2>
-          <v-checkbox 
-            height='6px'
-            :label="`Только с фотографией`"
-            v-model="checkboxes.hasPhoto"
-          ></v-checkbox>
+          <v-layout row wrap mx-0>
+            <v-checkbox height="6px" :label="`Только с фотографией`" v-model="checkboxes.hasPhoto"></v-checkbox>
 
-          <v-checkbox
-            height='6px'
-            :label="`Точное вхождение поисковой фразы`"
-            v-model="checkboxes.exactMatch"
-          ></v-checkbox>
-         </v-flex>
-</v-layout>
+            <v-checkbox
+              height="6px"
+              :label="`Точное вхождение поисковой фразы`"
+              v-model="checkboxes.exactMatch"
+            ></v-checkbox>
+          </v-layout>
 
-            <v-layout wrap>
-            <v-flex xs12 sm6 >
+          <v-layout wrap>
+            <v-flex xs12 sm6>
               <label>Пол</label>
               <v-select
                 solo
@@ -57,8 +50,8 @@
               ></v-select>
             </v-flex>
 
-             <v-flex xs12 sm6 >
-               <label>Семейное положение</label>
+            <v-flex xs12 sm6>
+              <label>Семейное положение</label>
               <v-select
                 solo
                 class="border"
@@ -70,14 +63,13 @@
                 item-value="id"
                 hide-details
               ></v-select>
-              </v-flex>
-          
-            </v-layout>
+            </v-flex>
+          </v-layout>
 
-            <label>Возраст</label>
-            <v-layout wrap>
-              <v-flex xs6 sm3 pt-0>               
-              <v-text-field 
+          <label>Возраст</label>
+          <v-layout wrap>
+            <v-flex xs6 sm3 pt-0>
+              <v-text-field
                 class="border"
                 hide-details
                 solo
@@ -88,7 +80,7 @@
             </v-flex>
 
             <v-flex xs6 sm3 pt-0>
-              <v-text-field 
+              <v-text-field
                 class="border"
                 hide-details
                 solo
@@ -98,8 +90,7 @@
               ></v-text-field>
             </v-flex>
 
-            
-               <v-flex xs6 sm3 pt-0>
+            <v-flex xs6 sm3 pt-0>
               <v-autocomplete
                 class="border"
                 flat
@@ -140,7 +131,7 @@
                     </v-list-tile-title>
                   </v-list-tile>
                 </template>
-                
+
                 <template v-slot:item="{ item }">
                   <v-list-tile-avatar
                     color="indigo"
@@ -152,13 +143,12 @@
                   </v-list-tile-content>
                 </template>
               </v-autocomplete>
-              
             </v-flex>
-              </v-layout>
+          </v-layout>
 
-              <!-- <div class="font-weight-medium mt-3">Поиск по</div> -->
-<label>Поиск по</label>
-   <v-radio-group v-model="radiogroup.selected" style="margin-top:0px"  row>
+          <!-- <div class="font-weight-medium mt-3">Поиск по</div> -->
+          <label>Поиск по</label>
+          <v-radio-group v-model="radiogroup.selected" style="margin-top:0px" row>
             <v-radio label="Интересам" value="interests"></v-radio>
             <v-radio label="Должности" value="position"></v-radio>
             <v-radio label="Месту работы" value="workplace"></v-radio>
@@ -170,95 +160,90 @@
             <v-radio label="Имени ребенка" value="childname"></v-radio>
           </v-radio-group>
 
-              
-          
+          <v-divider class="mb-4"></v-divider>
 
-         <v-divider class="mb-4"></v-divider>
+          <label>Название задачи</label>
+          <v-layout wrap>
+            <v-flex xs12 sm6 md8 pt-0>
+              <v-text-field class="border" flat solo label="Любое название (для себя)" hide-details></v-text-field>
+            </v-flex>
 
-        <label>Название задачи</label>
-        <v-layout wrap>
-          <v-flex xs12 sm6 md8 pt-0> 
-            <v-text-field
-              class="border"
-              flat
-              solo
-              label="Любое название (для себя)"
-              hide-details
-            ></v-text-field>
-          </v-flex>
-
-          <v-flex xs12 sm6 md4 pt-0>
-            <v-btn 
-            class="mt-0"
-            style="height:50px;             
+            <v-flex xs12 sm6 md4 pt-0>
+              <v-btn
+                class="mt-0"
+                style="height:50px;             
             font-size:20px; 
             text-transform:none; 
             background: linear-gradient(160deg,#4f555e,#4f555e,#5c6e68,#7f6b67); 
             color:white"
-            block
-            flat
-            hide-details
-            @click="getGroups"
-            :loading="!answer">
-              <v-icon style="margin-right: 5px">mdi-play</v-icon>
-              <label>Начать поиск</label>
-            </v-btn>
-          </v-flex>
-        </v-layout>
-
+                block
+                flat
+                hide-details
+                @click="getGroups"
+                :loading="!answer"
+              >
+                <v-icon style="margin-right: 5px">mdi-play</v-icon>
+                <label>Начать поиск</label>
+              </v-btn>
+            </v-flex>
+          </v-layout>
         </v-flex>
       </v-flex>
 
       <v-flex xs12 md4 pt-0>
-        <v-flex style="background:#e7fbed" > <h1>Описание</h1>
-          <p>В поиске пользователей можно искать людей по полу,
-             городу, возрасту, тех, у кого день рождения, семейному положению,
-             наличию детей, а так же производить поиск их родственников, 
-             вторых половинок и детей. <br><br>
-             1. Введите параметры поиска людей <br><br>
-             2. Задайте понятное описание задачи, чтобы не забыть, кто у Вас собирается. <br><br>
-             3. Нажмите "Добавить задачу" и перейдите к следующей. <br><br>
-             При указании возраста, города, семейного положения выдача может
-             отличаться от выдачи ВКонтакте, т.к. в базу попадают только те,
-             кто не скрыл возраст, семейное положение, город настройками приватности.</p>
-          </v-flex>
+        <v-flex style="background:#e7fbed">
+          <h1>Описание</h1>
+          <p>
+            В поиске пользователей можно искать людей по полу,
+            городу, возрасту, тех, у кого день рождения, семейному положению,
+            наличию детей, а так же производить поиск их родственников,
+            вторых половинок и детей.
+            <br />
+            <br />1. Введите параметры поиска людей
+            <br />
+            <br />2. Задайте понятное описание задачи, чтобы не забыть, кто у Вас собирается.
+            <br />
+            <br />3. Нажмите "Добавить задачу" и перейдите к следующей.
+            <br />
+            <br />При указании возраста, города, семейного положения выдача может
+            отличаться от выдачи ВКонтакте, т.к. в базу попадают только те,
+            кто не скрыл возраст, семейное положение, город настройками приватности.
+          </p>
+        </v-flex>
       </v-flex>
-
-
     </v-layout>
   </v-container>
 </template>
 
 
-<style scoped> 
-.border{
-  border:1px solid #d7d7d7;
+<style scoped>
+.border {
+  border: 1px solid #d7d7d7;
 }
 </style>
 
 
 <script>
 export default {
-  data () {
+  data() {
     return {
-
-      textarea:{
-        value:''
+      textarea: {
+        value: ""
       },
 
-      radiogroup:{
-        selected:null
+      radiogroup: {
+        selected: "interests"
       },
 
-      checkboxes:{
-        exactMatch:false,
-        hasPhoto:false
+      checkboxes: {
+        hasPhoto: true,
+        exactMatch: false
       },
 
-      inputs:{
-        age:{
-          from:null,
-          to:null
+      inputs: {
+        age: {
+          from: 1,
+          to: 1000
         }
       },
 
@@ -269,7 +254,7 @@ export default {
             { title: "Женский", id: 1 },
             { title: "Мужской", id: 2 }
           ],
-          selected: null
+          selected: { title: "Любой", id: 0 }
         },
         status: {
           items: [
@@ -282,7 +267,7 @@ export default {
             { title: "Влюблен / Влюблена", id: 7 },
             { title: "В гражданском браке", id: 8 }
           ],
-          selected: null
+          selected: { title: "Не женат / Не замужем", id: 1 }
         },
         country: {
           loading: false,
@@ -298,32 +283,29 @@ export default {
         }
       },
       search: null
-
-    }
+    };
   },
   methods: {
-
     getUsers() {
       if (!this.selects.city.selected) return;
       let obj = {
-        q:this.key_phrases,
-        searchBy:this.radiogroup.selected,
-        exactMatch:this.checkboxes.exactMatch,
+        q: this.key_phrases,
+        searchBy: this.radiogroup.selected,
+        exactMatch: this.checkboxes.exactMatch,
         hasPhoto: +this.checkboxes.hasPhoto,
-        ageFrom:+this.inputs.age.from,
-        ageTo:+this.inputs.age.to,
+        ageFrom: +this.inputs.age.from,
+        ageTo: +this.inputs.age.to,
         status: this.selects.status.selected,
         sex: this.selects.sex.selected,
         city: this.selects.city.selected,
         country: this.selects.country.selected,
-        title:'Поиск > Пользователи',
-        user_id:this.$store.getters.user.id,
+        title: "Поиск > Пользователи",
+        user_id: this.$store.getters.user.id
       };
-      this.answer = '';
-      this.$http.post("http://localhost:3000/getUsers", obj)
-      .then(res => {
+      this.answer = "";
+      this.$http.post("http://localhost:3000/getUsers", obj).then(res => {
         this.answer = res.body;
-      })
+      });
     },
 
     getCities(v) {
@@ -350,8 +332,7 @@ export default {
           this.selects.country.loading = false;
         });
     }
-
-  },//конец methods
+  }, //конец methods
   watch: {
     "selects.city.search": function(val) {
       val && val !== this.selects.city.selected && this.getCities(val);
@@ -360,11 +341,10 @@ export default {
       val && val !== this.selects.country.selected && this.getCountries(val);
     }
   },
-  computed:{
+  computed: {
     key_phrases() {
-      return this.textarea.value.split`\n`
+      return this.textarea.value.split`\n`;
     }
   }
-
-}
+};
 </script>

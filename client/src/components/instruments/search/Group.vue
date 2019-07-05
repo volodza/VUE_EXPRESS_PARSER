@@ -1,30 +1,29 @@
 <template>
   <v-container grid-list-xl fluid>
-     <div class='mb-3'>
-            <h1 class="display-1">Поиск сообществ ВКонтакте</h1>
-          </div>
+    <div class="mb-3">
+      <h1 class="display-1">Поиск сообществ ВКонтакте</h1>
+    </div>
 
     <v-layout flex-child wrap>
-       <v-flex xs12 md8  class="border">
+      <v-flex xs12 md8 class="border">
         <v-flex class="white">
-
           <!-- Textarea -->
-        <v-layout row wrap>
-         <v-flex xs12 xl6>
-           <label>Ключевые слова</label>
-          <v-textarea
-            rows='4'
-            solo
-            class="border"
-            flat
-            name="input-7-1"
-            label="По одному слову в строке"
-            v-model="textarea.key_word"
-            hide-details
-          ></v-textarea>
-          </v-flex>
+          <v-layout row wrap>
+            <v-flex xs12>
+              <label>Ключевые слова</label>
+              <v-textarea
+                rows="4"
+                solo
+                class="border"
+                flat
+                name="input-7-1"
+                label="По одному слову в строке"
+                v-model="textarea.key_word"
+                hide-details
+              ></v-textarea>
+            </v-flex>
 
-        <v-flex xs12 xl6>
+            <!-- <v-flex xs12 xl6>
           <label>Минус ключевые слова</label>
           <v-textarea
             rows='4'
@@ -36,37 +35,32 @@
             v-model="textarea.minus_key_word"
             hide-details
           ></v-textarea>
-          </v-flex>
-        </v-layout>
+            </v-flex>-->
+          </v-layout>
 
-        <!-- Checkbox -->   
-          <v-layout row wrap  mx-1 mt-3 >       
-          <v-checkbox
-            class="my-0 py-0"
-            :label="`Точное вхождение поисковой фразы`"
-            v-model="checkboxes.exact_phrase"
-          ></v-checkbox>
-          <v-checkbox
-            class="my-0 py-0"
-            :label="`Только официальные сообщества`"
-            v-model="checkboxes.only_official"
-          ></v-checkbox>
-          <v-checkbox
-            class="my-0 py-0"
-            v-model="checkboxes.with_goods"
-            :label="`Только сообщество с товарами`"
-          ></v-checkbox> 
+          <!-- Checkbox -->
+          <v-layout row wrap mx-0 mt-3>
+            <v-checkbox
+              class="my-0 py-0"
+              :label="`Точное вхождение поисковой фразы`"
+              v-model="checkboxes.exact_phrase"
+            ></v-checkbox>
+            <v-checkbox
+              class="my-0 py-0"
+              :label="`Только официальные сообщества`"
+              v-model="checkboxes.only_official"
+            ></v-checkbox>
+            <v-checkbox
+              class="my-0 py-0"
+              v-model="checkboxes.with_goods"
+              :label="`Только сообщество с товарами`"
+            ></v-checkbox>
           </v-layout>
 
           <v-divider class="mb-3"></v-divider>
 
-
-     
-
-          
-          
-<v-layout wrap>
-            <v-flex xs12 md6> 
+          <v-layout wrap>
+            <v-flex xs12 md6>
               <label>Типы сообществ</label>
               <v-select
                 hide-details
@@ -86,21 +80,21 @@
               <v-select
                 v-model="selects.sort.selected"
                 hide-details
+                flat
                 solo
                 class="border"
-                flat
                 item-text="title"
                 item-value="value"
                 :items="selects.sort.items"
-                label="Выберете тип сортировки"
+                label="Выберите тип сортировки"
               ></v-select>
             </v-flex>
-</v-layout>
+          </v-layout>
 
-            <label >Подписчиков</label>
-            <v-layout wrap>               
-               <v-flex xs6 md3 pt-0>  
-              <v-text-field 
+          <label>Подписчиков</label>
+          <v-layout wrap>
+            <v-flex xs6 md3 pt-0>
+              <v-text-field
                 class="border"
                 flat
                 solo
@@ -143,7 +137,7 @@
                 class="border"
                 flat
                 :disabled="!selects.country.selected"
-                v-model="selects.city.selected"                
+                v-model="selects.city.selected"
                 :loading="selects.city.loading"
                 :items="selects.city.items"
                 :search-input.sync="selects.city.search"
@@ -166,56 +160,50 @@
                 </template>
               </v-autocomplete>
             </v-flex>
-</v-layout>
-         
+          </v-layout>
 
-          
-          
-         
           <v-divider class="my-4"></v-divider>
 
-          
-<label>Название задачи</label>
+          <label>Название задачи</label>
           <v-layout wrap>
+            <v-flex xs12 sm6 md8 pt-0>
+              <v-text-field
+                class="border"
+                v-model="inputs.taskName"
+                flat
+                solo
+                label="Любое название (для себя)"
+                hide-details
+              ></v-text-field>
+            </v-flex>
 
-
-<v-flex xs12 sm6 md8 pt-0> 
-  
-          <v-text-field
-            class="border"
-            v-model="inputs.taskName"
-            flat
-            solo
-            label="Любое название (для себя)"
-            hide-details
-          ></v-text-field>
-</v-flex>
-
-          <v-flex xs12 sm6 md4 pt-0>
-            <v-btn 
-            class="mt-0"
-            style="height:50px;             
+            <v-flex xs12 sm6 md4 pt-0>
+              <v-btn
+                class="mt-0"
+                style="height:50px;             
             font-size:20px; 
             text-transform:none; 
             background: linear-gradient(160deg,#4f555e,#4f555e,#5c6e68,#7f6b67); 
             color:white"
-            block
-            flat
-            hide-details
-            @click="getGroups"
-            :loading="!answer">
-              <v-icon style="margin-right: 5px">mdi-play</v-icon>
-              <label>Начать поиск</label>
-            </v-btn>
-          </v-flex>
-        </v-layout> 
-
+                block
+                flat
+                hide-details
+                @click="getGroups"
+                :loading="!answer"
+              >
+                <v-icon style="margin-right: 5px">mdi-play</v-icon>
+                <label>Начать поиск</label>
+              </v-btn>
+            </v-flex>
+          </v-layout>
+        </v-flex>
       </v-flex>
-    </v-flex>
 
-           <v-flex xs12 md4 pt-0 >
-        <v-flex style="background:#e7fbed"> <h1>Описание</h1>
-          <p>Облачный "Поиск групп" осуществляется по базе Segmento Target, 
+      <v-flex xs12 md4 pt-0>
+        <v-flex style="background:#e7fbed">
+          <h1>Описание</h1>
+          <p>
+            Облачный "Поиск групп" осуществляется по базе Segmento Target,
             способен выдавать до 10 000 результатов (в 10 раз больше чем в API Поиске).
             В базе хранятся группы с количеством участников от 2 пользователей,
             группы с меньшим количеством участников отсутствуют в выдаче.
@@ -223,28 +211,26 @@
             содержаться не самые актуальные результаты. Поиск осуществляется с
             учетом морфологии, однако выдача может несколько отличаться от
             выдачи ВКонтакте, так как алгоритмы текстового поиска не совпадают.
-            Инструмент позволяет сохранить контакты групп. Ключевые слова и 
-            фразы нужно вводить по одному в строке. Если Вам необходима выдача 
+            Инструмент позволяет сохранить контакты групп. Ключевые слова и
+            фразы нужно вводить по одному в строке. Если Вам необходима выдача
             точь-в-точь как во ВКонтакте — воспользуйтесь API Поиском групп.
             Выдачу можно отсортировать по количеству постов в день, в неделю,
             чтобы выделить группы, в которых ведётся активность. API Поиск работает корректно,
-            не смотря на то что устаревший ВК не поддерживается. 
+            не смотря на то что устаревший ВК не поддерживается.
             Если Вы вводите страну либо город — пабликов в выдаче не будет.
-            ER=(Лайки+Репосты+Комментарии)/Дни/Участники*100</p>
-          </v-flex>
+            ER=(Лайки+Репосты+Комментарии)/Дни/Участники*100
+          </p>
+        </v-flex>
       </v-flex>
-
-       
-
     </v-layout>
   </v-container>
 </template>
 
 
 
-<style scoped> 
-.border{
-  border:1px solid #d7d7d7;
+<style scoped>
+.border {
+  border: 1px solid #d7d7d7;
 }
 </style>
 
@@ -252,25 +238,22 @@
 
 <script>
 export default {
-  data () {
+  data() {
     return {
-      textarea:{
-        key_word:'',
-        minus_key_word:''
+      textarea: { search: null, key_word: "", minus_key_word: "" },
+      checkboxes: {
+        exact_phrase: true,
+        only_official: false,
+        with_goods: false
       },
-      checkboxes:{
-        exact_phrase: false,
-        only_official:false,
-        with_goods:false
-      },
-      inputs:{
-        members:{
-          from:null,
-          to:null
+      inputs: {
+        members: {
+          from: 1,
+          to: 1000
         },
-        taskName:null
+        taskName: null
       },
-      selects:{
+      selects: {
         country: {
           loading: false,
           items: [],
@@ -283,74 +266,94 @@ export default {
           selected: null,
           search: null
         },
-        type:{
-          items:[
-            {title:'Группа',value:'group'},
-            {title:'Паблик',value:'page'},
-            {title:'Мероприятие',value:'event'},
-            {title:'Предстоящее мероприятие',value:'future'}
+        type: {
+          items: [
+            { title: "Группа", value: "group" },
+            { title: "Паблик", value: "page" },
+            { title: "Мероприятие", value: "event" },
+            { title: "Предстоящее мероприятие", value: "future" }
           ],
-          selected:null
+          selected: { title: "Группа", value: "group" }
         },
-        sort:{
-          items:[
-            {title:'По умолчанию(аналогично результатам поиска в ВК)',value:0},
-            {title:'По скорости роста',value:1},
-            {title:'По дневной посещаемости',value:2},
-            {title:'По количеству лайков',value:3},
-            {title:'По количеству комментариев',value:4},
-            {title:'По количеству записей в обсуждениях',value:5}
+        sort: {
+          items: [
+            {
+              title: "По умолчанию(аналогично результатам поиска в ВК)",
+              id: 0
+            },
+            { title: "По скорости роста", id: 1 },
+            { title: "По дневной посещаемости", id: 2 },
+            { title: "По количеству лайков", id: 3 },
+            { title: "По количеству комментариев", id: 4 },
+            { title: "По количеству записей в обсуждениях", id: 5 }
           ],
-          selected:null
+          selected: {
+            title: "По умолчанию(аналогично результатам поиска в ВК)",
+            id: 0
+          }
         }
       },
-      answer:'тут',
-      list:{
-        tasks:{
+      answer: "тут",
+      list: {
+        tasks: {
           items: [
-          { icon: 'folder', iconClass: 'grey lighten-1 white--text', title: 'Поиск > Сообщества', subtitle: '03.02.2019' },
-          { icon: 'folder', iconClass: 'grey lighten-1 white--text', title: 'Поиск > Родители', subtitle: 'Jan 17, 2014' },
-          { icon: 'folder', iconClass: 'grey lighten-1 white--text', title: 'Сбор > Друзья', subtitle: 'Jan 28, 2014' }
-        ]
+            {
+              icon: "folder",
+              iconClass: "grey lighten-1 white--text",
+              title: "Поиск > Сообщества",
+              subtitle: "03.02.2019"
+            },
+            {
+              icon: "folder",
+              iconClass: "grey lighten-1 white--text",
+              title: "Поиск > Родители",
+              subtitle: "Jan 17, 2014"
+            },
+            {
+              icon: "folder",
+              iconClass: "grey lighten-1 white--text",
+              title: "Сбор > Друзья",
+              subtitle: "Jan 28, 2014"
+            }
+          ]
         }
       }
-    }
+    };
   },
-  methods:{
+  methods: {
     getGroups() {
-      
       if (!this.textarea.key_word) {
-        this.$store.commit('setError','Введите хотя бы одну ключевую фразу')
-        return
+        this.$store.commit("setError", "Введите хотя бы одну ключевую фразу");
+        return;
       }
       let obj = {
-        q:this.key_phrases,
-        type:this.selects.type.selected,
-        city_id:this.selects.city.selected,
-        country_id:this.selects.country.selected,
-        sort:this.selects.sort.selected,
-        members_from:+this.inputs.members.from,
-        members_to:+this.inputs.members.to,
+        q: this.key_phrases,
+        type: this.selects.type.selected,
+        city_id: this.selects.city.selected,
+        country_id: this.selects.country.selected,
+        sort: this.selects.sort.selected,
+        members_from: +this.inputs.members.from,
+        members_to: +this.inputs.members.to,
         exact_phrase: this.checkboxes.exact_phrase,
-        verified:this.checkboxes.only_official,
-        market:+this.checkboxes.with_goods,
-        user_id:this.$store.getters.user.id,
-        title:this.inputs.taskName || 'Поиск > Сообщества'
-      }
-      this.answer = '';
-      this.$http.post('/api/search/groups',obj)
-       .then(res =>{
-          this.$store.commit('setSuccess',res.body)
-          this.answer = res.body
-       })
+        verified: this.checkboxes.only_official,
+        market: +this.checkboxes.with_goods,
+        user_id: this.$store.getters.user.id,
+        title: this.inputs.taskName || "Поиск > Сообщества"
+      };
+      this.answer = "";
+      this.$http.post("/api/search/groups", obj).then(res => {
+        this.$store.commit("setSuccess", res.body);
+        this.answer = res.body;
+      });
     },
     getCities(v) {
       if (!this.selects.country.selected) return;
       this.selects.city.loading = true;
-      this.$http.get("/api/geolocation/cities", {
-          params:{
+      this.$http
+        .get("/api/geolocation/cities", {
+          params: {
             q: v,
-            country_id:this.selects.country.selected
+            country_id: this.selects.country.selected
           }
         })
         .then(res => {
@@ -360,8 +363,9 @@ export default {
     },
     getCountries(v) {
       this.selects.country.loading = true;
-      this.$http.get("/api/geolocation/countries", {
-          params:{
+      this.$http
+        .get("/api/geolocation/countries", {
+          params: {
             q: v
           }
         })
@@ -379,11 +383,10 @@ export default {
       val && val !== this.selects.country.selected && this.getCountries(val);
     }
   },
-  computed:{
+  computed: {
     key_phrases() {
-      return this.textarea.key_word.split`\n`
+      return this.textarea.key_word.split`\n`;
     }
   }
-}
-
+};
 </script>

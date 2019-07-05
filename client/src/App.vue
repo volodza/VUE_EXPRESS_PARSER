@@ -1,32 +1,24 @@
 <template>
   <v-app>
-
     <!-- Header -->
     <v-toolbar app flat style="border-bottom:1px solid #8CCFB9">
-     <v-toolbar-side-icon
-      @click.stop="drawer = !drawer" 
-      class="hidden-lg-and-up"
-     >
-     </v-toolbar-side-icon>
-     <v-spacer></v-spacer>
-     <app-header/>
-     
+      <v-toolbar-side-icon @click.stop="drawer = !drawer" class="hidden-lg-and-up"></v-toolbar-side-icon>
+      <v-spacer></v-spacer>
+      <app-header />
     </v-toolbar>
-    
-    
+
     <!-- Sidebar -->
     <v-navigation-drawer
-      
-     style="background: linear-gradient(200deg,#4f555e,#4f555e,#4f555e,#4f555e,#5c6e68,#7f6b67);"
-     app
-     v-model="drawer"
+      style="background: linear-gradient(200deg,#4f555e,#4f555e,#4f555e,#4f555e,#5c6e68,#7f6b67);"
+      app
+      v-model="drawer"
     >
-      <app-sidebar/>
+      <app-sidebar />
     </v-navigation-drawer>
 
-    <v-content class='white'>
-      <router-view/>
-   </v-content>
+    <v-content class="white">
+      <router-view />
+    </v-content>
 
     <!-- snackbar-error -->
     <template v-if="error">
@@ -38,13 +30,7 @@
         :value="true"
       >
         {{error}}
-        <v-btn
-          dark
-          flat
-          @click="closeError"
-        >
-          Закрыть
-        </v-btn>
+        <v-btn dark flat @click="closeError">Закрыть</v-btn>
       </v-snackbar>
     </template>
 
@@ -58,23 +44,15 @@
         :value="true"
       >
         {{success}}
-        <v-btn
-          dark
-          flat
-          @click="closeSuccess"
-        >
-          Закрыть
-        </v-btn>
+        <v-btn dark flat @click="closeSuccess">Закрыть</v-btn>
       </v-snackbar>
     </template>
-
   </v-app>
 </template>
 
 <style>
-
 #app {
-font-family: 'Source Sans Pro', sans-serif;
+  font-family: "Source Sans Pro", sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   color: #2c3e50;
@@ -83,34 +61,34 @@ font-family: 'Source Sans Pro', sans-serif;
 </style>
 
 <script>
-import AppHeader from '@/components/AppHeader'
-import AppSidebar from '@/components/AppSidebar'
+import AppHeader from "@/components/AppHeader";
+import AppSidebar from "@/components/AppSidebar";
 
 export default {
   components: {
     AppHeader,
-    AppSidebar 
+    AppSidebar
   },
-  data () {
+  data() {
     return {
-      drawer:null
+      drawer: null
+    };
+  },
+  computed: {
+    error() {
+      return this.$store.getters.error;
+    },
+    success() {
+      return this.$store.getters.success;
     }
   },
-  computed:{
-    error(){
-      return this.$store.getters.error
+  methods: {
+    closeError() {
+      this.$store.dispatch("clearError");
     },
-    success(){
-      return this.$store.getters.success
-    }
-  },
-  methods:{
-    closeError (){
-      this.$store.dispatch('clearError')
-    },
-    closeSuccess (){
-      this.$store.dispatch('clearSuccess')
+    closeSuccess() {
+      this.$store.dispatch("clearSuccess");
     }
   }
-}
+};
 </script>

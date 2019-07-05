@@ -22,7 +22,7 @@
             multiple
             item-value="value"
             item-text="title"
-            label=""
+            label="dsafsdf"
            :items="selects.typeRelatives.items"
             v-model="selects.typeRelatives.selected"
             ></v-select>
