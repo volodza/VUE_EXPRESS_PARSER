@@ -49,15 +49,7 @@
       </v-flex>
 
       <v-flex xs12 md6 d-flex>
-        <v-flex class="white">
-          <v-textarea
-            name="input-7-1"
-            label="Ключевые фразы"
-            value
-            hint="По одной ключевой фразе в строку"
-            v-model="key_phrases"
-          ></v-textarea>
-        </v-flex>
+         
       </v-flex>
     </v-layout>
   </v-container>
@@ -66,7 +58,9 @@
 <script>
     export default {
       data () {
-    return {search: null,
+    return {
+      
+      search: null,
 
       textarea:{
          value:'',

@@ -273,24 +273,21 @@ export default {
             { title: "Мероприятие", value: "event" },
             { title: "Предстоящее мероприятие", value: "future" }
           ],
-          selected: { title: "Группа", value: "group" }
+          selected: "group"
         },
         sort: {
           items: [
             {
               title: "По умолчанию(аналогично результатам поиска в ВК)",
-              id: 0
+              value: 0
             },
-            { title: "По скорости роста", id: 1 },
-            { title: "По дневной посещаемости", id: 2 },
-            { title: "По количеству лайков", id: 3 },
-            { title: "По количеству комментариев", id: 4 },
-            { title: "По количеству записей в обсуждениях", id: 5 }
+            { title: "По скорости роста", value: 1 },
+            { title: "По дневной посещаемости", value: 2 },
+            { title: "По количеству лайков", value: 3 },
+            { title: "По количеству комментариев", value: 4 },
+            { title: "По количеству записей в обсуждениях", value: 5 }
           ],
-          selected: {
-            title: "По умолчанию(аналогично результатам поиска в ВК)",
-            id: 0
-          }
+          selected: 0
         }
       },
       answer: "тут",
@@ -341,16 +338,18 @@ export default {
         title: this.inputs.taskName || "Поиск > Сообщества"
       };
       this.answer = "";
-      this.$http.post("/api/search/groups", obj).then(res => {
-        this.$store.commit("setSuccess", res.body);
-        this.answer = res.body;
-      });
+      this.$http
+        .post("http://Localhost:3000/api/search/groups", obj)
+        .then(res => {
+          this.$store.commit("setSuccess", res.body);
+          this.answer = res.body;
+        });
     },
     getCities(v) {
       if (!this.selects.country.selected) return;
       this.selects.city.loading = true;
       this.$http
-        .get("/api/geolocation/cities", {
+        .get("Localhost:3000//api/geolocation/cities", {
           params: {
             q: v,
             country_id: this.selects.country.selected
@@ -364,7 +363,7 @@ export default {
     getCountries(v) {
       this.selects.country.loading = true;
       this.$http
-        .get("/api/geolocation/countries", {
+        .get("Localhost:3000//api/geolocation/countries", {
           params: {
             q: v
           }

@@ -1,7 +1,7 @@
 <template>
   <v-app>
     <!-- Header -->
-    <v-toolbar app flat style="border-bottom:1px solid #8CCFB9">
+    <v-toolbar app flat style="border-bottom:1px solid #d7d7d7">
       <v-toolbar-side-icon @click.stop="drawer = !drawer" class="hidden-lg-and-up"></v-toolbar-side-icon>
       <v-spacer></v-spacer>
       <app-header />

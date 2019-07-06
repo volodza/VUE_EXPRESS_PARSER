@@ -1,6 +1,6 @@
 <template>
   <div>
-    <v-list class="sideText--text" style="padding:0px;">
+    <v-list class="sideText--text " style="padding:0px;">
       <!-- side-header -->
       <v-list-tile style="height:54px;margin-top:10px" :href="'/'">
         <v-list-tile-action>
@@ -30,8 +30,8 @@
           @click="1"
           :to="link.url"
         >
-          <v-list-tile-action>
-            <v-icon right v-text="link.icon"></v-icon>
+          <v-list-tile-action >
+            <v-icon dark right v-text="link.icon"></v-icon>
           </v-list-tile-action>
           <v-list-tile-title v-text="link.title"></v-list-tile-title>
         </v-list-tile>
@@ -51,7 +51,7 @@
           :to="link.url"
         >
           <v-list-tile-action>
-            <v-icon right :color="link.iconColor" v-text="link.icon"></v-icon>
+            <v-icon  dark right :color="link.iconColor" v-text="link.icon"></v-icon>
           </v-list-tile-action>
           <v-list-tile-title v-text="link.title"></v-list-tile-title>
         </v-list-tile>
@@ -66,7 +66,7 @@
 
         <v-list-tile class="ml-4" v-for="link in links.activity" :key="link.title" @click="1">
           <v-list-tile-action>
-            <v-icon right v-text="link.icon"></v-icon>
+            <v-icon dark right v-text="link.icon"></v-icon>
           </v-list-tile-action>
           <v-list-tile-title v-text="link.title"></v-list-tile-title>
         </v-list-tile>
