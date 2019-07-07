@@ -1,6 +1,6 @@
 <template>
   <div class="text-xs-center">
-    <v-dialog
+    <!-- <v-dialog
       v-model="dialog"
       width="500"
     >
@@ -13,7 +13,7 @@
         >
           Click Me
         </v-btn>
-      </template>
+      </template> -->
 
       <v-card>
         <v-card-title
@@ -25,7 +25,7 @@
 
         <v-progress-linear 
           :indeterminate="true"
-          v-if="arr == null"
+          v-if="content == null"
         >
         </v-progress-linear>
 
@@ -40,7 +40,7 @@
         <v-layout
           column
           text-xs-center            
-          v-for="item in arr"
+          v-for="item in content"
           :key="item.name"
         >
           <v-layout row>
@@ -80,60 +80,60 @@
         <v-divider></v-divider>
 
         <v-pagination
-          v-if="arr!==null"
+          v-if="content!==null"
           v-model="page"
           :length="pages"
           :total-visible="9"
         ></v-pagination>
 
       </v-card>
-    </v-dialog>
+    <!-- </v-dialog> -->
   </div>
 </template>
 
 <script>
   export default {
+    inject: ['getArr'],
     data () {
       return {
-        dialog: false,
         page: 1,
         arr:null,
         pages:1
       }
     },
     methods:{
-      getArr (page){
-        this.$http.get(`http://localhost:3000/api/test`,{
-          params:{
-            page:this.page,
-            user_id:82106886,
-            begin:'2019-07-07T11:39:45.025+00:00'
-          }
-        })
-          .then(response => {
-            console.log(response.body)
-            this.arr = response.body.arr
-            this.pages = response.body.pages
-        },(err) => {err});
-      }
+      // getArr (page){
+      //   // if(!this.taskBegin) return;
+      //   this.$http.get(`http://localhost:3000/api/test`,{
+      //     params:{
+      //       page:this.page,
+      //       user_id: this.$store.getters.user.id,
+      //       begin: this.taskBegin
+      //     }
+      //   })
+      //     .then(response => {
+      //       // console.log(response.body)
+      //       this.$store.commit('setResults',response.body.arr);
+      //       this.pages = response.body.pages
+      //   },(err) => {err});
+      // }
     },
     computed:{
       content (){
-        return this.arr
+        return this.$store.getters.results
+      },
+      taskBegin(){
+        return this.$store.getters.taskBegin
       }
     },
     watch: {
       page(){
-        this.arr = null;
+        this.$store.commit('setResults',null);
         this.getArr(this.page)
-      },
-      dialog(){
-        if (!this.dialog) this.arr = null
-        else this.getArr(this.page)
       }
     },
     created (){
-      this.getArr(this.page)
+      setTimeout(this.getArr(this.page),8000)
     }
   }
 </script>

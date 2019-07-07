@@ -4,7 +4,8 @@
     <v-card>
   <!-- <div style="overflow:auto;border:1px solid #e0e0e0;"> -->
     <v-progress-circular v-if="this.$store.getters.tasks == null" indeterminate color="primary"></v-progress-circular>
-
+    {{this.$store.getters.taskBegin}}
+    {{this.$store.getters.results}}
     <div v-if="this.$store.getters.monitored == []">Список сообществ для отслеживания пуст</div>
 
     <v-list two-line subheader v-else style="padding-bottom:20px">
@@ -34,13 +35,26 @@
         <v-list-tile-content style="font-size:14px;height:40px">
           <v-list-tile-title>{{ task.title }}</v-list-tile-title>
           <v-list-tile-sub-title>
+
             <v-icon size="17">mdi-calendar</v-icon>
             {{ task.begin.slice(0,10) }}
+
+
             <v-icon
               size="17"
               v-if="task.count"
+              @click="setTaskBegin(task.begin)"
+            >
+              mdi-account-search-outline
+            </v-icon>
+
+
+
+            <!-- <v-icon
+              size="17"
+              v-if="task.count"
               @click="downloadAnswer(task)"
-            >mdi-account-search-outline</v-icon>
+            >mdi-account-search-outline</v-icon> -->
 
             {{task.count}}
             <!-- <v-icon size='17'>mdi-timer-sand-empty</v-icon> -->
@@ -69,18 +83,61 @@
     </v-list> 
   </v-card>
   </v-flex>
+
+  <v-dialog
+    v-model="dialog"
+    width="500"
+  >
+    <SearchResults/>
+  </v-dialog>
+
+
+
   <!-- </div> -->
 </v-layout> 
 </template>
 
 <script>
+import SearchResults from '../SearchResults'
 export default {
+  components:{SearchResults},
+  data () {
+    return {
+      dialog:false
+    }
+  },
+  provide() {
+    return {
+      getArr: this.getArr
+    }
+  },
   computed: {
     tasks() {
       return this.$store.getters.tasks;
     }
   },
+  watch:{
+    dialog(){
+      if (!this.dialog) this.$store.commit('setResults',null)
+    }
+  },
   methods: {
+      getArr (page){
+        // if(!this.taskBegin) return;
+        this.$http.get(`http://localhost:3000/api/test`,{
+          params:{
+            page:this.page,
+            user_id: this.$store.getters.user.id,
+            begin: this.taskBegin
+          }
+        })
+          .then(response => {
+            // console.log(response.body)
+            this.$store.commit('setResults',response.body.arr);
+            this.pages = response.body.pages
+        },(err) => {err});
+      },
+
     downloadAnswer(task) {
       const obj = {
         user_id: this.$store.getters.user.id,
@@ -136,10 +193,16 @@ export default {
         begin: task.begin
       };
 
-      this.$http.post(`http://localhost:3000/deleteTask`, obj).then(res => {
+      this.$http.get(`http://localhost:3000/api/tasks/delete`, {
+        params:obj
+      }).then(res => {
         console.log(res.body);
         this.getTasks();
       });
+    },
+    setTaskBegin (begin){
+      this.$store.commit('setTaskBegin',begin)
+      this.dialog = true
     }
   },
   created() {

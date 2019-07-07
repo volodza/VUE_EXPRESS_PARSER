@@ -8,7 +8,7 @@ const test = express.Router();
 test.get('/', async (req,res) => {
   //{page,user_id,begin}
   let page = +req.query.page;
-
+      console.log(req.query)
   let tasks = await db.getDB().collection('tasks').findOne({id:+req.query.user_id});
       console.log(tasks)
       task = tasks.tasks.find(x=>x.begin.toString() == new Date(req.query.begin).toString());
