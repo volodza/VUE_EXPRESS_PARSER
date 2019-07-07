@@ -15,6 +15,8 @@ const search = require('./routes/api/search')
 app.use('/api/search',search)
 const tasks = require('./routes/api/tasks')
 app.use('/api/tasks',tasks)
+const test = require('./routes/api/test')
+app.use('/api/test',test)
 
 const port = process.env.PORT || 3000;
 

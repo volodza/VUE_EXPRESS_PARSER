@@ -35,10 +35,10 @@ function sortByReqParams(groups, req) {
             members_range = req.members_from <= group.members_count &&
             req.members_to >= group.members_count;
 
-        if (official && with_goods && members_range) arr.push(group.id)
+        if (official && with_goods && members_range) arr.push(group)
     })
-    console.log('отсортировал')
     return arr
+    // arr = [{id,name,type,members_count,photo_50},...{}]
 }
  
   function compareRandom(a, b) {

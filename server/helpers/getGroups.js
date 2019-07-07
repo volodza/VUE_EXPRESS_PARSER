@@ -25,6 +25,34 @@ function requestGroups (q,req,token,i) {
       },i*3000);
   });
 };
+
+async function dividedBy10k (groups,req,startDate) {
+  let arr = [];
+  let objIds = []
+
+  for (let i = 0;i*10000 <= groups.length;i++){
+    arr.push({
+      groups:groups.slice(i*10000,(i+1)*10000)
+    })
+  }
+
+  await db.getDB().collection('ids').insertMany(arr,async (err,result)=>{
+    if (err)
+      console.log(err)
+    else {
+      console.log(result.insertedIds)
+      let insertedIds = result.insertedIds
+      for(let id in insertedIds){
+        objIds.push(insertedIds[id])
+      }
+      
+      await db.getDB().collection('tasks').updateOne(
+        {id:req.user_id,'tasks.begin': new Date(startDate)},
+        {$set:{[`tasks.$.answer`] : objIds}}
+      )
+    }
+  })
+}
  
 function compareRandom(a, b) {
   return Math.random() - 0.5;
@@ -70,24 +98,18 @@ module.exports = async (req) => {
   
   await Promise.all(promises).then(data => answer = flattenDeep(data));
   answer = answer.map(x=>x.id)
-  let groupsIds = await requestGroupsById(answer,req);
+  let groups = await requestGroupsById(answer,req);
+  // groups = [{id,name,type,members_count,photo_50},...{}]
 
-  // userTasks.get('tasks')
-  // .find({begin:startDate})
-  // .assign({
-  //   answer:groupsIds,
-  //   status:'complete',
-  //   end:new Date(),
-  //   count:groupsIds.length
-  // })
-  // .write()
+  await dividedBy10k (groups,req,startDate);
+  
   await db.getDB().collection('tasks').updateOne(
     {id:req.user_id,'tasks.begin': startDate},
     {$set:{
       'tasks.$.end':new Date,
       'tasks.$.status':'complete',
-      'tasks.$.answer':groupsIds,
-      'tasks.$.count':groupsIds.length
+      // 'tasks.$.answer':groupsIds,
+      'tasks.$.count':groups.length
       }
     }
   )
