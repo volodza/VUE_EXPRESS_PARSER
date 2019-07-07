@@ -14,6 +14,7 @@ import Discussions from '@/components/instruments/collect/Discussions'
 import Posts from '@/components/instruments/collect/Posts'
 import Relatives from '@/components/instruments/collect/Relatives'
 import Comments from '@/components/instruments/collect/Comments'
+import SearchResults from '@/components/SearchResults'
 
 
 
@@ -84,7 +85,13 @@ export default new Router({
             path: '/Tarif',
             name: 'Tarif',
             component: Tarif
+        },
+        {
+            path: '/SearchResults',
+            name: 'SearchResults',
+            component: SearchResults
         }
+
     ],
     mode: 'history'
 })
