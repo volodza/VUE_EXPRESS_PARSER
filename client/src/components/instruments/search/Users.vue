@@ -254,7 +254,7 @@ export default {
             { title: "Женский", id: 1 },
             { title: "Мужской", id: 2 }
           ],
-          selected: { title: "Любой", id: 0 }
+          selected: null
         },
         status: {
           items: [
@@ -267,7 +267,7 @@ export default {
             { title: "Влюблен / Влюблена", id: 7 },
             { title: "В гражданском браке", id: 8 }
           ],
-          selected: { title: "Не женат / Не замужем", id: 1 }
+          selected: null
         },
         country: {
           loading: false,

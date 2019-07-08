@@ -16,13 +16,61 @@
       </template> -->
 
       <v-card>
+
+        <!-- header -->
         <v-card-title
-          class="headline grey lighten-2"
+          class="side py-2"
           primary-title
         >
-          Список найденых
-        </v-card-title>
+        <v-list-item-content> 
+          <v-list-tile-title class="sideText--text ">{ task.title }  </v-list-tile-title>
+            <v-list-tile-sub-title style="color:#d0d0d0;">
+            <v-icon 
+            style="color:#d0d0d0;" 
+            size="17" >mdi-calendar</v-icon>
+            { task.begin.slice(0,10) }
 
+             <v-icon 
+             style="color:#d0d0d0;"
+              size="17">
+              mdi-account-search-outline
+            </v-icon>
+            {task.count}
+            </v-list-tile-sub-title> 
+          </v-list-item-content>
+          <v-icon  style="color:#d0d0d0; margin-left: auto;">mdi-close-circle-outline</v-icon>
+        </v-card-title>
+        <!-- header-end -->
+
+        <!-- sub-header -->
+<v-card-title
+          class="header py-3"
+          primary-title
+        >
+        <!-- <v-list-item-content>  -->
+          <div style=" margin:0 auto; border:1px solid #d7d7d7;">
+            
+              <v-btn 
+                flat 
+                  class="mx-2 px-0" style=" background:white; min-width:40px;"
+                  >
+                Х
+              </v-btn> 
+              <v-btn flat class="mx-0 px-0" style="background:white; min-width:40px;"
+                 >
+                У
+              </v-btn>
+              <v-btn flat style=" background:white; min-width:40px;"
+                 class="mx-2 px-0">
+                Й
+              </v-btn>
+             
+             
+            </div>
+            
+          <!-- </v-list-item-content> -->
+        </v-card-title>
+        <!-- sub-header-end -->
         <v-progress-linear 
           :indeterminate="true"
           v-if="content == null"
@@ -101,6 +149,7 @@
         pages:1
       }
     },
+    
     methods:{
       // getArr (page){
       //   // if(!this.taskBegin) return;

@@ -273,21 +273,18 @@ export default {
             { title: "Мероприятие", value: "event" },
             { title: "Предстоящее мероприятие", value: "future" }
           ],
-          selected: "group"
+          selected: null
         },
         sort: {
           items: [
-            {
-              title: "По умолчанию(аналогично результатам поиска в ВК)",
-              value: 0
-            },
+            {title: "По умолчанию(аналогично результатам поиска в ВК)", value: 0},
             { title: "По скорости роста", value: 1 },
             { title: "По дневной посещаемости", value: 2 },
             { title: "По количеству лайков", value: 3 },
             { title: "По количеству комментариев", value: 4 },
             { title: "По количеству записей в обсуждениях", value: 5 }
           ],
-          selected: 0
+          selected: null
         }
       },
       answer: "тут",
