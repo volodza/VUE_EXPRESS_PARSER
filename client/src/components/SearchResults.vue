@@ -1,6 +1,7 @@
 <template>
-  <div class="text-xs-center">
-      <v-card>
+  <div class="text-xs-center header" style="padding-bottom:700px;">
+      <v-card class="header" style="overflow : visible;">
+        
 
         <!-- header -->
         <v-card-title
@@ -11,7 +12,7 @@
             <v-list-tile-title class="sideText--text ">
               {{ title }}  
             </v-list-tile-title>
-            <v-list-tile-sub-title style="color:#d0d0d0;">
+            <v-list-tile-sub-title style="color:#d0d0d0; text-align:left;">
               <v-icon 
                 style="color:#d0d0d0;" 
                 size="17" 
@@ -47,50 +48,73 @@
           primary-title
         >
           <div style=" margin:0 auto; border:1px solid #d7d7d7;">
-            
+            <v-tooltip bottom>
+              <template v-slot:activator="{ on }">
               <v-btn 
+                v-on="on"
                 flat 
                 class="mx-2 px-0" 
                 style=" background:white; min-width:40px;"
               >
                 ID
               </v-btn> 
+              </template>
+              <span>Скачать id</span>
+            </v-tooltip>
 
-              <v-btn 
+             <v-tooltip bottom>
+              <template v-slot:activator="{ on }">
+              <v-btn
+                v-on="on" 
                 flat 
                 class="mx-0 px-0" 
                 style="background:white; min-width:40px;"
               >
                 <v-icon size="20">mdi-paperclip</v-icon>
               </v-btn>
+              </template>
+              <span>Скачать ссылки</span>
+            </v-tooltip>
 
+             <v-tooltip bottom>
+              <template v-slot:activator="{ on }">
               <v-btn 
+                v-on="on" 
                 flat 
                 style=" background:white; min-width:40px;"
                 class="mx-2 px-0"
               >
                 Й
               </v-btn>
+              </template>
+              <span>Скачать хуй</span>
+            </v-tooltip>
              
             </div>  
         </v-card-title>
+          <!-- sub-header-end -->
 
-        <!-- sub-header-end -->
-        <v-progress-linear 
+<div class="header" style="position: sticky; top: 0; z-index: 1;">
+        <v-progress-linear  
           :indeterminate="true"
           v-if="content == null"
         >
         </v-progress-linear>
 
         <v-pagination
+          
+          v-if="content!==null"
           v-model="page"
           :length="pages"
           :total-visible="9"
         ></v-pagination>
+</div>
+        <!-- <v-divider></v-divider> -->
 
-        <v-divider></v-divider>
-
-        <v-layout
+<v-card class="mx-2 mt-2">
+        <v-layout 
+          style="border-bottom:1px dashed #d7d7d7"
+          class="my-1"
           column
           text-xs-center            
           v-for="item in content"
@@ -98,7 +122,7 @@
         >
           <v-layout row>
 
-            <v-flex align-self-center xs1>
+            <v-flex align-self-center xs2 sm1>
               <v-avatar
                 size="30"
                 color="grey lighten-4"
@@ -107,7 +131,8 @@
               </v-avatar>       
             </v-flex>
 
-            <v-layout text-xs-left column xs1>
+            <!-- <v-layout text-xs-left column > -->
+              <v-flex xs8 sm9 text-xs-left>
               <a 
                 target='_blank' 
                 :href="'http://vk.com/public'+item.id"
@@ -115,11 +140,11 @@
               >
                 {{ item.name }}
               </a>
-
               <v-flex style="font-size:12px">
                 <v-icon size='15'>mdi-vk</v-icon>{{ item.id }}
               </v-flex>
-            </v-layout>
+              </v-flex>
+            <!-- </v-layout> -->
 
             <v-flex style="font-size:12px"  xs2 align-self-center>
               <v-icon size='15'>mdi-account-search-outline</v-icon>
@@ -127,17 +152,18 @@
             </v-flex>
             
           </v-layout>
-          <v-divider></v-divider>
+          <!-- <v-divider></v-divider> -->
         </v-layout>
+          </v-card>
 
         <v-divider></v-divider>
 
-        <v-pagination
+        <!-- <v-pagination
           v-if="content!==null"
           v-model="page"
           :length="pages"
           :total-visible="9"
-        ></v-pagination>
+        ></v-pagination> -->
 
       </v-card>
     <!-- </v-dialog> -->

@@ -1,107 +1,94 @@
 <template>
-<v-layout row>
-  <v-flex offset>
-    <v-card>
-  <!-- <div style="overflow:auto;border:1px solid #e0e0e0;"> -->
-    <v-progress-circular v-if="this.$store.getters.tasks == null" indeterminate color="primary"></v-progress-circular>
-    <div v-if="this.$store.getters.monitored == []">Список сообществ для отслеживания пуст</div>
+  <v-layout row>
+    <v-flex offset>
+      <v-layout column text-xs-center>
+        <v-progress-circular v-if="this.$store.getters.tasks == null" indeterminate color="primary"></v-progress-circular>
+        <div v-if="this.$store.getters.monitored == []">Список сообществ для отслеживания пуст</div>
 
-    <v-list two-line subheader v-else style="padding-bottom:20px">
-      <template v-for="(task,index) in tasks">
-      <v-list-tile
-        :key="task.begin"
-        avatar
-        style="height:50px;padding:0 0 0 0"
-      >
-        <v-list-tile-avatar  style="min-width:0px;">
-          <v-progress-circular
-            v-if="task.status === 'loading'"
-            indeterminate
-            color="primary"
-            size="28"
-          ></v-progress-circular>
-          <v-icon
-            v-else-if="task.status === 'complete'"
-            size="35"
-            color="green"
-          >mdi-check-circle-outline</v-icon>
+        <v-list two-line subheader v-else style="padding-bottom:0px">
+          <template v-for="(task,index) in tasks" >
 
-          <v-icon v-else-if="task.status === 'error'" size="35" color="red">mdi-close-circle-outline</v-icon>
-        </v-list-tile-avatar>
+            
+            <v-layout row :key="task.begin" avatar class="my-1">
+               <v-flex align-self-center xs2 >
+              <v-avatar size="30">
+                <v-progress-circular
+                  v-if="task.status === 'loading'"
+                  indeterminate
+                  color="primary"
+                  size="28"
+                ></v-progress-circular>
+                <v-icon
+                  v-else-if="task.status === 'complete'"
+                  size="35"
+                  color="green"
+                >mdi-check-circle-outline</v-icon>
 
-        <v-list-tile-content style="font-size:14px;height:40px">
-          <v-list-tile-title>{{ task.title }}</v-list-tile-title>
-          <v-list-tile-sub-title>
+                <v-icon
+                  v-else-if="task.status === 'error'"
+                  size="35"
+                  color="red"
+                >mdi-close-circle-outline</v-icon>
+                </v-avatar> 
+              </v-flex>
 
-            <v-icon size="17">mdi-calendar</v-icon>
-            {{ task.begin.slice(0,10) }}
+              <v-layout text-xs-left column xs1 style="font-size:14px;">
+                {{ task.title }}
+                <v-flex style="font-size:12px">
+                  <v-icon size="17">mdi-calendar</v-icon>
 
+                  {{ task.begin.slice(0,10) }}
+                  <v-icon
+                    size="17"
+                    v-if="task.count"
+                    @click="setTaskBegin(task)"
+                  >mdi-account-search-outline</v-icon>
 
-            <v-icon
-              size="17"
-              v-if="task.count"
-              @click="setTaskBegin(task)"
-            >
-              mdi-account-search-outline
-            </v-icon>
-
-
-
-            <!-- <v-icon
+                  <!-- <v-icon
               size="17"
               v-if="task.count"
               @click="downloadAnswer(task)"
-            >mdi-account-search-outline</v-icon> -->
+                  >mdi-account-search-outline</v-icon>-->
+                  {{task.count}}
+                  <!-- <v-icon size='17'>mdi-timer-sand-empty</v-icon> -->
+                </v-flex>
+               </v-layout>
 
-            {{task.count}}
-            <!-- <v-icon size='17'>mdi-timer-sand-empty</v-icon> -->
-          </v-list-tile-sub-title>
-        </v-list-tile-content>
+              <v-list-tile-action class="pt-2">
+                <v-layout>
+                  <v-btn icon ripple>
+                    <v-icon size="20" color="black">mdi-file-document-box-outline</v-icon>
+                  </v-btn>
+                  <v-btn icon ripple>
+                    <v-icon size="20" color="black">mdi-star-outline</v-icon>
+                  </v-btn>
+                  <v-btn icon ripple @click="deleteTask(task)">
+                    <v-icon size="20" color="black">mdi-delete-outline</v-icon>
+                  </v-btn>
+                </v-layout>
+              </v-list-tile-action>
+            
+            </v-layout>
+            <v-divider v-if="index + 1 < tasks.length" :key="index" ></v-divider>
+          </template>
+        </v-list>
+      </v-layout>
+    </v-flex>
 
-        <v-list-tile-action>
-          <v-layout>
-            <v-btn icon ripple>
-              <v-icon size="20" color="black">mdi-file-document-box-outline</v-icon>
-            </v-btn>
-            <v-btn icon ripple>
-              <v-icon size="20" color="black">mdi-star-outline</v-icon>
-            </v-btn>
-            <!-- <v-btn icon ripple>
-                <v-icon size="20" color="black">mdi-reload</v-icon>
-            </v-btn>-->
-            <v-btn icon ripple @click="deleteTask(task)">
-              <v-icon size="20" color="black">mdi-delete-outline</v-icon>
-            </v-btn> 
-          </v-layout>
-        </v-list-tile-action> 
-      </v-list-tile>
-      <v-divider v-if="index + 1 < tasks.length" :key="index" class="mt-3"></v-divider>
-      </template>
-    </v-list> 
-  </v-card>
-  </v-flex>
-
-  <v-dialog
-    v-model="dialog"
-    width="500"
-  >
-    <SearchResults/>
-  </v-dialog>
-
-
-
-  <!-- </div> -->
-</v-layout> 
+    <v-dialog v-model="dialog" width="700" style="">
+      <SearchResults />
+    </v-dialog>
+  </v-layout>
 </template>
 
 <script>
-import SearchResults from '../SearchResults'
+import SearchResults from "../SearchResults";
 export default {
-  components:{SearchResults},
-  data () {
+  components: { SearchResults },
+  data() {
     return {
-      dialog:false
-    }
+      dialog: false
+    };
   },
   // provide() {
   //   return {
@@ -112,44 +99,50 @@ export default {
     tasks() {
       return this.$store.getters.tasks;
     },
-    page (){
-      return this.$store.getters.page 
+    page() {
+      return this.$store.getters.page;
     }
   },
-  watch:{
+  watch: {
     // dialog(){
     //   if (!this.dialog) this.$store.commit('setResults',null)
     // },
-      page(){
-        this.$store.commit('setResult',null)
-        this.getArr()
-      },
-      dialog(){
-        if (!this.dialog) {
-          this.$store.commit('setResult',null)
-          this.$store.commit('setPage',1)
-        } else {
-          this.$store.commit('setPages',1)
-          this.getArr()
-        }
+    page() {
+      this.$store.commit("setResult", null);
+      this.getArr();
+    },
+    dialog() {
+      if (!this.dialog) {
+        this.$store.commit("setResult", null);
+        this.$store.commit("setPage", 1);
+      } else {
+        this.$store.commit("setPages", 1);
+        this.getArr();
       }
+    }
   },
   methods: {
-      getArr (){
-        // if(!this.taskBegin) return;
-        this.$http.get(`http://localhost:3000/api/test`,{
-          params:{
-            page:this.page || 1,
+    getArr() {
+      // if(!this.taskBegin) return;
+      this.$http
+        .get(`http://localhost:3000/api/test`, {
+          params: {
+            page: this.page || 1,
             user_id: this.$store.getters.user.id,
             begin: this.$store.getters.taskBegin
           }
         })
-          .then(response => {
+        .then(
+          response => {
             // console.log(response.body)
-            this.$store.commit('setResult',response.body.arr);
-            this.$store.commit("setPages", response.body.pages)
-        },(err) => {err});
-      },
+            this.$store.commit("setResult", response.body.arr);
+            this.$store.commit("setPages", response.body.pages);
+          },
+          err => {
+            err;
+          }
+        );
+    },
 
     downloadAnswer(task) {
       const obj = {
@@ -189,7 +182,8 @@ export default {
     },
     getTasks() {
       if (!this.$store.getters.user.id) return;
-      this.$http.get(`http://localhost:3000/api/tasks`, {
+      this.$http
+        .get(`http://localhost:3000/api/tasks`, {
           params: {
             user_id: this.$store.getters.user.id
           }
@@ -205,24 +199,26 @@ export default {
         begin: task.begin
       };
 
-      this.$http.get(`http://localhost:3000/api/tasks/delete`, {
-        params:obj
-      }).then(res => {
-        console.log(res.body);
-        this.getTasks();
-      });
+      this.$http
+        .get(`http://localhost:3000/api/tasks/delete`, {
+          params: obj
+        })
+        .then(res => {
+          console.log(res.body);
+          this.getTasks();
+        });
     },
-    setTaskBegin (task){
-      this.$store.commit('setTaskBegin',task.begin)
-      this.$store.commit('setTitle',task.title)
-      this.$store.commit('setCount',task.count)
-      this.getArr()
-      this.dialog = true
+    setTaskBegin(task) {
+      this.$store.commit("setTaskBegin", task.begin);
+      this.$store.commit("setTitle", task.title);
+      this.$store.commit("setCount", task.count);
+      this.getArr();
+      this.dialog = true;
     }
   },
   created() {
-    this.getTasks()
-    this.getTasks()
+    this.getTasks();
+    this.getTasks();
     this.interval = setInterval(() => this.getTasks(), 5000);
   }
 };

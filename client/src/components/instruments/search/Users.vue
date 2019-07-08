@@ -232,18 +232,18 @@ export default {
       },
 
       radiogroup: {
-        selected: "interests"
+        selected: null
       },
 
       checkboxes: {
-        hasPhoto: true,
+        hasPhoto: false,
         exactMatch: false
       },
 
       inputs: {
         age: {
-          from: 1,
-          to: 1000
+          from: null,
+          to: null
         }
       },
 
