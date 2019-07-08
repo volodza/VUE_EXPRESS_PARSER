@@ -106,35 +106,51 @@ export default {
       dialog:false
     }
   },
-  provide() {
-    return {
-      getArr: this.getArr
-    }
-  },
+  // provide() {
+  //   return {
+  //     getArr: this.getArr
+  //   }
+  // },
   computed: {
     tasks() {
       return this.$store.getters.tasks;
+    },
+    page (){
+      return this.$store.getters.page 
     }
   },
   watch:{
-    dialog(){
-      if (!this.dialog) this.$store.commit('setResults',null)
-    }
+    // dialog(){
+    //   if (!this.dialog) this.$store.commit('setResults',null)
+    // },
+      page(){
+        this.$store.commit('setResult',null)
+        this.getArr()
+      },
+      dialog(){
+        if (!this.dialog) {
+          this.$store.commit('setResult',null)
+          this.$store.commit('setPage',1)
+        } else {
+          this.$store.commit('setPages',1)
+          this.getArr()
+        }
+      }
   },
   methods: {
-      getArr (page){
+      getArr (){
         // if(!this.taskBegin) return;
         this.$http.get(`http://localhost:3000/api/test`,{
           params:{
-            page:this.page,
+            page:this.page || 1,
             user_id: this.$store.getters.user.id,
-            begin: this.taskBegin
+            begin: this.$store.getters.taskBegin
           }
         })
           .then(response => {
             // console.log(response.body)
-            this.$store.commit('setResults',response.body.arr);
-            this.pages = response.body.pages
+            this.$store.commit('setResult',response.body.arr);
+            this.$store.commit("setPages", response.body.pages)
         },(err) => {err});
       },
 
@@ -202,6 +218,7 @@ export default {
     },
     setTaskBegin (begin){
       this.$store.commit('setTaskBegin',begin)
+      this.getArr()
       this.dialog = true
     }
   },

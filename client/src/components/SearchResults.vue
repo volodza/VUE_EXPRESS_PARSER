@@ -22,28 +22,39 @@
           class="side py-2"
           primary-title
         >
-        <v-list-item-content> 
-          <v-list-tile-title class="sideText--text ">{ task.title }  </v-list-tile-title>
-            <v-list-tile-sub-title style="color:#d0d0d0;">
+        <div> 
+          <v-list-tile-title class="sideText--text ">
+            { task.title }  
+          </v-list-tile-title>
+          <v-list-tile-sub-title style="color:#d0d0d0;">
             <v-icon 
-            style="color:#d0d0d0;" 
-            size="17" >mdi-calendar</v-icon>
+              style="color:#d0d0d0;" 
+              size="17" 
+            >
+              mdi-calendar
+            </v-icon>
             { task.begin.slice(0,10) }
 
-             <v-icon 
-             style="color:#d0d0d0;"
-              size="17">
-              mdi-account-search-outline
+            <v-icon 
+            style="color:#d0d0d0;"
+            size="17"
+            >
+            mdi-account-search-outline
             </v-icon>
             {task.count}
-            </v-list-tile-sub-title> 
-          </v-list-item-content>
-          <v-icon  style="color:#d0d0d0; margin-left: auto;">mdi-close-circle-outline</v-icon>
+
+          </v-list-tile-sub-title> 
+        </div>
+
+        <v-icon style="color:#d0d0d0; margin-left: auto;">
+          mdi-close-circle-outline
+        </v-icon>
+
         </v-card-title>
         <!-- header-end -->
 
         <!-- sub-header -->
-<v-card-title
+        <v-card-title
           class="header py-3"
           primary-title
         >
@@ -141,48 +152,32 @@
 
 <script>
   export default {
-    inject: ['getArr'],
     data () {
       return {
-        page: 1,
-        arr:null,
-        pages:1
+        page: 1
       }
-    },
-    
-    methods:{
-      // getArr (page){
-      //   // if(!this.taskBegin) return;
-      //   this.$http.get(`http://localhost:3000/api/test`,{
-      //     params:{
-      //       page:this.page,
-      //       user_id: this.$store.getters.user.id,
-      //       begin: this.taskBegin
-      //     }
-      //   })
-      //     .then(response => {
-      //       // console.log(response.body)
-      //       this.$store.commit('setResults',response.body.arr);
-      //       this.pages = response.body.pages
-      //   },(err) => {err});
-      // }
     },
     computed:{
       content (){
-        return this.$store.getters.results
+        return this.$store.getters.result
       },
-      taskBegin(){
-        return this.$store.getters.taskBegin
+      pages (){
+        return this.$store.getters.pages
+      },
+      taskInfo (){
+        return 
       }
+      // page (){
+      //   this.$store.commit('setPage',1)
+      // }
+      // taskBegin(){
+      //   return this.$store.getters.taskBegin
+      // }
     },
     watch: {
       page(){
-        this.$store.commit('setResults',null);
-        this.getArr(this.page)
+        this.$store.commit('setPage',this.page);
       }
-    },
-    created (){
-      setTimeout(this.getArr(this.page),8000)
     }
   }
 </script>

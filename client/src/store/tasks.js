@@ -5,7 +5,7 @@ export default {
         results:{
             page:1,
             pages:1,
-            arr:null
+            answer:null
         }
     },
     mutations: {
@@ -15,8 +15,14 @@ export default {
         setTaskBegin (state, payload) {
             state.taskBegin = payload
         },
-        setResults (state,payload){
-            state.results = payload
+        setPage (state,payload){
+            state.results.page = payload
+        },
+        setPages (state,payload){
+            state.results.pages = payload
+        },
+        setResult ( state,payload){
+            state.results.answer = payload
         }
     },
     actions: {},
@@ -27,8 +33,14 @@ export default {
         taskBegin(state){
             return state.taskBegin
         },
-        results(state){
-            return state.results
+        page(state){
+            return state.results.page
+        },
+        pages(state){
+            return state.results.pages
+        },
+        result(state){
+            return state.results.answer
         }
     }
 }
