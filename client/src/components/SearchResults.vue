@@ -61,7 +61,7 @@
                 class="mx-0 px-0" 
                 style="background:white; min-width:40px;"
               >
-                <v-icon size="20">mdi-vk</v-icon>
+                <v-icon size="20">mdi-paperclip</v-icon>
               </v-btn>
 
               <v-btn 
@@ -94,7 +94,7 @@
           column
           text-xs-center            
           v-for="item in content"
-          :key="item.name"
+          :key="item.id"
         >
           <v-layout row>
 
@@ -159,7 +159,7 @@
         return this.$store.getters.pages
       },
       begin (){
-        return this.$store.getters.taskBegin
+        return this.$store.getters.taskBegin || '11:11:11'
       },
       title(){
         return this.$store.getters.title

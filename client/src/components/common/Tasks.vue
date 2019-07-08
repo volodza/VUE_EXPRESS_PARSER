@@ -9,12 +9,11 @@
     <v-list two-line subheader v-else style="padding-bottom:20px">
       <template v-for="(task,index) in tasks">
       <v-list-tile
-        
-        :key="index"
+        :key="task.begin"
         avatar
         style="height:50px;padding:0 0 0 0"
       >
-        <v-list-tile-avatar :key="index" style="min-width:0px;">
+        <v-list-tile-avatar  style="min-width:0px;">
           <v-progress-circular
             v-if="task.status === 'loading'"
             indeterminate

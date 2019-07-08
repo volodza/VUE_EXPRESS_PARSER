@@ -200,20 +200,28 @@
       </v-flex>
 
       <v-flex xs12 md4 pt-0>
-        <v-flex style="background:#e7fbed">
+        <v-flex style="background:#e7fbed;font-size:12px">
           <h1>Описание</h1>
           <p>
             Облачный "Поиск групп" осуществляется по базе Segmento Target,
             способен выдавать до 10 000 результатов (в 10 раз больше чем в API Поиске).
+          </p>
+          <p>
             В базе хранятся группы с количеством участников от 2 пользователей,
             группы с меньшим количеством участников отсутствуют в выдаче.
+          </p>
+          <p>
             База обновляется один раз в 3 дня, это означает что в выдаче могут
             содержаться не самые актуальные результаты. Поиск осуществляется с
             учетом морфологии, однако выдача может несколько отличаться от
             выдачи ВКонтакте, так как алгоритмы текстового поиска не совпадают.
+          </p>
+          <p>
             Инструмент позволяет сохранить контакты групп. Ключевые слова и
             фразы нужно вводить по одному в строке. Если Вам необходима выдача
             точь-в-точь как во ВКонтакте — воспользуйтесь API Поиском групп.
+          </p>
+          <p>
             Выдачу можно отсортировать по количеству постов в день, в неделю,
             чтобы выделить группы, в которых ведётся активность. API Поиск работает корректно,
             не смотря на то что устаревший ВК не поддерживается.
@@ -242,14 +250,14 @@ export default {
     return {
       textarea: { search: null, key_word: "", minus_key_word: "" },
       checkboxes: {
-        exact_phrase: true,
+        exact_phrase: false,
         only_official: false,
         with_goods: false
       },
       inputs: {
         members: {
-          from: 1,
-          to: 1000
+          from: null,
+          to: null
         },
         taskName: null
       },
@@ -322,12 +330,12 @@ export default {
       }
       let obj = {
         q: this.key_phrases,
-        type: this.selects.type.selected,
+        type: this.selects.type.selected || 'page',
         city_id: this.selects.city.selected,
         country_id: this.selects.country.selected,
-        sort: this.selects.sort.selected,
-        members_from: +this.inputs.members.from,
-        members_to: +this.inputs.members.to,
+        sort: this.selects.sort.selected || 0,
+        members_from: +this.inputs.members.from || 0,
+        members_to: +this.inputs.members.to || 99999999,
         exact_phrase: this.checkboxes.exact_phrase,
         verified: this.checkboxes.only_official,
         market: +this.checkboxes.with_goods,
