@@ -6,7 +6,9 @@ export default {
             page:1,
             pages:1,
             answer:null
-        }
+        },
+        title:null,
+        count:null
     },
     mutations: {
         setTasks(state, payload) {
@@ -23,6 +25,12 @@ export default {
         },
         setResult ( state,payload){
             state.results.answer = payload
+        },
+        setTitle ( state,payload){
+            state.title = payload
+        },
+        setCount (state,payload){
+            state.count = payload
         }
     },
     actions: {},
@@ -41,6 +49,12 @@ export default {
         },
         result(state){
             return state.results.answer
+        },
+        title(state){
+            return state.title
+        },
+        count(state){
+            return state.count
         }
     }
 }

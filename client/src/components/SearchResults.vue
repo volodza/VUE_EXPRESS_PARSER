@@ -1,20 +1,5 @@
 <template>
   <div class="text-xs-center">
-    <!-- <v-dialog
-      v-model="dialog"
-      width="500"
-    >
-
-      <template v-slot:activator="{ on }">
-        <v-btn
-          color="red lighten-2"
-          dark
-          v-on="on"
-        >
-          Click Me
-        </v-btn>
-      </template> -->
-
       <v-card>
 
         <!-- header -->
@@ -22,33 +7,36 @@
           class="side py-2"
           primary-title
         >
-        <div> 
-          <v-list-tile-title class="sideText--text ">
-            { task.title }  
-          </v-list-tile-title>
-          <v-list-tile-sub-title style="color:#d0d0d0;">
-            <v-icon 
-              style="color:#d0d0d0;" 
-              size="17" 
-            >
-              mdi-calendar
-            </v-icon>
-            { task.begin.slice(0,10) }
+          <div> 
+            <v-list-tile-title class="sideText--text ">
+              {{ title }}  
+            </v-list-tile-title>
+            <v-list-tile-sub-title style="color:#d0d0d0;">
+              <v-icon 
+                style="color:#d0d0d0;" 
+                size="17" 
+              >
+                mdi-calendar
+              </v-icon>
+              {{ begin.slice(0,10) }}
 
-            <v-icon 
-            style="color:#d0d0d0;"
-            size="17"
-            >
-            mdi-account-search-outline
-            </v-icon>
-            {task.count}
+              <v-icon 
+                style="color:#d0d0d0;"
+                size="17"
+              >
+                mdi-account-search-outline
+              </v-icon>
+              {{count}}
 
-          </v-list-tile-sub-title> 
-        </div>
+            </v-list-tile-sub-title> 
+          </div>
 
-        <v-icon style="color:#d0d0d0; margin-left: auto;">
-          mdi-close-circle-outline
-        </v-icon>
+          <v-icon 
+            style="color:#d0d0d0; margin-left: auto;"
+            @click="dialog = false"
+          >
+            mdi-close-circle-outline
+          </v-icon>
 
         </v-card-title>
         <!-- header-end -->
@@ -58,29 +46,35 @@
           class="header py-3"
           primary-title
         >
-        <!-- <v-list-item-content>  -->
           <div style=" margin:0 auto; border:1px solid #d7d7d7;">
             
               <v-btn 
                 flat 
-                  class="mx-2 px-0" style=" background:white; min-width:40px;"
-                  >
-                Х
+                class="mx-2 px-0" 
+                style=" background:white; min-width:40px;"
+              >
+                ID
               </v-btn> 
-              <v-btn flat class="mx-0 px-0" style="background:white; min-width:40px;"
-                 >
-                У
+
+              <v-btn 
+                flat 
+                class="mx-0 px-0" 
+                style="background:white; min-width:40px;"
+              >
+                <v-icon size="20">mdi-vk</v-icon>
               </v-btn>
-              <v-btn flat style=" background:white; min-width:40px;"
-                 class="mx-2 px-0">
+
+              <v-btn 
+                flat 
+                style=" background:white; min-width:40px;"
+                class="mx-2 px-0"
+              >
                 Й
               </v-btn>
              
-             
-            </div>
-            
-          <!-- </v-list-item-content> -->
+            </div>  
         </v-card-title>
+
         <!-- sub-header-end -->
         <v-progress-linear 
           :indeterminate="true"
@@ -164,15 +158,15 @@
       pages (){
         return this.$store.getters.pages
       },
-      taskInfo (){
-        return 
+      begin (){
+        return this.$store.getters.taskBegin
+      },
+      title(){
+        return this.$store.getters.title
+      },
+      count(){
+        return this.$store.getters.count
       }
-      // page (){
-      //   this.$store.commit('setPage',1)
-      // }
-      // taskBegin(){
-      //   return this.$store.getters.taskBegin
-      // }
     },
     watch: {
       page(){

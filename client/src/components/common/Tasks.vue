@@ -4,8 +4,6 @@
     <v-card>
   <!-- <div style="overflow:auto;border:1px solid #e0e0e0;"> -->
     <v-progress-circular v-if="this.$store.getters.tasks == null" indeterminate color="primary"></v-progress-circular>
-    {{this.$store.getters.taskBegin}}
-    {{this.$store.getters.results}}
     <div v-if="this.$store.getters.monitored == []">Список сообществ для отслеживания пуст</div>
 
     <v-list two-line subheader v-else style="padding-bottom:20px">
@@ -16,7 +14,7 @@
         avatar
         style="height:50px;padding:0 0 0 0"
       >
-        <v-list-tile-avatar style="min-width:0px;">
+        <v-list-tile-avatar :key="index" style="min-width:0px;">
           <v-progress-circular
             v-if="task.status === 'loading'"
             indeterminate
@@ -43,7 +41,7 @@
             <v-icon
               size="17"
               v-if="task.count"
-              @click="setTaskBegin(task.begin)"
+              @click="setTaskBegin(task)"
             >
               mdi-account-search-outline
             </v-icon>
@@ -192,8 +190,7 @@ export default {
     },
     getTasks() {
       if (!this.$store.getters.user.id) return;
-      this.$http
-        .get(`http://localhost:3000/api/tasks`, {
+      this.$http.get(`http://localhost:3000/api/tasks`, {
           params: {
             user_id: this.$store.getters.user.id
           }
@@ -216,13 +213,17 @@ export default {
         this.getTasks();
       });
     },
-    setTaskBegin (begin){
-      this.$store.commit('setTaskBegin',begin)
+    setTaskBegin (task){
+      this.$store.commit('setTaskBegin',task.begin)
+      this.$store.commit('setTitle',task.title)
+      this.$store.commit('setCount',task.count)
       this.getArr()
       this.dialog = true
     }
   },
   created() {
+    this.getTasks()
+    this.getTasks()
     this.interval = setInterval(() => this.getTasks(), 5000);
   }
 };
