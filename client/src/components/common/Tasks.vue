@@ -57,13 +57,13 @@
               <v-list-tile-action class="pt-2">
                 <v-layout>
                   <v-btn icon ripple>
-                    <v-icon size="20" color="black">mdi-file-document-box-outline</v-icon>
+                    <v-icon size="17" color="black">mdi-file-document-box-outline</v-icon>
                   </v-btn>
                   <v-btn icon ripple>
-                    <v-icon size="20" color="black">mdi-star-outline</v-icon>
+                    <v-icon size="17" color="black">mdi-star-outline</v-icon>
                   </v-btn>
                   <v-btn icon ripple @click="deleteTask(task)">
-                    <v-icon size="20" color="black">mdi-delete-outline</v-icon>
+                    <v-icon size="17" color="black">mdi-delete-outline</v-icon>
                   </v-btn>
                 </v-layout>
               </v-list-tile-action>
@@ -76,7 +76,7 @@
     </v-flex>
 
     <v-dialog v-model="dialog" width="700" style="">
-      <SearchResults />
+      <SearchResults :closeDialog='closeDialog' />
     </v-dialog>
   </v-layout>
 </template>
@@ -214,6 +214,10 @@ export default {
       this.$store.commit("setCount", task.count);
       this.getArr();
       this.dialog = true;
+    },
+    closeDialog () {
+      this.dialog = false;
+      this.$store.commit('setPage',1);
     }
   },
   created() {

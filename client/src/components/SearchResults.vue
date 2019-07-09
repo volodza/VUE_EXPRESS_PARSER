@@ -34,7 +34,7 @@
 
           <v-icon 
             style="color:#d0d0d0; margin-left: auto;"
-            @click="dialog = false"
+            @click="close()"
           >
             mdi-close-circle-outline
           </v-icon>
@@ -172,6 +172,7 @@
 
 <script>
   export default {
+    props:['closeDialog'],
     data () {
       return {
         page: 1
@@ -197,6 +198,12 @@
     watch: {
       page(){
         this.$store.commit('setPage',this.page);
+      }
+    },
+    methods:{
+      close (){
+        this.closeDialog()
+        this.page = 1;
       }
     }
   }
