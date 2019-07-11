@@ -25,7 +25,11 @@
           </v-layout>
 
           <v-layout row wrap mx-0>
-            <v-checkbox height="6px" :label="`Только с фотографией`" v-model="checkboxes.hasPhoto"></v-checkbox>
+            <v-checkbox 
+              height="6px" 
+              :label="`Только с фотографией`" 
+              v-model="checkboxes.hasPhoto"
+            ></v-checkbox>
 
             <v-checkbox
               height="6px"
@@ -165,7 +169,13 @@
           <label>Название задачи</label>
           <v-layout wrap>
             <v-flex xs12 sm6 md8 pt-0>
-              <v-text-field class="border" flat solo label="Любое название (для себя)" hide-details></v-text-field>
+              <v-text-field 
+                class="border" 
+                flat 
+                solo 
+                label="Любое название (для себя)" 
+                hide-details
+              ></v-text-field>
             </v-flex>
 
             <v-flex xs12 sm6 md4 pt-0>
@@ -179,7 +189,7 @@
                 block
                 flat
                 hide-details
-                @click="getGroups"
+                @click="getUsers"
                 :loading="!answer"
               >
                 <v-icon style="margin-right: 5px">mdi-play</v-icon>
@@ -244,7 +254,8 @@ export default {
         age: {
           from: null,
           to: null
-        }
+        },
+        taskTitle:null
       },
 
       selects: {
@@ -282,12 +293,13 @@ export default {
           search: null
         }
       },
-      search: null
+      search: null,
+      answer:'1'
     };
   },
   methods: {
     getUsers() {
-      if (!this.selects.city.selected) return;
+      // if (!this.selects.city.selected) return;
       let obj = {
         q: this.key_phrases,
         searchBy: this.radiogroup.selected,
@@ -299,11 +311,11 @@ export default {
         sex: this.selects.sex.selected,
         city: this.selects.city.selected,
         country: this.selects.country.selected,
-        title: "Поиск > Пользователи",
+        title: this.taskTitle || "Поиск > Пользователи",
         user_id: this.$store.getters.user.id
       };
       this.answer = "";
-      this.$http.post("http://localhost:3000/getUsers", obj).then(res => {
+      this.$http.post("http://localhost:3000/api/search/users", obj).then(res => {
         this.answer = res.body;
       });
     },
@@ -312,26 +324,30 @@ export default {
       if (!this.selects.country.selected) return;
       this.selects.city.loading = true;
       this.$http
-        .post("http://89.254.230.243:3000/getCities", {
-          q: v
+        .get("http://localhost:3000/api/geolocation/cities", {
+          params: {
+            q: v,
+            country_id: this.selects.country.selected
+          }
         })
         .then(res => {
           this.selects.city.items = res.body.items;
           this.selects.city.loading = false;
         });
     },
-
     getCountries(v) {
       this.selects.country.loading = true;
       this.$http
-        .post("http://89.254.230.243:3000/getCountries", {
-          q: v
+        .get("http://localhost:3000/api/geolocation/countries", {
+          params: {
+            q: v
+          }
         })
         .then(res => {
           this.selects.country.items = res.body.items;
           this.selects.country.loading = false;
         });
-    }
+    } 
   }, //конец methods
   watch: {
     "selects.city.search": function(val) {

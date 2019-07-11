@@ -344,7 +344,7 @@ export default {
       };
       this.answer = "";
       this.$http
-        .post("http://Localhost:3000/api/search/groups", obj)
+        .post("http://localhost:3000/api/search/groups", obj)
         .then(res => {
           this.$store.commit("setSuccess", res.body);
           this.answer = res.body;
@@ -354,7 +354,7 @@ export default {
       if (!this.selects.country.selected) return;
       this.selects.city.loading = true;
       this.$http
-        .get("Localhost:3000//api/geolocation/cities", {
+        .get("http://localhost:3000/api/geolocation/cities", {
           params: {
             q: v,
             country_id: this.selects.country.selected
@@ -368,9 +368,9 @@ export default {
     getCountries(v) {
       this.selects.country.loading = true;
       this.$http
-        .get("Localhost:3000//api/geolocation/countries", {
-          params: {
-            q: v
+        .get("http://localhost:3000/api/geolocation/countries",{
+          params:{
+            q:v
           }
         })
         .then(res => {
