@@ -1,11 +1,16 @@
  <template>
-  <v-flex>
+<v-expansion-panel>
+    <v-expansion-panel-content
+       v-for="item in content"
+      :key="item.id"
+    >
+      <template v-slot:header>
+
     <v-layout 
       style="border-bottom:1px dashed #d7d7d7"
       column
       text-xs-center            
-      v-for="item in content"
-      :key="item.id"
+     
     >
       <v-layout row>
 
@@ -21,17 +26,19 @@
         <!-- <v-layout text-xs-left column > -->
         <v-flex xs8 sm9 text-xs-left>
 
-          <a 
-            target='_blank' 
+<p class="mb-0" style="font-size:15px">
+        {{ item.first_name + ' ' + item.last_name }}
+</p>
+
+
+          <v-flex  style="font-size:12px">
+           
+            <v-icon size='15'>mdi-vk</v-icon><a 
+            
             :href="'http://vk.com/id'+item.id"
             style="font-size:12px"
-          >
-            {{ item.first_name + ' ' + item.last_name }}
-
-          </a>
-
-          <v-flex style="font-size:12px">
-            <v-icon size='15'>mdi-vk</v-icon>{{ item.id }}
+          >{{ item.id }}
+            </a>
           </v-flex>
           
         </v-flex>
@@ -59,7 +66,14 @@
       </v-layout>
       <!-- <v-divider></v-divider> -->
     </v-layout>
-  </v-flex>
+
+</template>
+
+ <v-card>
+        <v-card-text>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</v-card-text>
+      </v-card>
+    </v-expansion-panel-content>
+  </v-expansion-panel>
 </template>
 
 <script>
