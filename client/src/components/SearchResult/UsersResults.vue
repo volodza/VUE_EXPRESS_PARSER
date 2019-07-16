@@ -1,5 +1,5 @@
- <template>
-<v-app>
+<template>
+  <v-app>
 
     <v-layout 
       style="border-bottom:1px dashed #d7d7d7; background:white;"
@@ -55,86 +55,91 @@
           Россия, Белая Холуница
         </v-flex>
 
+      </v-layout>    
+
+      <v-layout text-xs-center v-if="taskKey == item.id">
+        <!-- {{info}} -->
+        <v-progress-linear  
+          :indeterminate="true"
+          v-if="info == null"
+        ></v-progress-linear>
+
+        <v-layout v-else>
+        <v-flex xs4 >
+          <v-avatar
+            class="mt-5" 
+            color="grey lighten-4"
+          >
+            <v-img style="height:100px; width:100px" :src="info.photo_100"></v-img>
+          </v-avatar>       
+        </v-flex>
+
+        <v-flex xs8 style="font-size:15px" text-xs-center>
+
+          <p class="mb-0">Статус: <strong>{{info.status}}</strong> </p>
+          <p class="mb-0">Телефон: <strong>{{info.contacts}}</strong> </p>
+          <p>Онлайн: <strong>{{info.online + ' / ' + info.last_seen.time}}</strong> </p>
+          <p>Деятельность: <strong>{{info.occupation.type}}</strong> </p>
+          <p >Семейное положение: <strong>{{info.relation}}</strong> </p>
+          <p class="mb-0">Можно отправить приглашения в друзья: <strong>{{info.can_send_friend_request}}</strong> </p>
+          <p class="mb-0">Можно отправить личное сообщение: <strong>{{info.can_write_private_message}}</strong> </p>
+          <p >Можно оставлять записи на стене: <strong>{{info.can_post}}</strong> </p>
+
+          <v-layout row>
+            <v-flex>
+              <h2>{{info.counters.albums}}</h2>
+              <span>Фотоальбомов</span>
+            </v-flex>
+
+            <v-flex>
+              <h2>{{info.counters.videos}}</h2>
+              <span>Видеозаписей</span>
+            </v-flex>
+
+            <v-flex>
+              <h2>{{info.counters.audios}}</h2>
+              <span>Аудиозаписей</span>
+            </v-flex>
+          </v-layout>
+
+          <v-layout row>
+            <v-flex>
+              <h2>{{info.counters.photos}}</h2>
+              <span>Фотографий</span>
+            </v-flex>
+
+            <v-flex>
+              <h2>{{info.counters.notes}}</h2>
+              <span>Заметок</span>
+            </v-flex>
+
+            <v-flex>
+              <h2>{{info.counters.groups}}</h2>
+              <span>Сообществ</span>
+            </v-flex>
+          </v-layout>
+
+          <v-layout row>
+            <v-flex>
+              <h2>{{info.counters.friends}}</h2>
+              <span>Друзей</span>
+            </v-flex>
+
+            <v-flex>
+              <h2>{{info.counters.followers}}</h2>
+              <span>Подписчиков</span>
+            </v-flex>
+
+            <v-flex mb-2>
+              <h2>{{info.counters.pages}}</h2>
+              <span>Подписок</span>
+            </v-flex>
+          </v-layout>
+        </v-flex>
+      </v-layout>  
       </v-layout>
-
-
-      <v-layout text-xs-center v-if="taskKey == item.id ">
-
-      <v-flex xs4 >
-        <v-avatar
-          class="mt-5" 
-          color="grey lighten-4"
-        >
-          <v-img style="height:100px; width:100px" :src="item.photo_50"></v-img>
-        </v-avatar>       
-      </v-flex>
-
-      <v-flex xs8 style="font-size:15px" text-xs-center>
-
-        <p class="mb-0">Статус: <strong>{{item.status}}</strong> </p>
-        <p class="mb-0">Телефон: <strong>{{item.contacts}}</strong> </p>
-        <!-- <p>Онлайн: <strong>{{item.online/item.last_seen.time}}</strong> </p> -->
-        <!-- <p>Деятельность: <strong>{{item.occupation.type}}</strong> </p> -->
-        <p >Семейное положение: <strong>{{item.relation}}</strong> </p>
-        <p class="mb-0">Можно отправить приглашения в друзья: <strong>{{item.can_send_friend_request}}</strong> </p>
-        <p class="mb-0">Можно отправить личное сообщение: <strong>{{item.can_write_private_message}}</strong> </p>
-        <p >Можно оставлять записи на стене: <strong>{{item.can_post}}</strong> </p>
-
-        <v-layout row>
-          <v-flex>
-        <!-- <h2>{{item.counters.albums}}</h2> -->
-            <span>Фотоальбомов</span>
-          </v-flex>
-
-          <v-flex>
-        <!-- <h2>{{item.counters.videos}}</h2> -->
-            <span>Видеозаписей</span>
-          </v-flex>
-
-          <v-flex>
-            <!-- <h2>{{item.counters.audios}}</h2> -->
-            <span>Аудиозаписей</span>
-          </v-flex>
-        </v-layout>
-
-        <v-layout row>
-          <v-flex>
-            <!-- <h2>{{item.counters.photos}}</h2> -->
-            <span>Фотографий</span>
-          </v-flex>
-
-          <v-flex>
-            <!-- <h2>{{item.counters.notes}}</h2> -->
-            <span>Заметок</span>
-          </v-flex>
-
-          <v-flex>
-            <!-- <h2>{{item.counters.groups}}</h2> -->
-            <span>Сообществ</span>
-          </v-flex>
-        </v-layout>
-
-        <v-layout row>
-          <v-flex>
-            <!-- <h2>{{item.counters.friends}}</h2> -->
-            <span>Друзей</span>
-          </v-flex>
-
-          <v-flex>
-            <!-- <h2>{{item.counters.followers}}</h2> -->
-            <span>Подписчиков</span>
-          </v-flex>
-
-          <v-flex mb-2>
-            <!-- <h2>{{item.counters.pages}}</h2> -->
-            <span>Подписок</span>
-          </v-flex>
-        </v-layout>
-      </v-flex>
-
     </v-layout>
-  </v-layout>
-</v-app>
+  </v-app>
 </template>
 
 
@@ -143,7 +148,8 @@
   export default {
     data () {
       return {
-        taskKey:null
+        taskKey:null,
+        info:null
       }
     },
     computed:{
@@ -153,8 +159,21 @@
     },
     methods:{
       userInfo(id){
-        if(this.taskKey == id) this.taskKey = null;
-        else this.taskKey = id
+        if (this.taskKey == id) {
+          this.taskKey = null;
+          this.info = null;
+        } else {
+          this.taskKey = id;
+          
+          this.$http.get("http://localhost:3000/api/test/user", {
+            params:{
+              id
+            }
+          }).then(res => {
+            this.info = res.body;
+          });
+          
+        }
       }
     }
   }

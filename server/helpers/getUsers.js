@@ -122,7 +122,8 @@ module.exports = async(req) => {
         $set: {
             'tasks.$.end': new Date,
             'tasks.$.status': 'complete',
-            'tasks.$.count': users.length
+            'tasks.$.count': users.length,
+            'tasks.$.type': 'users'
         }
     })
 
