@@ -113,10 +113,10 @@
         <!-- <v-divider></v-divider> -->
 
         <v-card class="mx-2 mt-2">
-         <GroupsResults/>
+         <!-- <GroupsResults/> -->
          <UsersResults/>
-         <NewsResults/>
-         <PostsResults/>
+         <!-- <NewsResults/> -->
+         <!-- <PostsResults/> -->
         </v-card>
 
         <v-divider></v-divider>

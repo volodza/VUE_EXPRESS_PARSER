@@ -23,10 +23,11 @@
 
           <a 
             target='_blank' 
-            :href="'http://vk.com/public'+item.id"
+            :href="'http://vk.com/id'+item.id"
             style="font-size:12px"
           >
-            {{ item.name }}
+            {{ item.first_name + ' ' + item.last_name }}
+
           </a>
 
           <v-flex style="font-size:12px">
@@ -35,11 +36,25 @@
           
         </v-flex>
         <!-- </v-layout> -->
+ <v-flex style="font-size:12px" xs1 align-self-center>
+              Муж.
+              <!-- <v-card  dark tile flat color="blue darken-4">
+            <v-card-text>12.12.1912</v-card-text>
+              </v-card>-->
+            </v-flex>
 
-        <v-flex style="font-size:12px"  xs2 align-self-center>
+            <v-flex style="font-size:12px" xs2 align-self-center>
+              12.12.1912
+              <!-- <v-card  dark tile flat color="blue darken-4">
+            <v-card-text>12.12.1912</v-card-text>
+              </v-card>-->
+            </v-flex>
+
+            <v-flex style="font-size:12px" xs3 align-self-center>Россия, Белая Холуница</v-flex>
+        <!-- <v-flex style="font-size:12px"  xs2 align-self-center>
           <v-icon size='15'>mdi-account-search-outline</v-icon>
           {{ item.members_count }}
-        </v-flex>
+        </v-flex> -->
         
       </v-layout>
       <!-- <v-divider></v-divider> -->
