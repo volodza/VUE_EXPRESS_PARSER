@@ -1,16 +1,12 @@
  <template>
-<v-expansion-panel>
-    <v-expansion-panel-content
-       v-for="item in content"
-      :key="item.id"
-    >
-      <template v-slot:header>
+<v-app>
 
     <v-layout 
-      style="border-bottom:1px dashed #d7d7d7"
+      style="border-bottom:1px dashed #d7d7d7; background:white;"
       column
       text-xs-center            
-     
+     v-for="item in content"
+      :key="item.id"
     >
       <v-layout row>
 
@@ -31,50 +27,119 @@
 </p>
 
 
-          <v-flex  style="font-size:12px">
+          <v-flex  style="font-size:12px; ">
            
-            <v-icon size='15'>mdi-vk</v-icon><a 
-            
+            <v-icon size='15'>mdi-vk</v-icon>
+            <a 
+             target='_blank'
             :href="'http://vk.com/id'+item.id"
-            style="font-size:12px"
+            style="font-size:12px; "
           >{{ item.id }}
             </a>
           </v-flex>
           
         </v-flex>
-        <!-- </v-layout> -->
+
  <v-flex style="font-size:12px" xs1 align-self-center>
-              Муж.
-              <!-- <v-card  dark tile flat color="blue darken-4">
-            <v-card-text>12.12.1912</v-card-text>
-              </v-card>-->
+             {{item.sex}}
+
             </v-flex>
 
             <v-flex style="font-size:12px" xs2 align-self-center>
-              12.12.1912
-              <!-- <v-card  dark tile flat color="blue darken-4">
-            <v-card-text>12.12.1912</v-card-text>
-              </v-card>-->
+              {{item.bdate}}
+
             </v-flex>
 
             <v-flex style="font-size:12px" xs3 align-self-center>Россия, Белая Холуница</v-flex>
-        <!-- <v-flex style="font-size:12px"  xs2 align-self-center>
-          <v-icon size='15'>mdi-account-search-outline</v-icon>
-          {{ item.members_count }}
-        </v-flex> -->
+
         
       </v-layout>
-      <!-- <v-divider></v-divider> -->
+
+
+  <v-layout text-xs-center>
+
+  <v-flex xs4 >
+          <v-avatar
+           class="mt-5" 
+            color="grey lighten-4"
+          >
+            <v-img style="height:100px; width:100px" :src="item.photo_50"></v-img>
+          </v-avatar>       
+  </v-flex>
+
+  <v-flex xs8 style="font-size:15px" text-xs-center>
+<p class="mb-0">Статус: <strong>{{item.status}}</strong> </p>
+<p class="mb-0">Телефон: <strong>{{item.contacts}}</strong> </p>
+<!-- <p>Онлайн: <strong>{{item.online/item.last_seen.time}}</strong> </p> -->
+<!-- <p>Деятельность: <strong>{{item.occupation.type}}</strong> </p> -->
+<p >Семейное положение: <strong>{{item.relation}}</strong> </p>
+
+
+
+<p class="mb-0">Можно отправить приглашения в друзья: <strong>{{item.can_send_friend_request}}</strong> </p>
+<p class="mb-0">Можно отправить личное сообщение: <strong>{{item.can_write_private_message}}</strong> </p>
+<p >Можно оставлять записи на стене: <strong>{{item.can_post}}</strong> </p>
+
+<v-layout row>
+  <v-flex>
+    <!-- <h2>{{item.counters.albums}}</h2> -->
+<span>Фотоальбомов</span>
+  </v-flex>
+
+  <v-flex>
+    <!-- <h2>{{item.counters.videos}}</h2> -->
+    <span>Видеозаписей</span>
+  </v-flex>
+
+  <v-flex>
+    <!-- <h2>{{item.counters.audios}}</h2> -->
+    <span>Аудиозаписей</span>
+  </v-flex>
+</v-layout>
+
+<v-layout row>
+  <v-flex>
+    <!-- <h2>{{item.counters.photos}}</h2> -->
+<span>Фотографий</span>
+  </v-flex>
+
+  <v-flex>
+    <!-- <h2>{{item.counters.notes}}</h2> -->
+    <span>Заметок</span>
+  </v-flex>
+
+  <v-flex>
+    <!-- <h2>{{item.counters.groups}}</h2> -->
+    <span>Сообществ</span>
+  </v-flex>
+</v-layout>
+
+<v-layout row>
+  <v-flex>
+    <!-- <h2>{{item.counters.friends}}</h2> -->
+<span>Друзей</span>
+  </v-flex>
+
+  <v-flex>
+    <!-- <h2>{{item.counters.followers}}</h2> -->
+    <span>Подписчиков</span>
+  </v-flex>
+
+  <v-flex mb-2>
+    <!-- <h2>{{item.counters.pages}}</h2> -->
+    <span>Подписок</span>
+  </v-flex>
+</v-layout>
+  </v-flex>
+
+</v-layout>
+
+
     </v-layout>
-
+</v-app>
 </template>
 
- <v-card>
-        <v-card-text>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</v-card-text>
-      </v-card>
-    </v-expansion-panel-content>
-  </v-expansion-panel>
-</template>
+
 
 <script>
   export default {
