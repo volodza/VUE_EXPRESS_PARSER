@@ -7,6 +7,12 @@
       <app-header />
     </v-toolbar>
 
+    <v-footer app inset v-model="drawer" style="border-top:1px solid #d7d7d7">
+      <p class="ml-2 mt-3">Ваш ID:<strong>{user_id}</strong></p>
+    <v-spacer></v-spacer>
+    <app-footer />
+  </v-footer>
+
     <!-- Sidebar -->
     <v-navigation-drawer
       style="background: linear-gradient(200deg,#4f555e,#4f555e,#4f555e,#4f555e,#5c6e68,#7f6b67);"
@@ -63,11 +69,13 @@
 <script>
 import AppHeader from "@/components/AppHeader";
 import AppSidebar from "@/components/AppSidebar";
+import AppFooter from "@/components/AppFooter";
 
 export default {
   components: {
     AppHeader,
-    AppSidebar
+    AppSidebar,
+    AppFooter
   },
   data() {
     return {
