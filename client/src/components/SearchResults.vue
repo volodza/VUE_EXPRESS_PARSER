@@ -113,8 +113,10 @@
         <!-- <v-divider></v-divider> -->
 
         <v-card class="mx-2 mt-2">
-          
-         <group-results/>
+         <GroupsResults/>
+         <UsersResults/>
+         <NewsResults/>
+         <PostsResults/>
         </v-card>
 
         <v-divider></v-divider>
@@ -132,18 +134,23 @@
 </template>
 
 <script>
-import GroupResults from "./SearchResult/GroupResults";
+  import GroupsResults from "./SearchResult/GroupsResults";
+  import UsersResults from "./SearchResult/UsersResults";
+
   export default {
     components: {
-    GroupResults
-  },
+      GroupsResults,
+      UsersResults
+    },
   
     props:['closeDialog'],
+
     data () {
       return {
         page: 1
       }
     },
+
     computed:{
       content (){
         return this.$store.getters.result
@@ -161,16 +168,19 @@ import GroupResults from "./SearchResult/GroupResults";
         return this.$store.getters.count
       }
     },
+
     watch: {
       page(){
         this.$store.commit('setPage',this.page);
       }
     },
+
     methods:{
       close (){
         this.closeDialog()
         this.page = 1;
       }
     }
+
   }
 </script>
