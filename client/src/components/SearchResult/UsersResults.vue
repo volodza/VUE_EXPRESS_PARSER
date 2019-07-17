@@ -47,12 +47,12 @@
         </v-flex>
 
         <v-flex style="font-size:13px" xs5 sm2 align-self-center >
-          {{item.bdate}}
+          {{item.bdate }} 
+          {{ fullYears(item) }}
         </v-flex>
 
-        <v-flex style="font-size:12px" xs3 sm3 align-self-center 
-        v-if="item.hasOwnProperty('city')">
-          {{item.сity.title}}
+        <v-flex style="font-size:12px" xs3 sm3 align-self-center >
+          {{ geolocation(item) }}
         </v-flex>
 
       </v-layout>    
@@ -188,9 +188,9 @@ strong, h2{
         return this.$store.getters.result
       },
       occupation (){
-       return this.info.occupation.type === 'work' ? 'Работа'
-             :this.info.occupation.type === 'university' ? 'Университет'
-             :'Школа'
+        return this.info.occupation.type === 'work' ? 'Работа'
+              :this.info.occupation.type === 'university' ? 'Университет'
+              :'Школа'
       },
       online (){
         let ms = new Date(this.info.last_seen.time*1000);
@@ -215,6 +215,32 @@ strong, h2{
           });
           
         }
+      },
+      geolocation (item) {
+        let arr = [];
+
+        if(item.hasOwnProperty('country')) {
+          if(item.country.hasOwnProperty('title')) arr.push(item.country.title)
+        }
+
+        if(item.hasOwnProperty('city')) {
+          if(item.city.hasOwnProperty('title')) arr.push(item.city.title)
+        }
+
+        return arr ? arr.join`, ` : 'Не указан'
+        
+      },
+      fullYears (item) {
+        if(!item.bdate || item.bdate.length < 8) return '';
+        let arr = item.bdate.split`.`
+        let str = `${arr[1]}.${arr[0]}.${arr[2]}`
+        let birthdate = new Date(str),
+          cur = new Date(),
+          diff = cur-birthdate,
+          fullYears = Math.floor(diff/31557600000);
+
+        return  fullYears + ' лет'
+
       }
     }
   }
