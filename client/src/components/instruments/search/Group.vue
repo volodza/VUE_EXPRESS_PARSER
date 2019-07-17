@@ -169,7 +169,7 @@
             <v-flex xs12 sm6 md8 pt-0>
               <v-text-field
                 class="border"
-                v-model="inputs.taskName"
+                v-model="inputs.taskTitle"
                 flat
                 solo
                 label="Любое название (для себя)"
@@ -259,7 +259,7 @@ export default {
           from: null,
           to: null
         },
-        taskName: null
+        taskTitle: null
       },
       selects: {
         country: {
@@ -340,7 +340,7 @@ export default {
         verified: this.checkboxes.only_official,
         market: +this.checkboxes.with_goods,
         user_id: this.$store.getters.user.id,
-        title: this.inputs.taskName || "Поиск > Сообщества"
+        title: this.inputs.taskTitle || "Поиск > Сообщества"
       };
       this.answer = "";
       this.$http

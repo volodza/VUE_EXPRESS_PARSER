@@ -2,7 +2,7 @@
   <v-app>
 
     <v-layout 
-      style="border-bottom:1px dashed #d7d7d7; background:white;"
+      style="border-bottom:1px dashed #d7d7d7; background:white; color:#717171"
       column
       text-xs-center            
       v-for="item in content"
@@ -20,22 +20,21 @@
         </v-flex>
 
         <!-- <v-layout text-xs-left column > -->
-        <v-flex xs6 sm9 text-xs-left>
+        <v-flex xs6 sm8 text-xs-left>
 
           <a 
-            class="mb-0" 
-            style="font-size:15px"
+            style="font-size:15px; color:#6e9ddb;"
             @click="userInfo(item.id)"
           >
             {{ item.first_name + ' ' + item.last_name }}
           </a>
 
-          <v-flex  style="font-size:12px; ">
+          <v-flex  style="font-size:12px; margin-top:-3px">
             <v-icon size='15'>mdi-vk</v-icon>
             <a 
               target='_blank'
               :href="'http://vk.com/id'+item.id"
-              style="font-size:12px; text-decoration:none"
+              style="font-size:12px; text-decoration:none;color:#6e9ddb"
             >
               {{ item.id }}
             </a>
@@ -47,12 +46,13 @@
           {{item.sex===1?'Жен': item.sex === 2 ? 'Муж' : ''}}
         </v-flex>
 
-        <v-flex style="font-size:13px" xs5 align-self-center >
+        <v-flex style="font-size:13px" xs5 sm2 align-self-center >
           {{item.bdate}}
         </v-flex>
 
-        <v-flex style="font-size:12px" xs3 align-self-center >
-          Россия, Белая Холуница
+        <v-flex style="font-size:12px" xs3 sm3 align-self-center 
+        v-if="item.hasOwnProperty('city')">
+          {{item.сity.title}}
         </v-flex>
 
       </v-layout>    
@@ -87,14 +87,15 @@
             </p>
 
             <p class="mb-0" >
-              Онлайн:
+              Онлайн: <v-icon style="font-size:13px">mdi-cellphone</v-icon>
               <strong>{{ online }}</strong> 
             </p>
 
             <p class="mb-0" v-if="info.hasOwnProperty('occupation')">
               Занятость: <strong>{{ occupation}}</strong> 
             </p>
-            <p class="mb-0" v-if = info.relation>Семейное положение: <strong>{{info.relation}}</strong> </p>
+            <p class="mb-0" v-if = info.relation>Семейное положение:
+               <strong>{{info.relation}}</strong> </p>
 
             <p class="mb-0 mt-3 iphone">Можно отправить приглашения в друзья:
               <strong>{{info.can_send_friend_request===1?'Да':'Нет'}}</strong> </p>
@@ -133,7 +134,7 @@
                 </v-flex>
 
                 <v-flex  xs6 sm4>
-                  <h2>{{info.counters.groups}}</h2>
+                  <h2>{{info.counters.groups || 0}}</h2>
                   <span>Сообществ</span>
                 </v-flex>
               </v-layout>
@@ -166,6 +167,10 @@
 <style scoped>
 @media screen and (max-width: 320px) {
     .iphone{ font-size:12px;}
+}
+strong, h2{
+  color:#616161;
+  
 }
 </style>
 

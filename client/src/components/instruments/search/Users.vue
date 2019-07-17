@@ -171,6 +171,7 @@
             <v-flex xs12 sm6 md8 pt-0>
               <v-text-field 
                 class="border" 
+                v-model="inputs.taskTitle"
                 flat 
                 solo 
                 label="Любое название (для себя)" 
@@ -311,7 +312,7 @@ export default {
         sex: this.selects.sex.selected,
         city: this.selects.city.selected,
         country: this.selects.country.selected,
-        title: this.taskTitle || "Поиск > Пользователи",
+        title: this.inputs.taskTitle || "Поиск > Пользователи",
         user_id: this.$store.getters.user.id
       };
       this.answer = "";
