@@ -300,7 +300,10 @@ export default {
   },
   methods: {
     getUsers() {
-      // if (!this.selects.city.selected) return;
+       if (!this.textarea.key_word) {
+        this.$store.commit("setError", "Введите хотя бы одну ключевую фразу");
+        return;
+      }
       let obj = {
         q: this.key_phrases,
         searchBy: this.radiogroup.selected,

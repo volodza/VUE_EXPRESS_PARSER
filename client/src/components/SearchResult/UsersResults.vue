@@ -20,7 +20,7 @@
         </v-flex>
 
         <!-- <v-layout text-xs-left column > -->
-        <v-flex xs6 sm8 text-xs-left>
+        <v-flex xs6 sm6 text-xs-left>
 
           <a 
             style="font-size:15px; color:#6e9ddb;"
@@ -42,17 +42,17 @@
           
         </v-flex>
 
-        <v-flex  style="font-size:13px" xs1 align-self-center >
+        <v-flex  style="font-size:14px" xs1 align-self-center >
           {{item.sex===1?'Жен': item.sex === 2 ? 'Муж' : ''}}
         </v-flex>
 
-        <v-flex style="font-size:13px" xs5 sm2 align-self-center >
-          {{item.bdate }} 
+        <v-flex style="font-size:14px" xs5 sm2 align-self-center >
+          {{item.bdate }} <br/>
           {{ fullYears(item) }}
         </v-flex>
 
         <v-flex style="font-size:12px" xs3 sm3 align-self-center >
-          {{ geolocation(item) }}
+          {{ country(item)}} <br/> {{city(item)}}
         </v-flex>
 
       </v-layout>    
@@ -67,7 +67,7 @@
         ></v-progress-circular>
 
         <v-layout flex-child wrap v-else>
-          <v-flex xs12 sm3 mb-5>
+          <v-flex xs12 sm4 mb-5>
             <v-avatar
               class="mt-5" 
               color="grey lighten-4"
@@ -76,7 +76,7 @@
             </v-avatar>       
           </v-flex>
 
-          <v-flex xs12 sm9 style="font-size:14px" text-xs-center>
+          <v-flex xs12 sm8 style="font-size:14px" text-xs-center>
 
             <p class="mb-0" v-if="info.status">
               Статус: <strong>{{info.status}}</strong> 
@@ -87,7 +87,7 @@
             </p>
 
             <p class="mb-0" >
-              Онлайн: <v-icon style="font-size:13px">mdi-cellphone</v-icon>
+              Онлайн: <v-icon style="font-size:13px" >mdi-cellphone</v-icon>             
               <strong>{{ online }}</strong> 
             </p>
 
@@ -95,7 +95,7 @@
               Занятость: <strong>{{ occupation}}</strong> 
             </p>
             <p class="mb-0" v-if = info.relation>Семейное положение:
-               <strong>{{info.relation}}</strong> </p>
+               <strong>{{status}}</strong> </p>
 
             <p class="mb-0 mt-3 iphone">Можно отправить приглашения в друзья:
               <strong>{{info.can_send_friend_request===1?'Да':'Нет'}}</strong> </p>
@@ -196,6 +196,14 @@ strong, h2{
         let ms = new Date(this.info.last_seen.time*1000);
         return this.info.online === 1 ?'Сейчас онлайн'
               : `${ms.getHours()}:${ms.getMinutes()} ${ms.getDate()}.${ms.getMonth()}.${ms.getFullYear()}`
+      },
+      status(){
+        let arr = [
+          "Не женат / Не замужем", "Есть друг / Есть подруга", "Помолвлен / Помолвлена",
+          "Женат / Замужем", "Всё сложно", "В активном поиске", "Влюблен / Влюблена",
+          "В гражданском браке" 
+          ]
+        return arr[this.info.relation-1]
       }
     },
     methods:{
@@ -216,18 +224,23 @@ strong, h2{
           
         }
       },
-      geolocation (item) {
-        let arr = [];
+      country (item) {
+        let c  ;
 
         if(item.hasOwnProperty('country')) {
-          if(item.country.hasOwnProperty('title')) arr.push(item.country.title)
+          if(item.country.hasOwnProperty('title')) c = (item.country.title)
         }
+
+        return c
+      },
+      city (item){
+        let ci   ;
 
         if(item.hasOwnProperty('city')) {
-          if(item.city.hasOwnProperty('title')) arr.push(item.city.title)
+          if(item.city.hasOwnProperty('title')) ci = (item.city.title)
         }
 
-        return arr ? arr.join`, ` : 'Не указан'
+        return ci
         
       },
       fullYears (item) {
