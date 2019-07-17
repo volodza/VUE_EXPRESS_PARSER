@@ -8,7 +8,7 @@
       v-for="item in content"
       :key="item.id"
     >
-      <v-layout row>
+      <v-layout row >
 
         <v-flex align-self-center xs2 sm1>
           <v-avatar
@@ -43,15 +43,15 @@
           
         </v-flex>
 
-        <v-flex style="font-size:14px" xs1 align-self-center >
+        <v-flex  style="font-size:13px" xs1 align-self-center >
           {{item.sex===1?'Жен': item.sex === 2 ? 'Муж' : ''}}
         </v-flex>
 
-        <v-flex style="font-size:14px" xs4 align-self-center>
+        <v-flex style="font-size:13px" xs5 align-self-center >
           {{item.bdate}}
         </v-flex>
 
-        <v-flex style="font-size:12px" xs3 align-self-center>
+        <v-flex style="font-size:12px" xs3 align-self-center >
           Россия, Белая Холуница
         </v-flex>
 
@@ -59,10 +59,12 @@
 
       <v-layout text-xs-center v-if="taskKey == item.id">
         <!-- {{info}} -->
-        <v-progress-linear  
+        <v-progress-circular 
+          class="primary--text"
+          style="margin:0 auto;"
           :indeterminate="true"
           v-if="info == null"
-        ></v-progress-linear>
+        ></v-progress-circular>
 
         <v-layout flex-child wrap v-else>
         <v-flex xs12 sm3 mb-5>
@@ -76,17 +78,22 @@
 
         <v-flex xs12 sm9 style="font-size:14px" text-xs-center>
 
-          <p class="mb-0" >Статус: <strong>{{info.status}}</strong> </p>
-          <p class="mb-0">Телефон: <strong>{{info.contacts}}</strong> </p>
-          <p class="mb-0">Онлайн: <strong>{{info.online===1?'Сейчас онлайн': info.last_seen.time}}</strong> </p>
-          <p class="mb-0">Деятельность: <strong>{{info.occupation.type}}</strong> </p>
-          <p >Семейное положение: <strong>{{info.relation}}</strong> </p>
+          <p class="mb-0" v-if = info.status>Статус: <strong>{{info.status}}</strong> </p>
+          <p class="mb-0" v-if = info.contacts>Телефон: <strong>{{info.contacts}}</strong> </p>
+          <p class="mb-0" >Онлайн:
+             <strong>{{info.online===1?'Сейчас онлайн': info.last_seen.time}}</strong> </p>
+          <p class="mb-0" v-if = info.occupation.type>Занятость:
+             <strong>{{info.occupation.type==='work'?'Работа':info.occupation.type==='university'?'Университет':'Школа'}}</strong> </p>
+          <p class="mb-0" v-if = info.relation>Семейное положение: <strong>{{info.relation}}</strong> </p>
 
-          <p class="mb-0">Можно отправить приглашения в друзья: <strong>{{info.can_send_friend_request===1?'Да':'Нет'}}</strong> </p>
-          <p class="mb-0">Можно отправить личное сообщение: <strong>{{info.can_write_private_message===1?'Да':'Нет'}}</strong> </p>
-          <p >Можно оставлять записи на стене: <strong>{{info.can_post===1?'Да':'Нет'}}</strong> </p>
+          <p class="mb-0 mt-3 iphone">Можно отправить приглашения в друзья:
+             <strong>{{info.can_send_friend_request===1?'Да':'Нет'}}</strong> </p>
+          <p class="mb-0 iphone">Можно отправить личное сообщение:
+             <strong>{{info.can_write_private_message===1?'Да':'Нет'}}</strong> </p>
+          <p class="iphone">Можно оставлять записи на стене: 
+            <strong>{{info.can_post===1?'Да':'Нет'}}</strong> </p>
 
-          <v-layout row>
+          <v-layout class="iphone" row>
             <v-flex xs6 sm4>
               <h2>{{info.counters.albums}}</h2>
               <span>Фотоальбомов</span>
@@ -97,13 +104,13 @@
               <span>Видеозаписей</span>
             </v-flex>
 
-            <v-flex xs6 sm4>
+            <v-flex  xs6 sm4>
               <h2>{{info.counters.audios}}</h2>
               <span>Аудиозаписей</span>
             </v-flex>
           </v-layout>
 
-          <v-layout row>
+          <v-layout class="iphone" row>
             <v-flex xs6 sm4>
               <h2>{{info.counters.photos}}</h2>
               <span>Фотографий</span>
@@ -114,13 +121,13 @@
               <span>Заметок</span>
             </v-flex>
 
-            <v-flex xs6 sm4>
+            <v-flex  xs6 sm4>
               <h2>{{info.counters.groups}}</h2>
               <span>Сообществ</span>
             </v-flex>
           </v-layout>
 
-          <v-layout row>
+          <v-layout class="iphone" row>
             <v-flex xs6 sm4>
               <h2>{{info.counters.friends}}</h2>
               <span>Друзей</span>
@@ -143,6 +150,11 @@
   </v-app>
 </template>
 
+<style scoped>
+@media screen and (max-width: 320px) {
+    .iphone{ font-size:12px;}
+}
+</style>
 
 
 <script>
