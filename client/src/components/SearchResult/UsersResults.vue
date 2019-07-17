@@ -67,84 +67,97 @@
         ></v-progress-circular>
 
         <v-layout flex-child wrap v-else>
-        <v-flex xs12 sm3 mb-5>
-          <v-avatar
-            class="mt-5" 
-            color="grey lighten-4"
-          >
-            <v-img style="height:120px; width:120px" :src="info.photo_100"></v-img>
-          </v-avatar>       
-        </v-flex>
+          <v-flex xs12 sm3 mb-5>
+            <v-avatar
+              class="mt-5" 
+              color="grey lighten-4"
+            >
+              <v-img style="height:120px; width:120px" :src="info.photo_100"></v-img>
+            </v-avatar>       
+          </v-flex>
 
-        <v-flex xs12 sm9 style="font-size:14px" text-xs-center>
+          <v-flex xs12 sm9 style="font-size:14px" text-xs-center>
 
-          <p class="mb-0" v-if = info.status>Статус: <strong>{{info.status}}</strong> </p>
-          <p class="mb-0" v-if = info.contacts>Телефон: <strong>{{info.contacts}}</strong> </p>
-          <p class="mb-0" >Онлайн:
-             <strong>{{info.online===1?'Сейчас онлайн': info.last_seen.time}}</strong> </p>
-          <p class="mb-0" v-if = info.occupation.type>Занятость:
-             <strong>{{info.occupation.type==='work'?'Работа':info.occupation.type==='university'?'Университет':'Школа'}}</strong> </p>
-          <p class="mb-0" v-if = info.relation>Семейное положение: <strong>{{info.relation}}</strong> </p>
+            <p class="mb-0" v-if="info.status">
+              Статус: <strong>{{info.status}}</strong> 
+            </p>
 
-          <p class="mb-0 mt-3 iphone">Можно отправить приглашения в друзья:
-             <strong>{{info.can_send_friend_request===1?'Да':'Нет'}}</strong> </p>
-          <p class="mb-0 iphone">Можно отправить личное сообщение:
-             <strong>{{info.can_write_private_message===1?'Да':'Нет'}}</strong> </p>
-          <p class="iphone">Можно оставлять записи на стене: 
-            <strong>{{info.can_post===1?'Да':'Нет'}}</strong> </p>
+            <p class="mb-0" v-if="info.contacts">
+              Телефон: <strong>{{info.contacts}}</strong> 
+            </p>
 
-          <v-layout class="iphone" row>
-            <v-flex xs6 sm4>
-              <h2>{{info.counters.albums}}</h2>
-              <span>Фотоальбомов</span>
+            <p class="mb-0" >
+              Онлайн:
+              <strong>{{ online }}</strong> 
+            </p>
+
+            <p class="mb-0" v-if="info.hasOwnProperty('occupation')">
+              Занятость: <strong>{{ occupation}}</strong> 
+            </p>
+            <p class="mb-0" v-if = info.relation>Семейное положение: <strong>{{info.relation}}</strong> </p>
+
+            <p class="mb-0 mt-3 iphone">Можно отправить приглашения в друзья:
+              <strong>{{info.can_send_friend_request===1?'Да':'Нет'}}</strong> </p>
+            <p class="mb-0 iphone">Можно отправить личное сообщение:
+              <strong>{{info.can_write_private_message===1?'Да':'Нет'}}</strong> </p>
+            <p class="iphone">Можно оставлять записи на стене: 
+              <strong>{{info.can_post===1?'Да':'Нет'}}</strong> </p>
+
+            <v-flex v-if="info.hasOwnProperty('counters')">
+              <v-layout class="iphone" row>
+                <v-flex xs6 sm4>
+                  <h2>{{info.counters.albums || 0}}</h2>
+                  <span>Фотоальбомов</span>
+                </v-flex>
+
+                <v-flex xs6 sm4>
+                  <h2>{{info.counters.videos}}</h2>
+                  <span>Видеозаписей</span>
+                </v-flex>
+
+                <v-flex  xs6 sm4>
+                  <h2>{{info.counters.audios}}</h2>
+                  <span>Аудиозаписей</span>
+                </v-flex>
+              </v-layout>
+
+              <v-layout class="iphone" row>
+                <v-flex xs6 sm4>
+                  <h2>{{info.counters.photos}}</h2>
+                  <span>Фотографий</span>
+                </v-flex>
+
+                <v-flex xs6 sm4>
+                  <h2>{{info.counters.notes}}</h2>
+                  <span>Заметок</span>
+                </v-flex>
+
+                <v-flex  xs6 sm4>
+                  <h2>{{info.counters.groups}}</h2>
+                  <span>Сообществ</span>
+                </v-flex>
+              </v-layout>
+
+              <v-layout class="iphone" row>
+                <v-flex xs6 sm4>
+                  <h2>{{info.counters.friends}}</h2>
+                  <span>Друзей</span>
+                </v-flex>
+
+                <v-flex xs6 sm4>
+                  <h2>{{info.counters.followers}}</h2>
+                  <span>Подписчиков</span>
+                </v-flex>
+
+                <v-flex mb-2 xs6 sm4>
+                  <h2>{{info.counters.pages}}</h2>
+                  <span>Подписок</span>
+                </v-flex>
+              </v-layout>
             </v-flex>
-
-            <v-flex xs6 sm4>
-              <h2>{{info.counters.videos}}</h2>
-              <span>Видеозаписей</span>
-            </v-flex>
-
-            <v-flex  xs6 sm4>
-              <h2>{{info.counters.audios}}</h2>
-              <span>Аудиозаписей</span>
-            </v-flex>
-          </v-layout>
-
-          <v-layout class="iphone" row>
-            <v-flex xs6 sm4>
-              <h2>{{info.counters.photos}}</h2>
-              <span>Фотографий</span>
-            </v-flex>
-
-            <v-flex xs6 sm4>
-              <h2>{{info.counters.notes}}</h2>
-              <span>Заметок</span>
-            </v-flex>
-
-            <v-flex  xs6 sm4>
-              <h2>{{info.counters.groups}}</h2>
-              <span>Сообществ</span>
-            </v-flex>
-          </v-layout>
-
-          <v-layout class="iphone" row>
-            <v-flex xs6 sm4>
-              <h2>{{info.counters.friends}}</h2>
-              <span>Друзей</span>
-            </v-flex>
-
-            <v-flex xs6 sm4>
-              <h2>{{info.counters.followers}}</h2>
-              <span>Подписчиков</span>
-            </v-flex>
-
-            <v-flex mb-2 xs6 sm4>
-              <h2>{{info.counters.pages}}</h2>
-              <span>Подписок</span>
-            </v-flex>
-          </v-layout>
-        </v-flex>
-      </v-layout>  
+            
+          </v-flex>
+        </v-layout>  
       </v-layout>
     </v-layout>
   </v-app>
@@ -168,6 +181,16 @@
     computed:{
       content (){
         return this.$store.getters.result
+      },
+      occupation (){
+       return this.info.occupation.type === 'work' ? 'Работа'
+             :this.info.occupation.type === 'university' ? 'Университет'
+             :'Школа'
+      },
+      online (){
+        let ms = new Date(this.info.last_seen.time*1000);
+        return this.info.online === 1 ?'Сейчас онлайн'
+              : `${ms.getHours()}:${ms.getMinutes()} ${ms.getDate()}.${ms.getMonth()}.${ms.getFullYear()}`
       }
     },
     methods:{
