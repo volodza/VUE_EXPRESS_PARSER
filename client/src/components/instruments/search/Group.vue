@@ -295,31 +295,7 @@ export default {
           selected: null
         }
       },
-      answer: "тут",
-      list: {
-        tasks: {
-          items: [
-            {
-              icon: "folder",
-              iconClass: "grey lighten-1 white--text",
-              title: "Поиск > Сообщества",
-              subtitle: "03.02.2019"
-            },
-            {
-              icon: "folder",
-              iconClass: "grey lighten-1 white--text",
-              title: "Поиск > Родители",
-              subtitle: "Jan 17, 2014"
-            },
-            {
-              icon: "folder",
-              iconClass: "grey lighten-1 white--text",
-              title: "Сбор > Друзья",
-              subtitle: "Jan 28, 2014"
-            }
-          ]
-        }
-      }
+      answer: "тут"
     };
   },
   methods: {

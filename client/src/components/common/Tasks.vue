@@ -210,6 +210,7 @@ export default {
     },
     setTaskBegin(task) {
       this.$store.commit("setTaskBegin", task.begin);
+      this.$store.commit("setTask", task);
       this.$store.commit("setTitle", task.title);
       this.$store.commit("setCount", task.count);
       this.getArr();
@@ -218,6 +219,7 @@ export default {
     closeDialog () {
       this.dialog = false;
       this.$store.commit('setPage',1);
+      this.$store.commit("setTask", {});
     }
   },
   created() {

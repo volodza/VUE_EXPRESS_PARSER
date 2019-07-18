@@ -109,7 +109,8 @@ module.exports = async (req) => {
       'tasks.$.end':new Date,
       'tasks.$.status':'complete',
       // 'tasks.$.answer':groupsIds,
-      'tasks.$.count':groups.length
+      'tasks.$.count':groups.length,
+      'tasks.$.type':'groups'
       }
     }
   )

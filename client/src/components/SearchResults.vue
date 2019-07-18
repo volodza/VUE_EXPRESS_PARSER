@@ -113,8 +113,8 @@
         <!-- <v-divider></v-divider> -->
 
         <v-card class="mx-2 mt-2">
-         <!-- <GroupsResults/> -->
-         <UsersResults/>
+         <GroupsResults v-if="this.$store.getters.task.type === 'groups'"/>
+         <UsersResults v-if="this.$store.getters.task.type === 'users'"/>
          <!-- <NewsResults/> -->
          <!-- <PostsResults/> -->
         </v-card>
@@ -166,7 +166,11 @@
       },
       count(){
         return this.$store.getters.count
+      },
+      type (){
+        return this.$store.getters.task ? this.$store.getters.task.type : null
       }
+
     },
 
     watch: {

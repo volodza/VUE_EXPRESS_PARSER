@@ -8,7 +8,8 @@ export default {
             answer:null
         },
         title:null,
-        count:null
+        count:null,
+        task:{}
     },
     mutations: {
         setTasks(state, payload) {
@@ -31,6 +32,9 @@ export default {
         },
         setCount (state,payload){
             state.count = payload
+        },
+        setTask (state,payload){
+            state.task = payload
         }
     },
     actions: {},
@@ -55,6 +59,9 @@ export default {
         },
         count(state){
             return state.count
+        },
+        task(state){
+            return state.task
         }
     }
 }
