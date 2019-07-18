@@ -195,7 +195,7 @@ strong, h2{
       online (){
         let ms = new Date(this.info.last_seen.time*1000);
         return this.info.online === 1 ?'Сейчас онлайн'
-              : `${ms.getHours()}:${ms.getMinutes()} ${ms.getDate()}.${ms.getMonth()}.${ms.getFullYear()}`
+              : `${(''+ms.getHours()).padStart(2,'0')}:${(''+ms.getMinutes()).padStart(2,'0')} ${(''+ms.getDate()).padStart(2,'0')}.${(''+ms.getMonth()).padStart(2,'0')}.${ms.getFullYear()}`
       },
       status(){
         let arr = [
