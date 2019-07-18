@@ -18,13 +18,14 @@
         <strong style="font-size:15px;">ИНСТРУМЕНТЫ</strong>
       </v-list-tile>
 
-      <v-list-group sub-group>
+      <v-list-group sub-group style="border-top:1px solid grey;border-radius: 10px 10px;">
         <template v-slot:activator>
           <v-list-tile>Поиск</v-list-tile>
         </template>
 
         <v-list-tile
           class="ml-4"
+          style=""
           v-for="link in links.search"
           :key="link.title"
           @click="1"
@@ -37,7 +38,7 @@
         </v-list-tile>
       </v-list-group>
 
-      <v-list-group sub-group>
+      <v-list-group sub-group style="border-top:1px solid grey; border-radius: 10px 10px;">
         <template v-slot:activator>
           <v-list-tile>
             <v-list-tile-title>Сбор</v-list-tile-title>
@@ -57,7 +58,7 @@
         </v-list-tile>
       </v-list-group>
 
-      <v-list-group sub-group>
+      <v-list-group sub-group style="border-top:1px solid grey; border-radius: 10px 10px;">
         <template v-slot:activator>
           <v-list-tile>
             <v-list-tile-title>Активности</v-list-tile-title>

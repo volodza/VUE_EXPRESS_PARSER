@@ -251,8 +251,8 @@ strong, h2{
           cur = new Date(),
           diff = cur-birthdate,
           fullYears = Math.floor(diff/31557600000);
-
-        return  fullYears + ' лет'
+        let v = (fullYears%10===0?'лет':fullYears%10===1?'год':fullYears%10<5?'года':'лет')
+        return  fullYears + ' ' + v
 
       }
     }
