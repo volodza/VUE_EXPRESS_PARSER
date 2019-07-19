@@ -208,12 +208,11 @@ strong, h2{
     },
     methods:{
       userInfo(id){
+        this.info = null;
         if (this.taskKey == id) {
           this.taskKey = null;
-          this.info = null;
         } else {
           this.taskKey = id;
-          
           this.$http.get("http://localhost:3000/api/test/user", {
             params:{
               id

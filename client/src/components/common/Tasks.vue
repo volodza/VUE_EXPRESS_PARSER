@@ -2,13 +2,19 @@
   <v-layout row>
     <v-flex offset>
       <v-layout column text-xs-center>
-        <v-progress-circular v-if="this.$store.getters.tasks == null" indeterminate color="primary"></v-progress-circular>
-        <div v-if="this.$store.getters.monitored == []">Список сообществ для отслеживания пуст</div>
+
+        <v-progress-circular 
+          v-if="this.$store.getters.tasks == null" 
+          indeterminate color="primary"
+        ></v-progress-circular>
+
+        <div v-if="this.$store.getters.monitored == []">
+          Список сообществ для отслеживания пуст
+        </div>
 
         <v-list two-line subheader v-else style="padding-bottom:0px">
-          <template v-for="(task,index) in tasks" >
 
-            
+          <template v-for="(task,index) in tasks" >
             <v-layout row :key="task.begin" avatar class="my-1">
                <v-flex align-self-center xs2 >
               <v-avatar size="30">
@@ -124,6 +130,7 @@ export default {
   methods: {
     getArr() {
       // if(!this.taskBegin) return;
+      this.$store.commit("setResult", null);
       this.$http
         .get(`http://localhost:3000/api/test`, {
           params: {
@@ -149,20 +156,6 @@ export default {
         user_id: this.$store.getters.user.id,
         begin: task.begin
       };
-      // this.$http.post('http://localhost:3000/downloadAnswer',obj,{
-      //   responseType: 'arraybuffer',
-      //   headers:{
-      //     'content-type': 'application/json'
-      //     }
-      // })
-      // .then(res => console.log(res))
-      // .then(base64String => {
-      //     const anchorTag = document.createElement('a');
-      //     console.log(base64String)
-      //     anchorTag.href = base64String;
-      //     anchorTag.download = obj.user_id + ".txt";
-      //     anchorTag.click();
-      // });
       fetch(`http://${this.$store.getters.ip}downloadAnswer`, {
         method: "POST",
         responseType: "arraybuffer",
@@ -182,8 +175,7 @@ export default {
     },
     getTasks() {
       if (!this.$store.getters.user.id) return;
-      this.$http
-        .get(`http://localhost:3000/api/tasks`, {
+      this.$http.get(`http://localhost:3000/api/tasks`, {
           params: {
             user_id: this.$store.getters.user.id
           }
@@ -199,8 +191,7 @@ export default {
         begin: task.begin
       };
 
-      this.$http
-        .get(`http://localhost:3000/api/tasks/delete`, {
+      this.$http.get(`http://localhost:3000/api/tasks/delete`, {
           params: obj
         })
         .then(res => {
