@@ -161,7 +161,7 @@
         </v-layout> 
         
       </v-layout>
-      <hr  class="hr-dashed my-0" v-if="index + 1 < content.length" :key="index"></hr> 
+      <divider  style="border-top: 1px dashed #d7d7d7;" v-if="index + 1 < content.length" :key="index"></divider> 
     </v-layout>
   </div>
 </template>
@@ -172,13 +172,6 @@
  }
 strong, h2{
   color:#616161;
- }
-.hr-dashed {
-    margin: 20px 0;
-    padding: 0;
-    height: 0;
-    border: none;
-    border-top: 1px dashed #d7d7d7;
  }
 
 </style>
