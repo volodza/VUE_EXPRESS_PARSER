@@ -81,7 +81,7 @@
       </v-layout>
     </v-flex>
 
-    <v-dialog v-model="dialog" width="600" style="">
+    <v-dialog v-model="dialog"  style="">
       <SearchResults :closeDialog='closeDialog' />
     </v-dialog>
   </v-layout>

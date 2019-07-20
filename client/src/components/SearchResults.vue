@@ -1,5 +1,8 @@
 <template>
-  <div class="text-xs-center header" style="padding-bottom:700px;">
+  <div class="text-xs-center " 
+  style="position:fixed;top: 5%;width: 90%;
+    max-width: 600px; max-height:95%;overflow:auto;
+    right: 0; left: 0; margin: auto;">
       <v-card class="header" style="overflow : visible;">
         
 
@@ -95,7 +98,7 @@
         </v-card-title>
           <!-- sub-header-end -->
 
-        <div class="header" style="position: sticky; top: 0; z-index: 1;">
+        <div class="header" style="position: sticky; top:0; z-index: 1;">
 
           <v-progress-linear  
             :indeterminate="true"
@@ -106,7 +109,7 @@
             v-if="content!==null"
             v-model="page"
             :length="pages"
-            :total-visible="9"
+            :total-visible="5"
           ></v-pagination>
 
         </div>
@@ -132,6 +135,11 @@
     <!-- </v-dialog> -->
   </div>
 </template>
+
+<style scoped>
+
+</style>
+
 
 <script>
   import GroupsResults from "./SearchResult/GroupsResults";

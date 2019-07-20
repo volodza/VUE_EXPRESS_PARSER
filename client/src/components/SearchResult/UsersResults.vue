@@ -1,8 +1,8 @@
 <template>
-  <v-app>
+  <div style="margin-bottom:10px">
 
     <v-layout 
-      style="border-bottom:1px dashed #d7d7d7; background:white; color:#717171"
+      style="border-bottom:1px dashed #d7d7d7; background:white; color:#717171; "
       column
       text-xs-center            
       v-for="item in content"
@@ -161,7 +161,7 @@
         </v-layout>  
       </v-layout>
     </v-layout>
-  </v-app>
+  </div>
 </template>
 
 <style scoped>
@@ -172,6 +172,7 @@ strong, h2{
   color:#616161;
   
 }
+
 </style>
 
 
