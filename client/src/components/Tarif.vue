@@ -17,7 +17,7 @@
 
             <v-flex xs12 md3 d-flex >
                 <v-flex class="white" text-xs-center  >
-                    <h3>Хуйный</h3> <br>
+                    <h3>Продвинутый</h3> <br>
                     <p style="text-align:left;">- 2 потока для задач;<br>
                     - Больше 150 инструментов парсинга;<br>
                     Не доступны: <br>
@@ -39,7 +39,7 @@
 
              <v-flex xs12 md3 d-flex >
                 <v-flex class="white" text-xs-center  >
-                    <h3>Нехуйный</h3> <br>
+                    <h3>Максимальный</h3> <br>
                     <p style="text-align:left;">- 2 потока для задач;<br>
                     - 1 поток для кейсов;<br>
                     - 500 сообществ для отслеживания <br>в "Активности - Вступления";<br>

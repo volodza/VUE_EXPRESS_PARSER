@@ -1,6 +1,6 @@
 <template>
   <div>
-    &copy;1488 - {{ new Date().getFullYear() }}г.
+    &copy;{{ new Date().getFullYear() }}г.
   </div>
 </template>
 

@@ -91,7 +91,7 @@
                   Й
                 </v-btn>
               </template>
-              <span>Скачать хуй</span>
+              <span>Скачать</span>
             </v-tooltip>
              
           </div>  

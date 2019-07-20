@@ -216,7 +216,7 @@ strong, h2{
           this.taskKey = null;
         } else {
           this.taskKey = id;
-          this.$http.get("http://localhost:3000/api/test/user", {
+          this.$http.get("/api/test/user", {
             params:{
               id
             }

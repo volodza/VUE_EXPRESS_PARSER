@@ -87,7 +87,7 @@ export default {
   data () {
     return {
       menu:[
-        {title:'Тариф', onClick:1, icon:'mdi-key'},
+        {title:'Тариф', onClick:this.$router.push('Tarif'), icon:'mdi-key'},
         {title:'Настройки', onClick:1, icon:'mdi-settings'},
         {title:'Выйти', onClick:this.userLogout, icon:'mdi-exit-to-app'}
       ],
@@ -103,7 +103,7 @@ export default {
 
   methods:{
     vkAuth (){
-      this.$http.get('http://localhost:3000/auth/vkontakte') 
+      this.$http.get('/auth/vkontakte') 
       .then(response => {
         localStorage.access_key = response.body.access_key
         window.location.href = response.body.vk_url
@@ -117,7 +117,7 @@ export default {
   
     checkUserLogin (){ 
       if(!localStorage.access_key) return; 
-      this.$http.get("http://localhost:3000/auth/checkToken",{ 
+      this.$http.get("/auth/checkToken",{ 
         params: { 
           access_key:localStorage.access_key 
         } 

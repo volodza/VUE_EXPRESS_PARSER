@@ -319,7 +319,7 @@ export default {
         user_id: this.$store.getters.user.id
       };
       this.answer = "";
-      this.$http.post("http://localhost:3000/api/search/users", obj).then(res => {
+      this.$http.post("/api/search/users", obj).then(res => {
         this.answer = res.body;
       });
     },
@@ -328,7 +328,7 @@ export default {
       if (!this.selects.country.selected) return;
       this.selects.city.loading = true;
       this.$http
-        .get("http://localhost:3000/api/geolocation/cities", {
+        .get("/api/geolocation/cities", {
           params: {
             q: v,
             country_id: this.selects.country.selected
@@ -342,7 +342,7 @@ export default {
     getCountries(v) {
       this.selects.country.loading = true;
       this.$http
-        .get("http://localhost:3000/api/geolocation/countries", {
+        .get("/api/geolocation/countries", {
           params: {
             q: v
           }
