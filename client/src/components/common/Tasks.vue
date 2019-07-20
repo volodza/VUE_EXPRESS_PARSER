@@ -8,6 +8,7 @@
           indeterminate color="primary"
         ></v-progress-circular>
 
+
         <div v-if="this.$store.getters.monitored == []">
           Список сообществ для отслеживания пуст
         </div>
