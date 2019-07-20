@@ -175,7 +175,8 @@ strong, h2{
 
 </style>
 
-
+  
+  
 <script>
   export default {
     data () {
