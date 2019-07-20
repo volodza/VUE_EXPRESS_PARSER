@@ -2,10 +2,10 @@
   <div style="margin-bottom:10px">
 
     <v-layout 
-      style="border-bottom:1px dashed #d7d7d7; background:white; color:#717171; "
+      style="; background:white; color:#717171; "
       column
       text-xs-center            
-      v-for="item in content"
+      v-for="(item,index) in content"
       :key="item.id"
     >
       <v-layout row >
@@ -158,8 +158,10 @@
             </v-flex>
             
           </v-flex>
-        </v-layout>  
+        </v-layout> 
+        
       </v-layout>
+      <hr  class="hr-dashed my-0" v-if="index + 1 < content.length" :key="index"></hr> 
     </v-layout>
   </div>
 </template>
@@ -167,11 +169,17 @@
 <style scoped>
 @media screen and (max-width: 320px) {
     .iphone{ font-size:12px;}
-}
+ }
 strong, h2{
   color:#616161;
-  
-}
+ }
+.hr-dashed {
+    margin: 20px 0;
+    padding: 0;
+    height: 0;
+    border: none;
+    border-top: 1px dashed #d7d7d7;
+ }
 
 </style>
 

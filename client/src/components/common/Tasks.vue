@@ -75,7 +75,7 @@
               </v-list-tile-action>
             
             </v-layout>
-            <v-divider v-if="index + 1 < tasks.length" :key="index" ></v-divider>
+            <hr  class="hr-dashed my-0" v-if="index + 1 < tasks.length" :key="index"></hr>
           </template>
         </v-list>
       </v-layout>
@@ -86,6 +86,16 @@
     </v-dialog>
   </v-layout>
 </template>
+
+<style scoped>
+.hr-dashed {
+    margin: 20px 0;
+    padding: 0;
+    height: 0;
+    border: none;
+    border-top: 1px dashed #d7d7d7;
+}
+</style>
 
 <script>
 import SearchResults from "../SearchResults";
