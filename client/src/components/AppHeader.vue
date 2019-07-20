@@ -6,7 +6,7 @@
       <v-badge 
         overlap 
         v-if="$store.getters.user"
-         v-model="$store.getters.tasks.length" 
+        v-model="$store.getters.tasks.length" 
       >
 
         <template v-slot:badge>
@@ -20,11 +20,9 @@
 
           <template v-slot:activator="{ on }">
             <v-btn
-              
               color="black"
               flat
               v-on="on"
-              
               style='height:30px;border:1px solid #d7d7d7;text-transform:none'
             >
               Мои задачи
@@ -32,7 +30,7 @@
           </template>
 
           <v-card class="flat" style="box-shadow: 0 0 5px 2px;">
-            <tasks></tasks>
+            <tasks/>
           </v-card>
 
         </v-menu>
@@ -53,9 +51,7 @@
           >
             <img :src="$store.getters.user.photo_50">
           </v-avatar>
-          
           <v-icon >mdi-chevron-down</v-icon>
-    
         </v-btn>
       </template>
       <v-list>
@@ -69,14 +65,6 @@
         </v-list-tile>
       </v-list>
     </v-menu>
-           
-    <!-- <v-btn 
-      class="hidden-sm-and-down" 
-      style="border: 1px solid black;"
-      :href="'/Tarif'"
-    >
-      <p style="font-size:15px; padding-top:15px; text-transform:none">Тариф "нехуйный"</p>
-    </v-btn>  -->
 
     <v-btn 
       @click="vkAuth"
@@ -95,7 +83,7 @@
 <script>
 import Tasks from './common/Tasks'
 export default {
-  components:{Tasks:Tasks},
+  components:{Tasks},
   data () {
     return {
       menu:[
@@ -128,21 +116,21 @@ export default {
     },
   
     checkUserLogin (){ 
-if(!localStorage.access_key) return; 
-this.$http.get("http://localhost:3000/auth/checkToken",{ 
-params: { 
-access_key:localStorage.access_key 
-} 
-}).then(res => { 
-res.body ? this.$store.commit('setUser',res.body) : console.log('Ошибка') 
-console.log(this.$store.getters.user) 
-}); 
-}
-},
+      if(!localStorage.access_key) return; 
+      this.$http.get("http://localhost:3000/auth/checkToken",{ 
+        params: { 
+          access_key:localStorage.access_key 
+        } 
+      }).then(res => { 
+        res.body ? this.$store.commit('setUser',res.body) : console.log('Ошибка') 
+        console.log(this.$store.getters.user) 
+      }); 
+    }
+  },
 
-created: function (){ 
-this.checkUserLogin() 
-}
+  created: function (){ 
+    this.checkUserLogin() 
+  }
 }
 
 </script>

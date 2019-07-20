@@ -3,12 +3,15 @@
     <v-list class="sideText--text" style="padding:0px;">
       <!-- side-header -->
       <v-list-tile style="height:54px;margin-top:10px" :href="'/'">
+
         <v-list-tile-action>
           <img style="height:50px" src="../assets/logo1.png" alt />
         </v-list-tile-action>
+
         <h1 style="font-size:33px; color:#E87563">
           <strong style="color:#88C8B3">Arrow</strong>Target
         </h1>
+
       </v-list-tile>
 
       <v-divider class="mb-2 accent"></v-divider>
@@ -19,6 +22,7 @@
       </v-list-tile>
 
       <v-list-group sub-group style="border-top:1px solid grey;border-radius: 10px 10px;">
+        
         <template v-slot:activator>
           <v-list-tile>Поиск</v-list-tile>
         </template>

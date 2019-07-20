@@ -2,16 +2,21 @@
   <v-app>
     <!-- Header -->
     <v-toolbar app flat style="border-bottom:1px solid #d7d7d7">
-      <v-toolbar-side-icon @click.stop="drawer = !drawer" class="hidden-lg-and-up"></v-toolbar-side-icon>
+
+      <v-toolbar-side-icon 
+        @click.stop="drawer = !drawer" 
+        class="hidden-lg-and-up"
+      ></v-toolbar-side-icon>
       <v-spacer></v-spacer>
       <app-header />
+
     </v-toolbar>
 
     <v-footer app inset v-model="drawer" style="border-top:1px solid #d7d7d7">
       <p class="ml-2 mt-3">Ваш ID:<strong>{user_id}</strong></p>
-    <v-spacer></v-spacer>
-    <app-footer />
-  </v-footer>
+      <v-spacer></v-spacer>
+      <app-footer />
+    </v-footer>
 
     <!-- Sidebar -->
     <v-navigation-drawer
@@ -40,7 +45,7 @@
       </v-snackbar>
     </template>
 
-    <!-- snackbar-access -->
+    <!-- snackbar-success -->
     <template v-if="success">
       <v-snackbar
         @input="closeSuccess"
@@ -53,6 +58,7 @@
         <v-btn dark flat @click="closeSuccess">Закрыть</v-btn>
       </v-snackbar>
     </template>
+
   </v-app>
 </template>
 

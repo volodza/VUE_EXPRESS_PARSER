@@ -3,7 +3,7 @@
   style="position:fixed;top: 5%;width: 90%;
     max-width: 600px; max-height:95%;overflow:auto;
     right: 0; left: 0; margin: auto;">
-      <v-card class="header" style="overflow : visible;">
+      <v-card class="header" style="overflow : visible;min-height:500px">
         
 
         <!-- header -->
@@ -109,7 +109,9 @@
             v-if="content!==null"
             v-model="page"
             :length="pages"
-            :total-visible="5"
+            
+            
+
           ></v-pagination>
 
         </div>
@@ -136,9 +138,6 @@
   </div>
 </template>
 
-<style scoped>
-
-</style>
 
 
 <script>
@@ -196,3 +195,42 @@
 
   }
 </script>
+
+<style>
+
+/* стили для скрола перенести в апп */
+::-webkit-scrollbar-button { 
+background-image:url(''); 
+background-repeat:no-repeat; 
+width:6px; 
+height:0px 
+} 
+
+::-webkit-scrollbar-track { 
+background-color:#eef1f07e; 
+/* box-shadow:0px 0px 3px #000 inset;  */
+} 
+
+::-webkit-scrollbar-thumb { 
+/* -webkit-border-radius: 5px;  */
+/* border-radius: 5px;  */
+background-color:#4f555e; 
+/* box-shadow:0px 1px 1px #fff inset;  */
+
+background-position:center; 
+background-repeat:no-repeat; 
+} 
+
+::-webkit-resizer{ 
+background-image:url(''); 
+background-repeat:no-repeat; 
+width:7px; 
+height:0px 
+} 
+
+::-webkit-scrollbar{ 
+width: 5px; 
+}
+
+
+</style>
