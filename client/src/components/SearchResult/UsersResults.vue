@@ -161,7 +161,7 @@
         </v-layout> 
         
       </v-layout>
-      <divider  style="border-top: 1px dashed #d7d7d7;" v-if="index + 1 < content.length" :key="index"></divider> 
+      <v-divider  style="border-top: 1px dashed #d7d7d7;" v-if="index + 1 < content.length" :key="index"></v-divider> 
     </v-layout>
   </div>
 </template>

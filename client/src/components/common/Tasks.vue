@@ -76,7 +76,7 @@
               </v-list-tile-action>
             
             </v-layout>
-            <divider  style="border-top: 1px dashed #d7d7d7;" v-if="index + 1 < tasks.length" :key="index"></divider>
+            <v-divider  style="border-top: 1px dashed #d7d7d7;" v-if="index + 1 < tasks.length" :key="index"></v-divider>
           </template>
         </v-list>
       </v-layout>
