@@ -87,7 +87,7 @@ export default {
   data () {
     return {
       menu:[
-        {title:'Тариф', onClick:this.$router.push('Tarif'), icon:'mdi-key'},
+        {title:'Тариф', onClick:1, icon:'mdi-key'},
         {title:'Настройки', onClick:1, icon:'mdi-settings'},
         {title:'Выйти', onClick:this.userLogout, icon:'mdi-exit-to-app'}
       ],
@@ -107,7 +107,9 @@ export default {
       .then(response => {
         localStorage.access_key = response.body.access_key
         window.location.href = response.body.vk_url
-      },(response) => {});
+      },(err) => {
+        this.$store.commit("setError", err);
+      });
     },
     userLogout (){
       localStorage.removeItem('access_key')
@@ -124,7 +126,9 @@ export default {
       }).then(res => { 
         res.body ? this.$store.commit('setUser',res.body) : console.log('Ошибка') 
         console.log(this.$store.getters.user) 
-      }); 
+      },(err) => {
+        this.$store.commit("setError", err);
+      });
     }
   },
 
