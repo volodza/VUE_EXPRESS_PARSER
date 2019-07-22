@@ -200,7 +200,7 @@
       </v-flex>
 
       <v-flex xs12 md4 pt-0>
-        <v-flex style="background:#e7fbed;font-size:12px">
+        <v-flex style="background:#e7fbed;font-size:13px">
           <h1>Описание</h1>
           <p>
             Облачный "Поиск групп" осуществляется по базе Segmento Target,

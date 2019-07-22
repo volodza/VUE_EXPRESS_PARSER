@@ -39,8 +39,20 @@
                 </v-avatar> 
               </v-flex>
 
-              <v-layout text-xs-left column xs1 style="font-size:14px;">
-                {{ task.title }}
+              <v-layout
+               
+               text-xs-left
+               column
+                xs1 style="font-size:14px;">
+
+                <span v-if="task.count<1">
+                  {{ task.title }}
+                </span>
+
+              <a v-if="task.count" style="color:#6e9ddb;" @click="setTaskBegin(task)">
+                  {{ task.title }}
+              </a>
+              
                 <v-flex style="font-size:12px">
                   <v-icon size="17">mdi-calendar</v-icon>
 
@@ -48,7 +60,7 @@
                   <v-icon
                     size="17"
                     v-if="task.count"
-                    @click="setTaskBegin(task)"
+                    
                   >mdi-account-search-outline</v-icon>
 
                   <!-- <v-icon

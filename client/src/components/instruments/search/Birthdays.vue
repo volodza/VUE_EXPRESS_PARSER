@@ -1,13 +1,18 @@
 <template>
   <v-container fluid grid-list-xl>
+    <div>
+      <h1 class="display-1 mb-3">Дни рождения</h1>
+    </div>
+
     <v-layout flex-child wrap>
-      <v-flex xs12 md6 d-flex>
-        <v-flex class="white" text-xs-center>
-          <div class="font-weight-medium mb-0">Период,за который искать дни рождения (обязательно)</div>
+      <v-flex xs12 md8 class="border">
+          <label>Период, за который искать дни рождения (обязательно)</label>
           <v-layout class="mt-0">
             <!-- Календарь от -->
-            <v-flex xs12 sm6>
+            <v-flex xs12 sm6 pt-0>
               <v-menu
+                
+                min-width='100px'
                 ref="menu1"
                 :close-on-content-click="false"
                 :nudge-right="40"
@@ -15,7 +20,7 @@
                 lazy
                 transition="scale-transition"
                 offset-y
-                full-width
+                
               >
                 <template v-slot:activator="{ on }">
                   <v-text-field
@@ -28,14 +33,18 @@
                 </template>
                 <v-date-picker v-model="calendar.from" no-title scrollable>
                   <v-spacer></v-spacer>
-                  <v-btn flat color="primary" @click="menu1 = false">Cancel</v-btn>
-                  <v-btn flat color="primary" @click="$refs.menu1.save(calendar.from)">OK</v-btn>
+                  <v-flex xs6 mx-2  text-xs-center>
+                  <v-btn flat color="primary" @click="menu2 = false">Закрыть</v-btn>
+                  </v-flex ><v-flex xs6 mx-2  text-xs-center>
+                  <v-btn flat color="primary" @click="$refs.menu2.save(calendar.to)">OK</v-btn>
+                  </v-flex>
                 </v-date-picker>
               </v-menu>
             </v-flex>
             <!-- Календарь до -->
-            <v-flex xs12 sm6>
+            <v-flex xs12 sm6 pt-0>
               <v-menu
+                min-width='100px'
                 ref="menu2"
                 :close-on-content-click="false"
                 :nudge-right="40"
@@ -48,7 +57,7 @@
                 <template v-slot:activator="{ on }">
                   <v-text-field
                     v-model="calendar.to"
-                    label="Начало периода"
+                    label="Конец периода"
                     prepend-icon="mdi-calendar"
                     readonly
                     v-on="on"
@@ -56,27 +65,62 @@
                 </template>
                 <v-date-picker v-model="calendar.to" no-title scrollable>
                   <v-spacer></v-spacer>
-                  <v-btn flat color="primary" @click="menu2 = false">Cancel</v-btn>
+                  <!-- <v-layout row> -->
+                    <v-flex xs6 mx-2  text-xs-center>
+                  <v-btn flat color="primary" @click="menu2 = false">Закрыть</v-btn>
+                  </v-flex ><v-flex xs6 mx-2  text-xs-center>
                   <v-btn flat color="primary" @click="$refs.menu2.save(calendar.to)">OK</v-btn>
+                  </v-flex>
+                  <!-- </v-layout> -->
                 </v-date-picker>
               </v-menu>
             </v-flex>
           </v-layout>
 
           <v-divider></v-divider>
-          <div class="font-weight-medium mt-3">Возраст</div>
-          <v-layout>
+
+       <v-layout row wrap>  
+          <v-flex xs12 sm6 >
+<label>Возраст</label>
+          <v-layout >
             
-            <v-flex xs6>
-              <v-text-field hide-details single-line placeholder="От" solo v-model="inputs.age.from"></v-text-field>
+            <v-flex py-0>
+              <v-text-field class="border" hide-details flat placeholder="От" solo v-model="inputs.age.from">
+              </v-text-field>
             </v-flex>
-            <v-flex xs6>
-              <v-text-field hide-details single-line solo placeholder="До" v-model="inputs.age.to"></v-text-field>
+
+            <v-flex py-0>
+              <v-text-field
+               class="border"
+               hide-details
+               solo 
+               flat
+               placeholder="До" 
+               v-model="inputs.age.to"> 
+              </v-text-field>
             </v-flex>
           </v-layout>
+          </v-flex>
+
+           <v-flex xs12 sm6>
+             <label>Пол</label>
+              <v-select
+                class="border"
+                flat
+                solo
+                hide-details
+                label="Пол"
+                :items="selects.sex.items"
+                v-model="selects.sex.selected"
+                item-text="title"
+                item-value="id"
+              ></v-select>
+            </v-flex>
+
+</v-layout>
 
           <v-layout wrap>
-            <v-flex xs6 sm6>
+            <v-flex xs12 sm6>
               <v-autocomplete
                 v-model="selects.country.selected"
                 :loading="selects.country.loading"
@@ -88,6 +132,8 @@
                 item-value="id"
                 label="Страна"
                 solo
+                class="border"
+                flat
               ></v-autocomplete>
             </v-flex>
 
@@ -104,6 +150,8 @@
                 item-value="id"
                 label="Город"
                 solo
+                class="border"
+                flat
               >
                 <template v-slot:no-data>
                   <v-list-tile>
@@ -129,45 +177,77 @@
               </v-autocomplete>
             </v-flex>
 
-            <v-flex xs12 sm6>
-              <v-select
-                solo
-                label="Пол"
-                :items="selects.sex.items"
-                v-model="selects.sex.selected"
-                item-text="title"
-                item-value="id"
-              ></v-select>
+           
+          </v-layout>
+
+          <v-divider class="my-4"></v-divider>
+
+          <label>Название задачи</label>
+          <v-layout wrap>
+            <v-flex xs12 sm6 md8 pt-0>
+              <v-text-field 
+                class="border" 
+                v-model="inputs.taskTitle"
+                flat 
+                solo 
+                label="Любое название (для себя)" 
+                hide-details
+              ></v-text-field>
+            </v-flex>
+
+            <v-flex xs12 sm6 md4 pt-0>
+              <v-btn
+                class="mt-0"
+                style="height:50px;             
+            font-size:20px; 
+            text-transform:none; 
+            background: linear-gradient(160deg,#4f555e,#4f555e,#5c6e68,#7f6b67); 
+            color:white"
+                block
+                flat
+                hide-details
+                @click="getUsers"
+                :loading="!answer"
+              >
+                <v-icon style="margin-right: 5px">mdi-play</v-icon>
+                <label>Начать поиск</label>
+              </v-btn>
             </v-flex>
           </v-layout>
 
-          <v-divider class="mb-4"></v-divider>
+      </v-flex>
 
-          <v-text-field solo label="Название задачи"></v-text-field>
-
-          <v-btn color="primary" block @click="getBirthdays">
-            <v-icon>mdi-play</v-icon>
-          </v-btn>
+<v-flex xs12 md4 pt-0>
+        <v-flex style="background:#e7fbed;font-size:13px">
+          <h1>Описание</h1>
+          <p>
+            В поиске пользователей можно искать людей по полу,
+            городу, возрасту, тех, у кого день рождения, семейному положению,
+            наличию детей, а так же производить поиск их родственников,
+            вторых половинок и детей.
+            <br />
+            <br />1. Введите параметры поиска людей
+            <br />
+            <br />2. Задайте понятное описание задачи, чтобы не забыть, кто у Вас собирается.
+            <br />
+            <br />3. Нажмите "Добавить задачу" и перейдите к следующей.
+            <br />
+            <br />При указании возраста, города, семейного положения выдача может
+            отличаться от выдачи ВКонтакте, т.к. в базу попадают только те,
+            кто не скрыл возраст, семейное положение, город настройками приватности.
+          </p>
         </v-flex>
       </v-flex>
 
-      <v-flex xs12 md6 d-flex>
-        <v-flex class="white">
-          <v-textarea
-            name="input-7-1"
-            label="Пользователи"
-            value="answer"
-            hint="По одной ключевой фразе в строку"
-            v-model="answer"
-          ></v-textarea>
-
-          {{selects.country.selected}}
-          {{selects.sex.selected}}
-        </v-flex>
-      </v-flex>
     </v-layout>
   </v-container>
 </template>
+
+<style scoped>
+.border {
+  border: 1px solid #d7d7d7;
+}
+</style>
 
 <script>
 export default {

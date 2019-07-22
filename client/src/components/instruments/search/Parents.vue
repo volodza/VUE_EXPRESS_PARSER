@@ -1,45 +1,108 @@
 <template>
   <v-container fluid grid-list-xl>
-    <v-layout flex-child wrap>
-      <v-flex xs12 md6 d-flex>
-        <v-flex class="white" text-xs-center>
-          <div class="font-weight-medium">Возраст ребенка</div>
-          <v-layout row wrap>
-            <v-flex xs12 sm6 ma-0>
-              <v-text-field
-                solo
-                label="От"
-                v-model="inputs.childAge.from"
-              ></v-text-field>
-            </v-flex>
-            <v-flex xs12 sm6>
-              <v-text-field
-                solo
-                v-model="inputs.childAge.to"
-                label="До"
-              ></v-text-field>
-            </v-flex>
-          </v-layout>
+    <div>
+      <h1 class="display-1 mb-3">Родители</h1>
+    </div>
 
-          <v-divider></v-divider>
-          <div class="font-weight-medium mt-3">Возраст родителей</div>
+    <v-layout flex-child wrap>
+      <v-flex xs12 md8 class="border">
+        <v-flex class="white">
+         
           <v-layout row wrap>
             <v-flex xs12 sm6 >
+              <label>Возраст родителей</label>
+              <v-layout>
+                <v-flex py-0 >
               <v-text-field
+                class="border"
+                hide-details
                 solo
+                flat
                 label="От"
                 v-model="inputs.parentAge.from"
               ></v-text-field>
             </v-flex>
-            <v-flex xs12 sm6>
+            <v-flex py-0 >
               <v-text-field
+                class="border"
+                hide-details
                 solo
+                flat
                 v-model="inputs.parentAge.to"
                 label="До"
               ></v-text-field>
+              </v-flex>
+              </v-layout>
             </v-flex>
+            
 
-            <v-flex xs12>
+
+            <v-flex xs12 sm6 >
+              <label >Возраст ребенка</label>
+               <v-layout>
+                <v-flex py-0 >
+              <v-text-field
+                class="border"
+                hide-details
+                solo
+                flat
+                label="От"
+                v-model="inputs.childAge.from"
+              ></v-text-field>
+            </v-flex>
+            <v-flex py-0 >
+              <v-text-field
+                class="border"
+                hide-details
+                solo
+                flat
+                v-model="inputs.childAge.to"
+                label="До"
+              ></v-text-field>
+            </v-flex>
+              </v-layout>
+            </v-flex>
+          </v-layout>
+
+
+          
+          
+
+          <v-layout wrap>
+            <v-flex xs12 sm6>
+              <label>Пол</label>
+              <v-select
+                class="border"
+                hide-details
+                solo
+                flat
+                label="Выберите пол"
+                :items="selects.sex.items"
+                v-model="selects.sex.selected"
+                item-text="title"
+                item-value="id"
+              ></v-select>
+            </v-flex>
+            <v-flex xs12 sm6>
+              <label>Семейное положение</label>
+              <v-select
+                class="border"
+                hide-details
+                solo
+                flat
+                label="Выберите семейное положение"
+                :items="selects.status.items"
+                v-model="selects.status.selected"
+                item-text="title"
+                item-value="id"
+              ></v-select>
+            </v-flex>
+</v-layout>
+
+          <!-- <v-divider class="my-3"></v-divider> -->
+
+<v-layout row wrap>
+            <v-flex xs12 sm6 mt-3>
               <v-checkbox
                 class="mt-0"
                 height='6px'
@@ -47,25 +110,26 @@
                 v-model="checkboxes.hasPhoto"
               ></v-checkbox>
             </v-flex>
-          </v-layout>
+          
 
-          <v-layout wrap>
-            <v-flex xs6 sm6>
+            <v-flex xs12 sm3>
               <v-autocomplete
                 v-model="selects.country.selected"
                 :loading="selects.country.loading"
                 :items="selects.country.items"
                 :search-input.sync="selects.country.search"
                 hide-no-data
-                hide-details
                 item-text="title"
                 item-value="id"
                 label="Страна"
+                class="border"
+                hide-details
                 solo
+                flat
               ></v-autocomplete>
             </v-flex>
 
-            <v-flex xs12 sm6>
+            <v-flex xs12 sm3>
               <v-autocomplete
                 :disabled="!selects.country.selected"
                 v-model="selects.city.selected"
@@ -73,11 +137,13 @@
                 :items="selects.city.items"
                 :search-input.sync="selects.city.search"
                 hide-no-data
-                hide-details
                 item-text="title"
                 item-value="id"
                 label="Город"
+                class="border"
+                hide-details
                 solo
+                flat
               >
                 <template v-slot:no-data>
                   <v-list-tile>
@@ -103,55 +169,77 @@
               </v-autocomplete>
             </v-flex>
 
-            <v-flex xs12 sm6>
-              <v-select
-                solo
-                label="Пол"
-                :items="selects.sex.items"
-                v-model="selects.sex.selected"
-                item-text="title"
-                item-value="id"
-              ></v-select>
-            </v-flex>
-            <v-flex xs12 sm6>
-              <v-select
-                solo
-                label="Семейное положение"
-                :items="selects.status.items"
-                v-model="selects.status.selected"
-                item-text="title"
-                item-value="id"
-              ></v-select>
-            </v-flex>            
+            
           </v-layout>
 
-          <v-divider class="mb-4"></v-divider>
+          <v-divider class="my-4"></v-divider>
 
-          <v-text-field solo label="Название задачи"></v-text-field>
+          <label>Название задачи</label>
+          <v-layout wrap>
+            <v-flex xs12 sm6 md8 pt-0>
+              <v-text-field 
+                class="border" 
+                v-model="inputs.taskTitle"
+                flat 
+                solo 
+                label="Любое название (для себя)" 
+                hide-details
+              ></v-text-field>
+            </v-flex>
 
-          <v-btn color="primary" block @click="getParents">
-            <v-icon>mdi-play</v-icon>
-          </v-btn>
+            <v-flex xs12 sm6 md4 pt-0>
+              <v-btn
+                class="mt-0"
+                style="height:50px;             
+            font-size:20px; 
+            text-transform:none; 
+            background: linear-gradient(160deg,#4f555e,#4f555e,#5c6e68,#7f6b67); 
+            color:white"
+                block
+                flat
+                hide-details
+                @click="getUsers"
+                :loading="!answer"
+              >
+                <v-icon style="margin-right: 5px">mdi-play</v-icon>
+                <label>Начать поиск</label>
+              </v-btn>
+            </v-flex>
+          </v-layout>
         </v-flex>
       </v-flex>
 
-      <v-flex xs12 md6 d-flex>
-        <v-flex class="white">
-          <v-textarea
-            name="input-7-1"
-            label="Пользователи"
-            value="answer"
-            hint="По одной ключевой фразе в строку"
-            v-model="answer"
-          ></v-textarea>
-
-          {{selects.country.selected}}
-          {{selects.sex.selected}}
+      <v-flex xs12 md4 pt-0>
+        <v-flex style="background:#e7fbed;font-size:13px">
+          <h1>Описание</h1>
+          <p>
+            В поиске пользователей можно искать людей по полу,
+            городу, возрасту, тех, у кого день рождения, семейному положению,
+            наличию детей, а так же производить поиск их родственников,
+            вторых половинок и детей.
+            <br />
+            <br />1. Введите параметры поиска людей
+            <br />
+            <br />2. Задайте понятное описание задачи, чтобы не забыть, кто у Вас собирается.
+            <br />
+            <br />3. Нажмите "Добавить задачу" и перейдите к следующей.
+            <br />
+            <br />При указании возраста, города, семейного положения выдача может
+            отличаться от выдачи ВКонтакте, т.к. в базу попадают только те,
+            кто не скрыл возраст, семейное положение, город настройками приватности.
+          </p>
         </v-flex>
       </v-flex>
+
     </v-layout>
   </v-container>
 </template>
+
+<style scoped>
+.border {
+  border: 1px solid #d7d7d7;
+}
+</style>
 
 <script>
 export default {
