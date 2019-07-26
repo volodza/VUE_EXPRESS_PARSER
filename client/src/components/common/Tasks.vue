@@ -4,13 +4,13 @@
       <v-layout column text-xs-center>
 
         <v-progress-circular 
-          v-if="this.$store.getters.tasks == null" 
+          v-if="this.$store.getters.tasks == []" 
           indeterminate color="primary"
         ></v-progress-circular>
 
  
-        <div v-if="this.$store.getters.monitored == []">
-          Список сообществ для отслеживания пуст
+        <div v-if="this.$store.getters.tasks.length == 0">
+          Список задач пуст.
         </div>
 
         <v-list two-line subheader v-else style="padding-bottom:0px">
