@@ -3,10 +3,10 @@
     <v-flex offset>
       <v-layout column text-xs-center>
 
-        <v-progress-circular 
+        <!-- <v-progress-circular 
           v-if="this.$store.getters.tasks == []" 
           indeterminate color="primary"
-        ></v-progress-circular>
+        ></v-progress-circular> -->
 
  
         <div v-if="this.$store.getters.tasks.length == 0">
