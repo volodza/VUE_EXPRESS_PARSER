@@ -10,7 +10,7 @@
 
  
         <div v-if="this.$store.getters.tasks.length == 0">
-          Список задач пуст.
+          <span class="text--grey">Список задач пуст.</span>
         </div>
 
         <v-list two-line subheader v-else style="padding-bottom:0px">
@@ -52,6 +52,7 @@
               <a v-if="task.count" style="color:#6e9ddb;" @click="setTaskBegin(task)">
                   {{ task.title }}
               </a>
+              <span v-else>{{ task.title }}</span>
               
                 <v-flex style="font-size:12px">
                   <v-icon size="17">mdi-calendar</v-icon>

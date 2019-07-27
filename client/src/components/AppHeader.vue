@@ -87,7 +87,7 @@ export default {
   data () {
     return {
       menu:[
-        {title:'Тариф', onClick:1, icon:'mdi-key'},
+        {title:'Тариф', onClick:this.toTarif, icon:'mdi-key'},
         {title:'Настройки', onClick:1, icon:'mdi-settings'},
         {title:'Выйти', onClick:this.userLogout, icon:'mdi-exit-to-app'}
       ],
@@ -115,6 +115,9 @@ export default {
       localStorage.removeItem('access_key')
       this.$store.commit('logout');
       window.location.href = '/'
+    },
+    toTarif (){
+      this.$router.push('/tarif')
     },
   
     checkUserLogin (){ 

@@ -1,7 +1,7 @@
 <template>
   <v-container>
     <v-layout row>
-      <v-flex xs12 md6 d-flex>
+      <v-flex xs12 md6 d-flex class="border">
         <v-flex class="white pa-3"  >
           <h1 class="title mb-3">Ключ доступа пользователя</h1>
           <p>Для работы со всеми методами API Вам необходимо 
@@ -26,3 +26,9 @@ export default {
 }
 
 </script>
+
+<style scoped>
+.border {
+  border: 1px solid #d7d7d7;
+}
+</style>

@@ -3,6 +3,7 @@ const db = require('../../db');
 const config = require('../../config')
 const getGroups = require('../../helpers/getGroups')
 const getUsers = require('../../helpers/getUsers')
+const getBirthdays = require('../../helpers/getBirthdays')
 
 const search = express.Router();
 
@@ -16,6 +17,12 @@ search.post('/groups', (req,res) => {
 search.post('/users', (req,res) => {
   // console.log(req.body)
   getUsers(req.body)
+  res.send('Запрос успешно начался')
+});
+
+search.post('/birthdays', (req,res) => {
+  // console.log(req.body)
+  getBirthdays(req.body)
   res.send('Запрос успешно начался')
 });
 

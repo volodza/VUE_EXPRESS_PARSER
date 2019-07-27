@@ -11,7 +11,6 @@
             <!-- Календарь от -->
             <v-flex xs12 sm6 pt-0>
               <v-menu
-                
                 min-width='100px'
                 ref="menu1"
                 :close-on-content-click="false"
@@ -20,23 +19,26 @@
                 lazy
                 transition="scale-transition"
                 offset-y
-                
               >
                 <template v-slot:activator="{ on }">
                   <v-text-field
+                    class="border"
+                    hide-details 
+                    flat
                     v-model="calendar.from"
-                    label="Начало периода"
-                    prepend-icon="mdi-calendar"
-                    readonly
+                    clearable
+                    solo
+                    height="10"
                     v-on="on"
+                    prepend-inner-icon="mdi-calendar"
                   ></v-text-field>
                 </template>
                 <v-date-picker v-model="calendar.from" no-title scrollable>
                   <v-spacer></v-spacer>
                   <v-flex xs6 mx-2  text-xs-center>
-                  <v-btn flat color="primary" @click="menu2 = false">Закрыть</v-btn>
+                  <v-btn flat color="primary" @click="menu1 = false">Закрыть</v-btn>
                   </v-flex ><v-flex xs6 mx-2  text-xs-center>
-                  <v-btn flat color="primary" @click="$refs.menu2.save(calendar.to)">OK</v-btn>
+                  <v-btn flat color="primary" @click="$refs.menu1.save(calendar.from)">OK</v-btn>
                   </v-flex>
                 </v-date-picker>
               </v-menu>
@@ -56,11 +58,15 @@
               >
                 <template v-slot:activator="{ on }">
                   <v-text-field
+                    class="border"
+                    hide-details 
+                    flat
                     v-model="calendar.to"
-                    label="Конец периода"
-                    prepend-icon="mdi-calendar"
-                    readonly
+                    clearable
+                    solo
+                    height="10"
                     v-on="on"
+                    prepend-inner-icon="mdi-calendar"
                   ></v-text-field>
                 </template>
                 <v-date-picker v-model="calendar.to" no-title scrollable>
@@ -206,7 +212,7 @@
                 block
                 flat
                 hide-details
-                @click="getUsers"
+                @click="getBirthdays"
                 :loading="!answer"
               >
                 <v-icon style="margin-right: 5px">mdi-play</v-icon>
@@ -300,19 +306,25 @@ export default {
         ageTo: +this.inputs.age.to,
         sex: this.selects.sex.selected,
         city: this.selects.city.selected,
-        country: this.selects.country.selected
+        country: this.selects.country.selected,
+        user_id: this.$store.getters.user.id,
+        title: this.inputs.taskTitle || "Поиск > Дни рождения"
       };
       this.answer = "";
-      this.$http.post("89.254.230.243:3000/getBirthdays", obj).then(res => {
-        this.answer = res.body;
+      this.$http.post("/api/search/birthdays", obj).then(res => {
+        this.$store.commit("setSuccess", res.body);
+        this.answer = res.body
       });
     },
     getCities(v) {
       if (!this.selects.country.selected) return;
       this.selects.city.loading = true;
       this.$http
-        .post("http://89.254.230.243:3000/getCities", {
-          q: v
+        .get("/api/geolocation/cities", {
+          params: {
+            q: v,
+            country_id: this.selects.country.selected
+          }
         })
         .then(res => {
           this.selects.city.items = res.body.items;
@@ -322,8 +334,10 @@ export default {
     getCountries(v) {
       this.selects.country.loading = true;
       this.$http
-        .post("http://89.254.230.243:3000/getCountries", {
-          q: v
+        .get("/api/geolocation/countries",{
+          params:{
+            q:v
+          }
         })
         .then(res => {
           this.selects.country.items = res.body.items;
