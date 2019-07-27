@@ -2,15 +2,17 @@
   <div>
     <v-list class="sideText--text" style="padding:0px;">
       <!-- side-header -->
-      <v-list-tile style="height:54px;margin-top:10px" :href="'/'">
+      <v-list-tile  @click="1" :to="'/'" style="height:54px;margin-top:10px" >
+        <v-layout >
+          <v-list-tile-action >
+            <img style="height:50px"  src="../assets/logo1.png" alt />
+          </v-list-tile-action>
 
-        <v-list-tile-action>
-          <img style="height:50px" src="../assets/logo1.png" alt />
-        </v-list-tile-action>
-
-        <h1 style="font-size:33px; color:#E87563">
-          <strong style="color:#88C8B3">Arrow</strong>Target
-        </h1>
+          <h1  style="font-size:33px; color:#E87563">
+            <strong style="color:#88C8B3">Arrow</strong>Target
+          </h1>
+        </v-layout>
+        <v-icon class="hidden-lg-and-up" @click="$emit('close-sidebar')" right dark>mdi-close</v-icon>
 
       </v-list-tile>
 

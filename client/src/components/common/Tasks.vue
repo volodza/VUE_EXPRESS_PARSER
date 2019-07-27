@@ -87,11 +87,13 @@
                   </v-btn>
                 </v-layout>
               </v-list-tile-action>
-            
+
             </v-layout>
             <v-divider  style="border-top: 1px dashed #d7d7d7;" v-if="index + 1 < tasks.length" :key="index"></v-divider>
           </template>
         </v-list>
+
+
       </v-layout>
     </v-flex>
 
@@ -109,7 +111,8 @@ export default {
   components: { SearchResults },
   data() {
     return {
-      dialog: false
+      dialog: false,
+      overlay:false
     };
   },
   // provide() {

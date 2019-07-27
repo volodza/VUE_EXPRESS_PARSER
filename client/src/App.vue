@@ -24,7 +24,7 @@
       app
       v-model="drawer"
     >
-      <app-sidebar />
+      <app-sidebar @close-sidebar="drawer = !drawer" />
     </v-navigation-drawer>
 
     <v-content class="white">
