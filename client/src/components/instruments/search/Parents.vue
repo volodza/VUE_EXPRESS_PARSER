@@ -198,7 +198,7 @@
                 block
                 flat
                 hide-details
-                @click="getUsers"
+                @click="getParents"
                 :loading="!answer"
               >
                 <v-icon style="margin-right: 5px">mdi-play</v-icon>
@@ -314,10 +314,12 @@ export default {
         city: this.selects.city.selected,
         country: this.selects.country.selected,
         hasPhoto: +this.checkboxes.hasPhoto,
-        status: this.selects.status.selected
+        status: this.selects.status.selected,
+        user_id: this.$store.getters.user.id,
+        title: this.inputs.taskTitle || "Поиск > Родители"
       };
       this.answer = "";
-      this.$http.post("http://89.254.230.243:3000/getParents", obj).then(res => {
+      this.$http.post("api/search/parents", obj).then(res => {
         this.answer = res.body;
       });
     },
@@ -325,8 +327,11 @@ export default {
       if (!this.selects.country.selected) return;
       this.selects.city.loading = true;
       this.$http
-        .post("http://89.254.230.243:3000/getCities", {
-          q: v
+        .get("/api/geolocation/cities", {
+          params: {
+            q: v,
+            country_id: this.selects.country.selected
+          }
         })
         .then(res => {
           this.selects.city.items = res.body.items;
@@ -336,8 +341,10 @@ export default {
     getCountries(v) {
       this.selects.country.loading = true;
       this.$http
-        .post("http://89.254.230.243:3000/getCountries", {
-          q: v
+        .get("/api/geolocation/countries",{
+          params:{
+            q:v
+          }
         })
         .then(res => {
           this.selects.country.items = res.body.items;

@@ -4,6 +4,7 @@ const config = require('../../config')
 const getGroups = require('../../helpers/getGroups')
 const getUsers = require('../../helpers/getUsers')
 const getBirthdays = require('../../helpers/getBirthdays')
+const getParents = require('../../helpers/getParents')
 
 const search = express.Router();
 
@@ -23,6 +24,12 @@ search.post('/users', (req,res) => {
 search.post('/birthdays', (req,res) => {
   // console.log(req.body)
   getBirthdays(req.body)
+  res.send('Запрос успешно начался')
+});
+
+search.post('/parents', (req,res) => {
+  // console.log(req.body)
+  getParents(req)
   res.send('Запрос успешно начался')
 });
 

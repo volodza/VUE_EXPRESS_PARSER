@@ -12,7 +12,7 @@ tasks.get('/', async (req,res) => {
     delete x.answer;
     return x
   })
-  console.log(withoutAnswer.length)
+  // console.log(withoutAnswer.length)
   res.send(withoutAnswer||[])
 
 });
