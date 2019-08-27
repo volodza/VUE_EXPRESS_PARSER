@@ -1,110 +1,62 @@
 <template>
-  <v-app>
-    <!-- Header -->
-    <v-toolbar app flat style="border-bottom:1px solid #d7d7d7">
-
-      <v-toolbar-side-icon 
-        @click.stop="drawer = !drawer" 
-        class="hidden-lg-and-up"
-      ></v-toolbar-side-icon>
-      <v-spacer></v-spacer>
-      <app-header />
-
-    </v-toolbar>
-
-    <v-footer app inset v-model="drawer" style="border-top:1px solid #d7d7d7">
-      <p class="ml-2 mt-3">Ваш ID:<strong>{user_id}</strong></p>
-      <v-spacer></v-spacer>
-      <app-footer />
-    </v-footer>
-
-    <!-- Sidebar -->
-    <v-navigation-drawer
-      style="background: linear-gradient(180deg,#2d3036,#383c42,#444950,#4a5058,#555b65,#66706f,#7f6b67);"
-      app
-      v-model="drawer"
-    >
-      <app-sidebar @close-sidebar="drawer = !drawer" />
-    </v-navigation-drawer>
-
-    <v-content class="white">
-      <router-view />
-    </v-content>
-
-    <!-- snackbar-error -->
-    <template v-if="error">
-      <v-snackbar
-        @input="closeError"
-        :multi-line="false"
-        :timeout="5000"
-        color="error"
-        :value="true"
-      >
-        {{error}}
-        <v-btn dark flat @click="closeError">Закрыть</v-btn>
-      </v-snackbar>
-    </template>
-
-    <!-- snackbar-success -->
-    <template v-if="success">
-      <v-snackbar
-        @input="closeSuccess"
-        :multi-line="false"
-        :timeout="5000"
-        color="success"
-        :value="true"
-      >
-        {{success}}
-        <v-btn dark flat @click="closeSuccess">Закрыть</v-btn>
-      </v-snackbar>
-    </template>
-
-  </v-app>
+    <div>
+        <MainApp v-if="this.$store.getters.user" /> 
+        <HomePage v-else /> 
+    </div>
 </template>
 
-<style>
-#app {
-  font-family: "Source Sans Pro", sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  color: #2c3e50;
-  font-size: 17px;
-  
-}
-
-</style>
-
 <script>
-import AppHeader from "@/components/AppHeader";
-import AppSidebar from "@/components/AppSidebar";
-import AppFooter from "@/components/AppFooter";
+import MainApp from "@/MainApp";
+import HomePage from "@/HomePage";
 
 export default {
-  components: {
-    AppHeader,
-    AppSidebar,
-    AppFooter
-  },
-  data() {
-    return {
-      drawer: null
-    };
-  },
-  computed: {
-    error() {
-      return this.$store.getters.error;
+    components: {
+      MainApp,
+      HomePage
     },
-    success() {
-      return this.$store.getters.success;
+
+     computed:{
+    isUserLoggedIn(){
+      return this.$store.getters.isUserLoggedIn
     }
   },
-  methods: {
-    closeError() {
-      this.$store.dispatch("clearError");
+     methods:{
+    vkAuth (){
+      this.$http.get('/auth/vkontakte') 
+      .then(response => {
+        localStorage.access_key = response.body.access_key
+        window.location.href = response.body.vk_url
+      },(err) => {
+        this.$store.commit("setError", err);
+      });
     },
-    closeSuccess() {
-      this.$store.dispatch("clearSuccess");
+    userLogout (){
+      localStorage.removeItem('access_key')
+      this.$store.commit('logout');
+      window.location.href = '/'
+    },
+    toTarif (){
+      this.$router.push('/tarif')
+    },
+  
+    checkUserLogin (){ 
+      if(!localStorage.access_key) return; 
+      this.$http.get("/auth/checkToken",{ 
+        params: { 
+          access_key:localStorage.access_key 
+        } 
+      }).then(res => { 
+        res.body ? this.$store.commit('setUser',res.body) : console.log('Ошибка') 
+        console.log(this.$store.getters.user) 
+      },(err) => {
+        this.$store.commit("setError", err);
+      });
     }
+  },
+
+  created: function (){ 
+    this.checkUserLogin() 
   }
-};
+
+}
 </script>

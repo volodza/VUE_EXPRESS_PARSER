@@ -15,13 +15,19 @@ import Posts from '@/components/instruments/collect/Posts'
 import Relatives from '@/components/instruments/collect/Relatives'
 import Comments from '@/components/instruments/collect/Comments'
 import SearchResults from '@/components/SearchResults'
-
+import MainApp from '@/MainApp'
+import HomePage from '@/HomePage'
 
 
 Vue.use(Router)
 
 export default new Router({
     routes: [{
+            path: '/MainApp',
+            name: 'MainApp',
+            component: MainApp
+        },
+        {
             path: '',
             name: 'home',
             component: Home
@@ -90,7 +96,12 @@ export default new Router({
             path: '/SearchResults',
             name: 'SearchResults',
             component: SearchResults
-        }
+        },
+        {
+            path: '/HomePage',
+            name: 'HomePage',
+            component: HomePage
+        },
 
     ],
     mode: 'history'
