@@ -8,7 +8,7 @@
             <img style="height:50px"  src="../assets/logo1.png" alt />
           </v-list-tile-action>
 
-          <h1  style="font-size:33px; color:#E87563">
+          <h1  style="font-size:35px; color:#E87563">
             <strong style="color:#88C8B3">Arrow</strong>Target
           </h1>
         </v-layout>
@@ -23,7 +23,7 @@
         <strong style="font-size:15px;">ИНСТРУМЕНТЫ</strong>
       </v-list-tile>
 
-      <v-list-group sub-group style="border-top:1px solid grey;border-radius: 10px 10px;">
+      <v-list-group sub-group >
         
         <template v-slot:activator>
           <v-list-tile>Поиск</v-list-tile>
@@ -44,7 +44,7 @@
         </v-list-tile>
       </v-list-group>
 
-      <v-list-group sub-group style="border-top:1px solid grey; border-radius: 10px 10px;">
+      <v-list-group sub-group >
         <template v-slot:activator>
           <v-list-tile>
             <v-list-tile-title>Сбор</v-list-tile-title>
@@ -64,7 +64,7 @@
         </v-list-tile>
       </v-list-group>
 
-      <v-list-group sub-group style="border-top:1px solid grey; border-radius: 10px 10px;">
+      <v-list-group sub-group >
         <template v-slot:activator>
           <v-list-tile>
             <v-list-tile-title>Активности</v-list-tile-title>

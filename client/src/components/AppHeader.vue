@@ -37,7 +37,7 @@
       </v-badge>
     </div>
      
-    <v-menu  offset-y v-if="this.$store.getters.user">
+    <v-menu  offset-y >
       <template v-slot:activator="{ on }">
         <v-btn
           left
@@ -66,15 +66,7 @@
       </v-list>
     </v-menu>
 
-    <v-btn 
-      @click="vkAuth"
-      flat
-      style="background:#4a76a8"
-      dark
-      v-if="!this.$store.getters.user"
-    >
-      <v-icon left>mdi-vk</v-icon>Войти
-    </v-btn>
+    
       
   </div>
 
