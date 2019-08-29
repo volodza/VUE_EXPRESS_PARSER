@@ -17,6 +17,7 @@ import Comments from '@/components/instruments/collect/Comments'
 import SearchResults from '@/components/SearchResults'
 import MainApp from '@/MainApp'
 import HomePage from '@/HomePage'
+import bgAnimation from '@/bgAnimation'
 
 
 Vue.use(Router)
@@ -102,6 +103,12 @@ export default new Router({
             name: 'HomePage',
             component: HomePage
         },
+        {
+            path: '/bgAnimation',
+            name: 'bgAnimation',
+            component: bgAnimation
+        }
+
 
     ],
     mode: 'history'
