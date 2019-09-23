@@ -2,11 +2,11 @@
   <div>
     <v-list class="sideText--text" style="padding:0px;">
       <!-- side-header -->
-      <v-list-tile  @click="1" :to="'/'" style="height:54px;margin-top:10px" >
+      <!-- <v-list-item  @click="1" :to="'/'" style="height:54px;margin-top:10px" >
         <v-layout >
-          <v-list-tile-action >
+          <v-list-item-action >
             <img style="height:50px"  src="../assets/logo1.png" alt />
-          </v-list-tile-action>
+          </v-list-item-action>
 
           <h1  style="font-size:35px; color:#E87563">
             <strong style="color:#88C8B3">Arrow</strong>Target
@@ -14,70 +14,69 @@
         </v-layout>
         <v-icon class="hidden-lg-and-up" @click="$emit('close-sidebar')" right dark>mdi-close</v-icon>
 
-      </v-list-tile>
+      </v-list-item> -->
 
       <v-divider class="mb-2 accent"></v-divider>
 
       <!-- side-content -->
-      <v-list-tile style="color:#8CCFB9;">
+      <v-list-item style="color:#8CCFB9;">
         <strong style="font-size:15px;">ИНСТРУМЕНТЫ</strong>
-      </v-list-tile>
+      </v-list-item>
 
-      <v-list-group sub-group >
-        
+      <v-list-group  sub-group >
         <template v-slot:activator>
-          <v-list-tile>Поиск</v-list-tile>
+          <v-list-item style="margin-bottom:0">Поиск</v-list-item>
         </template>
 
-        <v-list-tile
-          class="ml-4"
-          style=""
+        <v-list-item
+          style="margin-bottom:0"
           v-for="link in links.search"
           :key="link.title"
           @click="1"
           :to="link.url"
         >
-          <v-list-tile-action>
-            <v-icon dark right v-text="link.icon"></v-icon>
-          </v-list-tile-action>
-          <v-list-tile-title v-text="link.title"></v-list-tile-title>
-        </v-list-tile>
+          <v-list-item-action>
+            <v-icon v-text="link.icon"></v-icon>
+          </v-list-item-action>
+
+          <v-list-item-title v-text="link.title"></v-list-item-title>
+        </v-list-item>
       </v-list-group>
 
-      <v-list-group sub-group >
+      <!-- <v-list-group sub-group >
         <template v-slot:activator>
-          <v-list-tile>
-            <v-list-tile-title>Сбор</v-list-tile-title>
-          </v-list-tile>
+          <v-list-item>
+            <v-list-item-title>Сбор</v-list-item-title>
+          </v-list-item>
         </template>
-        <v-list-tile
+        <v-list-item
           class="ml-4"
           v-for="link in links.collect"
           :key="link.title"
           @click="1"
           :to="link.url"
         >
-          <v-list-tile-action>
+          <v-list-item-action>
             <v-icon dark right :color="link.iconColor" v-text="link.icon"></v-icon>
-          </v-list-tile-action>
-          <v-list-tile-title v-text="link.title"></v-list-tile-title>
-        </v-list-tile>
+          </v-list-item-action>
+          <v-list-item-title v-text="link.title"></v-list-item-title>
+        </v-list-item>
       </v-list-group>
 
       <v-list-group sub-group >
         <template v-slot:activator>
-          <v-list-tile>
-            <v-list-tile-title>Активности</v-list-tile-title>
-          </v-list-tile>
+          <v-list-item>
+            <v-list-item-title>Активности</v-list-item-title>
+          </v-list-item>
         </template>
 
-        <v-list-tile class="ml-4" v-for="link in links.activity" :key="link.title" @click="1">
-          <v-list-tile-action>
+        <v-list-item class="ml-4" v-for="link in links.activity" :key="link.title" @click="1">
+          <v-list-item-action>
             <v-icon dark right v-text="link.icon"></v-icon>
-          </v-list-tile-action>
-          <v-list-tile-title v-text="link.title"></v-list-tile-title>
-        </v-list-tile>
-      </v-list-group>
+          </v-list-item-action>
+          <v-list-item-title v-text="link.title"></v-list-item-title>
+        </v-list-item>
+      </v-list-group> -->
     </v-list>
   </div>
 </template>

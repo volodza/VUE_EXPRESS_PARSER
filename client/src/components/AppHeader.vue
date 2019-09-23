@@ -73,9 +73,9 @@
 </template>
 
 <script>
-import Tasks from './common/Tasks'
+// import Tasks from './common/Tasks'
 export default {
-  components:{Tasks},
+  // components:{Tasks},
   data () {
     return {
       menu:[

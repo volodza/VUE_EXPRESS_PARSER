@@ -1,53 +1,33 @@
 import Vue from 'vue'
-import App from './App'
-import router from './router'
-import store from './store'
+import App from './App.vue'
 import Vuetify from 'vuetify'
 import 'vuetify/dist/vuetify.min.css'
+import router from './router'
+import store from './store'
 import '@mdi/font/css/materialdesignicons.css'
-import VueResource from 'vue-resource'
-// import colors from 'vuetify/es5/util/colors'
-
-
-Vue.use(VueResource)
-
-Vue.use(Vuetify, {
-    theme: {
-        primary: '#8CCFB9', //green
-        secondary: '#F27865', //red
-        accent: '#8CCFB9', //green
-        side: '#4f555e', //grey
-        header: '#eef1f0', //light grey
-        sideText: '#eef1f0'
-    },
-    iconfont: 'mdi'
-})
+import vuetify from './plugins/vuetify';
+import '@babel/polyfill'
 
 Vue.config.productionTip = false
 
-new Vue({
-        router,
-        store,
-        render: h => h(App)
-    })
-    .$mount('#app')
+Vue.use(Vuetify, {
+  theme: {
+    primary: '#1976D2',
+    secondary: '#424242',
+    accent: '#82B1FF',
+    error: '#FF5252',
+    info: '#2196F3',
+    success: '#4CAF50',
+    warning: '#FFC107',
+    // dark: true
+  },
+  iconfont: 'mdi'
+})
 
-/* eslint-disable no-new */
-// new Vue({
-//     el: '#app',
-//     router,
-//     store,
-//     components: { App },
-//     template: '<App/>',
-//     created() {
-//         fb.initializeApp({
-//             apiKey: "AIzaSyDsUYWd1Eegmv1P9nCPPLo600Jc8ni2MSM",
-//             authDomain: "theta-shuttle-228314.firebaseapp.com",
-//             databaseURL: "https://theta-shuttle-228314.firebaseio.com",
-//             projectId: "theta-shuttle-228314",
-//             storageBucket: "theta-shuttle-228314.appspot.com",
-//             messagingSenderId: "909587803669",
-//             appId: "1:909587803669:web:b8769bd4da145504"
-//         })
-//     }
-// })
+
+new Vue({
+  router,
+  store,
+  vuetify,
+  render: h => h(App)
+}).$mount('#app')
