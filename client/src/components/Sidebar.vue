@@ -1,10 +1,10 @@
 <template>
   <div class="navigation">
-    <div style="font-size:36px;text-align:center" class='logo'>
-      <span>ARROWTARGET</span>
+    <div style="font-size:26px;text-align:center" class='logo'>
+      <span>ARROW TARGET</span>
     </div>
 
-    <v-divider color="ancient"></v-divider>
+    <v-divider color="white"></v-divider>
 
     <div class="nav-heading">Инструменты</div>
 
