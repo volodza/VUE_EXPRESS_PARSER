@@ -1,14 +1,14 @@
 <template>
   <div class="header">
-      <div class="container">
-           <v-flex class="col-sm-6 offset-sm-3" md6  >
+    <div class="container">
+      <v-flex class="col-sm-6 offset-sm-3" md6  >
 
-
-          <h1>ARROW TARGET</h1>
-          <p>Сервис для поиска <br> клиентов в социальной <br> сети Вконтакте!</p>
-          <v-btn style="margin:20px 0" height="42" width="152" color="#13426e" >Начать поиск</v-btn>
-
-            </v-flex>
+        
+        <h1>ARROW TARGET</h1>
+        <p>Сервис для поиска <br> клиентов в социальной <br> сети Вконтакте!</p>
+        <!-- <v-btn style="margin:20px 0" height="42" width="152" color="#13426e" >Начать поиск</v-btn> -->
+        <btn title="Начать поиск" class="btn">Начать поиск</btn>
+        </v-flex>
 
 
           <!-- <h1 style="font-size:60px;">
@@ -18,7 +18,7 @@
           <p>Сервис для поиска клиентов <br>в социальной сети Вконтакте!</p> 
           
           <v-btn height="42" width="142" color="#13426e" >Начать поиск</v-btn> -->
-      </div>
+    </div>
   <!-- </v-layout> -->
   </div>
 
@@ -44,14 +44,19 @@
         margin: 90px 0 20px
         font-weight: 300
 
+      .btn
+        height: 42px
+        margin: 20px auto
+        width: 152px
+        color: white
 
       p
         font-size: 30px
         line-height: 37px
   // %center 
-  //   display: flex
-  //   justify-content: center
-  //   align-items: center
+    // display: flex
+    // justify-content: center
+    // align-items: center
 
   // header
   //   height: 100vh
@@ -75,3 +80,12 @@
       
 
 </style>
+
+<script>
+import btn from '../elements/btn'
+export default {
+  components:{
+    btn
+  }
+}
+</script>
