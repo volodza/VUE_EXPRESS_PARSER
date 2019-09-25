@@ -7,6 +7,10 @@ import store from './store'
 import '@mdi/font/css/materialdesignicons.css'
 import vuetify from './plugins/vuetify';
 import '@babel/polyfill'
+import VueResource from 'vue-resource'
+
+
+Vue.use(VueResource)
 
 Vue.config.productionTip = false
 
