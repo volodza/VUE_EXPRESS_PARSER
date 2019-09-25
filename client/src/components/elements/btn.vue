@@ -1,5 +1,5 @@
 <template>
-  <div class="btn">
+  <div  class="btn size">
     <slot></slot>
   </div>
 
@@ -24,4 +24,5 @@
 
 
 </style>
+
 

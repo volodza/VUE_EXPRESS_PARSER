@@ -7,7 +7,9 @@
         <h1>ARROW TARGET</h1>
         <p>Сервис для поиска <br> клиентов в социальной <br> сети Вконтакте!</p>
         <!-- <v-btn style="margin:20px 0" height="42" width="152" color="#13426e" >Начать поиск</v-btn> -->
-        <btn title="Начать поиск" class="btn">Начать поиск</btn>
+        <btn size title="Начать поиск" class="btn">Начать поиск</btn>
+
+        <!-- <select name="qwer" id=""></select> -->
         </v-flex>
 
 
@@ -83,9 +85,11 @@
 
 <script>
 import btn from '../elements/btn'
+import slc from '../elements/slc'
 export default {
   components:{
-    btn
+    btn,
+    slc
   }
 }
 </script>
