@@ -1,13 +1,8 @@
 <template>
   <div style="height:40px;border-bottom:1px solid black">
-    <div @click="vkAuth" style="height:38px;width:38px;border-radius:50%;background-color:black;right:10px"></div>
-    <!-- <v-avatar
-      :tile="false"
-      :size="40"
-    >
-      <img :src="$store.getters.user.photo_50">
-    </v-avatar> -->
-    <v-toolbar-side-icon 
+    <slc :items='[1,2,3]'></slc>
+    <!-- <div @click="vkAuth" style="height:38px;width:38px;border-radius:50%;background-color:black;right:10px"></div> -->
+    <!-- <v-toolbar-side-icon 
       @click.stop="drawer = !drawer" 
       class="hidden-lg-and-up"
     ></v-toolbar-side-icon>
@@ -17,13 +12,17 @@
       <div class="avatar">
         <img :src="$store.getters.user.photo_50">
       </div>
-    </v-layout>
+    </v-layout> -->
     
   </div>
 </template>
 
 <script>
+import slc from '@/components/elements/slc'
 export default {
+  components:{
+    slc
+  },
   methods: {
     vkAuth (){
       this.$http.get('/auth/vkontakte') 
