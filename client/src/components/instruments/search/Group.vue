@@ -62,7 +62,13 @@
           <v-layout wrap>
             <v-flex xs12 md6>
               <label>Типы сообществ</label>
-              <v-select
+              <slc  
+              v-model="selects.type.selected" 
+              :items="selects.type.items"
+              item-text="title"
+              item-value="value"
+              ></slc>
+              <!-- <v-select
                 hide-details
                 solo
                 class="border"
@@ -72,7 +78,7 @@
                 item-text="title"
                 item-value="value"
                 :items="selects.type.items"
-              ></v-select>
+              ></v-select> -->
             </v-flex>
 
             <v-flex xs12 md6>
@@ -245,7 +251,11 @@
 
 
 <script>
+import slc from '../../elements/slc'
 export default {
+    components:{
+    slc
+  },
   data() {
     return {
       textarea: { search: null, key_word: "", minus_key_word: "" },

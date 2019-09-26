@@ -85,11 +85,9 @@
 
 <script>
 import btn from '../elements/btn'
-import slc from '../elements/slc'
 export default {
   components:{
-    btn,
-    slc
+    btn
   }
 }
 </script>
