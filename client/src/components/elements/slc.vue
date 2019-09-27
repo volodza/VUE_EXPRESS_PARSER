@@ -24,8 +24,11 @@
 </template>
 
 <style lang="sass" scoped>
+  $c_border: #d7d7d7
+
   .contain
-    border: 1px solid #d7d7d7
+    border: 1px solid $c_border
+    // border-color: $color_border
     border-radius: 2px
     height: 4vh
     cursor: pointer
