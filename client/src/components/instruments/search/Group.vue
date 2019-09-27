@@ -63,10 +63,9 @@
             <v-flex xs12 md6>
               <label>Типы сообществ</label>
               <slc  
-              v-model="selects.type.selected" 
-              :items="selects.type.items"
-              item-text="title"
-              item-value="value"
+                v-model="selects.type.selected" 
+                :items="selects.type.items"
+                label="Выберите тип сообществ"
               ></slc>
               <!-- <v-select
                 hide-details
@@ -83,7 +82,12 @@
 
             <v-flex xs12 md6>
               <label>Сортировка</label>
-              <v-select
+              <slc  
+                v-model="selects.sort.selected" 
+                :items="selects.sort.items"
+                label="Выберите тип сортировки"
+              ></slc>
+              <!-- <v-select
                 v-model="selects.sort.selected"
                 hide-details
                 flat
@@ -93,7 +97,7 @@
                 item-value="value"
                 :items="selects.sort.items"
                 label="Выберите тип сортировки"
-              ></v-select>
+              ></v-select> -->
             </v-flex>
           </v-layout>
 

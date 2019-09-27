@@ -71,7 +71,7 @@ export default {
     },
     label:{
       type:String,
-      default:'хуй'
+      default:'label'
     }
   },
   data () {
@@ -84,6 +84,7 @@ export default {
     selectItem(item){
       this.selected = item.title;
       this.isActive = false;
+      this.$emit('input',item.value)
     }
   },
 
