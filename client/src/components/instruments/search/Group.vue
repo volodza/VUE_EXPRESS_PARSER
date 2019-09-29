@@ -39,22 +39,21 @@
           </v-layout>
 
           <!-- Checkbox -->
-          <v-layout row wrap mx-0 mt-3>
-            <v-checkbox
-              class="my-0 py-0"
+          <v-layout column wrap mx-0 my-3>
+            <p-checkbox
               :label="`Точное вхождение поисковой фразы`"
               v-model="checkboxes.exact_phrase"
-            ></v-checkbox>
-            <v-checkbox
-              class="my-0 py-0"
+            ></p-checkbox>
+            <p-checkbox
+              
               :label="`Только официальные сообщества`"
               v-model="checkboxes.only_official"
-            ></v-checkbox>
-            <v-checkbox
-              class="my-0 py-0"
+            ></p-checkbox>
+            <p-checkbox
+              
               v-model="checkboxes.with_goods"
               :label="`Только сообщество с товарами`"
-            ></v-checkbox>
+            ></p-checkbox>
           </v-layout>
 
           <v-divider class="mb-3"></v-divider>
@@ -256,9 +255,11 @@
 
 <script>
 import slc from '../../elements/slc'
+import PCheckbox from '../../elements/PCheckbox'
 export default {
     components:{
-    slc
+    slc,
+    PCheckbox
   },
   data() {
     return {
