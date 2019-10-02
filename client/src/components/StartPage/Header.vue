@@ -82,12 +82,3 @@
       
 
 </style>
-
-<script>
-import btn from '../elements/btn'
-export default {
-  components:{
-    btn
-  }
-}
-</script>

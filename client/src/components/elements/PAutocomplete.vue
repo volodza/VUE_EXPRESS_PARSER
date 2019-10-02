@@ -77,7 +77,7 @@ export default {
 .search 
   border: 1px solid #d7d7d7
   border-radius: 2px
-  height: 30px
+  min-height: 35px
   width: auto
   position: relative
   // margin-right: 60px

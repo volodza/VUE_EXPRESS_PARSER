@@ -1,36 +1,51 @@
 <template>
-  <div style="height:40px;border-bottom:1px solid black;">
-    
-    <!-- <div @click="vkAuth" style="height:38px;width:38px;border-radius:50%;background-color:black;right:10px"></div> -->
-    <!-- <v-toolbar-side-icon 
-      @click.stop="drawer = !drawer" 
-      class="hidden-lg-and-up"
-    ></v-toolbar-side-icon>
-    <v-spacer></v-spacer> -->
-    <v-layout class="btn-dropdown" >
-      <v-icon light size="25">mdi-chevron-down</v-icon>
-      <div class="avatar">
-        <img :src="$store.getters.user.photo_50">
-      </div>
-    </v-layout>
-    <div class="menu-dropdown">
-      <ul style="background-color:white;padding-left:0">
-        <li>Тариф</li>
-        <li>Баланс</li>
-        <li>Настройки</li>
-        <li>Выйти</li>
-      </ul>
-     
-    </div>
+  <div class='header'>
+    <ul class='menu'>
+      <li class='menu-item'><a href="#">Home</a> </li>
+      <li class='menu-item'><a href="#">Поиск ЦА</a> </li>
+      <li class='menu-item'><a href="#">Модератор</a> </li>
+      <li class='menu-item'><a href="#">Обучение</a> </li>
+      <li class='menu-item'><a href="#">Магазин</a> </li>
+    </ul>
+
+
+    <ul class='menu'>
+      <li class="menu-item">
+        <a href="https://vk.com/ads?act=no_office"><strong>РК</strong></a>
+      </li>
+
+      <li class="menu-item"><a href="#">0р</a> </li>
+
+      <li class="menu-item"><p>Тариф 'Бесплатный'</p> </li>
+
+      <li class="menu-item" style="padding:0">
+        <div class="btn-dropdown" @click="isActive = !isActive">
+          <div class="avatar">
+            <!-- <img :src="$store.getters.user.photo_50"> -->
+          </div>
+          <v-icon  light size="20">mdi-chevron-{{isActive ? 'up' : 'down'}}</v-icon>
+        </div>
+        <div v-if='isActive' class="menu-dropdown">
+          <ul  style="background-color:white;padding-left:0">
+            <li>Тариф</li>
+            <li>Баланс</li>
+            <li>Настройки</li>
+            <li>Выйти</li>
+          </ul>     
+        </div>
+      </li>
+    </ul>
+
     
   </div>
 </template>
 
 <script>
-import pSelect from '@/components/elements/pSelect'
 export default {
-  components:{
-    pSelect
+  data(){
+    return{
+      isActive: false
+    }
   },
   methods: {
     vkAuth (){
@@ -67,12 +82,41 @@ export default {
 </script>
 
 <style lang="sass" scoped>
+  .header
+    height: 50px
+    margin-left: 256px
+    border-bottom: 1px solid #303030
+    display: flex
+    align-items: center
+    justify-content: space-between
+    
+  .menu
+    display: flex
+    align-items: center
+    position: relative
+    background: white
+    padding-left: 5px
+    .menu-item
+      display: flex
+      align-items: center
+      height: 35px
+      margin-left: 5px
+      width: calc(auto + 10px) 
+      border: 1px solid #d7d7d7
+      border-radius: 3px
+      cursor: pointer
+      &:hover
+        border: 1px solid #b0b0b0
+        transition: 0.3s
+      a,p
+        padding: 0 10px
+        color: black
+        text-decoration: none
+        margin: 0
+
+      
   .btn-dropdown
-    float: right
-    padding: 0 10px
-    cursor: pointer
-    &:hover
-      background-color: #f3f3f3
+    display: flex    
 
   .avatar
     margin-top: 3px
@@ -89,12 +133,12 @@ export default {
       height: inherit
       width: inherit
   .menu-dropdown
-    position: relative
+    // position: relative
     position: absolute
     // visibility: hidden;
-    width: 160px
-    top: 44px
-    right: 9px
+    width: 180px
+    top: 40px
+    right: 5px
     background: #fff
     z-index: 800
     border: 1px solid #c5d0db
@@ -108,7 +152,8 @@ export default {
     ul   
       li 
         cursor: pointer
-        padding: 3px 10px      
+        padding: 3px 10px    
+        font-size: 14px
         &:hover
           background-color: #f3f3f3   
         

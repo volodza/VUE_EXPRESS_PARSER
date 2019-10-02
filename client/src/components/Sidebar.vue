@@ -1,10 +1,9 @@
 <template>
   <div class="navigation">
-    <div style="font-size:26px;text-align:center" class='logo'>
-      <span>ARROW TARGET</span>
+    <div class="side-header" >
+      <span>4B Parser</span>
     </div>
 
-    <v-divider color="white"></v-divider>
 
     <div class="nav-heading">Инструменты</div>
 
@@ -100,6 +99,12 @@ export default {
 </script>
 
 <style lang="sass">
+  .side-header
+    font-size: 26px
+    text-align: center
+    height: 50px
+    border-bottom: 1px solid white
+
   .nav-heading
     padding: 12px 20px 6px 20px
     font-size: 12px

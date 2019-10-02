@@ -7,7 +7,8 @@
       <span 
       class='multiple' 
       v-else-if="Mselected.length" 
-      v-for="(item) in Mselected" 
+      v-for="(item,i) in Mselected" 
+      :key="i"
       >
       <!-- <v-icon size='16' class='close'>mdi-close-circle-outline</v-icon> -->
       {{item}}
@@ -21,9 +22,8 @@
     
 
     <div v-if="isActive"  class="dropdown">
-      <ul>
+      <ul  v-if="!multiple">
         <li 
-          v-if="!multiple"
           :class="selected == item.title ? 'active' : ''" 
           v-for="(item,i) in items" 
           :key="i"
@@ -31,9 +31,10 @@
         >
           {{item.title}}
         </li>
+      </ul>
 
+      <ul v-if="multiple">
         <li 
-          v-if="multiple"
           :class="Mselected.includes(item.title) ? 'active' : ''" 
           v-for="(item,i) in items" 
           :key="i"
@@ -43,9 +44,9 @@
             <div v-if="Mselected.includes(item.title)" class="checkmark"></div>
           </div>
           {{item.title}}
-          
         </li>
       </ul>
+
     </div>
   </div>
 </template>
@@ -56,7 +57,7 @@
   .contain
     border: 1px solid $c_border
     border-radius: 2px
-    min-height: 40px
+    min-height: 35px
     cursor: pointer
     display: flex
     align-items: center
@@ -71,7 +72,7 @@
 
   .multiple
     background: #d7d7d7
-    padding: 3px 5px
+    padding: 2px 5px
     border-radius: 10px
   // .close
   //   margin: 2px 1px 

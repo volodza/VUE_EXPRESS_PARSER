@@ -9,6 +9,12 @@ import vuetify from './plugins/vuetify';
 import '@babel/polyfill'
 import VueResource from 'vue-resource'
 
+// Globally register all base components for convenience, because they
+// will be used very frequently. Components are registered using the
+// PascalCased version of their file name.
+
+
+
 
 Vue.use(VueResource)
 
@@ -29,6 +35,24 @@ Vue.use(Vuetify, {
     iconfont: 'mdi'
 })
 
+import upperFirst from 'lodash/upperFirst'
+import camelCase from 'lodash/camelCase'
+
+const requireComponent = require.context(
+    './components/elements',
+    false,
+    /p[A-Z]\w+\.vue$/)
+requireComponent.keys().forEach((fileName) => {
+    const componentConfig = requireComponent(fileName)
+    const componentName = upperFirst(
+        camelCase(
+            fileName
+            .replace(/^\.\/_/, '')
+            .replace(/\.\w+$/, '')
+        )
+    )
+    Vue.component(componentName, componentConfig.default || componentConfig)
+})
 
 new Vue({
     router,

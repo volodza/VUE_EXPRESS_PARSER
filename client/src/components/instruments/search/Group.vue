@@ -11,7 +11,10 @@
           <v-layout row wrap>
             <v-flex xs12>
               <label>Ключевые слова</label>
-              <v-textarea
+              <p-Textarea>
+
+              </p-Textarea>
+              <!-- <v-textarea
                 rows="4"
                 solo
                 class="border"
@@ -20,26 +23,12 @@
                 label="По одному слову в строке"
                 v-model="textarea.key_word"
                 hide-details
-              ></v-textarea>
+              ></v-textarea> -->
             </v-flex>
-
-            <!-- <v-flex xs12 xl6>
-          <label>Минус ключевые слова</label>
-          <v-textarea
-            rows='4'
-            solo 
-            class="border"
-            flat
-            name="input-7-1"
-            label="По минус одному слову в строке"
-            v-model="textarea.minus_key_word"
-            hide-details
-          ></v-textarea>
-            </v-flex>-->
           </v-layout>
 
           <!-- Checkbox -->
-          <v-layout column wrap mx-0 my-3>
+          <v-layout column wrap mx-0 mb-3>
             <p-checkbox
               :label="`Точное вхождение поисковой фразы`"
               v-model="checkboxes.exact_phrase"
@@ -61,23 +50,11 @@
           <v-layout wrap>
             <v-flex xs12 md6>
               <label>Типы сообществ</label>
-              <p-select  
-                multiple
+              <p-select 
                 v-model="selects.type.selected" 
                 :items="selects.type.items"
                 label="Выберите тип сообществ"
               ></p-select>
-              <!-- <v-select
-                hide-details
-                solo
-                class="border"
-                flat
-                v-model="selects.type.selected"
-                label="Выберите тип сообщества"
-                item-text="title"
-                item-value="value"
-                :items="selects.type.items"
-              ></v-select> -->
             </v-flex>
 
             <v-flex xs12 md6>
@@ -87,17 +64,6 @@
                 :items="selects.sort.items"
                 label="Выберите тип сортировки"
               ></p-select >
-              <!-- <v-select
-                v-model="selects.sort.selected"
-                hide-details
-                flat
-                solo
-                class="border"
-                item-text="title"
-                item-value="value"
-                :items="selects.sort.items"
-                label="Выберите тип сортировки"
-              ></v-select> -->
             </v-flex>
           </v-layout>
 
@@ -105,32 +71,20 @@
           <v-layout wrap>
             <v-flex xs6 md3 pt-0>
               <p-input
+              v-model="inputs.members.from"
               label='От'
-              >
-               </p-input>
-              <!-- <v-text-field
-                class="border"
-                flat
-                solo
-                label="От"
-                v-model="inputs.members.from"
-                hide-details
-              ></v-text-field> -->
+              ></p-input>
             </v-flex>
 
             <v-flex xs6 md3 pt-0>
-              <v-text-field
-                class="border"
-                flat
-                solo
-                v-model="inputs.members.to"
-                label="До"
-                hide-details
-              ></v-text-field>
+              <p-input
+              v-model="inputs.members.to"
+              label='До'
+              ></p-input>
             </v-flex>
 
             <v-flex xs6 md3 pt-0>
-              <v-autocomplete
+              <p-autocomplete
                 class="border"
                 flat
                 v-model="selects.country.selected"
@@ -143,11 +97,11 @@
                 item-value="id"
                 label="Страна"
                 solo
-              ></v-autocomplete>
+              ></p-autocomplete>
             </v-flex>
 
             <v-flex xs6 md3 pt-0>
-              <v-autocomplete
+              <p-autocomplete
                 class="border"
                 flat
                 :disabled="!selects.country.selected"
@@ -172,7 +126,7 @@
                     <v-list-tile-sub-title v-text="item.region"></v-list-tile-sub-title>
                   </v-list-tile-content>
                 </template>
-              </v-autocomplete>
+              </p-autocomplete>
             </v-flex>
           </v-layout>
 
@@ -181,34 +135,29 @@
           <label>Название задачи</label>
           <v-layout wrap>
             <v-flex xs12 sm6 md8 pt-0>
-              <v-text-field
+              <p-input
                 class="border"
                 v-model="inputs.taskTitle"
                 flat
                 solo
                 label="Любое название (для себя)"
                 hide-details
-              ></v-text-field>
+              ></p-input>
             </v-flex>
 
             <v-flex xs12 sm6 md4 pt-0>
-              <v-btn
-                class="mt-0"
-                style="height:50px;             
-            font-size:20px; 
-            text-transform:none; 
-            background: linear-gradient(160deg,#4f555e,#4f555e,#5c6e68,#7f6b67); 
-            color:white"
-                block
-                flat
-                hide-details
+              <p-btn
+
+                
+
                 @click="getGroups"
                 :loading="!answer"
               >
-                <v-icon style="margin-right: 5px">mdi-play</v-icon>
-                <label>Начать поиск</label>
-              </v-btn>
+                <v-icon style="margin-right: 5px; color: white">mdi-play</v-icon>
+                Начать поиск
+              </p-btn>
             </v-flex>
+            
           </v-layout>
         </v-flex>
       </v-flex>
@@ -259,13 +208,7 @@
 
 
 <script>
-import pSelect from '../../elements/pSelect'
-import pCheckbox from '../../elements/pCheckbox'
 export default {
-    components:{
-    pSelect,
-    pCheckbox
-  },
   data() {
     return {
       textarea: { search: null, key_word: "", minus_key_word: "" },
