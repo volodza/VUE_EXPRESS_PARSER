@@ -261,12 +261,10 @@
 <script>
 import pSelect from '../../elements/pSelect'
 import pCheckbox from '../../elements/pCheckbox'
-import pInput from '../../elements/pInput'
 export default {
     components:{
     pSelect,
-    pCheckbox,
-    pInput
+    pCheckbox
   },
   data() {
     return {

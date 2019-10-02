@@ -1,9 +1,9 @@
 <template>
-  <div @click="check" class="checkbox">
-    <div class="square">
+  <div class="checkbox">
+    <div class="square" @click="check">
       <div v-if="value == true" class="checkmark"></div>
     </div>
-    <span>{{label}}</span>
+    <span @click="check">{{label}}</span>
   </div>
 </template>
 
@@ -34,11 +34,14 @@ export default {
 <style lang="sass" scoped>
   .checkbox
     display: flex
-    cursor: pointer
     margin: 2px
     user-select: none
+    span
+      cursor: pointer
+
 
   .square
+    cursor: pointer
     height: 20px
     width: 20px
     border: 1px solid #d7d7d7
