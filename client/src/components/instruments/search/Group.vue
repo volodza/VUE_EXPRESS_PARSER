@@ -61,11 +61,12 @@
           <v-layout wrap>
             <v-flex xs12 md6>
               <label>Типы сообществ</label>
-              <slc  
+              <p-select  
+                multiple
                 v-model="selects.type.selected" 
                 :items="selects.type.items"
                 label="Выберите тип сообществ"
-              ></slc>
+              ></p-select>
               <!-- <v-select
                 hide-details
                 solo
@@ -81,11 +82,11 @@
 
             <v-flex xs12 md6>
               <label>Сортировка</label>
-              <slc  
+              <p-select   
                 v-model="selects.sort.selected" 
                 :items="selects.sort.items"
                 label="Выберите тип сортировки"
-              ></slc>
+              ></p-select >
               <!-- <v-select
                 v-model="selects.sort.selected"
                 hide-details
@@ -103,14 +104,18 @@
           <label>Подписчиков</label>
           <v-layout wrap>
             <v-flex xs6 md3 pt-0>
-              <v-text-field
+              <p-input
+              label='От'
+              >
+               </p-input>
+              <!-- <v-text-field
                 class="border"
                 flat
                 solo
                 label="От"
                 v-model="inputs.members.from"
                 hide-details
-              ></v-text-field>
+              ></v-text-field> -->
             </v-flex>
 
             <v-flex xs6 md3 pt-0>
@@ -254,12 +259,14 @@
 
 
 <script>
-import slc from '../../elements/slc'
-import PCheckbox from '../../elements/PCheckbox'
+import pSelect from '../../elements/pSelect'
+import pCheckbox from '../../elements/pCheckbox'
+import pInput from '../../elements/pInput'
 export default {
     components:{
-    slc,
-    PCheckbox
+    pSelect,
+    pCheckbox,
+    pInput
   },
   data() {
     return {

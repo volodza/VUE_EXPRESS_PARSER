@@ -27,10 +27,10 @@
 </template>
 
 <script>
-import slc from '@/components/elements/slc'
+import pSelect from '@/components/elements/pSelect'
 export default {
   components:{
-    slc
+    pSelect
   },
   methods: {
     vkAuth (){
