@@ -1,24 +1,27 @@
 <template>
   <v-app id="inspire">
+    <!-- <div style="display: flex; flex-wrap: wrap"> -->
     <v-navigation-drawer
       v-model="drawer"
-      style="background-color:#303030;color:white"
+      style="background-color:#303030;color:white; "
       app
     >
       <sidebar @close-sidebar="drawer = !drawer" />
     </v-navigation-drawer>
 
-    <Toolbar/>
+      
 
     <v-content>
-        <router-view></router-view>
+      <Toolbar />
+      <router-view></router-view>
     </v-content>
-    <v-footer
+    <!-- <v-footer
       color="indigo"
-      app
+      
     >
       <span class="white--text">&copy; 2019</span>
-    </v-footer>
+    </v-footer> -->
+    <!-- </div> -->
   </v-app>
 </template>
 

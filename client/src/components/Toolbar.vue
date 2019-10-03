@@ -1,6 +1,6 @@
 <template>
   <div class='header'>
-    <ul class='menu'>
+    <ul class='menu drop'>
       <li class='menu-item'><a href="#">Home</a> </li>
       <li class='menu-item'><a href="#">Поиск ЦА</a> </li>
       <li class='menu-item'><a href="#">Модератор</a> </li>
@@ -14,9 +14,9 @@
         <a href="https://vk.com/ads?act=no_office"><strong>РК</strong></a>
       </li>
 
-      <li class="menu-item"><a href="#">0р</a> </li>
+      <li class="menu-item drop"><a href="#">0р</a> </li>
 
-      <li class="menu-item"><p>Тариф 'Бесплатный'</p> </li>
+      <li class="menu-item drop"><p>Тариф 'Бесплатный'</p> </li>
 
       <li class="menu-item" style="padding:0">
         <div class="btn-dropdown" @click="isActive = !isActive">
@@ -27,8 +27,8 @@
         </div>
         <div v-if='isActive' class="menu-dropdown">
           <ul  style="background-color:white;padding-left:0">
-            <li>Тариф</li>
-            <li>Баланс</li>
+            <li class="draw">Тариф</li>
+            <li class="draw">Баланс</li>
             <li>Настройки</li>
             <li>Выйти</li>
           </ul>     
@@ -44,7 +44,7 @@
 export default {
   data(){
     return{
-      isActive: false
+      isActive: false,
     }
   },
   methods: {
@@ -84,7 +84,7 @@ export default {
 <style lang="sass" scoped>
   .header
     height: 50px
-    margin-left: 256px
+    position: relative
     border-bottom: 1px solid #303030
     display: flex
     align-items: center
@@ -113,6 +113,8 @@ export default {
         color: black
         text-decoration: none
         margin: 0
+      .draw
+        display: none
 
       
   .btn-dropdown
@@ -145,6 +147,7 @@ export default {
     padding: 4px 0
     border-radius: 4px
 
+
     // opacity: 0
     filter: alpha(opacity=0)
     -o-transition: opacity 100ms linear, top 100ms linear, visibility 100ms linear
@@ -156,5 +159,13 @@ export default {
         font-size: 14px
         &:hover
           background-color: #f3f3f3   
-        
+    
+  @media screen and (max-width: 768px)
+    .drop 
+      display: none !important
+    .header
+      justify-content: flex-end 
+    .draw
+      display: block !important
+
 </style>

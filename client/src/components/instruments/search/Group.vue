@@ -67,23 +67,26 @@
             </v-flex>
           </v-layout>
 
-          <label>Подписчиков</label>
-          <v-layout wrap>
+          
+          <v-layout wrap style="display: flex; align-items: flex-end">
             <v-flex xs6 md3 pt-0>
+              <label>Подписчиков</label>
               <p-input
               v-model="inputs.members.from"
               label='От'
               ></p-input>
             </v-flex>
 
-            <v-flex xs6 md3 pt-0>
+            <v-flex xs6 md3 pt-0 >
               <p-input
               v-model="inputs.members.to"
               label='До'
               ></p-input>
             </v-flex>
 
+            
             <v-flex xs6 md3 pt-0>
+              <label>Геолокация</label>
               <p-autocomplete
                 class="border"
                 flat
