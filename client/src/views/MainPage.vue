@@ -13,7 +13,7 @@
 
     <v-content>
       <Toolbar />
-      <router-view></router-view>
+      <router-view style="background:#EDEEF0; height: 100%"></router-view>
     </v-content>
     <!-- <v-footer
       color="indigo"

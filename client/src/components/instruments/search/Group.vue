@@ -1,11 +1,11 @@
 <template>
-  <v-container grid-list-xl fluid>
+  <v-container grid-list-xl fluid >
     <div class="mb-3">
       <h1 class="display-1">Поиск сообществ ВКонтакте</h1>
     </div>
 
-    <v-layout flex-child wrap>
-      <v-flex xs12 md8 class="border">
+    <v-layout flex-child wrap >
+      <v-flex xs12 md8 class="border" style="padding-top: 0">
         <v-flex class="white">
           <!-- Textarea -->
           <v-layout row wrap>
@@ -166,7 +166,7 @@
       </v-flex>
 
       <v-flex xs12 md4 pt-0>
-        <v-flex style="background:#e7fbed;font-size:13px">
+        <v-flex style="background:white;font-size:13px">
           <h1>Описание</h1>
           <p>
             Облачный "Поиск групп" осуществляется по базе Segmento Target,
@@ -203,9 +203,9 @@
 
 
 <style scoped>
-.border {
+/* .border {
   border: 1px solid #d7d7d7;
-}
+} */
 </style>
 
 

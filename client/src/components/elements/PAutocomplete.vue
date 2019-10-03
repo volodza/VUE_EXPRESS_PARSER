@@ -106,7 +106,6 @@ export default {
 .search_input 
   position: absolute
   margin-left: 8px
-  width: 350px
   height: 28px
   outline: 0
 

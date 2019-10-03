@@ -4,6 +4,7 @@ import StartPage from '@/views/StartPage'
 import MainPage from '@/views/MainPage'
 
 import Group from '@/components/instruments/search/Group'
+import Users from '@/components/instruments/search/Users'
 
 Vue.use(Router)
 
@@ -21,10 +22,16 @@ export default new Router({
             name: 'mainPage',
             component: MainPage,
             children: [{
-                path: 'group',
-                name: 'group',
-                component: Group
-            }, ]
+                    path: 'group',
+                    name: 'group',
+                    component: Group
+                },
+                {
+                    path: 'users',
+                    name: 'users',
+                    component: Users
+                }
+            ]
         }
         // {
         //   path: '/main',

@@ -85,7 +85,7 @@ export default {
   .header
     height: 50px
     position: relative
-    border-bottom: 1px solid #303030
+    // border-bottom: 1px solid #d7d7d7
     display: flex
     align-items: center
     justify-content: space-between

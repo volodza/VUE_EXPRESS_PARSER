@@ -13,7 +13,7 @@
       <!-- <v-icon size='16' class='close'>mdi-close-circle-outline</v-icon> -->
       {{item}}
       </span>
-      <span v-else>{{label}}</span>
+      <span v-else style="color:#858585">{{label}}</span>
       </div>
       <v-icon class="submenu_icon" size='16'>
         mdi-chevron-{{isActive ? 'up' : 'down'}}
