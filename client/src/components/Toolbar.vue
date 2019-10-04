@@ -153,15 +153,15 @@ export default {
       
   .btn-dropdown
     display: flex 
+    align-items: center
     height: 29px
 
   .avatar
-    margin-top: 2px
+    margin-top: 1px
     margin-left: 3px
-    height: 2.7vh
-    width: 2.5vh
+    height: 22px
+    width: 22px
     border-radius: 20%
-    right: 0px
     img 
       border-radius: inherit
       display: -webkit-inline-box

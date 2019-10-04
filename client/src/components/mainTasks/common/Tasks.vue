@@ -134,7 +134,8 @@
         align-items: center
         padding: 4px 0
         border-bottom: 1px dashed #d7d7d7
-        last-child: {border-bottom: none}
+      li:last-child
+        border-bottom: none
     
     .avatar
       margin: 0 8px
