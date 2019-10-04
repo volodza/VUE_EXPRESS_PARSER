@@ -1,6 +1,10 @@
 <template>
   <div class="body">
-    <textarea></textarea>
+    <textarea
+     :placeholder="label"
+     :value="value"
+     type="text"
+    ></textarea>
   </div>
 </template>
 
@@ -14,3 +18,27 @@
       border: 1px solid #d7d7d7
       border-radius: 2px
 </style>
+
+<script>
+export default {
+  props:{
+    value:{
+      type:String
+    },
+    label:{
+      type:String,
+      default:'label'
+    }
+  },
+  data () {
+    return {
+    }
+  },
+  methods:{
+    check(){
+      this.value = !this.value;
+      this.$emit('input',this.value)
+    }
+  },
+}
+</script>

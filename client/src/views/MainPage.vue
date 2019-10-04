@@ -1,4 +1,4 @@
-<template>
+<template >
   <v-app id="inspire">
     <!-- <div style="display: flex; flex-wrap: wrap"> -->
     <v-navigation-drawer
@@ -12,7 +12,7 @@
       
 
     <v-content>
-      <Toolbar />
+      <Toolbar/>
       <router-view style="background:#EDEEF0; height: 100%"></router-view>
     </v-content>
     <!-- <v-footer

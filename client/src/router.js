@@ -3,6 +3,7 @@ import Router from 'vue-router'
 import StartPage from '@/views/StartPage'
 import MainPage from '@/views/MainPage'
 
+
 import Group from '@/components/instruments/search/Group'
 import Users from '@/components/instruments/search/Users'
 

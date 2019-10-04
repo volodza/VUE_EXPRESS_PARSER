@@ -55,28 +55,10 @@ export default {
           children:[
             { title: "Посты", icon: "mdi-account-multiple", url: "/posts" },
             { title: "Друзья", icon: "mdi-account", url: "/friends" },
-            {
-              title: "Обсуждения",
-              icon: "mdi-human-male-boy",
-              url: "/Discussions"
-            },
-            {
-              title: "Родственники",
-              icon: "mdi-gift-outline",
-              url: "/Relatives"
-            },
-            {
-              title: "Участники",
-              icon: "mdi-new-box",
-              url: "/subscribers",
-              iconColor: "red"
-            },
-            {
-              title: "Недавно вступившие",
-              icon: "mdi-new-box",
-              url: "/recentlyjoin",
-              iconColor: "red"
-            },
+            { title: "Обсуждения", icon: "mdi-human-male-boy", url: "/Discussions"},
+            { title: "Родственники", icon: "mdi-gift-outline", url: "/Relatives"},
+            { title: "Участники", icon: "mdi-new-box", url: "/subscribers", iconColor: "red"},
+            { title: "Недавно вступившие", icon: "mdi-new-box", url: "/recentlyjoin", iconColor: "red"},
             { title: "Комментарии", icon: "mdi-human-male-boy", url: "/Comments" }
           ]
         },

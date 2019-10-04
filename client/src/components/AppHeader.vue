@@ -87,11 +87,7 @@ export default {
     }
   },
       
-  computed:{
-    isUserLoggedIn(){
-      return this.$store.getters.isUserLoggedIn
-    }
-  },
+
 
   methods:{
     vkAuth (){

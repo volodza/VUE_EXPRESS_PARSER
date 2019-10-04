@@ -46,7 +46,7 @@ export default {
     width: 20px
     border: 1px solid #d7d7d7
     border-radius: 2px
-    margin-right: 10px
+    margin-right: 7px
 
   .checkmark
     left: 5px

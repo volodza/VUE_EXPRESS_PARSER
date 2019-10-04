@@ -1,15 +1,20 @@
-<template>
-  <div class='header'>
+<template >
+  <div class='header' >
     <ul class='menu drop'>
       <li class='menu-item'><a href="#">Home</a> </li>
       <li class='menu-item'><a href="#">Поиск ЦА</a> </li>
       <li class='menu-item'><a href="#">Модератор</a> </li>
       <li class='menu-item'><a href="#">Обучение</a> </li>
-      <li class='menu-item'><a href="#">Магазин</a> </li>
+      <li class='menu-item'><a @click='vkAuth' href="#">Магазин</a> </li>
     </ul>
 
 
     <ul class='menu'>
+      <li class="bgn">
+        <myTasks />
+        <!-- <p>Мои задачи</p> -->
+      </li>
+
       <li class="menu-item">
         <a href="https://vk.com/ads?act=no_office"><strong>РК</strong></a>
       </li>
@@ -18,10 +23,10 @@
 
       <li class="menu-item drop"><p>Тариф 'Бесплатный'</p> </li>
 
-      <li class="menu-item" style="padding:0">
+      <li :class="isActive ? 'menu-item active':'menu-item'" ref=drop>
         <div class="btn-dropdown" @click="isActive = !isActive">
           <div class="avatar">
-            <!-- <img :src="$store.getters.user.photo_50"> -->
+            <img :src="$store.getters.user.photo_50">
           </div>
           <v-icon  light size="20">mdi-chevron-{{isActive ? 'up' : 'down'}}</v-icon>
         </div>
@@ -41,10 +46,22 @@
 </template>
 
 <script>
+
+import myTasks from '@/components/mainTasks/myTasks'
+
 export default {
+  components:{
+    
+    myTasks
+  },
   data(){
     return{
       isActive: false,
+    }
+  },
+    computed:{
+    isUserLoggedIn(){
+      return this.$store.getters.isUserLoggedIn
     }
   },
   methods: {
@@ -72,7 +89,17 @@ export default {
       },(err) => {
         this.$store.commit("setError", err);
       });
-    }
+    },
+    onMouseUp(e){ 
+      const up = this.$refs.drop
+      if (!up.contains(e.target)){
+        this.isActive = false
+        }
+    }  
+  },
+
+    mounted() { 
+  document.addEventListener('mouseup', this.onMouseUp); 
   },
 
   created: function (){ 
@@ -96,37 +123,45 @@ export default {
     position: relative
     background: white
     padding-left: 5px
+    margin-right: 5px
     .menu-item
       display: flex
       align-items: center
-      height: 35px
       margin-left: 5px
-      width: calc(auto + 10px) 
       border: 1px solid #d7d7d7
-      border-radius: 3px
+      border-radius: 2px
       cursor: pointer
       &:hover
         border: 1px solid #b0b0b0
         transition: 0.3s
       a,p
-        padding: 0 10px
+        padding: 5px 10px
         color: black
         text-decoration: none
         margin: 0
       .draw
         display: none
 
+  .bgn
+    display: flex
+    align-items: center
+    margin-left: 5px
+    cursor: pointer
+
+  .active
+    border: 1px solid #b0b0b0 !important
       
   .btn-dropdown
-    display: flex    
+    display: flex 
+    height: 29px
 
   .avatar
-    margin-top: 3px
-    height: 34px
-    width: 34px
-    border-radius: 50%
+    margin-top: 2px
+    margin-left: 3px
+    height: 2.7vh
+    width: 2.5vh
+    border-radius: 20%
     right: 0px
-    // position: absolute
     img 
       border-radius: inherit
       display: -webkit-inline-box
@@ -135,9 +170,7 @@ export default {
       height: inherit
       width: inherit
   .menu-dropdown
-    // position: relative
     position: absolute
-    // visibility: hidden;
     width: 180px
     top: 40px
     right: 5px
@@ -160,7 +193,7 @@ export default {
         &:hover
           background-color: #f3f3f3   
     
-  @media screen and (max-width: 768px)
+  @media screen and (max-width: 820px)
     .drop 
       display: none !important
     .header

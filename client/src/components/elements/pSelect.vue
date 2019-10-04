@@ -170,8 +170,8 @@ export default {
     }
   },
   
-    mounted() { 
-  document.addEventListener('mouseup', this.onMouseUp); 
+  mounted() { 
+    document.addEventListener('mouseup', this.onMouseUp); 
   },
 
 }

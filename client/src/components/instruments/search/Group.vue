@@ -11,8 +11,10 @@
           <v-layout row wrap>
             <v-flex xs12>
               <label>Ключевые слова</label>
-              <p-Textarea>
-
+              <p-Textarea
+                label="По одному слову в строке"
+                
+                >
               </p-Textarea>
               <!-- <v-textarea
                 rows="4"
@@ -34,12 +36,10 @@
               v-model="checkboxes.exact_phrase"
             ></p-checkbox>
             <p-checkbox
-              
               :label="`Только официальные сообщества`"
               v-model="checkboxes.only_official"
             ></p-checkbox>
             <p-checkbox
-              
               v-model="checkboxes.with_goods"
               :label="`Только сообщество с товарами`"
             ></p-checkbox>
@@ -150,9 +150,7 @@
 
             <v-flex xs12 sm6 md4 pt-0>
               <p-btn
-
-                
-
+                dark
                 @click="getGroups"
                 :loading="!answer"
               >
