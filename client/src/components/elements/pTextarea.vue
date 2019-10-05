@@ -4,6 +4,7 @@
      :placeholder="label"
      :value="value"
      type="text"
+     @textarea="$emit('textarea', $event.target.value)"
     ></textarea>
   </div>
 </template>

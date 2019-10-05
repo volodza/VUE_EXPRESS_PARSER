@@ -46,7 +46,6 @@
 </template>
 
 <script>
-
 import myTasks from '@/components/mainTasks/myTasks'
 
 export default {
@@ -112,7 +111,6 @@ export default {
   .header
     height: 50px
     position: relative
-    // border-bottom: 1px solid #d7d7d7
     display: flex
     align-items: center
     justify-content: space-between
@@ -121,8 +119,8 @@ export default {
     display: flex
     align-items: center
     position: relative
-    background: white
-    padding-left: 5px
+    background: #FAFAFA
+    padding-left: 0
     margin-right: 5px
     .menu-item
       display: flex
@@ -146,6 +144,7 @@ export default {
     display: flex
     align-items: center
     margin-left: 5px
+    border-radius: 2px
     cursor: pointer
 
   .active
@@ -157,10 +156,9 @@ export default {
     height: 29px
 
   .avatar
-    margin-top: 1px
     margin-left: 3px
-    height: 22px
-    width: 22px
+    height: 23px
+    width: 23px
     border-radius: 20%
     img 
       border-radius: inherit

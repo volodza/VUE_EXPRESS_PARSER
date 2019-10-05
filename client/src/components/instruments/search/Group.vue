@@ -13,7 +13,7 @@
               <label>Ключевые слова</label>
               <p-Textarea
                 label="По одному слову в строке"
-                
+                v-model="textarea.key_word"
                 >
               </p-Textarea>
               <!-- <v-textarea
@@ -212,7 +212,7 @@
 export default {
   data() {
     return {
-      textarea: { search: null, key_word: "", minus_key_word: "" },
+      textarea: { search: null, key_word: ""},
       checkboxes: {
         exact_phrase: false,
         only_official: false,

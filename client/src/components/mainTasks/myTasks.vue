@@ -1,44 +1,20 @@
 <template>
   <div
     :class="isActive ? 'mytasks active':'mytasks'"
-    ref=drop
-  >
+    ref=drop>
     <div class="number">
       <span>{{$store.getters.tasks.length}}</span>
     </div>
-    <!-- <div v-if="this.$store.getters.user"> -->
-      <!-- <v-badge 
-        overlap 
-        v-if="$store.getters.user"
-        v-model="$store.getters.tasks.length" 
-      > -->
-
-        <!-- <template v-slot:badge>
-          <span>{{$store.getters.tasks.length}}</span>
-        </template> -->
-
-        <!-- <v-menu 
-          :close-on-content-click="false"
-          :nudge-width="200"
-        > -->
-
-            <p @click="isActive = !isActive">Мои задачи</p>
-
-          <!-- <div v-if="isActive" class="tasks" > -->
-            <tasks v-if="isActive"/>
-          <!-- </div> -->
-
+    <p @click="isActive = !isActive">Мои задачи</p>
+    <tasks v-if="isActive"/>
   </div>
 </template>
 
-<style lang="sass">
+<style lang="sass" scoped>
   .mytasks
     position: relative
     border: 1px solid #d7d7d7
     border-radius: 2px
-    &:hover
-      border: 1px solid #b0b0b0
-      transition: 0.3s
     p
       padding: 5px 10px
       color: black
@@ -47,14 +23,15 @@
   .number
     top: -8px
     right: -5px
-    // margin-bottom: 50px
-    // z-index: 2
     width: 17px
     background: #F27865
     position: absolute
     color: white
     border-radius: 50%
     text-align: center
+
+  // .active
+    // border-color: #b0b0b0 
 
 </style>
 

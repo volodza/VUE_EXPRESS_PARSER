@@ -1,130 +1,87 @@
 <template>
-  <!-- <v-layout row> -->
-    <!-- <v-flex offset> -->
-      <div 
-      class="taskList" 
-      >
+  <div 
+    class="taskList">
+    <ul>
+      <li v-if="this.$store.getters.tasks.length == 0">Список задач пуст.</li>
 
-        <!-- <v-progress-circular 
-          v-if="this.$store.getters.tasks == []" 
-          indeterminate color="primary"
-        ></v-progress-circular> -->
+      <li 
+        v-for="(task,index) in tasks" 
+        :key="index">
+        <div class="avatar" >
+          <v-avatar size="30">
+            <v-progress-circular
+              v-if="task.status === 'loading'"
+              indeterminate
+              color="primary"
+              size="28"
+            ></v-progress-circular>
+            <v-icon
+              v-else-if="task.status === 'complete'"
+              size="35"
+              color="green"
+              >mdi-check-circle-outline
+            </v-icon>
+            <v-icon
+              v-else-if="task.status === 'error'"
+              size="35"
+              color="red"
+              >mdi-close-circle-outline
+            </v-icon>
+          </v-avatar> 
+        </div>
 
- 
-        <!-- <div v-if="this.$store.getters.tasks.length == 0">
-          <span class="text--grey">Список задач пуст.</span>
-        </div> -->
+        <div
+          class="taskInfo">
+          <span v-if="task.count<1">
+            {{ task.title }}
+          </span>
 
-        <!-- <v-list two-line subheader v-else style="padding-bottom:0px"> -->
+          <a v-if="task.count" style="color:#6e9ddb;" @click="setTaskBegin(task)">
+              {{ task.title }}
+          </a>
+          <span v-else>{{ task.title }}</span>
+          
+          <div style="font-size:12px">
+            <v-icon size="17">mdi-calendar</v-icon>
 
-          <ul>
-            <li v-if="this.$store.getters.tasks.length == 0">Список задач пуст.</li>
-            <li 
-              v-for="(task,index) in tasks" 
-              :key="index">
-               <div class="avatar" >
-              <v-avatar size="30">
-                <v-progress-circular
-                  v-if="task.status === 'loading'"
-                  indeterminate
-                  color="primary"
-                  size="28"
-                ></v-progress-circular>
-                <v-icon
-                  v-else-if="task.status === 'complete'"
-                  size="35"
-                  color="green"
-                >mdi-check-circle-outline</v-icon>
-
-                <v-icon
-                  v-else-if="task.status === 'error'"
-                  size="35"
-                  color="red"
-                >mdi-close-circle-outline</v-icon>
-                </v-avatar> 
-              </div>
-
-              <div
-               class="taskInfo">
-
-                <span v-if="task.count<1">
-                  {{ task.title }}
-                </span>
-
-              <a v-if="task.count" style="color:#6e9ddb;" @click="setTaskBegin(task)">
-                  {{ task.title }}
-              </a>
-              <span v-else>{{ task.title }}</span>
-              
-                <div style="font-size:12px">
-                  <v-icon size="17">mdi-calendar</v-icon>
-
-                  {{ task.begin.slice(0,10) }}
-                  <v-icon
-                    size="17"
-                    v-if="task.count"
-                    
-                  >mdi-account-search-outline</v-icon>
-
-                  <!-- <v-icon
+            {{ task.begin.slice(0,10) }}
+            <v-icon
               size="17"
               v-if="task.count"
-              @click="downloadAnswer(task)"
-                  >mdi-account-search-outline</v-icon>-->
-                  {{task.count}}
-                  <!-- <v-icon size='17'>mdi-timer-sand-empty</v-icon> -->
-                </div>
-               </div>
+              >mdi-account-search-outline
+            </v-icon>
+            {{task.count}}
+          </div>
+        </div>
 
-              <div class="icon">
-                <!-- <v-layout> -->
-                  <!-- <v-btn icon ripple> -->
-                    <v-icon size="17" color="black">mdi-file-document-box-outline</v-icon>
-                  <!-- </v-btn> -->
-                  <!-- <v-btn icon ripple> -->
-                    <v-icon size="17" color="black">mdi-star-outline</v-icon>
-                  <!-- </v-btn> -->
-                  <!-- <v-btn icon ripple @click="deleteTask(task)"> -->
-                    <v-icon 
-                    @click="deleteTask(task)"
-                    size="17" 
-                    color="black">
-                    mdi-delete-outline
-                    </v-icon>
-                  <!-- </v-btn> -->
-                <!-- </v-layout> -->
-              </div>
-              <!-- <v-divider v-if="index + 1 < tasks.length" :key="index"></v-divider> -->
-            </li>
-            
-          </ul>
-        <!-- </v-list> -->
-
-
-      </div>
-    <!-- </v-flex> -->
-
-    <!-- <v-dialog v-model="dialog"  style="">
-      <SearchResults :closeDialog='closeDialog' />
-    </v-dialog> -->
-
-  <!-- </v-layout> -->
+        <div class="icon">
+          <v-icon size="17" color="black">mdi-file-document-box-outline</v-icon>
+          <v-icon size="17" color="black">mdi-star-outline</v-icon>
+          <v-icon 
+          @click="deleteTask(task)"
+          size="17" 
+          color="black">
+          mdi-delete-outline
+          </v-icon>
+        </div>
+      </li>
+    </ul>
+    <!-- <div class="overlay"> -->
+    <SearchResults v-if="dialog" :closeDialog='closeDialog' />
+    <!-- </div> -->
+  </div>
 </template>
 
-<style lang="sass">
+<style lang="sass" scoped> 
   .taskList
     display: flex
     flex-direction: column
     position: relative
     top: 10px
     transition: 0.2s
-    
-    // width: 400px
-    // flex-wrap: wrap
     ul
       z-index: 8
       padding: 0 5px
-      // width: 100%
       position: absolute
       background-color: white
       border: 1px solid #d7d7d7
@@ -142,7 +99,6 @@
     .icon
       display: flex
       cursor: pointer
-      // margin-left: 20px
       i
         padding: 0 2px
     .taskInfo
@@ -150,6 +106,17 @@
       flex-direction: column
       font-size: 14px
       min-width: 180px
+
+
+    // .overlay:target
+    //   display: block
+      
+
+  // .result
+  //   position: absolute
+  //   top: 5%
+  //   right: 50%
+  //   z-index: 3
           
   @media screen and (max-width: 820px)
     .taskList
@@ -163,7 +130,7 @@ export default {
   data() {
     return {
       dialog: false,
-      overlay:false
+      overlay: false
     };
   },
   // provide() {

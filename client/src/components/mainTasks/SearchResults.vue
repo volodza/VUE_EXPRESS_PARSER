@@ -1,21 +1,13 @@
 <template>
-  <div class="text-xs-center " 
-  style="position:fixed;top: 5%;width: 90%;
-    max-width: 600px; max-height:95%;overflow:auto;
-    right: 0; left: 0; margin: auto;">
-      <v-card class="header" style="overflow : visible;min-height:500px">
-        
+  <div class="overlay" >
+  <div class="searchResults" ref=drop>
+      <div class="header">
 
-        <!-- header -->
-        <v-card-title
-          class="side py-2"
-          primary-title
-        >
-          <div> 
-            <v-list-tile-title class="sideText--text ">
+          <div class="headerInfo"> 
+            <div>
               {{ title }}  
-            </v-list-tile-title>
-            <v-list-tile-sub-title style="color:#d0d0d0; text-align:left;">
+            </div>
+            <div style="color:#d0d0d0; text-align:left;">
               <v-icon 
                 style="color:#d0d0d0;" 
                 size="17" 
@@ -32,109 +24,27 @@
               </v-icon>
               {{count}}
 
-            </v-list-tile-sub-title> 
+            </div> 
           </div>
 
           <v-icon 
-            style="color:#d0d0d0; margin-left: auto;"
+            class="close"
             @click="close()"
           >
             mdi-close-circle-outline
           </v-icon>
+          </div>
 
-        </v-card-title>
-        <!-- header-end -->
 
-        <!-- sub-header -->
-        <v-card-title
-          class="header py-3"
-          primary-title
-        >
-          <div style=" margin:0 auto; border:1px solid #d7d7d7;">
-
-            <v-tooltip bottom>
-              <template v-slot:activator="{ on }">
-                <v-btn 
-                  v-on="on"
-                  flat 
-                  class="mx-2 px-0" 
-                  style=" background:white; min-width:40px;"
-                >
-                  ID
-                </v-btn> 
-              </template>
-              <span>Скачать id</span>
-            </v-tooltip>
-
-            <v-tooltip bottom>
-              <template v-slot:activator="{ on }">
-                <v-btn
-                  v-on="on" 
-                  flat 
-                  class="mx-0 px-0" 
-                  style="background:white; min-width:40px;"
-                >
-                  <v-icon size="20">mdi-paperclip</v-icon>
-                </v-btn>
-              </template>
-              <span>Скачать ссылки</span>
-            </v-tooltip>
-
-            <v-tooltip bottom>
-              <template v-slot:activator="{ on }">
-                <v-btn 
-                  v-on="on" 
-                  flat 
-                  style=" background:white; min-width:40px;"
-                  class="mx-2 px-0"
-                >
-                  Й
-                </v-btn>
-              </template>
-              <span>Скачать</span>
-            </v-tooltip>
-             
-          </div>  
-        </v-card-title>
-          <!-- sub-header-end -->
-
-        <div class="header" style="position: sticky; top:0; z-index: 1;">
-
-          <v-progress-linear  
-            :indeterminate="true"
-            v-if="content == null"
-          ></v-progress-linear>
-
-          <v-pagination
-            v-if="content!==null"
-            v-model="page"
-            :length="pages"
-            
-            
-
-          ></v-pagination>
-
-        </div>
-        <!-- <v-divider></v-divider> -->
-
-        <v-card class="mx-2 mt-2">
+        <div class="result">
          <GroupsResults v-if="this.$store.getters.task.type === 'groups'"/>
          <UsersResults v-if="this.$store.getters.task.type === 'users'"/>
          <!-- <NewsResults/> -->
          <!-- <PostsResults/> -->
-        </v-card>
+        </div>
 
-        <v-divider></v-divider>
 
-        <!-- <v-pagination
-          v-if="content!==null"
-          v-model="page"
-          :length="pages"
-          :total-visible="9"
-        ></v-pagination> -->
-
-      </v-card>
-    <!-- </v-dialog> -->
+  </div>
   </div>
 </template>
 
@@ -154,7 +64,7 @@
 
     data () {
       return {
-        page: 1
+        
       }
     },
 
@@ -162,9 +72,9 @@
       content (){
         return this.$store.getters.result
       },
-      pages (){
-        return this.$store.getters.pages
-      },
+      // pages (){
+      //   return this.$store.getters.pages
+      // },
       begin (){
         return this.$store.getters.taskBegin || '11:11:11'
       },
@@ -180,57 +90,107 @@
 
     },
 
-    watch: {
-      page(){
-        this.$store.commit('setPage',this.page);
-      }
-    },
+    // watch: {
+    //   page(){
+    //     this.$store.commit('setPage',this.page);
+    //   }
+    // },
 
     methods:{
       close (){
         this.closeDialog()
         this.page = 1;
-      }
+      },
+      onMouseUp(e){ 
+      const up = this.$refs.drop
+      if (!up.contains(e.target)){
+        this.closeDialog()
+        this.page = 1;
+        }
     }
+    },
+
+  mounted() { 
+    document.addEventListener('mouseup', this.onMouseUp); 
+  }
 
   }
 </script>
 
-<style>
+<style <style lang="sass" scoped>
 
-/* стили для скрола перенести в апп */
-::-webkit-scrollbar-button { 
-background-image:url(''); 
-background-repeat:no-repeat; 
-width:6px; 
-height:0px 
-} 
+  .overlay
+    background: rgba(102, 102, 102, 0.2)
+    width: 100%
+    height: 100%
+    position: fixed
+    top: 0
+    z-index: 7
+    left: 0
+    cursor: default
 
-::-webkit-scrollbar-track { 
-background-color:#eef1f07e; 
-/* box-shadow:0px 0px 3px #000 inset;  */
-} 
+  .searchResults
+    max-width: 600px
+    position: fixed
+    top: 5%
+    max-height: 95%
+    overflow: auto
+    right: 0
+    left: 0
+    margin: auto
+    background: #c2c2c2
+    .close
+      color: #d0d0d0
+      margin-left: auto
+      &:hover
+        color: white 
+    .header
+      overflow: visible
+      background: #303030
+      height: 60px
+      color: white
+      display: flex
+      padding: 0 15px
+      .headerInfo
+        display: flex
+        flex-direction: column
+        margin-top: 10px
+        cursor: text
 
-::-webkit-scrollbar-thumb { 
-/* -webkit-border-radius: 5px;  */
-/* border-radius: 5px;  */
-background-color:#4f555e; 
-/* box-shadow:0px 1px 1px #fff inset;  */
+    .result
+      background: white
 
-background-position:center; 
-background-repeat:no-repeat; 
-} 
 
-::-webkit-resizer{ 
-background-image:url(''); 
-background-repeat:no-repeat; 
-width:7px; 
-height:0px 
-} 
 
-::-webkit-scrollbar{ 
-width: 5px; 
-}
+  /* стили для скрола перенести в апп */
+  ::-webkit-scrollbar-button 
+    background-image: url('') 
+    background-repeat: no-repeat
+    width: 6px
+    height: 0px 
+
+
+  ::-webkit-scrollbar-track  
+    background-color: #eef1f07e 
+  /* box-shadow:0px 0px 3px #000 inset;  */
+  
+
+  ::-webkit-scrollbar-thumb  
+    background-color: #4f555e 
+    background-position: center
+    background-repeat: no-repeat
+
+
+  ::-webkit-resizer
+    background-image: url('')
+    background-repeat: no-repeat 
+    width: 7px 
+    height: 0px 
+
+
+  ::-webkit-scrollbar
+    width: 5px 
+
 
 
 </style>
