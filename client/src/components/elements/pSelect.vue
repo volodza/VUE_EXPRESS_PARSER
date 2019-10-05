@@ -1,19 +1,18 @@
 <template >
   <div ref=drop>
-    
-    <div @click="isActive = !isActive"  class="contain">
+    <div @click="isActive = !isActive" class="contain">
       <div class='content'>
-      <span v-if="selected">{{selected}}</span>
-      <span 
-      class='multiple' 
-      v-else-if="Mselected.length" 
-      v-for="(item,i) in Mselected" 
-      :key="i"
-      >
-      <!-- <v-icon size='16' class='close'>mdi-close-circle-outline</v-icon> -->
-      {{item}}
-      </span>
-      <span v-else style="color:#858585">{{label}}</span>
+        <span v-if="selected">{{selected}}</span>
+        <span 
+          class='multiple' 
+          v-else-if="Mselected.length" 
+          v-for="(item,i) in Mselected" 
+          :key="i"
+        >
+        <!-- <v-icon size='16' class='close'>mdi-close-circle-outline</v-icon> -->
+        {{item}}
+        </span>
+        <span v-else style="color:#858585">{{label}}</span>
       </div>
       <v-icon class="submenu_icon" size='16'>
         mdi-chevron-{{isActive ? 'up' : 'down'}}
@@ -22,7 +21,7 @@
     
 
     <div v-if="isActive"  class="dropdown">
-      <ul  v-if="!multiple">
+      <ul v-if="!multiple">
         <li 
           :class="selected == item.title ? 'active' : ''" 
           v-for="(item,i) in items" 
@@ -66,6 +65,8 @@
       max-width: 90%
       display: flex
       flex-wrap: wrap
+      white-space: nowrap
+      overflow: hidden
     span
       margin: 2px 0
       margin-left: 1vh
@@ -162,17 +163,17 @@ export default {
       else{this.Mselected.push(item.title)};
       this.$emit('input',item.value)
     },
-    onMouseUp(e){ 
-      const up = this.$refs.drop
-      if (!up.contains(e.target)){
-        this.isActive = false
-        }
-    }
+    // onMouseUp(e){ 
+    //   const up = this.$refs.drop
+    //   if (!up.contains(e.target)){
+    //     this.isActive = false
+    //     }
+    // }
   },
   
-  mounted() { 
-    document.addEventListener('mouseup', this.onMouseUp); 
-  },
+  // mounted() { 
+  //   document.addEventListener('mouseup', this.onMouseUp); 
+  // },
 
 }
 </script>

@@ -11,25 +11,14 @@
           <v-layout row wrap>
             <v-flex xs12>
               <label>Ключевые слова</label>
-              <p-Textarea
+              <p-textarea
                 label="По одному слову в строке"
                 v-model="textarea.key_word"
-                >
-              </p-Textarea>
-              <!-- <v-textarea
-                rows="4"
-                solo
-                class="border"
-                flat
-                name="input-7-1"
-                label="По одному слову в строке"
-                v-model="textarea.key_word"
-                hide-details
-              ></v-textarea> -->
+              ></p-textarea>
             </v-flex>
           </v-layout>
 
-          <!-- Checkbox -->
+          <!-- Checkboxes -->
           <v-layout column wrap mx-0 mb-3>
             <p-checkbox
               :label="`Точное вхождение поисковой фразы`"
@@ -44,8 +33,6 @@
               :label="`Только сообщество с товарами`"
             ></p-checkbox>
           </v-layout>
-
-          <v-divider class="mb-3"></v-divider>
 
           <v-layout wrap>
             <v-flex xs12 md6>
@@ -67,20 +54,19 @@
             </v-flex>
           </v-layout>
 
-          
           <v-layout wrap style="display: flex; align-items: flex-end">
             <v-flex xs6 md3 pt-0>
               <label>Подписчиков</label>
               <p-input
-              v-model="inputs.members.from"
-              label='От'
+                v-model="inputs.members.from"
+                label='От'
               ></p-input>
             </v-flex>
 
             <v-flex xs6 md3 pt-0 >
               <p-input
-              v-model="inputs.members.to"
-              label='До'
+                v-model="inputs.members.to"
+                label='До'
               ></p-input>
             </v-flex>
 
@@ -88,23 +74,17 @@
             <v-flex xs6 md3 pt-0>
               <label>Геолокация</label>
               <p-autocomplete
-                class="border"
-                flat
                 v-model="selects.country.selected"
                 :loading="selects.country.loading"
                 :items="selects.country.items"
                 :search-input.sync="selects.country.search"
-                hide-no-data
-                hide-details
-                item-text="title"
-                item-value="id"
                 label="Страна"
-                solo
               ></p-autocomplete>
             </v-flex>
 
             <v-flex xs6 md3 pt-0>
               <p-autocomplete
+              
                 class="border"
                 flat
                 :disabled="!selects.country.selected"
@@ -149,14 +129,7 @@
             </v-flex>
 
             <v-flex xs12 sm6 md4 pt-0>
-              <p-btn
-                dark
-                @click="getGroups"
-                :loading="!answer"
-              >
-                <v-icon style="margin-right: 5px; color: white">mdi-play</v-icon>
-                Начать поиск
-              </p-btn>
+              <p-btn dark color="#303030" @click="getGroups">Начать поиск</p-btn>
             </v-flex>
             
           </v-layout>
@@ -265,9 +238,11 @@ export default {
   methods: {
     getGroups() {
       if (!this.textarea.key_word) {
+        console.log(54321)
         this.$store.commit("setError", "Введите хотя бы одну ключевую фразу");
         return;
       }
+      console.log(222)
       let obj = {
         q: this.key_phrases,
         type: this.selects.type.selected || 'page',
@@ -286,6 +261,7 @@ export default {
       this.$http
         .post("/api/search/groups", obj)
         .then(res => {
+          console.log(12345)
           this.$store.commit("setSuccess", res.body);
           this.answer = res.body;
         });

@@ -1,6 +1,6 @@
 export default {
     state:{
-        user:null,
+        user:{photo:'0'},
         error:null,
         success:null
     },

@@ -7,7 +7,7 @@
       :value="searchInput"
       @input="$emit('update:searchInput', $event.target.value)"
       @focus="isActive = true"
-     
+      :style="disabled ? 'opacity:.3': ''"
       :disabled='disabled'
     >
 
