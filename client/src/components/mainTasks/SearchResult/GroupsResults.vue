@@ -256,13 +256,13 @@
       changeSelect(item){
         if(this.isAllSelected){
           if(this.areNotSelected.includes(item.id)){
-            this.areNotSelected.filter(x=>x != item.id)
+            this.areNotSelected = this.areNotSelected.filter(x=>x != item.id)
           } else {
             this.areNotSelected.push(item.id)
           }
         } else {
           if(this.areSelected.includes(item.id)){
-            this.areSelected.filter(x=>x != item.id)
+            this.areSelected = this.areSelected.filter(x=>x != item.id)
           } else {
             this.areSelected.push(item.id)
           }
