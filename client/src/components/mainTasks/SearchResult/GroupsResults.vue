@@ -22,10 +22,10 @@
         <img src="../../../assets/logo.png" alt="">
       </div>
       <div 
-        :class="isAllSelected ? 'square bg checkAll' : 'square checkAll' " 
+        :class="selectAll ? 'square bg checkAll' : 'square checkAll' " 
         @click="isAllSelected = !isAllSelected"
       >
-        <div v-if="isAllSelected" class="checkmark"></div>
+        <div v-if="selectAll" class="checkmark"></div>
       </div>
         <span>Cтраница {{page}} из {{pages}} </span>
       </div>
@@ -226,7 +226,8 @@
         page: 1,
         areSelected: [],
         areNotSelected:[],
-        isAllSelected: true
+        isAllSelected: true,
+        
       }
     },
     computed:{
@@ -238,7 +239,11 @@
       },
       count(){
         return this.$store.getters.count
-      },         
+      }, 
+      selectAll(){
+        return (this.isAllSelected && !this.areNotSelected.length) 
+      }
+              
     },
     watch: {
       page(){
@@ -256,21 +261,13 @@
       changeSelect(item){
         if(this.isAllSelected){
           if(this.areNotSelected.includes(item.id)){
-<<<<<<< HEAD
             this.areNotSelected=this.areNotSelected.filter(x=>x != item.id)
-=======
-            this.areNotSelected=this.areNotSelected.filter(x=>x != item.id)
->>>>>>> 2b606fd807b7712dec89fae51c23b7f6718d5c56
           } else {
             this.areNotSelected.push(item.id)
           }
         } else {
           if(this.areSelected.includes(item.id)){
-<<<<<<< HEAD
             this.areSelected=this.areSelected.filter(x=>x != item.id)
-=======
-            this.areSelected=this.areSelected.filter(x=>x != item.id)
->>>>>>> 2b606fd807b7712dec89fae51c23b7f6718d5c56
           } else {
             this.areSelected.push(item.id)
           }
