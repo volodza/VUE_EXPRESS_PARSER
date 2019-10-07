@@ -79,10 +79,11 @@ export default {
       return (end < this.length) ? end : this.length
     },     
     nextPage: function(){
-      return this.value + 1
+      return this.value<this.length?this.value + 1:this.length
     },
     prevPage: function(){
-      return this.value - 1
+
+      return this.value>1? this.value- 1: 1
     }
   },
   methods:{
