@@ -256,13 +256,21 @@
       changeSelect(item){
         if(this.isAllSelected){
           if(this.areNotSelected.includes(item.id)){
-            this.areNotSelected = this.areNotSelected.filter(x=>x != item.id)
+<<<<<<< HEAD
+            this.areNotSelected=this.areNotSelected.filter(x=>x != item.id)
+=======
+            this.areNotSelected=this.areNotSelected.filter(x=>x != item.id)
+>>>>>>> 2b606fd807b7712dec89fae51c23b7f6718d5c56
           } else {
             this.areNotSelected.push(item.id)
           }
         } else {
           if(this.areSelected.includes(item.id)){
-            this.areSelected = this.areSelected.filter(x=>x != item.id)
+<<<<<<< HEAD
+            this.areSelected=this.areSelected.filter(x=>x != item.id)
+=======
+            this.areSelected=this.areSelected.filter(x=>x != item.id)
+>>>>>>> 2b606fd807b7712dec89fae51c23b7f6718d5c56
           } else {
             this.areSelected.push(item.id)
           }

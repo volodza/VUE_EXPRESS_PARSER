@@ -12,7 +12,7 @@
       
 
     <v-content>
-      <Toolbar/>
+      <Toolbar style="position:sticky;z-index:100; top:0"/>
       <router-view style="background:#EDEEF0; height: 100%"></router-view>
     </v-content>
     <!-- <v-footer
