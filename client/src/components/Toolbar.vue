@@ -114,6 +114,7 @@ export default {
     display: flex
     align-items: center
     justify-content: space-between
+    background: #fcfbf9
     
   .menu
     display: flex
@@ -149,6 +150,9 @@ export default {
 
   .active
     border: 1px solid #b0b0b0 !important
+
+  .activeTask
+    background: #303030
       
   .btn-dropdown
     display: flex 

@@ -35,7 +35,6 @@
           </v-icon>
           </div>
 
-
         <div class="result">
          <GroupsResults v-if="this.$store.getters.task.type === 'groups'"/>
          <UsersResults v-if="this.$store.getters.task.type === 'users'"/>

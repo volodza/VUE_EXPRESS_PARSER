@@ -1,6 +1,6 @@
 <template>
   <div
-    :class="isActive ? 'mytasks active':'mytasks'"
+    :class="isActive ? 'mytasks activeTask':'mytasks'"
     ref=drop>
     <div class="number">
       <span>{{$store.getters.tasks.length}}</span>
@@ -13,22 +13,30 @@
 <style lang="sass" scoped>
   .mytasks
     position: relative
-    border: 1px solid #d7d7d7
+    border: 1px solid white
+    background: #4b4b4b
     border-radius: 2px
+    &:hover
+      background: #303030
     p
       padding: 5px 10px
-      color: black
+      color: white
       margin: 0
+    
 
   .number
     top: -8px
     right: -5px
-    width: 17px
-    background: #F27865
+    width: 18px
+    height: 18px
+    background: #f1c893
     position: absolute
-    color: white
+    color: black
     border-radius: 50%
-    text-align: center
+    span
+      position: absolute
+      left: 4.5px
+      bottom: 0
 
   // .active
     // border-color: #b0b0b0 

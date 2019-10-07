@@ -10,19 +10,26 @@
         </ul>
       </div>
 
+
        <div class="paginator">
         <p-paginator 
+        v-if="content"
         v-model="page"
         :length="pages">
         </p-paginator>
-        </div>
-      <div :class="idSelected.length===100?'square bg checkAll':'square checkAll'" @click="AllselectItem(content)">
-            <div v-if="idSelected.length===100" class="checkmark "></div>
       </div>
-        <span>Cтраница {{idSelected.length}} из {{pages}} </span>
+      <div v-if="content == null" class="loading">
+        <img src="../../../assets/logo.png" alt="">
+      </div>
+      <div :class="allSelect?'square bg checkAll':'square checkAll'" @click="AllselectItem(content)">
+            <div v-if="allSelect" class="checkmark "></div>
+      </div>
+        <span>Cтраница {{page}} из {{pages}} </span>
       </div>
 
+
   <div class="result">
+    
     <ul>
       <li
       v-for="item in content"
@@ -57,15 +64,18 @@
           <v-icon size='15'>mdi-vk</v-icon>{{ item.id }}
         </div>
           </div>
-        
+          <div class="icon">
+            <v-icon size='15'>mdi-account-search-outline</v-icon>
+            {{ item.members_count }}
+          </div>
        
 
-        <div class="icon">
-          <v-icon size='15'>mdi-account-search-outline</v-icon>
-          {{ item.members_count }}
-        </div>
+
       </li>
+
+
     </ul>
+
  
   </div>
   </div>
@@ -116,7 +126,8 @@
           li:last-child
             margin-right: 0
       .paginator
-        margin-top: 10px
+        margin-top: 8px
+        margin-bottom: 3px
       
 
     .result
@@ -160,7 +171,7 @@
     &:hover
       border: 1px solid #b0b0b0    
   .bg
-    background: #999999
+    background: #999999 !important
 
   .checkmark
     left: 5px
@@ -173,12 +184,32 @@
     border-width: 0 2px 2px 0
     -webkit-transform: rotate(45deg)
     transform: rotate(45deg) 
+
+  .loading
+    background: #EDEEF0
+    display: flex
+    justify-content: center
+    height: 40px
+    margin-bottom: 3px
+    img
+      height: 40px
+      width: 40px
+      transform: rotate(720deg)
+      animation: target 1s infinite linear
+
+  @keyframes target 
+    from
+      transform: rotate(0deg)
+    to
+      transform: rotate(360deg)
   
   @media screen and (max-width: 600px)
     .icon
       left: 80% !important
     .groupInfo
       width: 57% !important
+
+  
     
 </style>
 
@@ -204,10 +235,18 @@
         return this.$store.getters.count
       }      
 },
-          watch: {
+    watch: {
       page(){
         this.$store.commit('setPage',this.page);
-      }
+      },
+
+      allSelect() {
+        this.allSelect?this.idSelected=this.content.map(x=>x.id):this.idSelected=[]
+        
+      },
+      // idSelected(){
+      //   this.idSelected==this.content.map(x=>x.id)?this.q=true:this.q=false
+      // }
     },
     methods:{
       selectItem(item){
@@ -217,13 +256,9 @@
           this.$emit('input',item.value)
       },
       AllselectItem(content){
-          let q = 0        
-          for(let i=0;i<content.length;i++){
-            if(this.idSelected[q]==content[i].id){
-              this.idSelected.splice(q,1); }
-             else{this.idSelected.push(content[i].id); };
-            // this.idSelected.push(content[i].id)
-          }
+        this.allSelect=!this.allSelect
+        // this.allSelect?this.idSelected=this.content.map(x=>x.id):this.idSelected=[]
+          
       }      
     }
     

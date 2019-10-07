@@ -13,17 +13,17 @@
               v-if="task.status === 'loading'"
               indeterminate
               color="primary"
-              size="28"
+              size="30"
             ></v-progress-circular>
             <v-icon
               v-else-if="task.status === 'complete'"
-              size="35"
-              color="green"
+              size="30"
+              color="black"
               >mdi-check-circle-outline
             </v-icon>
             <v-icon
               v-else-if="task.status === 'error'"
-              size="35"
+              size="30"
               color="red"
               >mdi-close-circle-outline
             </v-icon>
@@ -41,12 +41,12 @@
           </a>
           <span v-else>{{ task.title }}</span>
           
-          <div style="font-size:12px">
-            <v-icon size="17">mdi-calendar</v-icon>
+          <div >
+            <v-icon size="15">mdi-calendar</v-icon>
 
             {{ task.begin.slice(0,10) }}
             <v-icon
-              size="17"
+              size="15"
               v-if="task.count"
               >mdi-account-search-outline
             </v-icon>
@@ -55,12 +55,11 @@
         </div>
 
         <div class="icon">
-          <v-icon size="17" color="black">mdi-file-document-box-outline</v-icon>
-          <v-icon size="17" color="black">mdi-star-outline</v-icon>
+          <v-icon size="15" >mdi-file-document-box-outline</v-icon>
+          <v-icon size="15" >mdi-star-outline</v-icon>
           <v-icon 
           @click="deleteTask(task)"
-          size="17" 
-          color="black">
+          size="15">
           mdi-delete-outline
           </v-icon>
         </div>
@@ -80,33 +79,38 @@
     top: 10px
     transition: 0.2s
     ul
-      z-index: 8
-      padding: 0 5px
+      padding: 0 
       position: absolute
-      background-color: white
-      border: 1px solid #d7d7d7
+      background-color: #fcfbf9
+      border-left: 1px solid #8d857c
+      border-right: 1px solid #8d857c
       cursor: default
+      color: black
       li
         display: flex
         align-items: center
-        padding: 4px 0
-        border-bottom: 1px dashed #d7d7d7
+        padding: 4px 10px
+        border-bottom: 1px dashed #303030
       li:last-child
-        border-bottom: none
+        border-bottom: 1px solid #8d857c
     
     .avatar
-      margin: 0 8px
+      margin: 0 10px
     .icon
       display: flex
       cursor: pointer
       i
+        color: black
         padding: 0 2px
+        
     .taskInfo
       display: flex
       flex-direction: column
-      font-size: 14px
-      min-width: 180px
-
+      font-size: 13px
+      min-width: 250px
+      i
+        color: black
+  
 
     // .overlay:target
     //   display: block
