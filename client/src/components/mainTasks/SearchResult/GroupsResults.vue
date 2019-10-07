@@ -9,7 +9,7 @@
           <li></li>
         </ul>
       </div>
-
+      <!-- {{notSelected}} -->
 
        <div class="paginator">
         <p-paginator 
@@ -21,8 +21,11 @@
       <div v-if="content == null" class="loading">
         <img src="../../../assets/logo.png" alt="">
       </div>
-      <div :class="allSelect?'square bg checkAll':'square checkAll'" @click="AllselectItem(content)">
-            <div v-if="allSelect" class="checkmark "></div>
+      <div 
+        :class="isAllSelected ? 'square bg checkAll' : 'square checkAll' " 
+        @click="isAllSelected = !isAllSelected"
+      >
+        <div v-if="isAllSelected" class="checkmark"></div>
       </div>
         <span>Cтраница {{page}} из {{pages}} </span>
       </div>
@@ -32,11 +35,14 @@
     
     <ul>
       <li
-      v-for="item in content"
-      :key="item.id"
+        v-for="item in content"
+        :key="item.id"
       >
-      <div :class="idSelected.includes(item.id)?'square bg':'square'" @click="selectItem(item)">
-            <div v-if="idSelected.includes(item.id)" class="checkmark "></div>
+      <div 
+        :class="checkSelected(item)?'square bg':'square'" 
+        @click="changeSelect(item)"
+      >
+        <div v-if="checkSelected(item)" class="checkmark "></div>
       </div>
       <!-- <p-checkbox 
       @click="selectItem(item)"
@@ -218,13 +224,12 @@
     data () {
       return {
         page: 1,
-        idSelected: [],
-        allSelect: false
+        areSelected: [],
+        areNotSelected:[],
+        isAllSelected: true
       }
     },
     computed:{
-      
-     
       content (){
         return this.$store.getters.result
       },
@@ -233,33 +238,40 @@
       },
       count(){
         return this.$store.getters.count
-      }      
-},
+      },         
+    },
     watch: {
       page(){
         this.$store.commit('setPage',this.page);
       },
 
-      allSelect() {
-        this.allSelect?this.idSelected=this.content.map(x=>x.id):this.idSelected=[]
-        
+      isAllSelected(val) {
+        val ? this.areNotSelected = [] : this.areSelected = []
       },
-      // idSelected(){
-      //   this.idSelected==this.content.map(x=>x.id)?this.q=true:this.q=false
-      // }
     },
     methods:{
-      selectItem(item){
-        if(this.idSelected.includes(item.id)){
-          this.idSelected=this.idSelected.filter(x => x != item.id)}
-        else{this.idSelected.push(item.id)};
-          this.$emit('input',item.value)
+      checkSelected(item){
+        return this.isAllSelected ? !this.areNotSelected.includes(item.id) : this.areSelected.includes(item.id)
       },
-      AllselectItem(content){
-        this.allSelect=!this.allSelect
-        // this.allSelect?this.idSelected=this.content.map(x=>x.id):this.idSelected=[]
-          
-      }      
+      changeSelect(item){
+        if(this.isAllSelected){
+          if(this.areNotSelected.includes(item.id)){
+            this.areNotSelected.filter(x=>x != item.id)
+          } else {
+            this.areNotSelected.push(item.id)
+          }
+        } else {
+          if(this.areSelected.includes(item.id)){
+            this.areSelected.filter(x=>x != item.id)
+          } else {
+            this.areSelected.push(item.id)
+          }
+        }
+
+      },
+      // AllselectItem(content){
+      //   this.allSelect=!this.allSelect  
+      // }      
     }
     
   }
