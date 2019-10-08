@@ -27,7 +27,7 @@
       >
         <div v-if="selectAll" class="checkmark"></div>
       </div>
-        <span>Cтраница {{page}} из {{pages}} </span>
+        <span>Cтраница {{page}} из {{pages}}</span>
       </div>
 
 
@@ -227,7 +227,6 @@
         areSelected: [],
         areNotSelected:[],
         isAllSelected: true,
-        
       }
     },
     computed:{
@@ -243,8 +242,8 @@
       selectAll(){
         return (this.isAllSelected && !this.areNotSelected.length) 
       }
-              
     },
+
     watch: {
       page(){
         this.$store.commit('setPage',this.page);
@@ -253,6 +252,12 @@
       isAllSelected(val) {
         val ? this.areNotSelected = [] : this.areSelected = []
       },
+      areNotSelected(){
+        if(this.areNotSelected.length==this.content.length){this.isAllSelected=false}
+      },
+      areSelected(){
+        if(this.areSelected.length==this.content.length){this.isAllSelected=true}
+      }
     },
     methods:{
       checkSelected(item){
@@ -274,9 +279,7 @@
         }
 
       },
-      // AllselectItem(content){
-      //   this.allSelect=!this.allSelect  
-      // }      
+     
     }
     
   }

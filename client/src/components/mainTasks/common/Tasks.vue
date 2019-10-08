@@ -124,7 +124,9 @@
           
   @media screen and (max-width: 820px)
     .taskList
-      right: 110px
+      right: 113px
+    .taskInfo
+      min-width: 170px !important
 </style>
 
 <script>

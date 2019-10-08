@@ -98,7 +98,7 @@ export default {
     padding: 10px 20px
     cursor: pointer
     &:hover
-      background-color: #323232 
+      // background-color: #323232 
       color: rgba(255, 255, 255, 0.4)
 
     .submenu_icon
