@@ -163,17 +163,19 @@ export default {
       else{this.Mselected.push(item.title)};
       this.$emit('input',item.value)
     },
-    // onMouseUp(e){ 
-    //   const up = this.$refs.drop
-    //   if (!up.contains(e.target)){
-    //     this.isActive = false
-    //     }
-    // }
+    onMouseUp(e){ 
+      if(e.target){
+      const up = this.$refs.drop
+      if (!up.contains(e.target)){
+        this.isActive = false
+        }
+    }
+    }
   },
   
-  // mounted() { 
-  //   document.addEventListener('mouseup', this.onMouseUp); 
-  // },
+  mounted() { 
+    document.addEventListener('mouseup', this.onMouseUp); 
+  },
 
 }
 </script>

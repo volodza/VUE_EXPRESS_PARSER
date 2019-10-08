@@ -90,11 +90,13 @@ export default {
       });
     },
     onMouseUp(e){ 
+       if(e.target){
       const up = this.$refs.drop
       if (!up.contains(e.target)){
         this.isActive = false
         }
     }  
+    }
   },
 
     mounted() { 
