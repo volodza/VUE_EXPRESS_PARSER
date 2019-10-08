@@ -59,6 +59,7 @@
         </div>
 
           <div class="groupInfo" >
+            <span>
             <a 
             target='_blank' 
             :href="'http://vk.com/public'+item.id"
@@ -66,6 +67,7 @@
           >
             {{ item.name }}
           </a>
+          </span>
            <div >
           <v-icon size='15'>mdi-vk</v-icon>{{ item.id }}
         </div>
@@ -165,6 +167,7 @@
       display: flex
       flex-direction: column
       width: 65%
+      a
 
   .square
     cursor: pointer

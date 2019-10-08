@@ -1,7 +1,8 @@
 <template>
-  <div class="overlay" >
-  <div class="searchResults" ref=drop>
-      <div class="header">
+<div>
+  <div class="overlay" @click="close()"></div>
+  <div class="searchResults" >
+      <div class="header" ref=drop>
 
           <div class="headerInfo"> 
             <div>
@@ -42,9 +43,9 @@
          <!-- <PostsResults/> -->
         </div>
 
-
+</div>
   </div>
-  </div>
+  
 </template>
 
 
@@ -100,18 +101,20 @@
         this.closeDialog()
         this.page = 1;
       },
-      onMouseUp(e){ 
-      const up = this.$refs.drop
-      if (!up.contains(e.target)){
-        this.closeDialog()
-        this.page = 1;
-        }
-    }
+    //   onMouseUp(e){ 
+    //   if(e.target){
+    //   const up = this.$refs.drop
+    //   if (!up.contains(e.target)){
+    //     this.closeDialog()
+    //     this.page = 1;
+    //     }
+    // }
+    // }
     },
 
-  mounted() { 
-    document.addEventListener('mouseup', this.onMouseUp); 
-  }
+  // mounted() { 
+  //   document.addEventListener('mouseup', this.onMouseUp); 
+  // }
 
   }
 </script>
@@ -124,11 +127,13 @@
     height: 100%
     position: fixed
     top: 0
-    z-index: 7
+    z-index: 1
     left: 0
     cursor: default
 
   .searchResults
+    cursor: default
+    z-index: 8
     max-width: 600px
     position: fixed
     top: 5%
