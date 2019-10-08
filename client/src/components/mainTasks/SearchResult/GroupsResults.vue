@@ -9,8 +9,6 @@
           <li></li>
         </ul>
       </div>
-      <!-- {{notSelected}} -->
-
        <div class="paginator">
         <p-paginator 
         v-if="content"
@@ -255,11 +253,11 @@
       isAllSelected(val) {
         val ? this.areNotSelected = [] : this.areSelected = []
       },
-      areNotSelected(){
-        if(this.areNotSelected.length==this.content.length){this.isAllSelected=false}
+      areNotSelected(val){
+        if(this.areNotSelected.length==this.count && this.isAllSelected){this.isAllSelected=false}
       },
-      areSelected(){
-        if(this.areSelected.length==this.content.length){this.isAllSelected=true}
+      areSelected(val){
+        if(this.areSelected.length==this.count){this.isAllSelected=true}
       }
     },
     methods:{
