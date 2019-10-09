@@ -40,6 +40,7 @@ export default {
 
   .dark
     color: white
+    background: #303030 !important
 
   .light
     color: black

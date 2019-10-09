@@ -1,141 +1,93 @@
 <template>
   <v-container grid-list-xl fluid>
-    <div>
-      <h1 class="display-1 mb-3">Пользователи ВКонтакте</h1>
+    <div class="mb-3">
+      <h1 class="display-1">Пользователи ВКонтакте</h1>
     </div>
 
     <v-layout flex-child wrap>
-      <v-flex xs12 md8 class="border">
+      <v-flex xs12 md8 style="padding-top: 0">
         <v-flex class="white">
           <!-- Textarea -->
           <v-layout row wrap>
             <v-flex xs12>
               <label>Ключевые слова</label>
-              <v-textarea
-                rows="4"
-                solo
-                class="border"
-                name="input-7-1"
+              <p-textarea
                 label="По одному слову в строке"
-                flat
                 v-model="textarea.value"
-                hide-details
-              ></v-textarea>
+              ></p-textarea>
             </v-flex>
           </v-layout>
 
-          <v-layout row wrap mx-0>
-            <v-checkbox 
-              height="6px" 
-              :label="`Только с фотографией`" 
-              v-model="checkboxes.hasPhoto"
-            ></v-checkbox>
-
-            <v-checkbox
-              height="6px"
+          <v-layout column wrap mx-0>
+            <p-checkbox
               :label="`Точное вхождение поисковой фразы`"
               v-model="checkboxes.exactMatch"
-            ></v-checkbox>
+            ></p-checkbox>
+
+            <p-checkbox 
+              :label="`Только с фотографией`" 
+              v-model="checkboxes.hasPhoto"
+            ></p-checkbox>
           </v-layout>
 
           <v-layout wrap>
             <v-flex xs12 sm6>
               <label>Пол</label>
-              <v-select
-                solo
-                class="border"
-                flat
+              <p-select
                 label="Выберите пол"
                 :items="selects.sex.items"
                 v-model="selects.sex.selected"
-                item-text="title"
-                item-value="id"
-                hide-details
-              ></v-select>
+              ></p-select>
             </v-flex>
 
             <v-flex xs12 sm6>
               <label>Семейное положение</label>
-              <v-select
-                solo
-                class="border"
-                flat
+              <p-select
                 label="Выберите семейное положение"
                 :items="selects.status.items"
                 v-model="selects.status.selected"
-                item-text="title"
-                item-value="id"
-                hide-details
-              ></v-select>
+              ></p-select>
             </v-flex>
           </v-layout>
 
-          <label>Возраст</label>
-          <v-layout wrap>
+          
+          <v-layout wrap style="display: flex; align-items: flex-end">
+            
             <v-flex xs6 sm3 pt-0>
-              <v-text-field
-                class="border"
-                hide-details
-                solo
-                flat
+              <label>Возраст</label>
+              <p-input
                 label="От"
                 v-model="inputs.age.from"
-              ></v-text-field>
+              ></p-input>
             </v-flex>
 
             <v-flex xs6 sm3 pt-0>
-              <v-text-field
-                class="border"
-                hide-details
-                solo
-                flat
+              <p-input
                 v-model="inputs.age.to"
                 label="До"
-              ></v-text-field>
+              ></p-input>
             </v-flex>
 
             <v-flex xs6 sm3 pt-0>
-              <v-autocomplete
-                class="border"
-                flat
+              <label>Геолокация</label>
+              <p-autocomplete
                 v-model="selects.country.selected"
                 :loading="selects.country.loading"
                 :items="selects.country.items"
                 :search-input.sync="selects.country.search"
-                hide-no-data
-                hide-details
-                item-text="title"
-                item-value="id"
                 label="Страна"
-                solo
-              ></v-autocomplete>
+              ></p-autocomplete>
             </v-flex>
 
             <v-flex xs6 sm3 pt-0>
-              <v-autocomplete
-                class="border"
-                flat
+              <p-autocomplete
                 :disabled="!selects.country.selected"
                 v-model="selects.city.selected"
                 :loading="selects.city.loading"
                 :items="selects.city.items"
                 :search-input.sync="selects.city.search"
-                hide-no-data
-                hide-details
-                item-text="title"
-                item-value="id"
                 label="Город"
-                solo
               >
-                <template v-slot:no-data>
-                  <v-list-tile>
-                    <v-list-tile-title>
-                      Search for your favorite
-                      <strong>Cryptocurrency</strong>
-                    </v-list-tile-title>
-                  </v-list-tile>
-                </template>
-
                 <template v-slot:item="{ item }">
                   <v-list-tile-avatar
                     color="indigo"
@@ -146,7 +98,7 @@
                     <v-list-tile-sub-title v-text="item.region"></v-list-tile-sub-title>
                   </v-list-tile-content>
                 </template>
-              </v-autocomplete>
+              </p-autocomplete>
             </v-flex>
           </v-layout>
 
@@ -169,40 +121,28 @@
           <label>Название задачи</label>
           <v-layout wrap>
             <v-flex xs12 sm6 md8 pt-0>
-              <v-text-field 
-                class="border" 
+              <p-input 
                 v-model="inputs.taskTitle"
-                flat 
-                solo 
                 label="Любое название (для себя)" 
-                hide-details
-              ></v-text-field>
+              ></p-input>
             </v-flex>
 
             <v-flex xs12 sm6 md4 pt-0>
-              <v-btn
-                class="mt-0"
-                style="height:50px;             
-            font-size:20px; 
-            text-transform:none; 
-            background: linear-gradient(160deg,#4f555e,#4f555e,#5c6e68,#7f6b67); 
-            color:white"
-                block
-                flat
-                hide-details
+              <p-btn
+                dark
                 @click="getUsers"
                 :loading="!answer"
               >
-                <v-icon style="margin-right: 5px">mdi-play</v-icon>
+                <v-icon style="margin-right: 5px; color: white">mdi-play</v-icon>
                 <label>Начать поиск</label>
-              </v-btn>
+              </p-btn>
             </v-flex>
           </v-layout>
         </v-flex>
       </v-flex>
 
       <v-flex xs12 md4 pt-0>
-        <v-flex style="background:#e7fbed;font-size:13px">
+        <v-flex style="background:white;font-size:13px">
           <h1>Описание</h1>
           <p>
             В поиске пользователей можно искать людей по полу,
@@ -313,8 +253,8 @@ export default {
         ageTo: +this.inputs.age.to,
         status: this.selects.status.selected,
         sex: this.selects.sex.selected,
-        city: this.selects.city.selected,
-        country: this.selects.country.selected,
+        city_id: this.selects.city.selected,
+        country_id: this.selects.country.selected,
         title: this.inputs.taskTitle || "Поиск > Пользователи",
         user_id: this.$store.getters.user.id
       };

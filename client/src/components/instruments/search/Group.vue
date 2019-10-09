@@ -5,7 +5,7 @@
     </div>
 
     <v-layout flex-child wrap >
-      <v-flex xs12 md8 class="border" style="padding-top: 0">
+      <v-flex xs12 md8 style="padding-top: 0">
         <v-flex class="white">
           <!-- Textarea -->
           <v-layout row wrap>
@@ -84,20 +84,12 @@
 
             <v-flex xs6 md3 pt-0>
               <p-autocomplete
-              
-                class="border"
-                flat
                 :disabled="!selects.country.selected"
                 v-model="selects.city.selected"
                 :loading="selects.city.loading"
                 :items="selects.city.items"
                 :search-input.sync="selects.city.search"
-                hide-no-data
-                hide-details
-                item-text="title"
-                item-value="id"
                 label="Город"
-                solo
               >
                 <template v-slot:item="{ item }">
                   <v-list-tile-avatar
@@ -129,7 +121,7 @@
             </v-flex>
 
             <v-flex xs12 sm6 md4 pt-0>
-              <p-btn dark color="#303030" @click="getGroups">Начать поиск</p-btn>
+              <p-btn dark @click="getGroups">Начать поиск</p-btn>
             </v-flex>
             
           </v-layout>

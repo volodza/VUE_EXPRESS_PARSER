@@ -66,7 +66,7 @@
       </li>
     </ul>
     <!-- <div class="overlay"> -->
-    <SearchResults v-if="dialog" :closeDialog='closeDialog' />
+    <SearchResults  v-if="dialog" :closeDialog='closeDialog' />
     <!-- </div> -->
   </div>
 </template>
@@ -78,6 +78,7 @@
     position: relative
     top: 10px
     transition: 0.2s
+    z-index: 1
     ul
       padding: 0 
       position: absolute
@@ -110,17 +111,7 @@
       min-width: 250px
       i
         color: black
-  
 
-    // .overlay:target
-    //   display: block
-      
-
-  // .result
-  //   position: absolute
-  //   top: 5%
-  //   right: 50%
-  //   z-index: 3
           
   @media screen and (max-width: 820px)
     .taskList
