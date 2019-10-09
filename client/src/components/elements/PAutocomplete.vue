@@ -81,6 +81,7 @@ export default {
   mounted() {
     document.addEventListener('mouseup', this.onMouseUp);
   },
+  
 }
 </script>
 
