@@ -1,8 +1,8 @@
 <template>
-  <div class="search">
-    <input 
+  <div ref=drop>
+    <input
+      class="search" 
       :placeholder="label"
-      class="search_input" 
       type="text"
       :value="searchInput"
       @input="$emit('update:searchInput', $event.target.value)"
@@ -11,15 +11,18 @@
       :disabled='disabled'
     >
 
-    <div v-if="isActive" class="dropdown">
+    <div v-if="isActive && filteredItems.length" class="dropdown">
       <ul>
         <li 
+          style="line-height:1.2"
           :class="selected == item.title ? 'active' : ''" 
           v-for="(item,i) in filteredItems" 
           :key="i"
           @click="selectItem(item)"
         >
-          {{item.title}}
+          {{item.title}} <br> 
+          <span style="font-size:10px;color:grey" v-if="item.area">{{item.area}}<br></span>
+          <span style="font-size:10px;color:grey" v-if="item.region">{{item.region}}</span> 
         </li>
       </ul>
     </div>
@@ -30,7 +33,7 @@
 export default {
   props:{
     value:{
-      type:String
+      type:Number
     },
     label:{
       type:String,
@@ -59,6 +62,14 @@ export default {
       this.isActive = false;
       this.$emit('input',item.id)
       this.$emit('update:searchInput', item.title)
+    },
+    onMouseUp(e){ 
+      if(e.target){
+        const up = this.$refs.drop
+        if (!up.contains(e.target)){
+          this.isActive = false
+        }
+      }
     }
   },
   computed: {
@@ -67,9 +78,9 @@ export default {
       return this.items.filter(el => el.title.match(filter))
     }
   },
-  // mounted() {
-  //   document.addEventListener('mouseup', this.isActive = false);
-  // },
+  mounted() {
+    document.addEventListener('mouseup', this.onMouseUp);
+  },
 }
 </script>
 
@@ -78,14 +89,15 @@ export default {
   border: 1px solid #d7d7d7
   border-radius: 2px
   min-height: 35px
-  width: auto
+  width: 100%
   position: relative
+  padding-left: 5px
+  outline: 0
   // margin-right: 60px
 
 .dropdown
   position: relative
   max-height: 200px
-  margin-top: 30px
   // overflow-y: auto
 
   ul
@@ -95,7 +107,7 @@ export default {
     z-index: 8
     max-height: 200px
     overflow-y: auto
-    // width: 100%
+    width: 100%
     position: absolute
     li 
       cursor: pointer
