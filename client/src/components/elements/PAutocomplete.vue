@@ -81,6 +81,9 @@ export default {
   mounted() {
     document.addEventListener('mouseup', this.onMouseUp);
   },
+  destroyed() { 
+    document.removeEventListener('mouseup', this.onMouseUp); 
+  },
   
 }
 </script>

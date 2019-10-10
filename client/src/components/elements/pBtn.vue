@@ -35,12 +35,13 @@ export default {
     -webkit-user-select: none
     user-select: none
 
-    &:hover
-      opacity: .95
 
   .dark
     color: white
-    background: #303030 !important
+    background: #4b4b4b !important
+    &:hover
+      background: #303030 !important
+
 
   .light
     color: black

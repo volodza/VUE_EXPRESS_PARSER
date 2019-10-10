@@ -1,11 +1,11 @@
 <template >
   <div class='header' >
     <ul class='menu drop'>
-      <li class='menu-item'><a href="#">Home</a> </li>
-      <li class='menu-item'><a href="#">Поиск ЦА</a> </li>
-      <li class='menu-item'><a href="#">Модератор</a> </li>
-      <li class='menu-item'><a href="#">Обучение</a> </li>
-      <li class='menu-item'><a @click='vkAuth' href="#">Магазин</a> </li>
+      <li class='menu-item'><a href="#"> <v-icon>mdi-home</v-icon> </a> </li>
+      <!-- <li class='menu-item'><a href="#">Поиск ЦА</a> </li> -->
+      <!-- <li class='menu-item'><a href="#">Модератор</a> </li> -->
+      <!-- <li class='menu-item'><a href="#">Обучение</a> </li> -->
+      <!-- <li class='menu-item'><a @click='vkAuth' href="#">Магазин</a> </li> -->
     </ul>
 
 
@@ -19,9 +19,9 @@
         <a href="https://vk.com/ads?act=no_office"><strong>РК</strong></a>
       </li>
 
-      <li class="menu-item drop"><a href="#">0р</a> </li>
+      <!-- <li class="menu-item drop"><a href="#">0р</a> </li> -->
 
-      <li class="menu-item drop"><p>Тариф 'Бесплатный'</p> </li>
+      <!-- <li class="menu-item drop"><p>Тариф 'Бесплатный'</p> </li> -->
 
       <li :class="isActive ? 'menu-item active':'menu-item'" ref=drop>
         <div class="btn-dropdown" @click="isActive = !isActive">
@@ -102,6 +102,9 @@ export default {
     mounted() { 
   document.addEventListener('mouseup', this.onMouseUp); 
   },
+  destroyed() { 
+    document.removeEventListener('mouseup', this.onMouseUp); 
+  },  
 
   created: function (){ 
     this.checkUserLogin() 

@@ -164,6 +164,9 @@ export default {
       this.$emit('input',item.value)
     },
     onMouseUp(e){ 
+      // var elem=this.$refs.drop
+      // if(!elem.contains(event.target))
+      // this.isActive = false
       if(e.target){
       const up = this.$refs.drop
       if (!up.contains(e.target)){
@@ -174,8 +177,11 @@ export default {
   },
   
   mounted() { 
+  // if(this.isActive){
     document.addEventListener('mouseup', this.onMouseUp); 
   },
-
+  destroyed() { 
+    document.removeEventListener('mouseup', this.onMouseUp); 
+  },
 }
 </script>

@@ -27,19 +27,17 @@
   .number
     top: -8px
     right: -5px
-    width: 18px
+    width: 20px
     height: 18px
     background: #f1c893
     position: absolute
     color: black
     border-radius: 50%
+    display: flex
+    justify-content: center
     span
       position: absolute
-      left: 4.5px
       bottom: 0
-
-  // .active
-    // border-color: #b0b0b0 
 
 </style>
 
@@ -67,6 +65,9 @@ export default {
 
   mounted() { 
     document.addEventListener('mouseup', this.onMouseUp); 
+  },
+  destroyed() { 
+    document.removeEventListener('mouseup', this.onMouseUp); 
   }
 }
 </script>

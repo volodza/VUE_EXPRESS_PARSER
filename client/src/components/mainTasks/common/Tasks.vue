@@ -77,6 +77,7 @@
     flex-direction: column
     position: relative
     top: 10px
+    right: 190px
     transition: 0.2s
     z-index: 1
     ul
