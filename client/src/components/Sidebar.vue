@@ -56,7 +56,8 @@ export default {
             { title: "Друзья", icon: "mdi-account", url: "/friends" },
             { title: "Обсуждения", icon: "mdi-human-male-boy", url: "/Discussions"},
             { title: "Родственники", icon: "mdi-gift-outline", url: "/Relatives"},
-            { title: "Участники", icon: "mdi-new-box", url: "/subscribers", iconColor: "red"},
+            { title: "Топ участники", icon: "mdi-new-box", url: "/main/topParticipant"},
+            { title: "Участники", icon: "mdi-new-box", url: "/main/participant"},
             { title: "Недавно вступившие", icon: "mdi-new-box", url: "/recentlyjoin", iconColor: "red"},
             { title: "Комментарии", icon: "mdi-human-male-boy", url: "/Comments" }
           ]

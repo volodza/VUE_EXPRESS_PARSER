@@ -134,7 +134,6 @@ export default {
     },
     label:{
       type:String,
-      default:'label'
     },
     multiple:{
       type:Boolean

@@ -36,6 +36,7 @@ export default {
     display: flex
     margin: 2px
     user-select: none
+    align-items: center
     span
       cursor: pointer
       margin-left: 7px
@@ -44,10 +45,8 @@ export default {
 
   .square
     cursor: pointer
-    // display: flex
-    // align-items: flex-end
     height: 20px
-    width: 20px
+    min-width: 20px
     border: 1px solid #d7d7d7
     border-radius: 2px
     transition: 0.3s 
@@ -57,7 +56,7 @@ export default {
     background: #999999
 
   .checkmark
-    left: 5px
+    left: 6px
     bottom: 1px
     top: 1px
     position: relative

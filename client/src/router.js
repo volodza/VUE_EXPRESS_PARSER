@@ -6,6 +6,8 @@ import MainPage from '@/views/MainPage'
 
 import Group from '@/components/instruments/search/Group'
 import Users from '@/components/instruments/search/Users'
+import Participant from '@/components/instruments/collection/Participant'
+import topParticipant from '@/components/instruments/collection/topParticipant'
 
 Vue.use(Router)
 
@@ -31,7 +33,17 @@ export default new Router({
                     path: 'users',
                     name: 'users',
                     component: Users
-                }
+                },
+                {
+                    path: 'Participant',
+                    name: 'Participant',
+                    component: Participant
+                },
+                {
+                    path: 'topParticipant',
+                    name: 'topParticipant',
+                    component: topParticipant
+                },
             ]
         }
         // {
