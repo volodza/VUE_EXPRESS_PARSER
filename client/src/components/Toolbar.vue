@@ -50,7 +50,6 @@ import myTasks from '@/components/mainTasks/myTasks'
 
 export default {
   components:{
-    
     myTasks
   },
   data(){

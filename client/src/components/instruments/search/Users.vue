@@ -104,8 +104,10 @@
 
           <!-- <div class="font-weight-medium mt-3">Поиск по</div> -->
           <label>Поиск по</label>
-          <v-radio-group v-model="radiogroup.selected" style="margin-top:0px" row>
-            <v-radio label="Интересам" value="interests"></v-radio>
+          <p-radio-group 
+          :items="radiogroup.items"
+          v-model="radiogroup.selected">
+            <!-- <v-radio label="Интересам" value="interests"></v-radio>
             <v-radio label="Должности" value="position"></v-radio>
             <v-radio label="Месту работы" value="workplace"></v-radio>
             <v-radio label="Религии" value="religion"></v-radio>
@@ -113,10 +115,10 @@
             <v-radio label="Фамилии" value="surname"></v-radio>
             <v-radio label="Имени + Фамилии" value="name+surname"></v-radio>
             <v-radio label="Статусу" value="status"></v-radio>
-            <v-radio label="Имени ребенка" value="childname"></v-radio>
-          </v-radio-group>
+            <v-radio label="Имени ребенка" value="childname"></v-radio> -->
+          </p-radio-group>
 
-          <v-divider class="mb-4"></v-divider>
+          <v-divider class="my-4"></v-divider>
 
           <label>Название задачи</label>
           <v-layout wrap>
@@ -183,6 +185,17 @@ export default {
       },
 
       radiogroup: {
+        items:[
+          {title: 'Интересам', id:0 },
+          {title: 'Должности', id:1 },
+          {title: 'Месту работы', id:2 },
+          {title: 'Религии', id:3 },
+          {title: 'Имени', id:4 },
+          {title: 'Фамилии', id:5 },
+          {title: 'Имени + Фамилии', id:6 },
+          {title: 'Статусу', id:7 },
+          {title: 'Имени ребенка', id:8 }
+        ],
         selected: null
       },
 

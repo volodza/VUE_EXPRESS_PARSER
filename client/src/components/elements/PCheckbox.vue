@@ -1,7 +1,8 @@
 <template>
-  <div class="checkbox">
-    <div :class="value == true ? 'square bg':'square'" @click="check">
-      <div v-if="value == true" class="checkmark"></div>
+  <div class="checkbox"
+   >
+    <div :class="value == true ? 'square bg':'square'" @click="check" >
+      <div  v-if="value == true" class="checkmark"></div>
     </div>
     <span v-if="label" @click="check">{{label}}</span>
   </div>

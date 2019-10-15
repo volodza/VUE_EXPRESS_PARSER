@@ -37,7 +37,7 @@
 export default {
   data () {
     return {
-      selected: null,
+      selected:null,
       isActive:null,
       links:[
         {
@@ -73,7 +73,6 @@ export default {
 
     }
   },
-
   methods:{
     selectChild(child){
       this.$router.push(child.url)
