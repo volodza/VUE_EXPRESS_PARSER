@@ -8,7 +8,7 @@
     <div class="nav-heading">Инструменты</div>
 
     <div v-for="(link,i) in links" :key="i">
-      <v-layout @click="selectLink(link)" :class="isActive==link.title?'nav-submenu select':'nav-submenu'" >
+      <v-layout @click="selectLink(link)" :class="[{'select': isActive==link.title}, 'nav-submenu']" >
         <v-icon class="submenu_icon" size="16">mdi-magnify</v-icon>
         <span>{{link.title}}</span>
         <v-spacer></v-spacer>
@@ -18,11 +18,11 @@
       </v-layout>
 
       <transition name="slide-fade">
-        <ul v-if="isActive == link.title">
+        <ul v-show="isActive == link.title">
           <li 
             v-for="(child,j) in link.children" 
             :key="j" 
-            :class="selected==child.title?'nav-submenu select':'nav-submenu'"
+            :class="[{'select':selected==child.title},'nav-submenu']"
             @click="selectChild(child)"
           >
             {{child.title}}
@@ -129,16 +129,9 @@ export default {
 
   .slide-fade-enter-active 
     transition: all .3s ease
-
-  // .slide-fade-leave-active 
-  //   transition: all .03s cubic-bezier(1.0, 0.5, 0.8, 1.0)
-
   .slide-fade-enter
     transform: translateX(10px)
     opacity: 0
-  // .slide-fade-leave-to
-  //   transform: translateX(10px)
-  //   opacity: 0
   ::-webkit-scrollbar-button 
     background-image: url('') 
     background-repeat: no-repeat

@@ -11,20 +11,19 @@
           ></p-textarea>
         </div>
 
-        <div class="layout">
+        <div class="layout input">
           <!-- <div class="flex col-sm-6 col-xs-12"> -->
           <!-- <label>Каких участников собирать?</label> -->
           <!-- <div style=""> -->
-            
-          <div class="flex col-sm-3 col-xs-6">
-            <label>Топ каких участников собирать?</label>
+            <!-- <div class=""> -->
+            <div class="flex"><label>Топ каких участников собирать?</label>
             <p-input
               v-model="inputs.party.from"
               label="От"
             ></p-input>
           </div>
 
-          <div class="flex col-sm-3 col-xs-6">
+          <div class="flex ">
             <p-input
               v-model="inputs.party.to"
               label="До"
@@ -32,7 +31,7 @@
           </div>
           <!-- </div>  -->
 
-          <div class="flex col-sm-3 col-xs-6">
+          <div class="flex">
             <label>Пребывают в группах</label>
             <p-input
               v-model="inputs.groups.from"
@@ -40,7 +39,7 @@
             ></p-input>
           </div>
 
-          <div class="flex col-sm-3 col-xs-6">
+          <div class="flex">
             <p-input
               v-model="inputs.groups.to"
               label="До"
@@ -84,6 +83,7 @@
     flex-wrap: wrap
     padding: 0 12px
     display: flex
+    align-items: flex-start
     .content
       display: flex
       flex-direction: column
@@ -104,7 +104,11 @@
 
   h1
     font-size: 40px
-    padding-left: 12px    
+    padding-left: 12px  
+
+  .input
+    .flex
+      flex: 1 
     
 </style>
 

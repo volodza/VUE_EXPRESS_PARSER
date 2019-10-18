@@ -4,8 +4,8 @@
     v-for="(item,i) in items"
     :key='i'
     class="radio">
-    <div class='square' @click="select(item)">
-      <div v-if="selected==item.title" class="select"></div>
+    <div :class="[{'active':selected==item.title},'square']" @click="select(item)">
+      <div v-show="selected==item.title" class="select"></div>
     </div>
     <span @click="select(item)">{{item.title}}</span>
     </div>
@@ -16,12 +16,10 @@
   .radioGroup
     display: flex
     flex-wrap: wrap
-    // margin: 12px 
     .radio
       display: flex
       margin-right: 13px
       margin-top: 6px
-      // margin: 3px 5px
       .square
         display: flex
         align-items: center
@@ -42,7 +40,10 @@
     height: 12px
     width: 12px
     border-radius: 50%
-    background: #d7d7d7 
+    background: #b0b0b0
+
+  .active
+    border: 1px solid #b0b0b0 !important 
          
 </style>
 

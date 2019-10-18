@@ -1,25 +1,19 @@
 <template>
-  <v-container grid-list-xl fluid >
-    <div class="mb-3">
-      <h1 class="display-1">Поиск сообществ ВКонтакте</h1>
-    </div>
-
-    <v-layout flex-child wrap >
-      <v-flex xs12 md8 style="padding-top: 0">
-        <v-flex class="white">
+<div>
+      <h1 >Поиск сообществ ВКонтакте</h1>
+    <div class="group" >
+      <div class="content flex ">
           <!-- Textarea -->
-          <v-layout row wrap>
-            <v-flex xs12>
+          <div class="flex">
               <label>Ключевые слова</label>
               <p-textarea
                 label="По одному слову в строке"
                 v-model="textarea.key_word"
               ></p-textarea>
-            </v-flex>
-          </v-layout>
+              </div>
 
           <!-- Checkboxes -->
-          <v-layout column wrap mx-0 mb-3>
+          <div class="flex">
             <p-checkbox
               :label="`Точное вхождение поисковой фразы`"
               v-model="checkboxes.exact_phrase"
@@ -32,46 +26,46 @@
               v-model="checkboxes.with_goods"
               :label="`Только сообщество с товарами`"
             ></p-checkbox>
-          </v-layout>
+          </div>
 
-          <v-layout wrap>
-            <v-flex xs12 md6>
+          <div class="layout">
+            <div class="flex">
               <label>Типы сообществ</label>
               <p-select 
                 v-model="selects.type.selected" 
                 :items="selects.type.items"
                 label="Выберите тип сообществ"
               ></p-select>
-            </v-flex>
+            </div>
 
-            <v-flex xs12 md6>
+            <div class="flex">
               <label>Сортировка</label>
               <p-select   
                 v-model="selects.sort.selected" 
                 :items="selects.sort.items"
                 label="Выберите тип сортировки"
               ></p-select >
-            </v-flex>
-          </v-layout>
+            </div>
+          </div>
 
-          <v-layout wrap style="display: flex; align-items: flex-end">
-            <v-flex xs6 md3 pt-0>
+          <div class="layout input">
+            <div class="flex ">
               <label>Подписчиков</label>
               <p-input
                 v-model="inputs.members.from"
                 label='От'
               ></p-input>
-            </v-flex>
+            </div>
 
-            <v-flex xs6 md3 pt-0 >
+            <div class="flex " >
               <p-input
                 v-model="inputs.members.to"
                 label='До'
               ></p-input>
-            </v-flex>
+            </div>
 
             
-            <v-flex xs6 md3 pt-0>
+            <div class="flex ">
               <label>Геолокация</label>
               <p-autocomplete
                 v-model="selects.country.selected"
@@ -80,9 +74,9 @@
                 :search-input.sync="selects.country.search"
                 label="Страна"
               ></p-autocomplete>
-            </v-flex>
+            </div>
 
-            <v-flex xs6 md3 pt-0>
+            <div class="flex ">
               <p-autocomplete
                 :disabled="!selects.country.selected"
                 v-model="selects.city.selected"
@@ -102,14 +96,15 @@
                   </v-list-tile-content>
                 </template>
               </p-autocomplete>
-            </v-flex>
-          </v-layout>
+            </div>
+          </div>
 
-          <v-divider class="my-4"></v-divider>
+          <!-- <v-divider class="my-4"></v-divider> -->
 
-          <label>Название задачи</label>
-          <v-layout wrap>
-            <v-flex xs12 sm6 md8 pt-0>
+          
+          <div class="layout goTask">
+            <div class="taskName flex">
+              <label>Название задачи</label>
               <p-input
                 class="border"
                 v-model="inputs.taskTitle"
@@ -118,18 +113,16 @@
                 label="Любое название (для себя)"
                 hide-details
               ></p-input>
-            </v-flex>
+            </div>
 
-            <v-flex xs12 sm6 md4 pt-0>
+            <div class="flex go">
               <p-btn dark @click="getGroups">Начать поиск</p-btn>
-            </v-flex>
+            </div>
             
-          </v-layout>
-        </v-flex>
-      </v-flex>
+          </div>
+      </div>
 
-      <v-flex xs12 md4 pt-0>
-        <v-flex style="background:white;font-size:13px">
+      <div class="descriptions flex">
           <h1>Описание</h1>
           <p>
             Облачный "Поиск групп" осуществляется по базе Segmento Target,
@@ -157,19 +150,67 @@
             Если Вы вводите страну либо город — пабликов в выдаче не будет.
             ER=(Лайки+Репосты+Комментарии)/Дни/Участники*100
           </p>
-        </v-flex>
-      </v-flex>
-    </v-layout>
-  </v-container>
+      </div>
+    </div>
+  </div>
 </template>
 
 
 
-<style scoped>
-/* .border {
-  border: 1px solid #d7d7d7;
-} */
-</style>
+<style lang="sass" scoped>
+  .group
+    flex-wrap: wrap
+    padding: 0 12px
+    display: flex
+    align-items: flex-start
+    .content
+      display: flex
+      flex-direction: column
+      background: white
+      flex: 2
+      .goTask
+        .taskName
+          flex-basis: 70% 
+        .go
+          flex-basis: 30% 
+    .descriptions
+      background: white
+      margin-left: 24px
+      flex: 1
+
+  .input
+    .flex
+      flex-basis: 25% 
+    
+
+  .layout
+    display: flex
+    flex-wrap: wrap
+    align-items: flex-end
+
+  .flex
+    padding: 12px
+    display: flex
+    flex-direction: column  
+
+  h1  
+    font-size: 40px
+    padding-left: 12px  
+
+  @media screen and (max-width: 600px)
+    .input
+      .flex
+        flex-basis: 50% 
+    .goTask
+      .taskName
+        flex-basis: 65% !important
+      .go
+        flex-basis: 40% !important       
+
+  @media screen and (max-width: 992px)
+    .content
+      min-width: 100%         
+</style> 
 
 
 

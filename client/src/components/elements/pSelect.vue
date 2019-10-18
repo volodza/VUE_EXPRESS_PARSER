@@ -20,10 +20,10 @@
     </div>
     
 
-    <div v-if="isActive"  class="dropdown">
-      <ul v-if="!multiple">
+    <div v-show="isActive"  class="dropdown">
+      <ul v-show="!multiple">
         <li 
-          :class="selected == item.title ? 'active' : ''" 
+          :class="{'active':selected == item.title}" 
           v-for="(item,i) in items" 
           :key="i"
           @click="selectItem(item)"
@@ -32,15 +32,15 @@
         </li>
       </ul>
 
-      <ul v-if="multiple">
+      <ul v-show="multiple">
         <li 
-          :class="Mselected.includes(item.title) ? 'active' : ''" 
+          :class="{'active':Mselected.includes(item.title)}" 
           v-for="(item,i) in items" 
           :key="i"
           @click="MselectItem(item)"
         >
           <div class="square">
-            <div v-if="Mselected.includes(item.title)" class="checkmark"></div>
+            <div v-show="Mselected.includes(item.title)" class="checkmark"></div>
           </div>
           {{item.title}}
         </li>

@@ -1,10 +1,10 @@
 <template>
   <div class="checkbox"
    >
-    <div :class="value == true ? 'square bg':'square'" @click="check" >
-      <div  v-if="value == true" class="checkmark"></div>
+    <div :class="[{'bg': value == true},'square']" @click="check" >
+      <div  v-show="value == true" class="checkmark"></div>
     </div>
-    <span v-if="label" @click="check">{{label}}</span>
+    <span v-show="label" @click="check">{{label}}</span>
   </div>
 </template>
 

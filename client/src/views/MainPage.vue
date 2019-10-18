@@ -23,7 +23,6 @@
     display: flex
     height: 100%
     overflow: hidden
-    // position: relative
     .sidebar
       background-color: #303030
       color: white

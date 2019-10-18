@@ -2,7 +2,7 @@
   <div>
     <h1>Поиск участников</h1>
     <div class="participant">
-      <div class="content flex col-md-8 col-xs-12">
+      <div class="content flex ">
         <div class="flex">
           <label>Ключевые слова</label>
           <p-textarea
@@ -68,7 +68,7 @@
 
       </div>
 
-      <div class="descriptions flex  col-xs-12">
+      <div class="descriptions flex  ">
         <h2>Описание</h2>
         <p></p>
       </div>
