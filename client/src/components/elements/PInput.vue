@@ -39,6 +39,7 @@ export default {
   border: 1px solid #d7d7d7
   border-radius: 2px
   min-height: 35px
+  // min-width: 150px
   position: relative
   display: flex
   align-items: center

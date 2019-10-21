@@ -8,7 +8,7 @@
     <div class="nav-heading">Инструменты</div>
 
     <div v-for="(link,i) in links" :key="i">
-      <v-layout @click="link.isActive = !link.isActive" class="nav-submenu" >
+      <v-layout @click="selectLink(link)" :class="[{'select': isActive==link.title}, 'nav-submenu']" >
         <v-icon class="submenu_icon" size="16">mdi-magnify</v-icon>
         <span>{{link.title}}</span>
         <v-spacer></v-spacer>
@@ -18,12 +18,12 @@
       </v-layout>
 
       <transition name="slide-fade">
-        <ul v-if="link.isActive">
+        <ul v-show="isActive == link.title">
           <li 
             v-for="(child,j) in link.children" 
             :key="j" 
-            class="nav-submenu"
-            @click="$router.push(child.url)"
+            :class="[{'select':selected==child.title},'nav-submenu']"
+            @click="selectChild(child)"
           >
             {{child.title}}
           </li>
@@ -37,11 +37,11 @@
 export default {
   data () {
     return {
-      selected: null,
+      selected:null,
+      isActive:null,
       links:[
         {
           title:'Поиск',
-          isActive:false,
           children:[
             { title: "Сообщества", icon: "mdi-account-multiple", url: "/main/group" },
             { title: "Пользователи", icon: "mdi-account", url: "/main/users" },
@@ -51,20 +51,19 @@ export default {
         },
         {
           title:'Сбор',
-          isActive:false,
           children:[
             { title: "Посты", icon: "mdi-account-multiple", url: "/posts" },
             { title: "Друзья", icon: "mdi-account", url: "/friends" },
             { title: "Обсуждения", icon: "mdi-human-male-boy", url: "/Discussions"},
             { title: "Родственники", icon: "mdi-gift-outline", url: "/Relatives"},
-            { title: "Участники", icon: "mdi-new-box", url: "/subscribers", iconColor: "red"},
+            { title: "Топ участники", icon: "mdi-new-box", url: "/main/topParticipant"},
+            { title: "Участники", icon: "mdi-new-box", url: "/main/participant"},
             { title: "Недавно вступившие", icon: "mdi-new-box", url: "/recentlyjoin", iconColor: "red"},
             { title: "Комментарии", icon: "mdi-human-male-boy", url: "/Comments" }
           ]
         },
         {
           title:'Активности',
-          isActive:false,
           children:[
             { title: "Вступления", icon: "mdi-account-multiple", url: "" },
             { title: "Сообщества", icon: "mdi-account", url: "" }
@@ -74,9 +73,17 @@ export default {
 
     }
   },
-    //   created () {
-    //   this.$vuetify.theme.dark = true
-    // },
+  methods:{
+    selectChild(child){
+      this.$router.push(child.url)
+      this.selected=child.title
+    },
+    selectLink(link){
+      this.isActive == link.title?this.isActive =null:this.isActive = link.title
+    }
+  },
+
+
 }
 </script>
 
@@ -92,14 +99,16 @@ export default {
     font-size: 12px
     font-weight: 600
     text-transform: uppercase
-    color: rgba(255, 255, 255, 0.3)
+    color: #b8b8b8
 
   .nav-submenu
     padding: 10px 20px
     cursor: pointer
+    color: #b8b8b8
+    font-size: 13px
     &:hover
-      // background-color: #323232 
-      color: rgba(255, 255, 255, 0.4)
+      color: white
+      background-color: #282828
 
     .submenu_icon
       margin-right: 15px
@@ -110,23 +119,19 @@ export default {
         color: inherit
         transition: none
 
+  .select
+    color: white !important
+
   ul
     padding-left: 30px
     list-style: none
-    background-color: #323232
+    background-color: #282828
 
   .slide-fade-enter-active 
     transition: all .3s ease
-
-  // .slide-fade-leave-active 
-  //   transition: all .03s cubic-bezier(1.0, 0.5, 0.8, 1.0)
-
   .slide-fade-enter
     transform: translateX(10px)
     opacity: 0
-  // .slide-fade-leave-to
-  //   transform: translateX(10px)
-  //   opacity: 0
   ::-webkit-scrollbar-button 
     background-image: url('') 
     background-repeat: no-repeat

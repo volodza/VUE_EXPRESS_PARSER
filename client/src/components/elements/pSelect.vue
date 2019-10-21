@@ -20,10 +20,10 @@
     </div>
     
 
-    <div v-if="isActive"  class="dropdown">
-      <ul v-if="!multiple">
+    <div v-show="isActive"  class="dropdown">
+      <ul v-show="!multiple">
         <li 
-          :class="selected == item.title ? 'active' : ''" 
+          :class="{'active':selected == item.title}" 
           v-for="(item,i) in items" 
           :key="i"
           @click="selectItem(item)"
@@ -32,15 +32,15 @@
         </li>
       </ul>
 
-      <ul v-if="multiple">
+      <ul v-show="multiple">
         <li 
-          :class="Mselected.includes(item.title) ? 'active' : ''" 
+          :class="{'active':Mselected.includes(item.title)}" 
           v-for="(item,i) in items" 
           :key="i"
           @click="MselectItem(item)"
         >
           <div class="square">
-            <div v-if="Mselected.includes(item.title)" class="checkmark"></div>
+            <div v-show="Mselected.includes(item.title)" class="checkmark"></div>
           </div>
           {{item.title}}
         </li>
@@ -134,7 +134,6 @@ export default {
     },
     label:{
       type:String,
-      default:'label'
     },
     multiple:{
       type:Boolean
@@ -164,6 +163,9 @@ export default {
       this.$emit('input',item.value)
     },
     onMouseUp(e){ 
+      // var elem=this.$refs.drop
+      // if(!elem.contains(event.target))
+      // this.isActive = false
       if(e.target){
       const up = this.$refs.drop
       if (!up.contains(e.target)){
@@ -174,10 +176,11 @@ export default {
   },
   
   mounted() { 
+  // if(this.isActive){
     document.addEventListener('mouseup', this.onMouseUp); 
   },
-  destroyed() {
-    document.removeEventListener('mouseup', this.onMouseUp);
+  destroyed() { 
+    document.removeEventListener('mouseup', this.onMouseUp); 
   },
 }
 </script>
