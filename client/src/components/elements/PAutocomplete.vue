@@ -1,5 +1,5 @@
 <template>
-  <div ref=drop>
+  <div ref=drop @blur="isActive = false">
     <input
       class="search" 
       :placeholder="label"
@@ -80,6 +80,9 @@ export default {
   },
   mounted() {
     document.addEventListener('mouseup', this.onMouseUp);
+  },
+  destroyed() {
+    document.removeEventListener('mouseup', this.onMouseUp);
   },
   
 }
