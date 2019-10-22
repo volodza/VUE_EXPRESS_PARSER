@@ -12,7 +12,7 @@
         </div>
 
         <div class="layout">
-          <div class="flex col-sm-6 col-xs-12">
+          <div class="flex sel">
           <label>Каких участников собирать?</label>
           <p-select
             multiple
@@ -21,7 +21,7 @@
           ></p-select> 
           </div> 
 
-          <div class="flex col-sm-3 col-xs-6">
+          <div class="flex input">
             <label>Пребывают в группах</label>
             <p-input
               v-model="inputs.groups.from"
@@ -29,7 +29,7 @@
             ></p-input>
           </div>
 
-          <div class="flex col-sm-3 col-xs-6">
+          <div class="flex input">
             <p-input
               v-model="inputs.groups.to"
               label="До"
@@ -45,8 +45,8 @@
         </div>
 
         
-        <div class="layout">
-          <div class="flex col-sm-8 col-xs-12">
+        <div class="layout goTask">
+          <div class="flex taskName">
             <label>Название задачи</label>
             <p-input
               v-model="inputs.taskTitle"
@@ -54,7 +54,7 @@
             </p-input>
           </div>
 
-          <div class="flex">
+          <div class="flex go">
             <p-btn
               dark
               @click="getUsers"
@@ -81,10 +81,16 @@
     flex-wrap: wrap
     padding: 0 12px
     display: flex
+    align-items: flex-start
     .content
       display: flex
       flex-direction: column
       background: white
+      .goTask
+        .taskName
+          flex-basis: 70% 
+        .go
+          flex-basis: 30%
     .descriptions
       background: white
       margin-left: 24px
@@ -99,10 +105,32 @@
     display: flex
     flex-direction: column  
 
+  .input 
+    flex-basis: 25%  
+
   h1
     font-size: 40px
     padding-left: 12px    
+
+  @media screen and(max-width: 600px)
+    .goTask
+      .taskName
+        flex-basis: 65% !important
+      .go
+        flex-basis: 40% !important 
+    .input 
+      display: flex
+      flex-basis: 50% 
+    .sel
+      flex-basis: 100%      
     
+  // @media screen and(max-width: 444px)
+    
+         
+
+  @media screen and (max-width: 992px)
+    .content
+      min-width: 100%        
 </style>
 
 <script>

@@ -215,22 +215,22 @@ export default {
       selects: {
         sex: {
           items: [
-            { title: "Любой", id: 0 },
-            { title: "Женский", id: 1 },
-            { title: "Мужской", id: 2 }
+            { title: "Любой", value: 0 },
+            { title: "Женский", value: 1 },
+            { title: "Мужской", value: 2 }
           ],
           selected: null
         },
         status: {
           items: [
-            { title: "Не женат / Не замужем", id: 1 },
-            { title: "Есть друг / Есть подруга", id: 2 },
-            { title: "Помолвлен / Помолвлена", id: 3 },
-            { title: "Женат / Замужем", id: 4 },
-            { title: "Всё сложно", id: 5 },
-            { title: "В активном поиске", id: 6 },
-            { title: "Влюблен / Влюблена", id: 7 },
-            { title: "В гражданском браке", id: 8 }
+            { title: "Не женат / Не замужем", value: 1 },
+            { title: "Есть друг / Есть подруга", value: 2 },
+            { title: "Помолвлен / Помолвлена", value: 3 },
+            { title: "Женат / Замужем", value: 4 },
+            { title: "Всё сложно", value: 5 },
+            { title: "В активном поиске", value: 6 },
+            { title: "Влюблен / Влюблена", value: 7 },
+            { title: "В гражданском браке", value: 8 }
           ],
           selected: null
         },
