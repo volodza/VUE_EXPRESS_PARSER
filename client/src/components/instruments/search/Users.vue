@@ -3,7 +3,18 @@
     <div class="mb-3">
       <h1 class="display-1">Пользователи ВКонтакте</h1>
     </div>
-
+    {{        {q: this.key_phrases,
+        searchBy: this.radiogroup.selected,
+        exactMatch: this.checkboxes.exactMatch,
+        hasPhoto: +this.checkboxes.hasPhoto,
+        ageFrom: +this.inputs.age.from,
+        ageTo: +this.inputs.age.to,
+        status: this.selects.status.selected,
+        sex: this.selects.sex.selected,
+        city_id: this.selects.city.selected,
+        country_id: this.selects.country.selected,
+        title: this.inputs.taskTitle || "Поиск > Пользователи",
+        user_id: this.$store.getters.user.id} }}
     <v-layout flex-child wrap>
       <v-flex xs12 md8 style="padding-top: 0">
         <v-flex class="white">
