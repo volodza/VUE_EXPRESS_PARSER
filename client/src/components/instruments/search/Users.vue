@@ -118,15 +118,6 @@
           <p-radio-group 
           :items="radiogroup.items"
           v-model="radiogroup.selected">
-            <!-- <v-radio label="Интересам" value="interests"></v-radio>
-            <v-radio label="Должности" value="position"></v-radio>
-            <v-radio label="Месту работы" value="workplace"></v-radio>
-            <v-radio label="Религии" value="religion"></v-radio>
-            <v-radio label="Имени" value="name"></v-radio>
-            <v-radio label="Фамилии" value="surname"></v-radio>
-            <v-radio label="Имени + Фамилии" value="name+surname"></v-radio>
-            <v-radio label="Статусу" value="status"></v-radio>
-            <v-radio label="Имени ребенка" value="childname"></v-radio> -->
           </p-radio-group>
 
           <v-divider class="my-4"></v-divider>
@@ -181,9 +172,7 @@
 
 
 <style scoped>
-.border {
-  border: 1px solid #d7d7d7;
-}
+
 </style>
 
 

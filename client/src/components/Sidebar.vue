@@ -45,8 +45,8 @@ export default {
           children:[
             { title: "Сообщества", icon: "mdi-account-multiple", url: "/main/group" },
             { title: "Пользователи", icon: "mdi-account", url: "/main/users" },
-            { title: "Родители", icon: "mdi-human-male-boy", url: "/parents" },
-            { title: "Дни рождения", icon: "mdi-gift-outline", url: "/birthdays" }
+            { title: "Родители", icon: "mdi-human-male-boy", url: "/main/parents" },
+            { title: "Дни рождения", icon: "mdi-gift-outline", url: "/main/birthdays" }
           ]
         },
         {
