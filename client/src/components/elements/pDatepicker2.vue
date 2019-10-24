@@ -1,8 +1,10 @@
 <template>
   <div>
-    <p-input label=""></p-input>
-    <div class="calendar" >
+    <div @click="isActive=!isActive">
+    <p-input label=''></p-input>
+      </div>
 
+    <div class="calendar" v-show="isActive">
       <div class="header">
         <v-icon class="btn_arrow" size='24'>
           mdi-chevron-left
@@ -11,7 +13,7 @@
         <v-icon class="btn_arrow" size='24'>
           mdi-chevron-right
         </v-icon>
-        <span class="btn next"></span>
+        <!-- <span class="btn next"></span> -->
       </div>
 
       <div style="color:black">
@@ -23,35 +25,19 @@
               </th>
             </tr>
           </thead>
+          
           <tbody
-              v-bind:key="currentPeriod.year + '-' + currentPeriod.month"
-              v-bind:class="directionClass"
-          >
+              :key="currentPeriod.year + '-' + currentPeriod.month"
+          > 
             <tr  class="vdpRow" v-for="(week, weekIndex) in currentPeriodDates" v-bind:key="weekIndex">
               <td
-                
-                class="number"
+                :class="[{'notBelong':dfg},'number']"
                 v-for="item in week"
-                v-bind:class="{
-                    selectable: !item.disabled,
-                    selected: item.selected,
-                    disabled: item.disabled,
-                    today: item.today,
-                    outOfRange: item.outOfRange
-                }"
-                v-bind:data-id="item.dateKey"
-                v-bind:key="item.dateKey"
-                v-on:click="selectDateItem(item)"
+                :data-id="item.dateKey"
+                :key="item.dateKey"
+                @click="selectDateItem(item)"
               >
-                <div style="height:35px;font-size: 14px;
-    display: block;
-    margin: 0 auto;
-    width: 2em;
-    height: 2em;
-    line-height: 2em;
-    text-align: center;
-    -webkit-transition: background 0.1s, color 0.1s;
-    transition: background 0.1s, color 0.1s;" class="vdpCellContent">
+                <div style="" class="vdpCellContent">
                   {{ item.date.getDate() }}
                 </div>
               </td>
@@ -64,33 +50,53 @@
 </template>
 <style lang="sass" scoped>
   .calendar
-    height: 240px
-    width: 280px
+    // height: 260px
+    width: 220px
     border: 1px solid #d7d7d7
     border-radius: 2px
     color: white
+    z-index: 234
+    background: white
+    position: absolute
 
     .header
-      position: relative
-      height: 50px
+      // position: relative
+      height: 35px
       display: flex
       align-items: center
-      justify-content: center
+      justify-content: space-around
       background: #303030
-
       .btn_arrow
         cursor: pointer
         color: white
-
       .month
         font-size: 15px
-        margin: 0 70px   
+        margin: 0 30px   
 
   .weekday
-    padding: 2px 10px 10px
+    // padding: 2px 10px 10px
     mergin: 0 auto
 
+  .table
+    width: 100%
+
   .number
+    height: 35px
+    font-size: 13px
+    border-radius: 2px
+    // margin: 0 auto
+    width: 2em
+    height: 2em
+    // line-height: 2em
+    text-align: center
+    cursor: pointer
+    // -webkit-transition: background 0.1s, color 0.1s
+    // transition: background 0.1s, color 0.1s
+    &:hover
+      background: #eeeeee
+
+  .notBelong
+    color: #c4c4c4 
 </style>
 
 <script>
@@ -101,9 +107,11 @@ export default {
       months:['Январь', 'Февраль', 'Март', 'Апрель','Май', 'Июнь', 
       'Июль', 'Август','Сентябрь', 'Октябрь', 'Ноябрь', 'Декабрь'],
       currentPeriod: {
+        day:new Date().getDate(),
         month:new Date().getMonth(),
         year:new Date().getFullYear()
       },
+      isActive: false,
     }
   },
   computed:{
@@ -144,6 +152,23 @@ export default {
       });
       return chunkArray(days, 7);
     },
+  },
+  
+  methods:{
+    selectDateItem(item) {
+      if (!item.disabled) {
+          const newDate = new Date(item.date);
+          if (this.currentTime) {
+              newDate.setHours(this.currentTime.hours);
+              newDate.setMinutes(this.currentTime.minutes);
+              newDate.setSeconds(this.currentTime.seconds);
+          }
+          this.$emit('input', this.formatDateToString(newDate, this.format));
+          if (this.hasInputElement && !this.pickTime) {
+              this.close();
+          }
+      }
+  },    
   }
 }
 function paddNum(num, padsize) {

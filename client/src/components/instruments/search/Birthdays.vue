@@ -8,7 +8,7 @@
         <div class="layout">
           <!-- Календарь от -->
           <div class="flex">
-            <v-menu
+            <!-- <v-menu
               min-width="100px"
               ref="menu1"
               :close-on-content-click="false"
@@ -30,21 +30,21 @@
                   v-on="on"
                   prepend-inner-icon="mdi-calendar"
                 ></v-text-field>
-              </template>
+              </template> -->
               <p-datepicker2 v-model="calendar.from" no-title scrollable>
-                <v-spacer></v-spacer>
+                <!-- <v-spacer></v-spacer>
                 <v-flex xs6 mx-2 text-xs-center>
                   <v-btn flat color="primary" @click="menu1 = false">Закрыть</v-btn>
                 </v-flex>
                 <v-flex xs6 mx-2 text-xs-center>
                   <v-btn flat color="primary" @click="$refs.menu1.save(calendar.from)">OK</v-btn>
-                </v-flex>
+                </v-flex> -->
               </p-datepicker2>
-            </v-menu>
+            <!-- </v-menu> -->
           </div>
           <!-- Календарь до -->
           <div class="flex">
-            <v-menu
+            <!-- <v-menu
               min-width="100px"
               ref="menu2"
               :close-on-content-click="false"
@@ -67,17 +67,17 @@
                   v-on="on"
                   prepend-inner-icon="mdi-calendar"
                 ></v-text-field>
-              </template>
+              </template> -->
               <p-datepicker2 v-model="calendar.to" no-title scrollable>
-                <v-spacer></v-spacer>
+                <!-- <v-spacer></v-spacer>
                 <v-flex xs6 mx-2 text-xs-center>
                   <v-btn flat color="primary" @click="menu2 = false">Закрыть</v-btn>
                 </v-flex>
                 <v-flex xs6 mx-2 text-xs-center>
                   <v-btn flat color="primary" @click="$refs.menu2.save(calendar.to)">OK</v-btn>
-                </v-flex>
+                </v-flex> -->
               </p-datepicker2>
-            </v-menu>
+            <!-- </v-menu> -->
           </div>
         </div>
 

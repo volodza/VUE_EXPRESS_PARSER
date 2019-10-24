@@ -105,7 +105,7 @@
         padding: 1vh 1vh  
         display: flex    
         &:hover
-          background-color: #f3f3f3
+          background-color: #eeeeee
 
   .square
     height: 20px
