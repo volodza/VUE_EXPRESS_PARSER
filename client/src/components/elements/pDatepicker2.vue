@@ -6,18 +6,19 @@
       </div>
 
     <div class="calendar" v-show="isActive">
+      <div v-if="!monthSelected">
       <div class="header">
-        <v-icon class="btn_arrow" size='24' >
+        <v-icon class="btn_arrow" @click="prevMonth()">
           mdi-chevron-left
         </v-icon>
-        <span class="month" >{{month}}</span>
-        <v-icon class="btn_arrow" size='24' >
+        <span class="month" @click="monthSelected=!monthSelected">{{month}} {{currentPeriod.year}}</span>
+        <v-icon class="btn_arrow" @click="nextMonth()">
           mdi-chevron-right
         </v-icon>
         <!-- <span class="btn next"></span> -->
       </div>
 
-      <div style="color:black">
+      <div style="color:black" >
         <table class="table">
           <thead>
             <tr>
@@ -41,8 +42,8 @@
               >
                 <div 
                 :class="{
-                'today':item.date.getDate()===Today,
-                'notBelong':dfg, 
+                'today':item.date.toLocaleString().substr(0, 10)===Today,
+                'notBelong':item.date.getMonth()!=currentPeriod.month, 
                 'selectDate':item.date.toLocaleString().substr(0, 10)==selectDate}">
                   {{ item.date.getDate() }} 
                 </div>
@@ -51,6 +52,29 @@
           </tbody>
         </table>
       </div>
+      </div>
+
+      <div v-else >
+        <div class="header">
+        <v-icon class="btn_arrow" @click="currentPeriod.year--">
+          mdi-chevron-left
+        </v-icon>
+        <span class="month" @click="monthSelected=!monthSelected">{{currentPeriod.year}}</span>
+        <v-icon class="btn_arrow" @click="currentPeriod.year++">
+          mdi-chevron-right
+        </v-icon>
+      </div>
+        <ul class="monthSelected">
+          <li v-for="(item, i) in months"
+          :key="i"
+          :class="{'monthSelect':item==month}"
+          @click="monthSelect(item, i)"
+          >
+            {{item.split(' ').map(x => x.substr(0, 3)).join()}}
+          </li>
+        </ul>
+      </div>
+
     </div>
   </div>
 </template>
@@ -72,12 +96,19 @@
       align-items: center
       justify-content: space-around
       background: #303030
+      
       .btn_arrow
         cursor: pointer
-        color: white
+        color: #b8b8b8
+        &:hover
+          color: white
       .month
         font-size: 15px
-        margin: 0 30px   
+        margin: 0 30px 
+        color: #b8b8b8
+        cursor: pointer
+        &:hover
+          color: white  
 
   .weekday
     // padding: 2px 10px 10px
@@ -85,7 +116,6 @@
 
   .table
     width: 100%
-
  
   .number
     padding: 0
@@ -105,10 +135,29 @@
     .today
       background: #f1c893 
     .selectDate
-      background: #e2e2e2 !important
+      background: #303030 !important
+      color: white
+    .notBelong
+      color: #c4c4c4 
 
-  .notBelong
-    color: #c4c4c4 
+  .monthSelected
+    background: white
+    color: black
+    display: flex
+    flex-wrap: wrap
+    justify-content: center
+    align-items: center
+    padding: 0
+    .monthSelect
+      background: #303030 !important
+      color: white
+    li
+      padding: 10px 0px
+      text-align: center
+      flex-basis: 25%
+      cursor: pointer
+      &:hover
+        background: #eeeeee
 </style>
 
 <script>
@@ -128,14 +177,13 @@ export default {
       months:['Январь', 'Февраль', 'Март', 'Апрель','Май', 'Июнь', 
       'Июль', 'Август','Сентябрь', 'Октябрь', 'Ноябрь', 'Декабрь'],
       currentPeriod: {
-        day:new Date().getDate(),
         month:new Date().getMonth(),
         year:new Date().getFullYear()
       },
       isActive: false,
-      Today: new Date().getDate(),
+      Today: new Date().toLocaleString().substr(0, 10),
       selectDate: null,
-      // monthq: this.pDate.substr(5,2)
+      monthSelected: false
     }
   },
   computed:{
@@ -143,9 +191,6 @@ export default {
       return this.months[this.currentPeriod.month]
     },
 
-    nextMonth(){
-
-    },
     currentPeriodDates() {
       const {year, month} = this.currentPeriod;
       const days = [];
@@ -204,7 +249,28 @@ export default {
           //     this.close();
           // }
       // }
-  },    
+  },   
+  prevMonth(){
+    if(this.currentPeriod.month===0){
+      this.currentPeriod.year--
+      this.currentPeriod.month=11
+    }
+    else{
+    this.currentPeriod.month--}
+
+  },
+  nextMonth(){
+    if(this.currentPeriod.month===11){
+      this.currentPeriod.year++
+      this.currentPeriod.month=0
+    }
+    else{
+    this.currentPeriod.month++}
+  },
+  monthSelect(item, i){
+    this.currentPeriod.month=i
+    this.monthSelected=false
+  } 
   }
 }
 function paddNum(num, padsize) {

@@ -179,7 +179,7 @@
           </div>
 
           <div class="flex go">
-            <p-btn dark @click="getGroups">Начать поиск</p-btn>
+            <p-btn dark @click="getBirthdays()">Начать поиск</p-btn>
           </div>
         </div>
       </div>
@@ -271,8 +271,8 @@ export default {
     return {
       search: null,
       calendar: {
-        from: new Date().toISOString().substr(0, 10),
-        to: new Date().toISOString().substr(0, 10)
+        from: new Date().toLocaleString().substr(0, 10),
+        to: new Date().toLocaleString().substr(0, 10)
       },
       inputs: {
         age: {
