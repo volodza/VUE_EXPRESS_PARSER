@@ -1,16 +1,17 @@
 <template>
   <div>
+    <!-- {{selectDate}} -->
     <div @click="isActive=!isActive">
-    <p-input label=''></p-input>
+    <p-input v-model="pDate" label=''></p-input>
       </div>
 
     <div class="calendar" v-show="isActive">
       <div class="header">
-        <v-icon class="btn_arrow" size='24'>
+        <v-icon class="btn_arrow" size='24' >
           mdi-chevron-left
         </v-icon>
-        <span class="month" >Октябрь</span>
-        <v-icon class="btn_arrow" size='24'>
+        <span class="month" >{{month}}</span>
+        <v-icon class="btn_arrow" size='24' >
           mdi-chevron-right
         </v-icon>
         <!-- <span class="btn next"></span> -->
@@ -29,16 +30,21 @@
           <tbody
               :key="currentPeriod.year + '-' + currentPeriod.month"
           > 
-            <tr  class="vdpRow" v-for="(week, weekIndex) in currentPeriodDates" v-bind:key="weekIndex">
+            <tr   v-for="(week, weekIndex) in currentPeriodDates" :key="weekIndex">
               <td
-                :class="[{'notBelong':dfg},'number']"
+                
                 v-for="item in week"
                 :data-id="item.dateKey"
                 :key="item.dateKey"
+                class='number'
                 @click="selectDateItem(item)"
               >
-                <div style="" class="vdpCellContent">
-                  {{ item.date.getDate() }}
+                <div 
+                :class="{
+                'today':item.date.getDate()===Today,
+                'notBelong':dfg, 
+                'selectDate':item.date.toLocaleString().substr(0, 10)==selectDate}">
+                  {{ item.date.getDate() }} 
                 </div>
               </td>
             </tr>
@@ -80,9 +86,11 @@
   .table
     width: 100%
 
+ 
   .number
+    padding: 0
     height: 35px
-    font-size: 13px
+    // font-size: 13px
     border-radius: 2px
     // margin: 0 auto
     width: 2em
@@ -94,6 +102,10 @@
     // transition: background 0.1s, color 0.1s
     &:hover
       background: #eeeeee
+    .today
+      background: #f1c893 
+    .selectDate
+      background: #e2e2e2 !important
 
   .notBelong
     color: #c4c4c4 
@@ -101,6 +113,15 @@
 
 <script>
 export default {
+  props:{
+    label:{
+      type:String,
+      default:'Выберете дату'
+    },
+    pDate:{
+      type:String
+    }
+  },
   data(){
     return {
       weekdays: ['Пн', 'Вт', 'Ср', 'Чт', 'Пт', 'Сб', 'Вс'],
@@ -112,9 +133,19 @@ export default {
         year:new Date().getFullYear()
       },
       isActive: false,
+      Today: new Date().getDate(),
+      selectDate: null,
+      // monthq: this.pDate.substr(5,2)
     }
   },
   computed:{
+    month(){
+      return this.months[this.currentPeriod.month]
+    },
+
+    nextMonth(){
+
+    },
     currentPeriodDates() {
       const {year, month} = this.currentPeriod;
       const days = [];
@@ -155,19 +186,24 @@ export default {
   },
   
   methods:{
+    // prevMonth(){
+    //   return this.month--
+    // },
     selectDateItem(item) {
-      if (!item.disabled) {
-          const newDate = new Date(item.date);
-          if (this.currentTime) {
-              newDate.setHours(this.currentTime.hours);
-              newDate.setMinutes(this.currentTime.minutes);
-              newDate.setSeconds(this.currentTime.seconds);
-          }
-          this.$emit('input', this.formatDateToString(newDate, this.format));
-          if (this.hasInputElement && !this.pickTime) {
-              this.close();
-          }
-      }
+      // if (!item.disabled) {
+        this.selectDate = new Date(item.date).toLocaleString().substr(0, 10)
+          // const newDate = new Date(item.date);
+          // if (this.currentTime) {
+          //     newDate.setHours(this.currentTime.hours);
+          //     newDate.setMinutes(this.currentTime.minutes);
+          //     newDate.setSeconds(this.currentTime.seconds);
+          // }
+          this.$emit('selectDate', this.selectDate);
+          this.isActive=false
+          // if (this.hasInputElement && !this.pickTime) {
+          //     this.close();
+          // }
+      // }
   },    
   }
 }

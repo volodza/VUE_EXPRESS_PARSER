@@ -58,7 +58,7 @@ export default {
       default: 1
     },
     pageRange: {
-      type:Number,
+      // type:Number,
       default:2
     }
   },

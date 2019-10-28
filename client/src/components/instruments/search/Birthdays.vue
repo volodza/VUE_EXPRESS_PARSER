@@ -31,7 +31,11 @@
                   prepend-inner-icon="mdi-calendar"
                 ></v-text-field>
               </template> -->
-              <p-datepicker2 v-model="calendar.from" no-title scrollable>
+              <p-datepicker2 
+              :pDate="calendar.from"
+              @selectDate='calendar.from=$event'
+               >
+                
                 <!-- <v-spacer></v-spacer>
                 <v-flex xs6 mx-2 text-xs-center>
                   <v-btn flat color="primary" @click="menu1 = false">Закрыть</v-btn>
@@ -68,7 +72,10 @@
                   prepend-inner-icon="mdi-calendar"
                 ></v-text-field>
               </template> -->
-              <p-datepicker2 v-model="calendar.to" no-title scrollable>
+              <p-datepicker2 
+              :pDate="calendar.to" 
+              @selectDate='calendar.to=$event'
+              >
                 <!-- <v-spacer></v-spacer>
                 <v-flex xs6 mx-2 text-xs-center>
                   <v-btn flat color="primary" @click="menu2 = false">Закрыть</v-btn>
