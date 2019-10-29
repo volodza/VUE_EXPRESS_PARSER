@@ -5,7 +5,7 @@
     <div class="birthdays">
       <div class="content flex">
         <label>Период, за который искать дни рождения (обязательно)</label>
-        <div class="layout">
+        <div class="layout input">
           <!-- Календарь от -->
           <div class="flex">
             <!-- <v-menu

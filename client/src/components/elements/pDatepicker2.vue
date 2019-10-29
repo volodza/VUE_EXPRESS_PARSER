@@ -1,11 +1,14 @@
 <template>
-  <div>
-    <!-- {{selectDate}} -->
-    <div @click="isActive=!isActive">
-    <p-input v-model="pDate" label=''></p-input>
+  <div ref=drop>
+    <div @click="isActive=true">
+    <p-input
+      v-model="pDate"
+      label=''
+      ></p-input>
       </div>
 
     <div class="calendar" v-show="isActive">
+
       <div v-if="!monthSelected">
       <div class="header">
         <v-icon class="btn_arrow" @click="prevMonth()">
@@ -68,7 +71,7 @@
           <li v-for="(item, i) in months"
           :key="i"
           :class="{'monthSelect':item==month}"
-          @click="monthSelect(item, i)"
+          @click="monthSelect(i)"
           >
             {{item.split(' ').map(x => x.substr(0, 3)).join()}}
           </li>
@@ -90,32 +93,31 @@
     position: absolute
 
     .header
-      // position: relative
       height: 35px
       display: flex
       align-items: center
-      justify-content: space-around
       background: #303030
       .btn_arrow
         cursor: pointer
         color: #b8b8b8
+        flex-basis: 20%
         &:hover
           color: white
       .month
         font-size: 15px
-        margin: 0 30px 
+        text-align: center
+        flex-basis: 60%
+        // margin: 0 10px 
         color: #b8b8b8
         cursor: pointer
         &:hover
           color: white  
 
   .weekday
-    // padding: 2px 10px 10px
     mergin: 0 auto
 
   .table
     width: 100%
-
  
   .number
     border-radius: 3px
@@ -144,20 +146,25 @@
     display: flex
     flex-wrap: wrap
     justify-content: center
-    // align-items: center
     padding: 0
     .monthSelect
       background: #303030 !important
       border-radius: 3px
       color: white
     li
-      padding: 10px 0px
+      padding: 5px 0px
+      margin: 3px
       text-align: center
-      flex-basis: 25%
+      flex-basis: 22%
       cursor: pointer
       border-radius: 3px
       &:hover
         background: #eeeeee
+
+  @media screen and (max-width: 400px) 
+    .calendar
+      width: 200px
+      margin-left: -30px  
 </style>
 
 <script>
@@ -183,10 +190,22 @@ export default {
       isActive: false,
       Today: new Date().toLocaleString().substr(0, 10),
       selectDate: null,
-      monthSelected: false
+      monthSelected: false,
+      // q: this.pDate
     }
   },
   computed:{
+    inputDate(){
+      // set: function(val) {
+      //   this.q = val
+      // },
+      // get: function() {
+      //   return this.q
+      // }
+      return this.pDate.toLocaleString().substr(0, 10)
+      // get() { return this.$store.getters.getpDate; },
+      // set(value) { this.$store.dispatch('setpDate', Value); }
+    },
     month(){
       return this.months[this.currentPeriod.month]
     },
@@ -229,26 +248,28 @@ export default {
       return chunkArray(days, 7);
     },
   },
-  
+  watch:{
+    pDate(val){
+      let day = this.pDate.split('.')[0]
+      let month = this.pDate.split('.')[1]
+      let year = this.pDate.split('.')[2]
+      if(year.length==0||year.length>4||month>12||month.length==0||day>31||day.length==0)
+      {this.selectDate=null
+      this.currentPeriod.month=new Date().getMonth()
+      this.currentPeriod.year=new Date().getFullYear()}
+      else{
+      this.selectDate = this.pDate
+      this.currentPeriod.month = +month.replace('0','')-1
+      this.currentPeriod.year = this.pDate.split('.')[2]
+      this.$emit('selectDate', this.selectDate)
+      }
+    }
+  },
   methods:{
-    // prevMonth(){
-    //   return this.month--
-    // },
     selectDateItem(item) {
-      // if (!item.disabled) {
         this.selectDate = new Date(item.date).toLocaleString().substr(0, 10)
-          // const newDate = new Date(item.date);
-          // if (this.currentTime) {
-          //     newDate.setHours(this.currentTime.hours);
-          //     newDate.setMinutes(this.currentTime.minutes);
-          //     newDate.setSeconds(this.currentTime.seconds);
-          // }
           this.$emit('selectDate', this.selectDate);
           this.isActive=false
-          // if (this.hasInputElement && !this.pickTime) {
-          //     this.close();
-          // }
-      // }
   },   
   prevMonth(){
     if(this.currentPeriod.month===0){
@@ -267,11 +288,25 @@ export default {
     else{
     this.currentPeriod.month++}
   },
-  monthSelect(item, i){
+  monthSelect(i){
     this.currentPeriod.month=i
     this.monthSelected=false
-  } 
+  },
+    onMouseUp(e){ 
+    if(e.target){
+    const up = this.$refs.drop
+    if (!up.contains(e.target)){
+      this.isActive = false
+      }
   }
+  }
+  },
+  mounted() { 
+    document.addEventListener('mouseup', this.onMouseUp); 
+  },
+  destroyed() { 
+    document.removeEventListener('mouseup', this.onMouseUp); 
+  },
 }
 function paddNum(num, padsize) {
     return typeof num !== 'undefined'
