@@ -33,11 +33,11 @@
           > 
             <tr   v-for="(week, weekIndex) in currentPeriodDates" :key="weekIndex">
               <td
-                
+                class="number"
                 v-for="item in week"
                 :data-id="item.dateKey"
                 :key="item.dateKey"
-                class='number'
+                
                 @click="selectDateItem(item)"
               >
                 <div 
@@ -96,7 +96,6 @@
       align-items: center
       justify-content: space-around
       background: #303030
-      
       .btn_arrow
         cursor: pointer
         color: #b8b8b8
@@ -116,26 +115,25 @@
 
   .table
     width: 100%
+
  
   .number
-    padding: 0
-    height: 35px
-    // font-size: 13px
-    border-radius: 2px
-    // margin: 0 auto
+    border-radius: 3px
     width: 2em
-    height: 2em
-    // line-height: 2em
-    text-align: center
     cursor: pointer
-    // -webkit-transition: background 0.1s, color 0.1s
-    // transition: background 0.1s, color 0.1s
+    div
+      height: 25px
+      display: flex
+      align-items: center
+      justify-content: center
     &:hover
       background: #eeeeee
     .today
       background: #f1c893 
+      border-radius: 3px
     .selectDate
       background: #303030 !important
+      border-radius: 3px
       color: white
     .notBelong
       color: #c4c4c4 
@@ -146,16 +144,18 @@
     display: flex
     flex-wrap: wrap
     justify-content: center
-    align-items: center
+    // align-items: center
     padding: 0
     .monthSelect
       background: #303030 !important
+      border-radius: 3px
       color: white
     li
       padding: 10px 0px
       text-align: center
       flex-basis: 25%
       cursor: pointer
+      border-radius: 3px
       &:hover
         background: #eeeeee
 </style>
