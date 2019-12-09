@@ -7,6 +7,9 @@
       <li 
         v-for="(task,index) in tasks" 
         :key="index">
+        <i @click="chosenTask()"
+        :class="{'chosenIcon': fgsdf}"
+        class="mdi mdi-star-outline"></i>
         <div class="avatar" >
           <v-avatar size="30">
             <v-progress-circular
@@ -29,7 +32,6 @@
             </v-icon>
           </v-avatar> 
         </div>
-
         <div
           class="taskInfo">
           <span v-if="task.count<1">
@@ -55,8 +57,8 @@
         </div>
 
         <div class="icon">
-          <v-icon size="15" >mdi-file-document-box-outline</v-icon>
-          <v-icon size="15" >mdi-star-outline</v-icon>
+          <v-icon @click="settingTask()" size="15" >mdi-file-document-box-outline</v-icon>
+          
           <v-icon 
           @click="deleteTask(task)"
           size="15">
@@ -82,6 +84,7 @@
     z-index: 1
     ul
       padding: 0 
+      width: 380px
       position: absolute
       background-color: #fcfbf9
       border-left: 1px solid #8d857c
@@ -112,7 +115,9 @@
       min-width: 250px
       i
         color: black
-
+        
+    .chosenIcon    
+      color: red 
           
   @media screen and (max-width: 820px)
     .taskList
@@ -142,7 +147,12 @@ export default {
     },
     page() {
       return this.$store.getters.page;
+    },
+    chosen(){
+      return this.$store.getters.chosen;
     }
+    
+
   },
   watch: {
     // dialog(){
@@ -163,6 +173,19 @@ export default {
     }
   },
   methods: {
+    settingTask(task){
+      // this.$store.commit("setTaskBegin", task.begin);
+      // this.$store.commit("setTask", task);
+      // this.$store.commit("setTitle", task.title);
+      // this.$store.commit("setCount", task.count);
+      // this.getArr();
+      this.$router.push('group')
+      this.dialog = true;
+    },
+    chosenTask(){
+      // this.task.params.chosen=true
+      this.$store.commit("setChosen", 'хуйэ');
+    },
     getArr() {
       // if(!this.taskBegin) return;
       this.$store.commit("setResult", null);

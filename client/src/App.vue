@@ -5,11 +5,6 @@
 </template>
 
 <style lang="sass">
-$c_primapy: #303030 //dark gray
-$c_secondary: #fff //huy poka znaet
-$c_accent: #fff
-
-$c_border: #d7d7d7
 
 *
   margin: 0

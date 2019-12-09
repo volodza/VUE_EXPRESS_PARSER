@@ -73,8 +73,11 @@ async function dividedBy10k(groups, req, startDate) {
                 objIds.push(insertedIds[id])
             }
 
-            await db.getDB().collection('tasks').updateOne({ id: req.user_id, 'tasks.begin': new Date(startDate) }, { $set: {
-                    [`tasks.$.answer`]: objIds } })
+            await db.getDB().collection('tasks').updateOne({ id: req.user_id, 'tasks.begin': new Date(startDate) }, {
+                $set: {
+                    [`tasks.$.answer`]: objIds
+                }
+            })
         }
     })
 }

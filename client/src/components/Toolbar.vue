@@ -23,8 +23,13 @@
 
       <!-- <li class="menu-item drop"><p>Тариф 'Бесплатный'</p> </li> -->
 
-      <li :class="isActive ? 'menu-item active':'menu-item'" ref=drop>
-        <div class="btn-dropdown" @click="isActive = !isActive">
+
+      <li 
+        v-if="this.$store.getters.user"
+        :class="isActive ? 'menu-item active':'menu-item'"
+        ref=drop
+        @click="isActive = !isActive">
+        <div class="btn-dropdown" >
           <div class="avatar">
             <img :src="$store.getters.user.photo_50">
           </div>
@@ -35,9 +40,13 @@
             <li class="draw">Тариф</li>
             <li class="draw">Баланс</li>
             <li>Настройки</li>
-            <li>Выйти</li>
+            <li @click="userLogout()">Выйти</li>
           </ul>     
         </div>
+      </li>
+
+      <li v-else class="menu-item logIn" >
+        <a @click='vkAuth()' href="#">Войти</a>
       </li>
     </ul>
 
@@ -87,6 +96,11 @@ export default {
       },(err) => {
         this.$store.commit("setError", err);
       });
+    },
+    userLogout (){
+      localStorage.removeItem('access_key')
+      this.$store.commit('logout');
+      // window.location.href = '/'
     },
     onMouseUp(e){ 
        if(e.target){
@@ -163,6 +177,12 @@ export default {
     align-items: center
     height: 29px
 
+  .logIn
+    background: #4A76A8
+    border: none !important
+    a
+      color: white !important
+
   .avatar
     margin-left: 3px
     height: 23px
@@ -185,9 +205,6 @@ export default {
     border: 1px solid #c5d0db
     padding: 4px 0
     border-radius: 4px
-
-
-    // opacity: 0
     filter: alpha(opacity=0)
     -o-transition: opacity 100ms linear, top 100ms linear, visibility 100ms linear
     transition: opacity 100ms linear, top 100ms linear, visibility 100ms linear

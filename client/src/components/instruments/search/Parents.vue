@@ -166,6 +166,7 @@
     
   .checkB
     flex-basis: 50%
+    margin: auto 0
   .geo
     flex-basis: 25%
 

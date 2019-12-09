@@ -1,40 +1,47 @@
 export default {
     state: {
         tasks: [],
-        taskBegin:null,
-        results:{
-            page:1,
-            pages:1,
-            answer:null
+        taskBegin: null,
+        results: {
+            page: 1,
+            pages: 1,
+            answer: null
         },
-        title:null,
-        count:null,
-        task:{}
+        title: null,
+        count: null,
+        chosen: [],
+        task: {},
+
+
+
     },
     mutations: {
         setTasks(state, payload) {
             state.tasks = payload
         },
-        setTaskBegin (state, payload) {
+        setTaskBegin(state, payload) {
             state.taskBegin = payload
         },
-        setPage (state,payload){
+        setPage(state, payload) {
             state.results.page = payload
         },
-        setPages (state,payload){
+        setPages(state, payload) {
             state.results.pages = payload
         },
-        setResult ( state,payload){
+        setResult(state, payload) {
             state.results.answer = payload
         },
-        setTitle ( state,payload){
+        setTitle(state, payload) {
             state.title = payload
         },
-        setCount (state,payload){
+        setCount(state, payload) {
             state.count = payload
         },
-        setTask (state,payload){
+        setTask(state, payload) {
             state.task = payload
+        },
+        setChosen(state, payload) {
+            state.chosen = payload
         }
     },
     actions: {},
@@ -42,26 +49,31 @@ export default {
         tasks(state) {
             return state.tasks;
         },
-        taskBegin(state){
+        taskBegin(state) {
             return state.taskBegin
         },
-        page(state){
+        page(state) {
             return state.results.page
         },
-        pages(state){
+        pages(state) {
             return state.results.pages
         },
-        result(state){
+        result(state) {
             return state.results.answer
         },
-        title(state){
+        title(state) {
             return state.title
         },
-        count(state){
+        count(state) {
             return state.count
         },
-        task(state){
+        task(state) {
             return state.task
+        },
+        chosen(state) {
+            return state.chosen
         }
+
+
     }
 }

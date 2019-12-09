@@ -1,155 +1,134 @@
 <template>
-<div>
-      <h1 >Поиск сообществ ВКонтакте</h1>
-    <div class="group" >
-      <div class="content flex ">
-          <!-- Textarea -->
+  <div>
+    <h1>Поиск сообществ ВКонтакте</h1>
+    <div class="group">
+      <div class="content flex">
+        <!-- Textarea -->
+        <div class="flex">
+          <label>Ключевые слова</label>
+          <p-textarea label="По одному слову в строке" v-model="textarea.key_word"></p-textarea>
+        </div>
+
+        <!-- Checkboxes -->
+        <div class="flex">
+          <p-checkbox :label="`Точное вхождение поисковой фразы`" v-model="checkboxes.exact_phrase"></p-checkbox>
+          <p-checkbox :label="`Только официальные сообщества`" v-model="checkboxes.only_official"></p-checkbox>
+          <p-checkbox v-model="checkboxes.with_goods" :label="`Только сообщество с товарами`"></p-checkbox>
+        </div>
+
+        <div class="layout sel">
           <div class="flex">
-              <label>Ключевые слова</label>
-              <p-textarea
-                label="По одному слову в строке"
-                v-model="textarea.key_word"
-              ></p-textarea>
-              </div>
+            <label>Типы сообществ</label>
+            <p-select
+              v-model="selects.type.selected"
+              :items="selects.type.items"
+              label="Выберите тип сообществ"
+            ></p-select>
+          </div>
 
-          <!-- Checkboxes -->
           <div class="flex">
-            <p-checkbox
-              :label="`Точное вхождение поисковой фразы`"
-              v-model="checkboxes.exact_phrase"
-            ></p-checkbox>
-            <p-checkbox
-              :label="`Только официальные сообщества`"
-              v-model="checkboxes.only_official"
-            ></p-checkbox>
-            <p-checkbox
-              v-model="checkboxes.with_goods"
-              :label="`Только сообщество с товарами`"
-            ></p-checkbox>
+            <label>Сортировка</label>
+            <p-select
+              v-model="selects.sort.selected"
+              :items="selects.sort.items"
+              label="Выберите тип сортировки"
+            ></p-select>
+          </div>
+        </div>
+
+        <div class="layout input">
+          <div class="flex">
+            <label>Подписчиков</label>
+            <p-input v-model="inputs.members.from" label="От"></p-input>
           </div>
 
-          <div class="layout">
-            <div class="flex">
-              <label>Типы сообществ</label>
-              <p-select 
-                v-model="selects.type.selected" 
-                :items="selects.type.items"
-                label="Выберите тип сообществ"
-              ></p-select>
-            </div>
-
-            <div class="flex">
-              <label>Сортировка</label>
-              <p-select   
-                v-model="selects.sort.selected" 
-                :items="selects.sort.items"
-                label="Выберите тип сортировки"
-              ></p-select >
-            </div>
+          <div class="flex">
+            <p-input v-model="inputs.members.to" label="До"></p-input>
           </div>
 
-          <div class="layout input">
-            <div class="flex ">
-              <label>Подписчиков</label>
-              <p-input
-                v-model="inputs.members.from"
-                label='От'
-              ></p-input>
-            </div>
-
-            <div class="flex " >
-              <p-input
-                v-model="inputs.members.to"
-                label='До'
-              ></p-input>
-            </div>
-
-            
-            <div class="flex ">
-              <label>Геолокация</label>
-              <p-autocomplete
-                v-model="selects.country.selected"
-                :loading="selects.country.loading"
-                :items="selects.country.items"
-                :search-input.sync="selects.country.search"
-                label="Страна"
-              ></p-autocomplete>
-            </div>
-
-            <div class="flex ">
-              <p-autocomplete
-                :disabled="!selects.country.selected"
-                v-model="selects.city.selected"
-                :loading="selects.city.loading"
-                :items="selects.city.items"
-                :search-input.sync="selects.city.search"
-                label="Город"
-              >
-                <template v-slot:item="{ item }">
-                  <v-list-tile-avatar
-                    color="indigo"
-                    class="headline font-weight-light white--text"
-                  >{{ item.title.charAt(0) }}</v-list-tile-avatar>
-                  <v-list-tile-content>
-                    <v-list-tile-title v-text="item.title"></v-list-tile-title>
-                    <v-list-tile-sub-title v-text="item.region"></v-list-tile-sub-title>
-                  </v-list-tile-content>
-                </template>
-              </p-autocomplete>
-            </div>
+          <div class="flex">
+            <label>Геолокация</label>
+            <p-autocomplete
+              v-model="selects.country.selected"
+              :loading="selects.country.loading"
+              :items="selects.country.items"
+              :search-input.sync="selects.country.search"
+              label="Страна"
+            ></p-autocomplete>
           </div>
 
-          <!-- <v-divider class="my-4"></v-divider> -->
-
-          
-          <div class="layout goTask">
-            <div class="taskName flex">
-              <label>Название задачи</label>
-              <p-input
-                class="border"
-                v-model="inputs.taskTitle"
-                flat
-                solo
-                label="Любое название (для себя)"
-                hide-details
-              ></p-input>
-            </div>
-
-            <div class="flex go">
-              <p-btn dark @click="getGroups">Начать поиск</p-btn>
-            </div>
-            
+          <div class="flex">
+            <p-autocomplete
+              :disabled="!selects.country.selected"
+              v-model="selects.city.selected"
+              :loading="selects.city.loading"
+              :items="selects.city.items"
+              :search-input.sync="selects.city.search"
+              label="Город"
+            >
+              <template v-slot:item="{ item }">
+                <v-list-tile-avatar
+                  color="indigo"
+                  class="headline font-weight-light white--text"
+                >{{ item.title.charAt(0) }}</v-list-tile-avatar>
+                <v-list-tile-content>
+                  <v-list-tile-title v-text="item.title"></v-list-tile-title>
+                  <v-list-tile-sub-title v-text="item.region"></v-list-tile-sub-title>
+                </v-list-tile-content>
+              </template>
+            </p-autocomplete>
           </div>
+        </div>
+
+        <!-- <v-divider class="my-4"></v-divider> -->
+
+        <div class="layout goTask">
+          <div class="taskName flex">
+            <label>Название задачи</label>
+            <p-input
+              class="border"
+              v-model="inputs.taskTitle"
+              flat
+              solo
+              label="Любое название (для себя)"
+              hide-details
+            ></p-input>
+          </div>
+
+          <div class="flex go">
+            <p-btn dark @click="getGroups">Начать поиск</p-btn>
+          </div>
+        </div>
       </div>
 
       <div class="descriptions flex">
-          <h1>Описание</h1>
-          <p>
-            Облачный "Поиск групп" осуществляется по базе Segmento Target,
-            способен выдавать до 10 000 результатов (в 10 раз больше чем в API Поиске).
-          </p>
-          <p>
-            В базе хранятся группы с количеством участников от 2 пользователей,
-            группы с меньшим количеством участников отсутствуют в выдаче.
-          </p>
-          <p>
-            База обновляется один раз в 3 дня, это означает что в выдаче могут
-            содержаться не самые актуальные результаты. Поиск осуществляется с
-            учетом морфологии, однако выдача может несколько отличаться от
-            выдачи ВКонтакте, так как алгоритмы текстового поиска не совпадают.
-          </p>
-          <p>
-            Инструмент позволяет сохранить контакты групп. Ключевые слова и
-            фразы нужно вводить по одному в строке. Если Вам необходима выдача
-            точь-в-точь как во ВКонтакте — воспользуйтесь API Поиском групп.
-          </p>
-          <p>
-            Выдачу можно отсортировать по количеству постов в день, в неделю,
-            чтобы выделить группы, в которых ведётся активность. API Поиск работает корректно,
-            не смотря на то что устаревший ВК не поддерживается.
-            Если Вы вводите страну либо город — пабликов в выдаче не будет.
-            ER=(Лайки+Репосты+Комментарии)/Дни/Участники*100
-          </p>
+        <h1>Описание</h1>
+        <p>
+          Облачный "Поиск групп" осуществляется по базе Segmento Target,
+          способен выдавать до 10 000 результатов (в 10 раз больше чем в API Поиске).
+        </p>
+        <p>
+          В базе хранятся группы с количеством участников от 2 пользователей,
+          группы с меньшим количеством участников отсутствуют в выдаче.
+        </p>
+        <p>
+          База обновляется один раз в 3 дня, это означает что в выдаче могут
+          содержаться не самые актуальные результаты. Поиск осуществляется с
+          учетом морфологии, однако выдача может несколько отличаться от
+          выдачи ВКонтакте, так как алгоритмы текстового поиска не совпадают.
+        </p>
+        <p>
+          Инструмент позволяет сохранить контакты групп. Ключевые слова и
+          фразы нужно вводить по одному в строке. Если Вам необходима выдача
+          точь-в-точь как во ВКонтакте — воспользуйтесь API Поиском групп.
+        </p>
+        <p>
+          Выдачу можно отсортировать по количеству постов в день, в неделю,
+          чтобы выделить группы, в которых ведётся активность. API Поиск работает корректно,
+          не смотря на то что устаревший ВК не поддерживается.
+          Если Вы вводите страну либо город — пабликов в выдаче не будет.
+          ER=(Лайки+Репосты+Комментарии)/Дни/Участники*100
+        </p>
       </div>
     </div>
   </div>
@@ -182,6 +161,9 @@
     .flex
       flex-basis: 25% 
     
+  .sel
+    .flex
+      flex-basis: 50%  
 
   .layout
     display: flex
@@ -218,7 +200,7 @@
 export default {
   data() {
     return {
-      textarea: { search: null, key_word: ""},
+      textarea: { search: null, key_word: "" },
       checkboxes: {
         exact_phrase: false,
         only_official: false,
@@ -255,7 +237,10 @@ export default {
         },
         sort: {
           items: [
-            {title: "По умолчанию(аналогично результатам поиска в ВК)", value: 0},
+            {
+              title: "По умолчанию(аналогично результатам поиска в ВК)",
+              value: 0
+            },
             { title: "По скорости роста", value: 1 },
             { title: "По дневной посещаемости", value: 2 },
             { title: "По количеству лайков", value: 3 },
@@ -271,14 +256,15 @@ export default {
   methods: {
     getGroups() {
       if (!this.textarea.key_word) {
-        console.log(54321)
+        console.log(54321);
         this.$store.commit("setError", "Введите хотя бы одну ключевую фразу");
         return;
       }
-      console.log(222)
+      console.log(222);
       let obj = {
+        chosen: false,
         q: this.key_phrases,
-        type: this.selects.type.selected || 'page',
+        type: this.selects.type.selected || "page",
         city_id: this.selects.city.selected,
         country_id: this.selects.country.selected,
         sort: this.selects.sort.selected || 0,
@@ -291,13 +277,11 @@ export default {
         title: this.inputs.taskTitle || "Поиск > Сообщества"
       };
       this.answer = "";
-      this.$http
-        .post("/api/search/groups", obj)
-        .then(res => {
-          console.log(12345)
-          this.$store.commit("setSuccess", res.body);
-          this.answer = res.body;
-        });
+      this.$http.post("/api/search/groups", obj).then(res => {
+        console.log(12345);
+        this.$store.commit("setSuccess", res.body);
+        this.answer = res.body;
+      });
     },
     getCities(v) {
       if (!this.selects.country.selected) return;
@@ -317,9 +301,9 @@ export default {
     getCountries(v) {
       this.selects.country.loading = true;
       this.$http
-        .get("/api/geolocation/countries",{
-          params:{
-            q:v
+        .get("/api/geolocation/countries", {
+          params: {
+            q: v
           }
         })
         .then(res => {

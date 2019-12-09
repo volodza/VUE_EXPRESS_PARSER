@@ -10,6 +10,7 @@ import Birthdays from '@/components/instruments/search/Birthdays'
 import Parents from '@/components/instruments/search/Parents'
 import Participant from '@/components/instruments/collect/Participant'
 import topParticipant from '@/components/instruments/collect/topParticipant'
+import Posts from '@/components/instruments/collect/Posts'
 
 Vue.use(Router)
 
@@ -55,6 +56,11 @@ export default new Router({
                     path: 'topParticipant',
                     name: 'topParticipant',
                     component: topParticipant
+                },
+                {
+                    path: 'Posts',
+                    name: 'Posts',
+                    component: Posts
                 },
             ]
         }

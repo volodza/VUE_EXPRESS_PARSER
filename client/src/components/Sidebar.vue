@@ -52,7 +52,7 @@ export default {
         {
           title:'Сбор',
           children:[
-            { title: "Посты", icon: "mdi-account-multiple", url: "/posts" },
+            { title: "Посты", icon: "mdi-account-multiple", url: "/main/posts" },
             { title: "Друзья", icon: "mdi-account", url: "/friends" },
             { title: "Обсуждения", icon: "mdi-human-male-boy", url: "/Discussions"},
             { title: "Родственники", icon: "mdi-gift-outline", url: "/Relatives"},

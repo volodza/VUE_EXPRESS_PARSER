@@ -20,20 +20,24 @@
             v-model="selects.type.selected"
           ></p-select> 
           </div> 
-
-          <div class="flex input">
-            <label>Пребывают в группах</label>
+<div class="flex input">
+  <label>Пребывают в группах</label>
+  <div class="layout">
+          <div class="flex ">
+            
             <p-input
               v-model="inputs.groups.from"
               label="От"
             ></p-input>
           </div>
 
-          <div class="flex input">
+          <div class="flex ">
             <p-input
               v-model="inputs.groups.to"
               label="До"
             ></p-input>
+          </div>
+          </div>
           </div>
         </div>
 
@@ -103,10 +107,19 @@
   .flex
     padding: 12px
     display: flex
-    flex-direction: column  
+    flex-direction: column 
+
+  .sel
+    flex-basis: 50%
 
   .input 
-    flex-basis: 25%  
+    flex-basis: 50%
+    padding: 0
+    label
+      padding-left: 12px
+    .flex
+      padding-top: 0
+      flex-basis: 25%  
 
   h1
     font-size: 40px

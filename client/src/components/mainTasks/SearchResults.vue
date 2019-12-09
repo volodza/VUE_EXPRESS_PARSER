@@ -37,6 +37,7 @@
           </div>
 
         <div class="result">
+          <!-- <router-view ></router-view> -->
          <GroupsResults v-if="this.$store.getters.task.type === 'groups'"/>
          <UsersResults v-if="this.$store.getters.task.type === 'users'"/>
          <!-- <NewsResults/> -->
@@ -51,20 +52,22 @@
 
 
 <script>
+  import Group from "@/components/instruments/search/Group"
   import GroupsResults from "./SearchResult/GroupsResults";
   import UsersResults from "./SearchResult/UsersResults";
 
   export default {
     components: {
       GroupsResults,
-      UsersResults
+      UsersResults,
+      Group
     },
   
     props:['closeDialog'],
 
     data () {
       return {
-        
+        qwer:'Group'
       }
     },
 
